@@ -1,0 +1,16 @@
+{
+  "id": "0",
+  "name": "Scrumboard",
+  "description": "A Analoque digital scrumboard.",
+  "version": "0.0.1",
+  "private": false,
+  "devDependencies": {
+  },
+  "engines": {
+    "node": ">=0.10.22"
+  },
+  "scripts": {
+    "install": "bower install",
+    "update": "bower update"
+  }
+}

@@ -1,0 +1,85 @@
+@import 'reset';
+@import 'post-it';
+
+@font-face {
+  font-family: 'gooddogregular';
+  src: url('fonts/gooddog_regular_macroman/GoodDog-webfont.eot');
+  src: url('fonts/gooddog_regular_macroman/GoodDog-webfont.eot?#iefix') format('embedded-opentype'),
+  url('fonts/gooddog_regular_macroman/GoodDog-webfont.woff') format('woff'),
+  url('fonts/gooddog_regular_macroman/GoodDog-webfont.ttf') format('truetype'),
+  url('fonts/gooddog_regular_macroman/GoodDog-webfont.svg#gooddogregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+html, body, .scrumboard {
+  height: 100%;
+  width: 100%;
+}
+
+.scrumboard {
+  background-image: url('/img/concrete_wall_2_2.png');
+  box-sizing: border-box;
+  border: solid #ccc 8px;
+  position: relative;
+  -webkit-box-shadow: 1px 3px 2px #aaa;
+
+  .add-post-it {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 5px 5px 2px #888;
+
+    background-image: url(/img/post-it.png);
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    background-position:-4px -6px;
+
+    width: 30px;
+    height: 30px;
+  }
+
+  .lanes {
+    font-size: 0;
+    height: 100%;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+
+    .lane {
+      &:not(:first-of-type) {
+        background-image: url('/img/green-board-line.png');
+        background-repeat: repeat-y;
+        background-position: left top;
+      }
+
+      &:nth-child(odd) {
+        background-position-y: -480px;
+      }
+      &:last-child {
+        background-position-y: 300px;
+      }
+
+      box-sizing: border-box;
+      display: inline-block;
+      margin-top: 20px;
+      text-align: center;
+      height: 100%;
+      width: 25%;
+
+      .lane-title {
+        font-family: 'gooddogregular', "Arial Rounded MT Bold", arial, serif;
+        color: #5c9db4;
+
+        font-size: 30px;
+        margin-top: -10px;
+        text-transform: capitalize;
+      }
+    }
+  }
+  background-color: #ff8;
+}
