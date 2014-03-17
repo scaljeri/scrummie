@@ -1,12 +1,17 @@
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+
+    <script src="/bower_components/jquery/jquery.min.js"></script>
+    <script src="/vendor/jquery.simplemodal.1.4.4.min.js"></script>
 
     <title>Analog digitial scrum board (ADSD)</title>
 </head>
 
 <body>
     {{>scrumboard}}
-
+    {{>add-post-it-overlay}}
 </body>
 
 <template name="scrumboard">
@@ -27,7 +32,7 @@
 
 <template name="scrumcards">
     <article>
-        <a class="add-post-it"></a>
+        <a class="add-post-it" title="add post-it" alt="add post-it"></a>
         <ol class="scrumcards">
             {{#each cards}}
                 {{>post-it}}
@@ -40,4 +45,18 @@
     <li class="post-it">
         <h1>{{this.id}}</h1>
     </li>
+</template>
+
+<template name="add-post-it-overlay">
+    <section class="add-post-it--overlay">
+            <h1 class="overlay--title">TODO: {{title}}</h1>
+            <span class="close"><a href="#" class="simplemodal-close">x</a></span>
+            <article class="overlay--content">
+                <h2>Hello! I'm SimpleModal!</h2>
+                <p>SimpleModal is a lightweight jQuery Plugin which provides a powerful interface for modal dialog development. Think of it as a modal dialog framework.</p>
+                <p>SimpleModal gives you the flexibility to build whatever you can envision, while shielding you from related cross-browser issues inherent with UI development..</p>
+                <p>As you can see by this example, SimpleModal can be easily configured to behave like an OSX dialog. With a handful options, 2 custom callbacks and some styling, you have a visually appealing dialog that is ready to use!</p>
+                <p><button class="simplemodal-close">Close</button> <span>(or press ESC or click the overlay)</span></p>
+            </article>
+    </section>
 </template>

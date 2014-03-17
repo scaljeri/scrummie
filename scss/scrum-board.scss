@@ -16,13 +16,16 @@
 html, body, .scrumboard {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 .scrumboard {
   background-image: url('/img/concrete_wall_2_2.png');
   box-sizing: border-box;
   border: solid #ccc 8px;
+  overflow: hidden;
   position: relative;
+  -webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;
   -webkit-box-shadow: 1px 3px 2px #aaa;
 
   .add-post-it {
@@ -41,6 +44,15 @@ html, body, .scrumboard {
 
     width: 30px;
     height: 30px;
+
+    &:hover {
+        box-shadow: 6px 6px 2px #888;
+    }
+
+    &:active {
+      box-shadow: 2px 2px 2px #888;
+      margin-top: 1px;
+    }
   }
 
   .lanes {
@@ -82,4 +94,22 @@ html, body, .scrumboard {
     }
   }
   background-color: #ff8;
+}
+
+#overlay--backdrop {
+  background-color:#000;
+}
+
+.overlay--title {
+  color: #000;
+  background-color: #ddd;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  padding: 6px 8px;
+  text-shadow: 0 1px 0 #f4f4f4;
+}
+
+.overlay--content {
+  font-size: 12px;
+  padding: 6px 12px;
 }

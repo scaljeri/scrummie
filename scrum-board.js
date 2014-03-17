@@ -7,11 +7,61 @@ if (Meteor.isClient) {
 	Meteor.subscribe('cards');
 
     Template.scrumboard.lanes = function () {
-	    return Lanes.find({}).fetch();
+	    return Lanes.find({}, {sort: {index: 1}}).fetch();
     };
 
     Template.scrumboard.events = {
-        "click .add": function () {
+        "click .add-post-it": function (e) {
+            e.preventDefault();
+            // http://www.ericmmartin.com/projects/simplemodal-demos/
+            $('.add-post-it--overlay').modal(
+                {
+                    overlayId: 'overlay--backdrop',
+                    containerId: 'add-post-it--overlay',
+                    closeHTML: null,
+                    minHeight: 80,
+                    opacity: 65,
+                    position: ['0',],
+                    overlayClose: true,
+                    onOpen: open,
+                    onClose: close
+                }
+            );
+
+            function open(d) {
+                var self = this;
+                self.container = d.container[0];
+                d.overlay.fadeIn('slow', function () {
+                    $(".add-post-it--overlay", self.container).show();
+                    var title = $(".overlay--title", self.container);
+                    title.show();
+                    d.container.slideDown('slow', function () {
+                        setTimeout(function () {
+                            var h = $(".overlay--content", self.container).height()
+                                + title.height()
+                                + 20; // padding
+                            d.container.animate(
+                                {height: h},
+                                200,
+                                function () {
+                                    $("div.close", self.container).show();
+                                    $(".overlay--content", self.container).show();
+                                }
+                            );
+                        }, 300);
+                    });
+                })
+            }
+            function close(d) {
+                var self = this; // this = SimpleModal object
+                d.container.animate(
+                    {top:"-" + (d.container.height() + 20)},
+                    500,
+                    function () {
+                        self.close(); // or $.modal.close();
+                    }
+                );
+            }
         }
     };
 
