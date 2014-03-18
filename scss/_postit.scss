@@ -1,10 +1,11 @@
 // http://www.ballyhooblog.com/realistic-css3-box-shadows/
 
-.post-it {
-  width: 300px;
-  height: 300px;
-  margin: 50px auto;
-  position: relative;
+.postit {
+  position: absolute;
+  top:0;
+  width: 20%;
+  height: 20%;
+  //margin: 50px auto;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#fefbb0), to(#fff955));
   -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
 
@@ -46,7 +47,7 @@
  */
 
 /* Overlay */
-#add-post-it--overlay {
+#postit-edit--overlay {
   background-color: #eee;
   color: #000;
   font: 16px/24px "Lucida Grande", Arial, sans-serif;
@@ -87,8 +88,5 @@
   }
   p {
     margin-bottom: 10px;
-  }
-  span {
-    color: #777;
   }
 }

@@ -1,5 +1,6 @@
 @import 'reset';
-@import 'post-it';
+@import 'form';
+@import 'postit';
 
 @font-face {
   font-family: 'gooddogregular';
@@ -12,8 +13,11 @@
   font-style: normal;
 }
 
+.ui-state-active {
+  background-color: rgba(255,255,255, .3);
+}
 
-html, body, .scrumboard {
+.scrumboard {
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -28,7 +32,7 @@ html, body, .scrumboard {
   -webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;
   -webkit-box-shadow: 1px 3px 2px #aaa;
 
-  .add-post-it {
+  .add-postit {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -63,6 +67,7 @@ html, body, .scrumboard {
     margin: 0px;
 
     .lane {
+      height: 100%;
       &:not(:first-of-type) {
         background-image: url('/img/green-board-line.png');
         background-repeat: repeat-y;
@@ -78,7 +83,7 @@ html, body, .scrumboard {
 
       box-sizing: border-box;
       display: inline-block;
-      margin-top: 20px;
+      padding-top: 20px;
       text-align: center;
       height: 100%;
       width: 25%;
@@ -101,15 +106,16 @@ html, body, .scrumboard {
 }
 
 .overlay--title {
-  color: #000;
   background-color: #ddd;
   border-bottom: 1px solid #ccc;
+  color: #000;
   font-weight: bold;
+  margin-bottom: 0;
   padding: 6px 8px;
   text-shadow: 0 1px 0 #f4f4f4;
 }
 
 .overlay--content {
   font-size: 12px;
-  padding: 6px 12px;
+  padding: 6px 6px;
 }
