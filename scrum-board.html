@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    {{> scrummie}}
+   {{> scrummie}}
 </body>
 
 <template name="scrummie">
@@ -46,8 +46,10 @@
 </template>
 
 <template name="postit">
-    <li postit class="postit draggable" data-id="{{_id}}" style="top: {{this.top}}%;left: {{this.left}}%">
-        <h1>{{this.title}}</h1>
+    <li postit class="draggable" data-id="{{_id}}" style="top: {{this.top}}%;left: {{this.left}}%">
+        <div class="postit">
+            <h1>{{title}}</h1>
+        </div>
     </li>
 </template>
 

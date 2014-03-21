@@ -37,13 +37,15 @@ Template.scrummie.closeOverlay = function (d) {
 Template['postit-edit--overlay'].events = {
     'click [submit]': function (e, t) {
         this.postit = $(t.find('form')).serializeObject();
-        debugger;
 
+        Meteor.call('insertPostit', this.postit);
+        /*
         if (this._id) {
             Postits.update(this.postit);
         }
         else {
             Postits.insert(this.postit);
         }
+        */
     }
 }

@@ -1,11 +1,11 @@
 Template.postits.items = function () {
- return Postits.find({}).fetch();
+ return Postits.find({}, { sort: {index: 1}}).fetch();
 };
 
 Template.postits.rendered = function (t) {
-    var postits = $('.draggable');
+    var postits = $('[postit]');
 
-    if (postits) {
+    if (postits.length > 0) {
         postits.draggable({
             containment: '[scrumboard]'
         });
@@ -24,8 +24,9 @@ Template.postits.rendered = function (t) {
                 postit.left = (1-(width-left)/width) * 100;
                 postit.top = (1-(height-top)/height) * 100;
 
-                delete postit._id;
-                Postits.update({_id: _id}, {$set: postit});
+                //delete postit._id;
+                //Postits.update({_id: _id}, {$set: postit});
+                Meteor.call('updatePosition', postit);
             }
         });
     }
@@ -33,6 +34,6 @@ Template.postits.rendered = function (t) {
 
 Template.postits.events = {
     'mousedown [postit]' : function (e, t) {
-        $('[postit]').not(e.target).remove().insertBefore(e.target);
+        $(e.target).closest('[postit]').css('z-index', 10);
     }
 }
