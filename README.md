@@ -1,10 +1,15 @@
 scrum-board
 ===========
 
-A analogue digital scrumboard
+
+An analogue digital scrumboard
 
     $> MONGO_URL='mongodb://localhost:27017/scrumboard' meteor
     $> MONGO_URL='mongodb://localhost:27017/scrumboard' mrt
+
+Setup
+
+	$> meteor remove autopublish
 
 
 Resources:

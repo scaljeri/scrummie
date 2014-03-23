@@ -1,34 +1,65 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='http://fonts.googleapis.com/css?family=The+Girl+Next+Door' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.googleapis.com/css?family=The+Girl+Next+Door' rel='stylesheet' type='text/css'>-->
+    <!--<link href='http://fonts.googleapis.com/css?family=News+Cycle' rel='stylesheet' type='text/css'>-->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200' rel='stylesheet' type='text/css'>
+    <link href="/bower_components/jquery-ui/themes/base/jquery-ui.css">
 
     <script src="/bower_components/jquery/jquery.min.js"></script>
     <script src="/bower_components/jquery-ui/ui/jquery-ui.js"></script>
+    <script src="/bower_components/underscore/underscore.js"></script>
     <script src="/vendor/jquery.utils.js"></script>
-    <script src="/vendor/jquery.simplemodal.1.4.4.min.js"></script>
+    <script src="/js/main.js"></script>
 
     <title>Analog digitial scrum board (scrummie)</title>
 </head>
 
 <body>
-   {{> scrummie}}
+<main>
+    {{> header}}
+    {{> scrumboard}}
+</main>
+
+<section positionable edit-task class="edit-task">
+    <article class="content-area">
+        {{> editTask}}
+    </article>
+</section>
 </body>
 
-<template name="scrummie">
-    {{> scrumboard}}
+<template name="header">
+    <header class="header-main header__logo">
+        <h1 class="header__title">Sprint {{sprint.sprintNumber}}</h1>
+        <nav class="header__nav">
+            <a add-task class="btn add-task">+ new task</a>
+        </nav>
+    </header>
+</template>
 
-    {{#with postit}}
-        {{> postit-edit--overlay}}
-    {{/with}}
+<template name="editTask">
+    <form>
+        <input type="text" name="story-id" value="{{task.storyId}}" placeholder="Story ID">
+        <input type="text" name="title" value="{{task.title}}" placeholder="Title">
+        <textarea name="description" value="{{task.description}}" placeholder="Description"></textarea>
+
+        <select name="colors">
+            {{#each colors}}
+            <option value="{{colors.index}}" {{isSelected colors task.colorIndex}}></option>
+            {{/each}}
+        </select>
+
+        <a cancel-task class="btn cancel-task">Cancel</a>
+        <a save-task class="btn save-task">Save</a>
+    </form>
 </template>
 
 <template name="scrumboard">
     <section scrumboard class="scrumboard">
         <ol class="lanes">
             {{#each lanes}}
-                <li class="lane droppable">
-                    <h1 class="lane-title">{{title}}</h1>
-                </li>
+            <li class="lane droppable">
+                <h1 class="lane-title">{{title}}</h1>
+            </li>
             {{/each}}
         </ol>
 
@@ -40,7 +71,7 @@
     <a class="add-postit" title="add post-it" alt="add post-it"></a>
     <ol class="scrumcards">
         {{#each items}}
-            {{> postit}}
+        {{> postit}}
         {{/each}}
     </ol>
 </template>
@@ -57,10 +88,10 @@
     <section class="postit-edit--overlay">
         <h1 class="overlay--title">
             {{#if postit._id}}
-                Edit taks: {{postit.id}}</h1>
-            {{else}}
-                New Task
-            {{/if}}
+            Edit taks: {{postit.id}}</h1>
+        {{else}}
+        New Task
+        {{/if}}
         </h1>
 
         <span class="close"><a href="#" class="simplemodal-close">x</a></span>
@@ -70,17 +101,17 @@
                 <form id="edit-task">
                     <fieldset>
                         <label class="label" for="id">ID:</label>
-                        <input name="id" type="text" placeholder="Issue identifier" />
+                        <input name="id" type="text" placeholder="Issue identifier"/>
 
                         <label class="label" for="title">Title:</label>
-                        <input name="title" placeholder="The title of the task" />
+                        <input name="title" placeholder="The title of the task"/>
 
                         <!--<span class="label label-with-group">Description:</span>-->
                         <label class="label" for="long">Long description:</label>
                         <textarea name="long" placeholder="Description of the task"></textarea>
 
                         <label class="label" for="short">Short:</label>
-                        <input name="short" placeholder="Description for the post-it" />
+                        <input name="short" placeholder="Description for the post-it"/>
 
                         <button type="button" submit>Save task</button>
 

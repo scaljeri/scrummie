@@ -1,7 +1,15 @@
-.form {
-  font-family: 'The Girl Next Door', cursive;
+form {
+  margin-top: 20px;
+}
+input, textarea {
+  margin-bottom: 10px;
+  font: 100 20px/35px 'Titillium Web', sans-serif;
+
+  -webkit-box-shadow: inset 4px 5px 7px -6px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    inset 4px 5px 7px -6px rgba(50, 50, 50, 0.75);
+  box-shadow:         inset 4px 5px 7px -6px rgba(50, 50, 50, 0.75);
 }
 
-.label {
-  width: 110px;
+textarea {
+  line-height: 25px;
 }

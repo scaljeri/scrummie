@@ -1,121 +1,130 @@
 @import 'reset';
 @import 'form';
+@import 'variables';
 @import 'postit';
-
-@font-face {
-  font-family: 'gooddogregular';
-  src: url('fonts/gooddog_regular_macroman/GoodDog-webfont.eot');
-  src: url('fonts/gooddog_regular_macroman/GoodDog-webfont.eot?#iefix') format('embedded-opentype'),
-  url('fonts/gooddog_regular_macroman/GoodDog-webfont.woff') format('woff'),
-  url('fonts/gooddog_regular_macroman/GoodDog-webfont.ttf') format('truetype'),
-  url('fonts/gooddog_regular_macroman/GoodDog-webfont.svg#gooddogregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+@import 'edit-task';
+@import 'add-task';
 
 .ui-state-active {
   background-color: rgba(255,255,255, .3);
 }
 
+body {
+  font-family: 'Titillium Web', sans-serif;
+  background-image: url(/img/bg.png);
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding: 10px;
+}
+
+.btn {
+  cursor: pointer;
+  text-align: center;
+  background-color: $button-bg;
+  color: #fff;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 2px;
+  height: 34px;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+
+  &.active {
+    background-color: #395077;
+    -webkit-box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
+    box-shadow:         inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
+  }
+}
+
+.header-main {
+  position: relative;
+  height: 34px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.header__logo {
+  background-image: url(/img/02_logo.png);
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: 120px 33px;
+}
+.header__nav {
+  float: right;
+  display: -webkit-flex;
+  display: flex;
+  height: 100%;
+
+  .add-task {
+    position: absolute;
+    right: 0px;
+    margin: auto;
+    font-size: 15px;
+    line-height: 16px;
+  }
+}
+
+.header__title {
+  display: inline;
+  font-size: 30px;
+  line-height: 34px;
+}
+
 .scrumboard {
+  background-color: #fff;
   height: 100%;
   width: 100%;
   overflow: hidden;
 }
 
 .scrumboard {
-  background-image: url('/img/concrete_wall_2_2.png');
-  box-sizing: border-box;
-  border: solid #ccc 8px;
-  overflow: hidden;
+  background-color: #fff;
+  border-radius: 2px;
+  height: calc(100% - 42px);
   position: relative;
   -webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;
-  -webkit-box-shadow: 1px 3px 2px #aaa;
-
-  .add-postit {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    border: 1px solid grey;
-    border-radius: 20px;
-    background-color: #fff;
-    box-shadow: 5px 5px 2px #888;
-
-    background-image: url(/img/post-it.png);
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    background-position:-4px -6px;
-
-    width: 30px;
-    height: 30px;
-
-    &:hover {
-        box-shadow: 6px 6px 2px #888;
-    }
-
-    &:active {
-      box-shadow: 2px 2px 2px #888;
-      margin-top: 1px;
-    }
-  }
+  border: 10px solid rgba(0,0,0,0);
 
   .lanes {
+    display: -webkit-box;
+    display: flex;
+    border-top: 40px solid rgba(0,0,0,0);
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
     font-size: 0;
     height: 100%;
     list-style-type: none;
     padding: 0px;
-    margin: 0px;
+    margin: 0;
 
     .lane {
-      height: 100%;
-      &:not(:first-of-type) {
-        background-image: url('/img/green-board-line.png');
-        background-repeat: repeat-y;
-        background-position: left top;
-      }
-
-      &:nth-child(odd) {
-        background-position-y: -480px;
-      }
-      &:last-child {
-        background-position-y: 300px;
-      }
-
+      border: 1px dashed #d2d4d8;
       box-sizing: border-box;
-      display: inline-block;
-      padding-top: 20px;
-      text-align: center;
+      -moz-box-sizing: border-box;
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      flex: 1;
       height: 100%;
-      width: 25%;
+      margin: 0 5px 10px 5px;
+      text-align: center;
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+      &:last-of-type {
+        margin-right: 0;
+      }
 
       .lane-title {
-        font-family: 'gooddogregular', "Arial Rounded MT Bold", arial, serif;
-        color: #5c9db4;
-
-        font-size: 30px;
-        margin-top: -10px;
-        text-transform: capitalize;
+        color: #253248;
+        font: 100 20px/40px 'Titillium Web';
+        margin-top: -35px;
+        text-transform: uppercase;
       }
     }
   }
-  background-color: #ff8;
 }
 
-#overlay--backdrop {
-  background-color:#000;
-}
-
-.overlay--title {
-  background-color: #ddd;
-  border-bottom: 1px solid #ccc;
-  color: #000;
-  font-weight: bold;
-  margin-bottom: 0;
-  padding: 6px 8px;
-  text-shadow: 0 1px 0 #f4f4f4;
-}
-
-.overlay--content {
-  font-size: 12px;
-  padding: 6px 6px;
-}

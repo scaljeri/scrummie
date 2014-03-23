@@ -1,3 +1,25 @@
+window.scrummie = {
+    edit: {
+        dep: new Deps.Dependency(),
+        task: {},
+        createNew: function () {
+            this.task = {
+                issueId: '',
+                title: 'aaa',
+                description: '',
+                colorIndex: -1
+            }
+            this.dep.changed();
+        }
+    }
+};
+
+Template.editTask.task = function () {
+    window.scrummie.edit.dep.depend();
+    return window.scrummie.edit.task;
+}
+
+/*
 var edit = {};
 var count = 0;
 
@@ -47,5 +69,5 @@ Template.scrummie.events = {
         },0);
     }
 }
-
+*/
 
