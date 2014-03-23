@@ -26,13 +26,3 @@ Template.header.events = {
         event.stopPropagation();
     }
 }
-
-Template.editTask.events = {
-    'click .edit-task': function (event) { // make sure the popover is not closed
-        event.stopPropagation();
-    }
-}
-
-Template.editTask.colors = function () {
-    return Colors.find({}, {sort: {index: 1}}).fetch();
-}

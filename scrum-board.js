@@ -1,13 +1,13 @@
 Sprints = new Meteor.Collection('sprints');
 Lanes = new Meteor.Collection('lanes');
-Postits = new Meteor.Collection('postits');
-Colors = new Meteor.Collection('colors');
+Tasks = new Meteor.Collection('tasks');
+TaskColors = new Meteor.Collection('task-colors');
 
 
 if (Meteor.isClient) {
     Meteor.subscribe('lanes');
     Meteor.subscribe('sprint-number');
-    Meteor.subscribe('colors');
+    Meteor.subscribe('task-colors');
 }
 
 if (Meteor.isServer) {
@@ -26,16 +26,15 @@ if (Meteor.isServer) {
         }
 
         // TODO: needs to be done via sprint config screen
-        if (Colors.find({}).count() === 0) {
-            Colors.insert({ color: '#FFFF00', title: 'Frontend', index: 0});
-            Colors.insert({ color: '#FF00FF', title: 'Design', index: 1});
-            Colors.insert({ color: '#04B404', title: 'Backend', index: 2});
-            Colors.insert({ color: '#04B404', title: 'Backend', index: 3});
-            Colors.insert({ color: '#FFBF00', title: 'Test', index: 4});
+        if (TaskColors.find({}).count() === 0) {
+            TaskColors.insert({ color: '#FFFF00', title: 'Frontend', index: 0});
+            TaskColors.insert({ color: '#FF00FF', title: 'Design', index: 1});
+            TaskColors.insert({ color: '#04B404', title: 'Backend', index: 2});
+            TaskColors.insert({ color: '#FFBF00', title: 'Test', index: 3});
         }
 
-        Meteor.publish('colors', function () {
-            return Colors.find({}, {sort: {index: 1}});
+        Meteor.publish('task-colors', function () {
+            return TaskColors.find({}, {sort: {index: 1}});
         });
 
         Meteor.publish('lanes', function () {

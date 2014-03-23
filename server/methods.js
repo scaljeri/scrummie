@@ -1,4 +1,8 @@
 Meteor.methods({
+    saveTask: function(task) {
+        task.modifiedDate = new Date().getTime();
+        Tasks.upsert({_id: task._id}, {$set: task});
+    },
     updatePosition: function (postit) {
         Postits.update({ _id: postit._id}, postit);
         sortPostits(postit);

@@ -6,6 +6,7 @@
   },
   "devDependencies": {
     "jquery-ui": "~1.10.4",
-    "underscore": "~1.6.0"
+    "underscore": "~1.6.0",
+    "select2": "~3.4.6"
   }
 }

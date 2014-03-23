@@ -7,17 +7,14 @@ window.scrummie = {
                 issueId: '',
                 title: 'aaa',
                 description: '',
-                colorIndex: -1
+                colorIndex: 2
             }
             this.dep.changed();
         }
     }
 };
 
-Template.editTask.task = function () {
-    window.scrummie.edit.dep.depend();
-    return window.scrummie.edit.task;
-}
+
 
 /*
 var edit = {};

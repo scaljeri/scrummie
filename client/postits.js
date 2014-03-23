@@ -1,3 +1,4 @@
+/*
 Template.postits.items = function () {
  return Postits.find({}, { sort: {index: 1}}).fetch();
 };
@@ -37,3 +38,4 @@ Template.postits.events = {
         $(e.target).closest('[postit]').css('z-index', 10);
     }
 }
+    */
