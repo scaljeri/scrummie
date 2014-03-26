@@ -1,6 +1,57 @@
 // http://www.ballyhooblog.com/realistic-css3-box-shadows/
 // http://mentormate.com/blog/css-postit-note/
+/*
 .draggable {
   position: absolute;
   z-index: 0;
+}
+*/
+
+.postit {
+  position: absolute;
+  top: 100px;
+  z-index: 100;
+  left: 20px;
+
+  display: inline-block;
+  //position: relative;
+  height: 146px;
+  width: 151px;
+
+  .description,
+  .title {
+    position: absolute;
+    width: 100%;
+    color: rgba(35,48,70,.6);
+  }
+
+  .title {
+    box-sizing: border-box;
+    top: 12px;
+    padding-left: 6px;
+    //left: 25px;
+    font: 100 15px/20px 'Sofadi One', cursive;
+    text-align: center;
+
+    &:after {
+      box-sizing: border-box;
+      position: absolute;
+      left: 17px;
+      right: 21px;
+      top: 23px;
+      content: '';
+      border-bottom: 1px solid rgba(35,48,70,.3);
+      transform:rotate(-3deg);
+      -ms-transform:rotate(-3deg); /* IE 9 */
+      -webkit-transform:rotate(-3deg); /* Opera, Chrome, and Safari */
+    }
+  }
+
+  .description {
+    font: 100 15px/20px 'Sofadi One', cursive;
+    top: 40px;
+    padding-left: 17px;
+    box-sizing: border-box;
+  }
+
 }

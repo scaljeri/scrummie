@@ -5,9 +5,11 @@ TaskColors = new Meteor.Collection('task-colors');
 
 
 if (Meteor.isClient) {
-    Meteor.subscribe('lanes');
     Meteor.subscribe('sprint-number');
+    Meteor.subscribe('lanes');
+    Meteor.subscribe('tasks');
     Meteor.subscribe('task-colors');
+    Meteor.subscribe('task-positions');
 }
 
 if (Meteor.isServer) {
@@ -25,16 +27,25 @@ if (Meteor.isServer) {
             Sprints.insert({ sprintNumber: 23, startDate: startDate, endDate: endDate.getTime()});
         }
 
-        // TODO: needs to be done via sprint config screen
         if (TaskColors.find({}).count() === 0) {
-            TaskColors.insert({ color: '#FFFF00', title: 'Frontend', index: 0});
-            TaskColors.insert({ color: '#FF00FF', title: 'Design', index: 1});
-            TaskColors.insert({ color: '#04B404', title: 'Backend', index: 2});
-            TaskColors.insert({ color: '#FFBF00', title: 'Test', index: 3});
+            TaskColors.insert({ color: '#ffff92', title: 'Frontend', index: 0});
+            TaskColors.insert({ color: '#ffa2e7', title: 'Design', index: 1});
+            TaskColors.insert({ color: '#73dcff', title: 'Backend', index: 2});
+            TaskColors.insert({ color: '#ff9999', title: 'Test', index: 3});
+            TaskColors.insert({ color: '#a0a0ff', title: 'other', index: 3});
+            TaskColors.insert({ color: '#9effe6', title: 'infra', index: 3});
         }
 
         Meteor.publish('task-colors', function () {
             return TaskColors.find({}, {sort: {index: 1}});
+        });
+
+        Meteor.publish('task-positions', function () {
+            return TaskColors.find({}, {sort: {updated: 1}, fields: {x: 1, y: 1, updated: 1}});     // only return task positions
+        });
+
+        Meteor.publish('tasks', function () {
+            return Tasks.find({}, {sort: {index: 1}, fields: {x: 0, y: 0, updated: 0}});          // return task without coordinates
         });
 
         Meteor.publish('lanes', function () {
@@ -42,7 +53,7 @@ if (Meteor.isServer) {
         });
 
         Meteor.publish('sprint-number', function () {
-            return Sprints.find({ startDate : {$gt : new Date().getTime()}, endDate : { $lt : new Date().getTime()}});
+            return Sprints.find({ startDate: {$gt: new Date().getTime()}, endDate: { $lt: new Date().getTime()}});
         });
     });
 }

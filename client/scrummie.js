@@ -1,20 +1,18 @@
 window.scrummie = {
     edit: {
         dep: new Deps.Dependency(),
-        task: {},
+        task: {},   // task used in the edit popover
         createNew: function () {
             this.task = {
                 issueId: '',
-                title: 'aaa',
+                title: '',
                 description: '',
-                colorIndex: 2
-            }
+                color: ''
+            };
             this.dep.changed();
         }
     }
 };
-
-
 
 /*
 var edit = {};

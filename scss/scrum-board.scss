@@ -5,9 +5,6 @@
 @import 'edit-task';
 @import 'add-task';
 
-.ui-state-active {
-  background-color: rgba(255,255,255, .3);
-}
 
 body {
   font-family: 'Titillium Web', sans-serif;
@@ -100,6 +97,7 @@ body {
     padding: 0px;
     margin: 0;
 
+
     .lane {
       border: 1px dashed #d2d4d8;
       box-sizing: border-box;
@@ -110,6 +108,17 @@ body {
       height: 100%;
       margin: 0 5px 10px 5px;
       text-align: center;
+
+
+      &.ui-state-hover {
+        background: none;
+        background-color: #fff;
+      }
+
+      &.ui-state-active {
+        background: none;
+        background-color: rgba(0,0,0, .1);
+      }
 
       &:first-of-type {
         margin-left: 0;

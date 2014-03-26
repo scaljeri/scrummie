@@ -1,0 +1,19 @@
+<template name="editTask">
+    <form edit-task-form>
+        {{#if task._id}}
+        <input type="hidden" value="{{task._id}}">
+        {{/if}}
+        <input type="text" name="story-id" value="{{task.storyId}}" placeholder="Story ID">
+        <input type="text" name="title" value="{{task.title}}" placeholder="Title">
+        <textarea name="description" value="{{task.description}}" placeholder="Description"></textarea>
+
+        <select dropdown multiple class="dropdown" name="color">
+            {{#each taskColors}}
+            <option value="{{color}}">{{title}}</option>
+            {{/each}}
+        </select>
+
+        <a cancel-task class="btn cancel-task">Cancel</a>
+        <a save-task class="btn save-task">Save</a>
+    </form>
+</template>

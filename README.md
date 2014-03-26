@@ -22,3 +22,4 @@ Interesting:
   * http://stackoverflow.com/questions/18520550/meteor-pass-data-to-nested-templates
   * https://www.andrewmunsell.com/blog/introduction-to-realtime-web-meteor-and-nodejs
   * https://github.com/aknuds1/example-meteor-and-ng-app
+  * http://projectricochet.com/blog/meteor-js-performance#.UzCGAK1dXno

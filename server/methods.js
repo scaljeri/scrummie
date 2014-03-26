@@ -1,38 +1,18 @@
 Meteor.methods({
-    saveTask: function(task) {
-        task.modifiedDate = new Date().getTime();
+    upsertTask: function(task) {
+        if (task.color !== undefined) {
+            var color = TaskColors.findOne({color: task.color});
+            task.color = color._id;
+        }
+        task.x = 0;
+        taks.y = 0;
+        task.updated = new Date().getTime();
+
         Tasks.upsert({_id: task._id}, {$set: task});
     },
-    updatePosition: function (postit) {
-        Postits.update({ _id: postit._id}, postit);
-        sortPostits(postit);
-    },
-    insertPostit: function (postit) {
-        if (postit._id) {
-            //Postits.update(postit);
-        }
-        else {
-            postit.left = 0;
-            postit.top = 0;
-            postit.index = 0;
-            Postits.insert(postit);
-            sortPostits(postit);
-        }
+    updatePostitPosition: function (position) {
+        console.dir(position);
+        console.log('id=' + position._id);
+        Tasks.update({_id: position._id}, {$set: {x: position.x, y: position.y, updated: new Date().getTime()}});
     }
 });
-
-function sortPostits(postit) {
-                    // Meteor.Postits.find....
-    var postits = Postits.find({}, { sort: {index: 1}}).fetch();
-
-    for(var i = postits.length - 1; i >= 0;  i--) {
-        console.log(postits[i]._id);
-        if (postits[i]._id === postit._id) {
-            postits[i].index = postits.length;
-        }
-        else {
-            postits[i].index = i;
-        }
-        Postits.update({ _id: postits[i]._id}, postits[i]);
-    }
-}

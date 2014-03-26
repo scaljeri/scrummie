@@ -3,6 +3,7 @@
     <meta charset="utf-8">
 
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200'>
+    <link href='http://fonts.googleapis.com/css?family=Sofadi+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/bower_components/jquery-ui/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/bower_components/select2/select2.css">
 
@@ -13,7 +14,7 @@
     <script src="/vendor/jquery.utils.js"></script>
     <script src="/js/main.js"></script>
 
-    <title>Analog digitial scrum board (scrummie)</title>
+    <title>Scrummie</title>
 </head>
 
 <body>
@@ -38,32 +39,11 @@
     </header>
 </template>
 
-<template name="editTask">
-    <form edit-task-form>
-        {{#if task._id}}
-            <input type="hidden" value="{{task._id}}">
-        {{/if}}
-        <input type="text" name="story-id" value="{{task.storyId}}" placeholder="Story ID">
-        <input type="text" name="title" value="{{task.title}}" placeholder="Title">
-        <textarea name="description" value="{{task.description}}" placeholder="Description"></textarea>
-
-        <select dropdown  class="dropdown" name="color">
-                <option></option>
-                {{#each taskColors}}
-                    <option value="{{color}}">{{title}}</option>
-                {{/each}}
-        </select>
-
-        <a cancel-task class="btn cancel-task">Cancel</a>
-        <a save-task class="btn save-task">Save</a>
-    </form>
-</template>
-
 <template name="scrumboard">
     <section scrumboard class="scrumboard">
         <ol class="lanes">
             {{#each lanes}}
-            <li class="lane droppable">
+            <li droppable class="lane">
                 <h1 class="lane-title">{{title}}</h1>
             </li>
             {{/each}}
@@ -75,58 +55,22 @@
 
 <template name="postits">
     <a class="add-postit" title="add post-it" alt="add post-it"></a>
-    <ol class="scrumcards">
+    <ol class="postits">
         {{#each items}}
-        {{> postit}}
+            {{> post-it}}
         {{/each}}
     </ol>
 </template>
 
+<!--
 <template name="postit">
     <li postit class="draggable" data-id="{{_id}}" style="top: {{this.top}}%;left: {{this.left}}%">
         <div class="postit">
             <h1>{{title}}</h1>
+            <p>{{description}}</p>
         </div>
     </li>
 </template>
+-->
 
-<template name="postit-edit--overlay">
-    <section class="postit-edit--overlay">
-        <h1 class="overlay--title">
-            {{#if postit._id}}
-            Edit taks: {{postit.id}}</h1>
-        {{else}}
-        New Task
-        {{/if}}
-        </h1>
 
-        <span class="close"><a href="#" class="simplemodal-close">x</a></span>
-        <article class="overlay--content">
-            <div id="contact">
-                <!--<h1>Send an email</h1>-->
-                <form id="edit-task">
-                    <fieldset>
-                        <label class="label" for="id">ID:</label>
-                        <input name="id" type="text" placeholder="Issue identifier"/>
-
-                        <label class="label" for="title">Title:</label>
-                        <input name="title" placeholder="The title of the task"/>
-
-                        <!--<span class="label label-with-group">Description:</span>-->
-                        <label class="label" for="long">Long description:</label>
-                        <textarea name="long" placeholder="Description of the task"></textarea>
-
-                        <label class="label" for="short">Short:</label>
-                        <input name="short" placeholder="Description for the post-it"/>
-
-                        <button type="button" submit>Save task</button>
-
-                    </fieldset>
-                </form>
-            </div>
-
-            <button class="simplemodal-close">Cancel</button>
-            <span>(or press ESC or click the overlay)</span></p>
-        </article>
-    </section>
-</template>
