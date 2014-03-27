@@ -4,6 +4,7 @@
   padding: 10px;
   width: 300px;
   height: 412px;
+  z-index: 2147483600; // 47 less than the maximum value
 
   .content-area {
     background-color: #fff;
@@ -90,4 +91,8 @@
 .select-option-title {
   display: inline;
   font: 100 16px/16px 'Titillium Web';
+}
+
+.select2-drop {
+  z-index: 2147483610!important;
 }

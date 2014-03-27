@@ -28,10 +28,10 @@ Template.postits.rendered = function (t) {
             }
         });
     }
-}
+};
 
 Template.postits.events = {
     'mousedown [postit]' : function (e, t) {
-        $(e.target).closest('[postit]').css('z-index', 10);
+        $(e.target).closest('[postit]').css('z-index', 1000000);
     }
-}
+};
