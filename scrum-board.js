@@ -41,7 +41,7 @@ if (Meteor.isServer) {
         });
 
         Meteor.publish('task-positions', function () {
-            return TaskColors.find({}, {sort: {updated: 1}, fields: {x: 1, y: 1, updated: 1}});     // only return task positions
+            return Tasks.find({}, {sort: {updated: 1}, fields: {x: 1, y: 1, updated: 1}});     // only return task positions
         });
 
         Meteor.publish('tasks', function () {
