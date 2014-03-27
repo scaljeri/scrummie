@@ -5,7 +5,7 @@ Meteor.methods({
             task.color = color._id;
         }
         task.x = 0;
-        taks.y = 0;
+        task.y = 0;
         task.updated = new Date().getTime();
 
         Tasks.upsert({_id: task._id}, {$set: task});
