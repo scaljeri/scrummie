@@ -2,6 +2,7 @@ $(function () {
     $('body').click(function() {
         $('[edit-task]').css('visibility', 'hidden');
         $('[add-task]').removeClass('active');
+        $('[config-menu]').removeClass('visible');
     });
 });
 

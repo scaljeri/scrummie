@@ -1,5 +1,7 @@
 Template.postit.zIndex = function () {
-    return this.updated.toString().replace(/^\d{7}/, '');
+    if (this.updated) {
+        return this.updated.toString().replace(/^\d{7}/, '');
+    }
 };
 
 Template.postit.getColor = function () {

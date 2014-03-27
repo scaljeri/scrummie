@@ -1,10 +1,10 @@
 @import 'reset';
 @import 'form';
 @import 'variables';
+@import 'config-menu';
 @import 'postit';
 @import 'edit-task';
 @import 'add-task';
-
 
 body {
   font-family: 'Titillium Web', sans-serif;
@@ -30,9 +30,16 @@ body {
   &.active {
     background-color: #395077;
     -webkit-box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
-    -moz-box-shadow:    inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
-    box-shadow:         inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
+    box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
   }
+}
+
+.hamburger {
+  margin-left: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
+  float: right;
 }
 
 .header-main {
@@ -41,12 +48,14 @@ body {
   text-align: center;
   margin-bottom: 10px;
 }
+
 .header__logo {
   background-image: url(/img/02_logo.png);
   background-repeat: no-repeat;
   background-position: left top;
   background-size: 120px 33px;
 }
+
 .header__nav {
   float: right;
   display: -webkit-flex;
@@ -54,8 +63,7 @@ body {
   height: 100%;
 
   .add-task {
-    position: absolute;
-    right: 0px;
+    float: right;
     margin: auto;
     font-size: 15px;
     line-height: 16px;
@@ -80,13 +88,16 @@ body {
   border-radius: 2px;
   height: calc(100% - 42px);
   position: relative;
-  -webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;
-  border: 10px solid rgba(0,0,0,0);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 10px solid rgba(0, 0, 0, 0);
 
   .lanes {
     display: -webkit-box;
     display: flex;
-    border-top: 40px solid rgba(0,0,0,0);
+    border-top: 40px solid rgba(0, 0, 0, 0);
     flex-wrap: nowrap;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -96,7 +107,6 @@ body {
     list-style-type: none;
     padding: 0px;
     margin: 0;
-
 
     .lane {
       border: 1px dashed #d2d4d8;
@@ -109,7 +119,6 @@ body {
       margin: 0 5px 10px 5px;
       text-align: center;
 
-
       &.ui-state-hover {
         background: none;
         background-color: #fff;
@@ -117,7 +126,7 @@ body {
 
       &.ui-state-active {
         background: none;
-        background-color: rgba(0,0,0, .1);
+        background-color: rgba(0, 0, 0, .1);
       }
 
       &:first-of-type {

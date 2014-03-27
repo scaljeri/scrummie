@@ -27,6 +27,8 @@
                 {{> editTask}}
             </article>
         </section>
+
+        {{> configMenu}}
     </main>
 </body>
 
@@ -35,6 +37,7 @@
         <h1 class="header__title">Sprint {{sprint.sprintNumber}}</h1>
         <nav class="header__nav">
             <a add-task class="btn add-task">+ new task</a>
+            <a config class="btn hamburger">☰</a>
         </nav>
     </header>
 </template>

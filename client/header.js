@@ -24,5 +24,9 @@ Template.header.events = {
         }
 
         event.stopPropagation();
+    },
+    'click [config]' : function (event) {
+        $('[config-menu]').addClass('visible');
+        event.stopPropagation();
     }
 }

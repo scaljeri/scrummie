@@ -1,0 +1,86 @@
+.config-container {
+  color: #fff;
+
+  position: absolute;
+  top: 0;
+  right: -400px;
+  //right: -25px;
+  width: 400px;
+
+  border: 20px solid transparent;
+  box-sizing: border-box;
+  z-index: 10000000;
+
+  transition-duration: 500ms;
+  -webkit-transition-duration: 500ms; /* Safari */
+  transition-property: right;
+  -moz-transition-property: right; /* Firefox 4 */
+  -webkit-transition-property: right; /* Safari and Chrome */
+  -o-transition-property: right; /* Opera */
+
+  .config-form {
+    border-radius: 10px;
+    background-color: $button-bg;
+    border: 2px solid grey;
+    width: 400px;
+    color: #fff;
+    padding-right: 25px;
+    box-sizing: border-box;
+
+    .sub-title {
+      color: inherit;
+      font: 100 20px/40px 'Titillium Web';
+      margin-left: 20px;
+    }
+
+    .sub-form {
+      margin-left: 40px;
+
+      .label {
+        display: inline-block;
+        width: 120px;
+        text-align: right;
+        margin-right: 10px;
+      }
+
+      #sprint-number {
+        width: 76px;
+      }
+
+      .input-datepicker {
+        position: relative;
+
+        .input-date {
+          width: 158px;
+        }
+        .calendar {
+          position: absolute;
+          right: 0;
+          top:0;
+          display: inline-block;
+          width: 25px;
+          height: 25px;
+          background-image: url(/img/calendar-icon-black.png);
+          background-size: 25px 25px;
+        }
+      }
+    }
+
+    .btn.save-task {
+      float: right;
+      background-color: #ff2ecb;
+    }
+  }
+
+  &.visible {
+    right: -25px;
+  }
+
+  .title {
+    color: inherit;
+    margin-top: 5px;
+    text-shadow: none;
+    font: 100 20px/40px 'Titillium Web';
+  }
+
+}

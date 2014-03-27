@@ -1,0 +1,39 @@
+<template name="configMenu">
+    <section config-menu class="config-container">
+        <article class="config-form">
+            <h1 class="title">Configuration</h1>
+
+            <h2 class="sub-title">Sprint:</h2>
+            <article class="sub-form">
+                <div>
+                    <label class="label" for="sprint-number">Sprint number:</label>
+                    <input id="sprint-number" maxlength="3" value="">
+                </div>
+
+                <div>
+                    <label class="label" for="starttime">Starttime:</label>
+                    <span  class="input-datepicker">
+                        <input datepicker class="input-date" value="Now" readonly>
+                        <span calendar--start class="calendar"></span>
+                    </span>
+                </div>
+
+                <div>
+                    <label class="label" for="endtime">Endtime:</label>
+                    <span  class="input-datepicker">
+                        <input datepicker class="input-date" value="" readonly>
+                        <span calendar--end class="calendar"></span>
+                    </span>
+                </div>
+            </article>
+
+            <h2 class="sub-title">Lanes:</h2>
+
+            <h2 class="sub-title">Colors:</h2>
+
+            <h2 class="sub-title">Team members:</h2>
+            <a cancel-task class="btn cancel-task">Cancel</a>
+            <a save-task class="btn save-task">Save</a>
+        </article>
+    </section>
+</template>
