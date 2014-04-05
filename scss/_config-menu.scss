@@ -1,4 +1,8 @@
-.config-container {
+.config-menu {
+  * {
+    box-sizing: border-box;
+  }
+
   color: #fff;
 
   position: absolute;
@@ -18,7 +22,7 @@
   -webkit-transition-property: right; /* Safari and Chrome */
   -o-transition-property: right; /* Opera */
 
-  .config-form {
+  .config-content {
     border-radius: 10px;
     background-color: $button-bg;
     border: 2px solid grey;
@@ -30,21 +34,52 @@
     .sub-title {
       color: inherit;
       font: 100 20px/40px 'Titillium Web';
-      margin-left: 20px;
     }
 
-    .sub-form {
-      margin-left: 40px;
+    .config-items {
+      padding-left: 15px;
+      padding-right: 30px;
+
+      .accordion-section {
+        padding-left: 10px;
+        padding-right: 10px;
+
+        .stop-start-sprint {
+          background-color: $color-theme1;
+          margin: 0 auto;
+          width: 150px;
+          display: block;
+          color: #fff;
+          line-height: 19px;
+        }
+
+        &.team-members {
+          .member-name {
+            width: 200px;
+          }
+
+          .member-initials {
+            width: 75px;
+          }
+
+          .add-member {
+            padding: 6px 1px;
+            cursor: pointer;
+          }
+        }
+      }
 
       .label {
         display: inline-block;
         width: 120px;
         text-align: right;
         margin-right: 10px;
+        font-size: 15px;
       }
 
       #sprint-number {
         width: 76px;
+        text-align: center;
       }
 
       .input-datepicker {
@@ -56,7 +91,7 @@
         .calendar {
           position: absolute;
           right: 0;
-          top:0;
+          top:-2px;
           display: inline-block;
           width: 25px;
           height: 25px;
@@ -64,11 +99,6 @@
           background-size: 25px 25px;
         }
       }
-    }
-
-    .btn.save-task {
-      float: right;
-      background-color: #ff2ecb;
     }
   }
 

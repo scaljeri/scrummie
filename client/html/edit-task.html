@@ -1,17 +1,18 @@
 <template name="editTask">
     <form edit-task-form>
         {{#if task._id}}
-            <input type="hidden" value="{{task._id}}">
+            <input name="_id" type="hidden" value="{{task._id}}">
+            <input name="sprintNumber" type="hidden" value="{{task.sprintNumber}}">
         {{/if}}
-        <input type="text" name="title" value="{{task.title}}" placeholder="Title">
-        <textarea name="description" value="{{task.description}}" placeholder="Description"></textarea>
+        <input type="text" name="title" value="{{task.title}}" placeholder="Title" class="input--shadow">
+        <textarea name="description" placeholder="Description" class="textarea--shadow">{{task.description}}</textarea>
 
         <select dropdown multiple class="dropdown" name="color">
             {{#each taskColors}}
-            <option value="{{color}}">{{title}}</option>
+                <option value="{{color}}">{{title}}</option>
             {{/each}}
         </select>
-        <input type="text" name="link" value="{{task.link}}" placeholder="Link">
+        <input type="text" name="link" value="{{task.link}}" placeholder="Link" class="input--shadow">
 
         <a cancel-task class="btn cancel-task">Cancel</a>
         <a save-task class="btn save-task">Save</a>

@@ -1,30 +1,100 @@
+// Collections
 Sprints = new Meteor.Collection('sprints');
 Lanes = new Meteor.Collection('lanes');
 Tasks = new Meteor.Collection('tasks');
 TaskColors = new Meteor.Collection('task-colors');
+Members = new Meteor.Collection('members');
 
+
+
+// Routes
+Router.configure({
+    layout: 'layout',
+    loadingTemplate: 'loading',
+    notFoundTemplate: 'notFound'
+});
+//RsprintNumberouter.onBeforeAction('notFound');
+Router.map(function () {
+    this.route('/', {
+        controller: 'SprintController'
+        //action: 'start'
+    });
+
+    /*
+    this.route('/:team', {
+        controller: 'SprintController',
+        action: 'start'
+    });
+
+    this.route('home', {
+        path: '/:team/:sprint',
+        controller: 'SprintController',
+        action: 'start'
+    });
+    */
+});
 
 if (Meteor.isClient) {
-    Meteor.subscribe('sprint-number');
-    Meteor.subscribe('lanes');
-    Meteor.subscribe('tasks');
-    Meteor.subscribe('task-colors');
-    Meteor.subscribe('task-positions');
+    App = {
+        subs: {
+            sprint: Meteor.subscribe('sprint'),
+            lanes: Meteor.subscribe('lanes'),
+            tasks: Meteor.subscribe('tasks'),
+            taskColors: Meteor.subscribe('task-colors'),
+            taskPositions: Meteor.subscribe('task-positions'),
+            members: Meteor.subscribe('members')
+        },
+        deps: {}
+    };
+
+    makeReactive('selectedTask');
+    makeReactive('errorMessage');
+
+    function makeReactive(property) {
+        var value = null,
+            dep = new Deps.Dependency();
+
+        console.log('reactive property: ' + property)
+        Object.defineProperty(App, property, {
+            set: function(newVal) {
+                value = newVal;
+                dep.changed();
+            },
+            get: function () {
+                dep.depend();
+                return value;
+            }
+        });
+    }
 }
 
 if (Meteor.isServer) {
     Meteor.startup(function () {
+        /*
+        Sprints.remove({});
+        Lanes.remove({});
+        Tasks.remove({});
+        TaskColors.remove({});
+        Members.remove({});
+        */
         if (Lanes.find({}).count() === 0) {
             Lanes.insert({ title: 'todo', message: 'Tasks to be done', index: 0});
             Lanes.insert({ title: 'in progress', message: 'Tasks in progress', index: 1});
             Lanes.insert({ title: 'test', message: 'Tasks under test', index: 2});
-            Lanes.insert({ title: 'done', message: 'Tasks done', index: 3});
+            Lanes.insert({ title: 'done', message: 'Tasks done', index: 1000000});
         }
 
         if (Sprints.find({}).count() === 0) {
+            /*
             var endDate = new Date(),
                 startDate = new Date().setDate(endDate.getDate() + 14);
-            Sprints.insert({ sprintNumber: 23, startDate: startDate, endDate: endDate.getTime()});
+            Sprints.insert({
+                sprintNumber: 23,
+                startDate: startDate,
+                endDate: endDate.getTime(),
+                status: 'started'
+            });
+            */
         }
 
         if (TaskColors.find({}).count() === 0) {
@@ -34,6 +104,10 @@ if (Meteor.isServer) {
             TaskColors.insert({ color: '#ff9999', title: 'Test', index: 3});
             TaskColors.insert({ color: '#a0a0ff', title: 'other', index: 3});
             TaskColors.insert({ color: '#9effe6', title: 'infra', index: 3});
+        }
+
+        if (Members.find({}).count() === 0) {
+            Members.insert({name: 'Lucas Calje', initials: 'LC'});
         }
 
         Meteor.publish('task-colors', function () {
@@ -52,8 +126,19 @@ if (Meteor.isServer) {
             return Lanes.find({}, {sort: {index: 1}});
         });
 
-        Meteor.publish('sprint-number', function () {
-            return Sprints.find({ startDate: {$gt: new Date().getTime()}, endDate: { $lt: new Date().getTime()}});
+        Meteor.publish('sprint', function (sprintNumber) {
+
+            if (sprintNumber) { // TODO: rename sprintNumber to number in Collection
+                return Sprints.find({number: sprintNumber}, {limit: 1, sort: {sprintNumber: -1}});
+            }
+            else {
+                //return Sprints.find({ startDate: {$gt: new Date().getTime()}, endDate: { $lt: new Date().getTime()}});
+                return Sprints.find({}, {limit: 1, sort: {sprintNumber: -1}});
+            }
+        });
+
+        Meteor.publish('members', function () {
+            return Members.find({}, {sort: {name: 1}});
         });
     });
 }

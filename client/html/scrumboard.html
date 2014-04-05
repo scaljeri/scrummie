@@ -1,0 +1,13 @@
+<template name="scrumboard">
+    <section scrumboard class="scrumboard">
+        <ol class="lanes">
+            {{#each lanes}}
+            <li droppable class="lane" data-id="{{_id}}">
+                <h1 class="lane-title">{{title}}</h1>
+            </li>
+            {{/each}}
+        </ol>
+
+        {{>postits}}
+    </section>
+</template>

@@ -1,39 +1,61 @@
 <template name="configMenu">
-    <section config-menu class="config-container">
-        <article class="config-form">
+    <section config-menu class="config-menu">
+        <section class="config-content">
             <h1 class="title">Configuration</h1>
 
-            <h2 class="sub-title">Sprint:</h2>
-            <article class="sub-form">
-                <div>
-                    <label class="label" for="sprint-number">Sprint number:</label>
-                    <input id="sprint-number" maxlength="3" value="">
+            <!--<h2 class="sub-title">Sprint:</h2>-->
+            <section accordion class="config-items">
+                <h3>Sprint</h3>
+                <div class="accordion-section">
+                    <div>
+                        <label class="label" for="sprint-number">Sprint number:</label>
+                        <input {{readonlySprintNumber}} sprint-number id="sprint-number" maxlength="3" value="{{sprintNumber}}">
+                    </div>
+
+                    <div>
+                        <label class="label" for="startdate">Starttime:</label>
+                        <span  class="input-datepicker">
+                            <input start-date id="startdate" class="input-date" readonly>
+                            <span calendar--start class="calendar"></span>
+                        </span>
+                    </div>
+
+                    <div>
+                        <label class="label" for="enddate">Endtime:</label>
+                        <span  class="input-datepicker">
+                            <input end-date id="enddate" class="input-date" readonly>
+                            <span calendar--end class="calendar"></span>
+                        </span>
+                    </div>
+                    <a stop-start-sprint class="btn stop-start-sprint">{{sprintButtonLabel}}</a>
                 </div>
+                <h3 class="sub-title">Lanes:</h3>
+                <div class="accordion-section"></div>
 
-                <div>
-                    <label class="label" for="starttime">Starttime:</label>
-                    <span  class="input-datepicker">
-                        <input datepicker class="input-date" value="Now" readonly>
-                        <span calendar--start class="calendar"></span>
-                    </span>
+                <h3 class="sub-title">Colors:</h3>
+                <div class="accordion-section"></div>
+
+                <h2 class="sub-title">Team members:</h2>
+                <div class="accordion-section team-members">
+                    <span>Name</span>
+                    <span>Initials</span>
+                    <ol>
+                        {{#each members}}
+                            <li>
+                                <input class="member-name" value="{{name}}">
+                                <input class="member-initials" value="{{initials}}">
+                            </li>
+                        {{/each}}
+                        <li>
+                            <input add-member-name class="member-name" value="{{name}}">
+                            <input add-member-initials class="member-initials" value="{{initials}}">
+                            <span add-member class="btn add-member">+</span>
+                        </li>
+                    </ol>
                 </div>
-
-                <div>
-                    <label class="label" for="endtime">Endtime:</label>
-                    <span  class="input-datepicker">
-                        <input datepicker class="input-date" value="" readonly>
-                        <span calendar--end class="calendar"></span>
-                    </span>
-                </div>
-            </article>
-
-            <h2 class="sub-title">Lanes:</h2>
-
-            <h2 class="sub-title">Colors:</h2>
-
-            <h2 class="sub-title">Team members:</h2>
+            </section> <!-- accordion -->
             <a cancel-task class="btn cancel-task">Cancel</a>
             <a save-task class="btn save-task">Save</a>
-        </article>
+        </section>
     </section>
 </template>

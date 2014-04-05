@@ -27,12 +27,19 @@ body {
   user-select: none;
   -webkit-user-select: none;
 
-  &.active {
-    background-color: #395077;
+  &:active {
+    //background-color: #395077;
     -webkit-box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
     box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
   }
+}
+
+.error {
+  border: 1px solid red;
+}
+.ui-dialog {
+  z-index: 1000000!important;
 }
 
 .hamburger {

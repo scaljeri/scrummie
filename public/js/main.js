@@ -1,8 +1,11 @@
 $(function () {
-    $('body').click(function() {
-        $('[edit-task]').css('visibility', 'hidden');
-        $('[add-task]').removeClass('active');
-        $('[config-menu]').removeClass('visible');
+    $('body').click(function(event) {
+
+        if (!$(event.target).hasClass('ui-icon')) {
+            $('[edit-task]').css('visibility', 'hidden');
+            $('[add-task]').removeClass('active');
+            $('[config-menu]').removeClass('visible');
+        }
     });
 });
 

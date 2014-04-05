@@ -11,6 +11,14 @@ window.scrummie = {
             };
             this.dep.changed();
         }
+    },
+    errorMessage: {
+        dep: new Deps.Dependency(),
+        value: '',
+        setValue: function (val) {
+            this.value = val;
+            this.dep.changed();
+        }
     }
 };
 

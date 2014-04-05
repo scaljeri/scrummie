@@ -23,3 +23,6 @@ Interesting:
   * https://www.andrewmunsell.com/blog/introduction-to-realtime-web-meteor-and-nodejs
   * https://github.com/aknuds1/example-meteor-and-ng-app
   * http://projectricochet.com/blog/meteor-js-performance#.UzCGAK1dXno
+  * https://www.eventedmind.com/feed/meteor-ironrouter
+  * https://www.eventedmind.com/feed/meteor-introducing-deps
+  * https://www.eventedmind.com/feed/

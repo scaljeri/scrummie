@@ -2,15 +2,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
 
+    <!--
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200'>
     <link href='http://fonts.googleapis.com/css?family=Sofadi+One' rel='stylesheet' type='text/css'>
+    -->
     <link rel="stylesheet" href="/bower_components/jquery-ui/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/bower_components/select2/select2.css">
 
     <script src="/bower_components/jquery/jquery.min.js"></script>
     <script src="/bower_components/jquery-ui/ui/jquery-ui.js"></script>
     <script src="/bower_components/underscore/underscore.js"></script>
-    <script src="/bower_components/select2/select2.min.js"></script>
+    <script src="/bower_components/select2/select2.js"></script>
     <script src="/vendor/jquery.utils.js"></script>
     <script src="/js/main.js"></script>
 
@@ -18,19 +20,10 @@
 </head>
 
 <body>
-    <main>
-        {{> header}}
-        {{> scrumboard}}
+        {{> layout}}
+ </body>
 
-        <section positionable edit-task class="edit-task">
-            <article class="content-area">
-                {{> editTask}}
-            </article>
-        </section>
 
-        {{> configMenu}}
-    </main>
-</body>
 
 <template name="header">
     <header class="header-main header__logo">
@@ -42,19 +35,7 @@
     </header>
 </template>
 
-<template name="scrumboard">
-    <section scrumboard class="scrumboard">
-        <ol class="lanes">
-            {{#each lanes}}
-            <li droppable class="lane">
-                <h1 class="lane-title">{{title}}</h1>
-            </li>
-            {{/each}}
-        </ol>
 
-        {{>postits}}
-    </section>
-</template>
 
 <template name="postits">
     <a class="add-postit" title="add post-it" alt="add post-it"></a>

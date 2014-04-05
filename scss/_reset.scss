@@ -59,23 +59,23 @@ h1 {
 
 input {
   box-sizing: border-box;
-  width: 100%;
+  /*width: 100%;*/
   height: 35px;
   padding: 5px 20px;
   border: 1px solid #a4a5a8;
   border-radius: 2px;
+  /*
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -moz-box-shadow: 0px 1px 0px #f2f2f2;
   -webkit-box-shadow: 0px 1px 0px #f2f2f2;
+  */
 }
 input::-webkit-input-placeholder  {
   color: #a1b2c3;
-  //text-shadow: 0px -1px 0px #38506b;
 }
 input:-moz-placeholder {
   color: #a1b2c3;
-  //text-shadow: 0px -1px 0px #38506b;
 }
 
 textarea {
