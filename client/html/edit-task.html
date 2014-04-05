@@ -7,11 +7,19 @@
         <input type="text" name="title" value="{{task.title}}" placeholder="Title" class="input--shadow">
         <textarea name="description" placeholder="Description" class="textarea--shadow">{{task.description}}</textarea>
 
-        <select dropdown multiple class="dropdown" name="color">
+        <select dropdown colors multiple class="dropdown" name="color">
             {{#each taskColors}}
                 <option value="{{color}}">{{title}}</option>
             {{/each}}
         </select>
+
+        <select dropdown members class="dropdown" name="memberId">
+            <option></option> <!-- required for placeholder -->
+            {{#each members}}
+                <option value="{{_id}}">{{name}}</option>
+            {{/each}}
+        </select>
+
         <input type="text" name="link" value="{{task.link}}" placeholder="Link" class="input--shadow">
 
         <a cancel-task class="btn cancel-task">Cancel</a>

@@ -1,10 +1,18 @@
 $(function () {
-    $('body').click(function(event) {
+    $('body').click(function (e) {
+        var el = $(e.target),
+            list = App.outsideClick.list;
+        App.outsideClick.isDirty = false;
 
-        if (!$(event.target).hasClass('ui-icon')) {
-            $('[edit-task]').css('visibility', 'hidden');
-            $('[add-task]').removeClass('active');
-            $('[config-menu]').removeClass('visible');
+        for (var i = 0; i < list.length; i++) {
+            if (el.closest(list[i].selector).length === 0) {
+                if (list[i].ignore) {
+                    list[i].ignore = false;
+                }
+                else {
+                    list[i].callback(e);
+                }
+            }
         }
     });
 });

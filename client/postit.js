@@ -5,13 +5,12 @@ Template.postit.zIndex = function () {
     }
 };
 
-Template.postit.getColor = function () {
-    var colors = TaskColors.find({}).fetch(),
-        self = this,
-        color = _.find(colors, function(color) {
-            return color._id === self.color;
-        });
-    return color ? color.color : '#fff';
+Template.postit.color = function () {
+    return TaskColors.findOne({_id: this.color});
+};
+
+Template.postit.member = function () {
+    return Members.findOne({_id: this.memberId});
 };
 
 Template.postit.rendered = function () {
@@ -22,19 +21,18 @@ Template.postit.rendered = function () {
 };
 
 Template.postit.events = {
-    'click [postit]' : function (e) {
-        var postit = $(e.target).closest('[postit]');
+    'click [postit]' : function (e, t) {
+        if (!e.target.hasAttribute('postit-link')) {
+            var postit = $(e.target).closest('[postit]');
 
-        $('[edit-task]').position({
-            of: postit,
-            my: 'center center',
-            at: 'center center',
-            collision: 'fit fit'
-        });
-        setTimeout(function () {
-            $('[edit-task]').css('visibility', 'visible');
-        },0);
-
-        Template.editTask.singleColorMode(Tasks.findOne({_id: postit.attr('data-id')}));
+            $('[edit-task]').position({
+                of: postit,
+                my: 'center center',
+                at: 'center center',
+                collision: 'fit fit'
+            });
+            Template.editTask.show(Tasks.findOne({_id: postit.attr('data-id')}));
+        }
+        event.stopPropagation();
     }
 }

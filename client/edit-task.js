@@ -1,38 +1,60 @@
 Template.editTask.task = function () {
     return App.selectedTask;
 };
-Template.editTask.multiColorMode = function (task) {
-    App.selectedTask = task;
-    setTimeout(function () {
-        setupSelect({multiple: true})
-            .select2('val', []);
-    }, 0);
-};
-
-Template.editTask.singleColorMode = function (task) {
-    App.selectedTask = task;
-    setTimeout(function () { // delay select2, so the change on App.selectedTask is applied first
-        taskColor = TaskColors.findOne({_id: task.color});
-        setupSelect( {multiple: false})
-            .select2('val', taskColor.color);
-    }, 0);
-}
 
 Template.editTask.taskColors = function () {
-    return TaskColors.find({}, {
-        sort: {
-            index: 1
-        }
-    }).fetch();
+    return TaskColors.find({}, {sort: {index: 1}}).fetch();
 };
 
+Template.editTask.members = function () {
+    return Members.find({}, {sort: {name: 1}});
+};
+
+Template.editTask.show = function (task) {
+    App.selectedTask = task;
+    setTimeout(function () { // make sure App.selectedTask is applied
+        var select = $('[edit-task] [dropdown][colors]'),
+            taskColors = [];
+
+        if (task) {
+            select.removeAttr('multiple');
+            taskColors = TaskColors.findOne({_id: task.color});
+        }
+        else {
+            select.attr('multiple', 'multiple')
+        }
+
+        select.select2({
+            formatResult: format,
+            formatSelection: format,
+            maximumSelectionSize: 5,
+            minimumResultsForSearch: -1,
+            placeholder: "Colors"
+        });
+        select.select2('val', taskColors);
+
+        $('[edit-task]').css('visibility', 'visible');
+
+        App.outsideClick.register('[edit-task]', Template.editTask.hide);
+    }, 0);
+};
+
+Template.editTask.hide = function () {
+    $('[edit-task] [dropdown]').blur();
+    $('[edit-task]').css('visibility', 'hidden');
+
+    App.outsideClick.remove(Template.editTask.hide);
+};
+
+
+
 Template.editTask.rendered = function () {
-    $('[edit-task] [dropdown]').select2({
-        formatResult: format,
-        formatSelection: format,
-        maximumSelectionSize: 5,
+    $('[edit-task] [dropdown][members]').select2({
+        //formatResult: format,
+        //formatSelection: format,
+        //maximumSelectionSize: 5,
         minimumResultsForSearch: -1,
-        placeholder: "Colors"
+        placeholder: "Team member"
     });
 };
 
@@ -65,21 +87,3 @@ function format(color) {
             '<h3 class="select-option-title">' + color.text + '</h3>'].join('');
 }
 
-function setupSelect(options) {
-    var select = $('[edit-task] [dropdown]');
-
-    if (!options.multiple) {
-        select.removeAttr('multiple')
-    }
-    else {
-        select.attr('multiple', 'multiple')
-    }
-
-    return select.select2({
-        formatResult: format,
-        formatSelection: format,
-        maximumSelectionSize: 5,
-        minimumResultsForSearch: -1,
-        placeholder: "Colors"
-    });
-}

@@ -8,6 +8,7 @@
 */
 
 .postit {
+  overflow: hidden;
   position: absolute;
   top: 100px;
   z-index: 100;
@@ -15,8 +16,8 @@
 
   display: inline-block;
   //position: relative;
-  height: 146px;
-  width: 151px;
+  height: 134px;
+  width: 145px;
 
   .description,
   .title {
@@ -54,4 +55,25 @@
     box-sizing: border-box;
   }
 
+  .postit__link {
+    position: absolute;
+    bottom: 2px;
+    left: 5px;
+    background-image: url(/img/link.png);
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    padding: 10px;
+  }
+
+  .postit__initials {
+    position: absolute;
+    bottom: 8px;
+    right: 5px;
+  }
+
+  svg {
+    left: -5px;
+    position: absolute;
+    z-index: -1;
+  }
 }

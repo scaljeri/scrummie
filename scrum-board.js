@@ -44,12 +44,25 @@ if (Meteor.isClient) {
             taskPositions: Meteor.subscribe('task-positions'),
             members: Meteor.subscribe('members')
         },
-        deps: {}
+        deps: {},
+        outsideClick: {
+            list: [],
+            isDirty: false,
+            register: function (selector, callback) {
+                this.remove(callback);
+                this.list.push({ selector: selector, callback: callback, ignore: this.isDirty});
+            },
+            remove: function (callback) {
+                this.list = _.filter(this.list, function (item) {
+                    return item.callback !== callback;
+                })||[];
+            }
+        }
     };
-
     makeReactive('selectedTask');
     makeReactive('errorMessage');
 
+    /* PRIVATE HELPER FUNCTIONS */
     function makeReactive(property) {
         var value = null,
             dep = new Deps.Dependency();

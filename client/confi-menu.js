@@ -49,11 +49,20 @@ Template.configMenu.rendered = function () {
     $('[accordion]').accordion({heightStyle: 'fill'});
 };
 
-Template.configMenu.setup = function () {
+Template.configMenu.show = function () {
+    $('[config-menu]').addClass('visible');
+
     var sprint = Sprints.find({}, {sort: {sprintNumber: -1}});
     $('[start-date]').datepicker("setDate", new Date(sprint.startdate));
     $('[end-date]').datepicker("setDate", new Date(sprint.enddate));
-}
+
+    App.outsideClick.register('[config-menu]', Template.configMenu.hide);
+};
+
+Template.configMenu.hide = function () {
+    $('[config-menu]').removeClass('visible');
+    App.outsideClick.remove(Template.configMenu.hide);
+};
 
 Template.configMenu.sprintButtonLabel = function () {
     var sprint = Sprints.findOne({}, {sort: {sprintNumber: -1}});

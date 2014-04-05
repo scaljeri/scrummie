@@ -2,34 +2,32 @@ Template.header.sprint = function () {
     return Sprints.findOne({ startdate: {$gt: new Date().getTime()}, enddate: { $lt: new Date().getTime()}});
 }
 
+Template.header.rendered = function () {
+    App.outsideClick.register('[edit-task]', function () {
+        $('[add-task]').removeClass('active');
+    });
+}
+
 Template.header.events = {
     'click [add-task]': function () {
         var addTask = $('[add-task]');
+        addTask.toggleClass('active');
         App.selectedTask = null;
 
-        $("[positionable]").position({
-            of: $("[add-task]"),
-            my: 'center bottom',
-            at: 'center top',
-            collision: 'fit flip'
-        });
-
-        addTask.toggleClass('active');
-        Template.editTask.multiColorMode();
-
         if (addTask.hasClass('active')) {
-            $('[edit-task]').css('visibility', 'visible');
-        }
-        else {
-            $('[edit-task]').css('visibility', 'hidden');
-        }
+            $("[positionable]").position({
+                of: $("[add-task]"),
+                my: 'center bottom',
+                at: 'center top',
+                collision: 'fit flip'
+            });
 
-        event.stopPropagation();
+            Template.editTask.show();
+            event.stopPropagation();
+        }
     },
     'click [config]': function (event) {
-        $('[config-menu]').addClass('visible');
-        event.stopPropagation();
-
-        Template.configMenu.setup();
+        App.outsideClick.isDirty = true;
+        Template.configMenu.show();
     }
-}
+};

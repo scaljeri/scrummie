@@ -1,11 +1,12 @@
 <template name="postit">
-    <li class="postit" data-id="{{_id}}" draggable postit style="top:{{y}}%;left:{{x}}%;z-index:{{zIndex}};" data-z-index="{{zIndex}}">
+    <li class="postit" data-id="{{_id}}" draggable postit style="top:{{y}}%;left:{{x}}%;z-index:{{zIndex}};" data-z-index="{{zIndex}}"
+            title="{{color.title}} {{#if member}}- {{/if}}{{member.name}}">
         <h3 class="title">{{title}}</h3>
         <p class="description">{{description}}</p>
         <svg class="post-it" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="156px" height="141.6px" viewBox="0 0 156 141.6" enable-background="new 0 0 156 141.6" xml:space="preserve">
             <g>
 	            <g>
-		            <path class="post-it-bg" fill-rule="evenodd" clip-rule="evenodd" fill="{{getColor}}" d="M5,9.401L141.499,5l7.457,124.825c0,0-41.377-5.49-72.215-3.354c-30.837,2.125-69.711,7.93-69.711,7.93L5,9.401z"/>
+		            <path class="post-it-bg" fill-rule="evenodd" clip-rule="evenodd" fill="{{color.color}}" d="M5,9.401L141.499,5l7.457,124.825c0,0-41.377-5.49-72.215-3.354c-30.837,2.125-69.711,7.93-69.711,7.93L5,9.401z"/>
 	            </g>
             </g>
             <g>
@@ -16,5 +17,10 @@
 	            <polygon fill-rule="evenodd" clip-rule="evenodd" fill="url(#SVGID_1_)" points="141.499,5 5,9.401 7.029,134.401 	"/>
             </g>
         </svg>
+
+        {{#if link}}
+            <a postit-link href="{{link}}" class="postit__link"></a>
+        {{/if}}
+        <span class="postit__initials">LC{{initials}}</span>
     </li>
 </template>
