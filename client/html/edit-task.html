@@ -8,8 +8,8 @@
         <textarea name="description" placeholder="Description" class="textarea--shadow">{{task.description}}</textarea>
 
         <select dropdown colors multiple class="dropdown" name="color">
-            {{#each taskColors}}
-                <option value="{{color}}">{{title}}</option>
+            {{#each colors}}
+                <option value="{{value}}">{{title}}</option>
             {{/each}}
         </select>
 

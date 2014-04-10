@@ -5,8 +5,12 @@ Template.postit.zIndex = function () {
     }
 };
 
+Template.postit.isVisible = function () {
+    return !!App.colorFilter || this.color in App.colorFilter;
+};
+
 Template.postit.color = function () {
-    return TaskColors.findOne({_id: this.color});
+    return TaskColors.findOne({_id: this.colorId});
 };
 
 Template.postit.member = function () {
@@ -16,7 +20,8 @@ Template.postit.member = function () {
 Template.postit.rendered = function () {
     var postit = $(this.find('[postit]'));
     $(postit).draggable({
-        containment: '[scrumboard]'
+        containment: '[scrumboard]',
+        scroll: false
     });
 };
 

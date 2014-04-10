@@ -38,3 +38,9 @@ Template.postits.events = {
 
     }
 };
+
+/*
+ db.tasks.find(
+ { "color": { $in: ["e4oqPeoBTJtCpG53K", "cvmQv7vQHunPnmqPz"] }}
+ );
+ */

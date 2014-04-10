@@ -56,7 +56,7 @@ Template.configMenu.show = function () {
     $('[start-date]').datepicker("setDate", new Date(sprint.startdate));
     $('[end-date]').datepicker("setDate", new Date(sprint.enddate));
 
-    App.outsideClick.register('[config-menu]', Template.configMenu.hide);
+    App.outsideClick.register('.config-content', Template.configMenu.hide);
 };
 
 Template.configMenu.hide = function () {

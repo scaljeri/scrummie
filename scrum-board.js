@@ -61,16 +61,17 @@ if (Meteor.isClient) {
     };
     makeReactive('selectedTask');
     makeReactive('errorMessage');
+    makeReactive('selectedColors');
+    makeReactive('colorFilter', []);
 
     /* PRIVATE HELPER FUNCTIONS */
-    function makeReactive(property) {
+    function makeReactive(property, defaultValue) {
         var value = null,
             dep = new Deps.Dependency();
 
-        console.log('reactive property: ' + property)
         Object.defineProperty(App, property, {
             set: function(newVal) {
-                value = newVal;
+                value = newVal||defaultValue;
                 dep.changed();
             },
             get: function () {
@@ -83,6 +84,7 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
     Meteor.startup(function () {
+
         /*
         Sprints.remove({});
         Lanes.remove({});
@@ -111,16 +113,18 @@ if (Meteor.isServer) {
         }
 
         if (TaskColors.find({}).count() === 0) {
-            TaskColors.insert({ color: '#ffff92', title: 'Frontend', index: 0});
-            TaskColors.insert({ color: '#ffa2e7', title: 'Design', index: 1});
-            TaskColors.insert({ color: '#73dcff', title: 'Backend', index: 2});
-            TaskColors.insert({ color: '#ff9999', title: 'Test', index: 3});
-            TaskColors.insert({ color: '#a0a0ff', title: 'other', index: 3});
-            TaskColors.insert({ color: '#9effe6', title: 'infra', index: 3});
+            TaskColors.insert({ value: '#ffff92', title: 'Frontend', index: 0});
+            TaskColors.insert({ value: '#ffa2e7', title: 'Design', index: 1});
+            TaskColors.insert({ value: '#73dcff', title: 'Backend', index: 2});
+            TaskColors.insert({ value: '#93e89f', title: 'Unknown', index: 3});
+            TaskColors.insert({ value: '#ff9999', title: 'Test', index: 4});
+            TaskColors.insert({ value: '#a0a0ff', title: 'other', index: 5});
+            TaskColors.insert({ value: '#9effe6', title: 'infra', index: 6});
         }
 
         if (Members.find({}).count() === 0) {
             Members.insert({name: 'Lucas Calje', initials: 'LC'});
+            Members.insert({name: 'Joost van Dieten', initials: 'JD'});
         }
 
         Meteor.publish('task-colors', function () {

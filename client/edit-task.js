@@ -2,7 +2,7 @@ Template.editTask.task = function () {
     return App.selectedTask;
 };
 
-Template.editTask.taskColors = function () {
+Template.editTask.colors = function () {
     return TaskColors.find({}, {sort: {index: 1}}).fetch();
 };
 
@@ -18,13 +18,14 @@ Template.editTask.show = function (task) {
 
         if (task) {
             select.removeAttr('multiple');
-            taskColors = TaskColors.findOne({_id: task.color});
+            taskColors = TaskColors.findOne({_id: task.colorId}).value;
         }
         else {
             select.attr('multiple', 'multiple')
         }
 
         select.select2({
+            allowClear: true,
             formatResult: format,
             formatSelection: format,
             maximumSelectionSize: 5,

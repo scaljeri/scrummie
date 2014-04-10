@@ -49,8 +49,9 @@ Meteor.methods({
 
 function upsertTask(task) {
     if (task.color !== undefined) {
-        var color = TaskColors.findOne({color: task.color});
-        task.color = color._id;
+        var color = TaskColors.findOne({value: task.color});
+        task.colorId = color._id;
+        delete task.color;
     }
 
     if (!task.sprintNumber) { // new tasks do not have a sprint number yet
