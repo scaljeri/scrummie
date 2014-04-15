@@ -1,15 +1,9 @@
 <template name="layout">
-    <main>
+    <main class="viewport">
         {{> header}}
+
         {{> scrumboard}}
 
-        <section positionable edit-task class="edit-task">
-            <article class="content-area">
-                {{> editTask}}
-            </article>
-        </section>
-
-        {{> configMenu}}
-        {{> errorDialog}}
+        <!--{{> taskManip}}-->
     </main>
 </template>

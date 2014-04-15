@@ -6,6 +6,9 @@
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200'>
     <link href='http://fonts.googleapis.com/css?family=Sofadi+One' rel='stylesheet' type='text/css'>
     -->
+    <!-- https://www.google.com/fonts#UsePlace:use/Collection:Lato -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" href="/bower_components/jquery-ui/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/bower_components/select2/select2.css">
 
@@ -19,38 +22,5 @@
     <title>Scrummie</title>
 </head>
 
-<body>
-        {{> layout}}
- </body>
-
-<template name="header">
-    <header class="header-main header__logo">
-        <h1 class="header__title">Sprint {{sprint.sprintNumber}}</h1>
-        <nav class="header__nav">
-            <a add-task class="btn add-task">+ new task</a>
-            <a config class="btn hamburger">☰</a>
-        </nav>
-    </header>
-</template>
-
-<template name="postits">
-    <a class="add-postit" title="add post-it" alt="add post-it"></a>
-    <ol class="postits">
-        {{#each items}}
-            {{> postit}}
-        {{/each}}
-    </ol>
-</template>
-
-<!--
-<template name="postit">
-    <li postit class="draggable" data-id="{{_id}}" style="top: {{this.top}}%;left: {{this.left}}%">
-        <div class="postit">
-            <h1>{{title}}</h1>
-            <p>{{description}}</p>
-        </div>
-    </li>
-</template>
--->
-
+<body></body>
 

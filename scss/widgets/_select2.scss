@@ -1,0 +1,25 @@
+.select2-default .select2-chosen {
+  color: #a1b2c3;
+  line-height: 26px;
+}
+.select2-chosen {
+  font: 300 16px/20px $font-normal;
+  color: $text;
+}
+
+
+
+
+.select2-results .select-option-color {
+  margin-left: 20px;
+  top: 0px;
+}
+
+.select-option-title {
+  display: inline;
+  font: 100 16px/16px $font-normal;
+}
+
+.select2-drop {
+  z-index: 2147483610!important;
+}

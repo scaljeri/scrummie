@@ -18,33 +18,7 @@
     height: 100%;
     width: 100%;
 
-    .select2-container {
-      display: block;
-      margin-bottom: 12px;
-    }
 
-    .select2-container .select2-choices {
-      .select2-search-field input {
-        line-height: 20px;
-        height: 25px;
-      }
-
-      .select2-search-choice {
-        padding-right: 0;
-
-        .select-option-color {
-          top: 0;
-          margin-right: 6px;
-          transform:rotate(0);
-          -ms-transform:rotate(0); /* IE 9 */
-          -webkit-transform:rotate(0); /* Opera, Chrome, and Safari */
-        }
-        .select-option-title {
-          display: none;
-          top: 0;
-        }
-      }
-    }
   }
   &:before {
     border-bottom: 10px solid #fff;
@@ -60,39 +34,4 @@
   }
 }
 
-.select2-default .select2-chosen {
-  color: #a1b2c3;
-  line-height: 26px;
-}
-.select2-chosen {
-  font: 300 16px/20px 'Titillium Web';
-  margin-left: 13px;
-}
 
-.select-option-color {
-  box-sizing: border-box;
-  display: inline-block;
-  height: 10px;
-  width: 10px;
-  margin-right: 10px;
-  position: relative;
-  top: 4px;
-  transform:rotate(45deg);
-  -ms-transform:rotate(45deg); /* IE 9 */
-  -webkit-transform:rotate(45deg); /* Opera, Chrome, and Safari */
-}
-
-
-.select2-results .select-option-color {
-  margin-left: 20px;
-  top: 0px;
-}
-
-.select-option-title {
-  display: inline;
-  font: 100 16px/16px 'Titillium Web';
-}
-
-.select2-drop {
-  z-index: 2147483610!important;
-}

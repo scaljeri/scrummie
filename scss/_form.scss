@@ -3,7 +3,7 @@ form {
 }
 input--shadow, textarea--shadow {
   margin-bottom: 10px;
-  font: 100 20px/35px 'Titillium Web', sans-serif;
+  font: 100 20px/35px $font-normal, 'Titillium Web', sans-serif;
 
   -webkit-box-shadow: inset 4px 5px 7px -6px rgba(50, 50, 50, 0.75);
   -moz-box-shadow:    inset 4px 5px 7px -6px rgba(50, 50, 50, 0.75);

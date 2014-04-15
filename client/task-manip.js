@@ -1,16 +1,16 @@
-Template.editTask.task = function () {
+Template.taskManip.task = function () {
     return App.selectedTask;
 };
 
-Template.editTask.colors = function () {
+Template.taskManip.colors = function () {
     return TaskColors.find({}, {sort: {index: 1}}).fetch();
 };
 
-Template.editTask.members = function () {
+Template.taskManip.members = function () {
     return Members.find({}, {sort: {name: 1}});
 };
 
-Template.editTask.show = function (task) {
+Template.taskManip.show = function (task) {
     App.selectedTask = task;
     setTimeout(function () { // make sure App.selectedTask is applied
         var select = $('[edit-task] [dropdown][colors]'),
@@ -36,20 +36,20 @@ Template.editTask.show = function (task) {
 
         $('[edit-task]').css('visibility', 'visible');
 
-        App.outsideClick.register('[edit-task]', Template.editTask.hide);
+        App.outsideClick.register('[edit-task]', Template.taskManip.hide);
     }, 0);
 };
 
-Template.editTask.hide = function () {
+Template.taskManip.hide = function () {
     $('[edit-task] [dropdown]').blur();
     $('[edit-task]').css('visibility', 'hidden');
 
-    App.outsideClick.remove(Template.editTask.hide);
+    App.outsideClick.remove(Template.taskManip.hide);
 };
 
 
 
-Template.editTask.rendered = function () {
+Template.taskManip.rendered = function () {
     $('[edit-task] [dropdown][members]').select2({
         //formatResult: format,
         //formatSelection: format,
@@ -59,7 +59,7 @@ Template.editTask.rendered = function () {
     });
 };
 
-Template.editTask.events = {
+Template.taskManip.events = {
     'click [edit-task-form]': function (event) { // make sure the popover is not closed
         event.stopPropagation();
     },

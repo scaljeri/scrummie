@@ -1,5 +1,5 @@
 SprintController = RouteController.extend({
-    template: 'scrumboard',
+    template: 'layout',
 
     before: function () {
         //console.log("TEAM: " + process.env.TEAM);
@@ -15,7 +15,7 @@ SprintController = RouteController.extend({
         */
     },
     waitOn: function () {
-        return [App.subs.lanes]; // TODO: define a list to wait for
+        return [App.subs.lanes, App.subs.taskColors]; // TODO: define a list to wait for
     },/*
     data: {  // or a function
 

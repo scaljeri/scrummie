@@ -62,7 +62,7 @@ if (Meteor.isClient) {
     makeReactive('selectedTask');
     makeReactive('errorMessage');
     makeReactive('selectedColors');
-    makeReactive('colorFilter', []);
+    makeReactive('filterColor');
 
     /* PRIVATE HELPER FUNCTIONS */
     function makeReactive(property, defaultValue) {

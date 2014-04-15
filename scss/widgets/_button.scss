@@ -1,0 +1,20 @@
+.btn {
+  font: 300 15px/15px Lato;
+  cursor: pointer;
+  text-align: center;
+  background-color: $button-bg;
+  color: #fff;
+  display: inline-block;
+  padding: 6px 20px 7px;
+  border-radius: 2px;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+
+  &:active {
+    //background-color: #395077;
+    -webkit-box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
+    box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
+  }
+}

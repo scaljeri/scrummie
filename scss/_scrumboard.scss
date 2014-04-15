@@ -1,0 +1,10 @@
+.scrumboard {
+  background-color: #fff;
+  border: 10px solid rgba(0, 0, 0, 0);
+  border-radius: 2px;
+  flex: 1;
+
+  @include vendor-prefix-value(display, flex);
+  @include vendor-prefix(flex-direction, column);
+  @include vendor-prefix(user-select, none);
+}

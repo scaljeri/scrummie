@@ -1,0 +1,43 @@
+@import 'variables';
+@import 'mixins';
+@import 'reset';
+@import 'form';
+@import 'widgets/select2';
+@import 'widgets/select2-colors';
+@import 'header';
+@import 'scrumboard';
+@import 'scrumboard-header';
+@import 'config-menu';
+@import 'lanes';
+@import 'postit';
+@import 'edit-task';
+@import 'add-task';
+
+@import 'widgets/button';
+
+* {
+  @include vendor-prefix(box-sizing, border-box);
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-image: url($main-bg);
+  font-family: $font-normal;
+  padding: 10px;
+}
+
+.viewport {
+  @include vendor-prefix-value(display, flex);
+  @include vendor-prefix(flex-direction, column);
+}
+
+.error {
+  border: 1px solid $error;
+}
+.ui-dialog {
+  z-index: 1000000!important;
+}
