@@ -5,8 +5,8 @@
     </article>
 </section>
 -->
-<template name="taskManip">
-    <form edit-task-form>
+<template name="manipTask">
+    <form manip-task class="manip-task">
         {{#if task._id}}
             <input name="_id" type="hidden" value="{{task._id}}">
             <input name="sprintNumber" type="hidden" value="{{task.sprintNumber}}">

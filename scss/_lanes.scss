@@ -6,7 +6,7 @@
   padding: 0px;
   margin: 0;
   border-top: 1px dashed #d2d4d8;
-  border: 1px solid green;
+  flex: 1;
 
   @include vendor-prefix-value(display, flex);
   @include vendor-prefix(flex-direction, row);
@@ -21,23 +21,27 @@
       content: '';
       display: inline-block;
       position: absolute;
-      top: 0;
+      top: 10px;
       bottom: 0;
       right: 0;
 
       border-right: 1px dashed #d2d4d8;
     }
 
+    &:last-child:after {
+      display: none;
+    }
+
     &.ui-state-hover {
       background: none;
       background-color: #fff;
       border: none;
-      border-right: 1px dashed #d2d4d8;
     }
 
     &.ui-state-active {
       background: none;
       background-color: rgba(0, 0, 0, .1);
+      border: none;
     }
 
     &:first-of-type {

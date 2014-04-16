@@ -2,13 +2,24 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "scss": {}
+      "scss": {},
+      "iron-router": {}
     },
     "packages": {
       "scss": {
         "git": "https://github.com/fourseven/meteor-scss.git",
-        "tag": "v0.8.3",
-        "commit": "84fa8b09766e85a9e85b5606903f4222b7dd7605"
+        "tag": "v0.8.4",
+        "commit": "11af0da643944d241fe7d173af76162c4b670dee"
+      },
+      "iron-router": {
+        "git": "https://github.com/EventedMind/iron-router.git",
+        "tag": "v0.7.0",
+        "commit": "05f34bc48c4cad9fdaa366c1ddcabe6980232ece"
+      },
+      "blaze-layout": {
+        "git": "https://github.com/EventedMind/blaze-layout.git",
+        "tag": "v0.2.2",
+        "commit": "8bc53798fe5965669ae67c72f91829fcfdceabfd"
       }
     }
   }

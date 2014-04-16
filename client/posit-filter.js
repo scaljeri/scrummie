@@ -17,9 +17,13 @@ Template.postitFilter.rendered = function () {
 
   });
 
-  select.on('change', function (e) {
-    console.log(select.val());
-    debugger;
+  select.on('change', function () {
+    if (select.val() === '') {
+      App.filterColorId = null;
+    }
+    else {
+      App.filterColorId = TaskColors.findOne({value: select.val()})._id;
+    }
   });
 };
 

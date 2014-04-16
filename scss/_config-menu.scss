@@ -1,19 +1,12 @@
 .config-menu {
-  * {
-    box-sizing: border-box;
-  }
-
   color: #fff;
 
   position: absolute;
   top: 0;
   right: -400px;
-  //right: -25px;
+  height: 100%;
   width: 400px;
-
-  border: 20px solid transparent;
-  box-sizing: border-box;
-  z-index: 10000000;
+  z-index: $on-top;
 
   transition-duration: 500ms;
   -webkit-transition-duration: 500ms; /* Safari */
@@ -23,13 +16,12 @@
   -o-transition-property: right; /* Opera */
 
   .config-content {
-    border-radius: 10px;
     background-color: $button-bg;
-    border: 2px solid grey;
     width: 400px;
     color: #fff;
     padding-right: 25px;
     box-sizing: border-box;
+    height: 100%;
 
     .sub-title {
       color: inherit;
@@ -108,9 +100,8 @@
 
   .title {
     color: inherit;
-    margin-top: 5px;
     text-shadow: none;
-    font: 100 20px/40px 'Titillium Web';
+    font: 100 20px/40px $font-normal;
   }
 
 }

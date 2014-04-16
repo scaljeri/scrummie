@@ -9,24 +9,7 @@ Template.header.rendered = function () {
 }
 
 Template.header.events = {
-    'click [add-task]': function () {
-        var addTask = $('[add-task]');
-        addTask.toggleClass('active');
-        App.selectedTask = null;
-
-        if (addTask.hasClass('active')) {
-            $("[positionable]").position({
-                of: $("[add-task]"),
-                my: 'center bottom',
-                at: 'center top',
-                collision: 'fit flip'
-            });
-
-            Template.editTask.show();
-            event.stopPropagation();
-        }
-    },
-    'click [config]': function (event) {
+    'click [config]': function () {
         App.outsideClick.isDirty = true;
         Template.configMenu.show();
     }

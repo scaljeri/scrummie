@@ -47,6 +47,15 @@ if (Meteor.isClient) {
         deps: {},
         outsideClick: {
             list: [],
+            /*
+            When a click is supposed to show a widget, this widget should be ignored when this
+            click is handled in the outside-click code. Otherwise this click will show the widget
+            and immediately close it again. So, when a widget is shown also set dirty to true
+
+              App.outsideClick.isDirty = true;
+              Template.configMenu.show();       // the widget registers itself for an outside-click
+
+            */
             isDirty: false,
             register: function (selector, callback) {
                 this.remove(callback);
@@ -62,7 +71,7 @@ if (Meteor.isClient) {
     makeReactive('selectedTask');
     makeReactive('errorMessage');
     makeReactive('selectedColors');
-    makeReactive('filterColor');
+    makeReactive('filterColorId');
 
     /* PRIVATE HELPER FUNCTIONS */
     function makeReactive(property, defaultValue) {
