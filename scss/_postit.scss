@@ -8,6 +8,23 @@
 */
 
 .postit {
+  background:#fefabc;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size:15px;
+  color: #000;
+  width:200px;
+
+  /*
+  transform: rotate(7deg);
+  */
+
+  box-shadow: 0px 4px 6px #333;
+  -moz-box-shadow: 0px 4px 6px #333;
+  -webkit-box-shadow: 0px 4px 6px #333;
+
+}
+
+.postit {
   overflow: hidden;
   position: absolute;
   top: 100px;
@@ -18,10 +35,11 @@
   //position: relative;
   height: 134px;
   width: 145px;
+  padding-top: 5px;
 
   .description,
   .title {
-    position: absolute;
+    //position: absolute;
     width: 100%;
     color: rgba(35,48,70,.6);
   }
@@ -31,15 +49,16 @@
     top: 12px;
     padding-left: 6px;
     //left: 25px;
-    font: 100 15px/20px 'Sofadi One', cursive;
+    font: 400 20px/20px 'Gloria Hallelujah', cursive;
     text-align: center;
+    margin-bottom: 10px;
 
     &:after {
       box-sizing: border-box;
       position: absolute;
       left: 17px;
       right: 21px;
-      top: 23px;
+      top: 28px;
       content: '';
       border-bottom: 1px solid rgba(35,48,70,.3);
       transform:rotate(-3deg);
@@ -49,10 +68,8 @@
   }
 
   .description {
-    font: 100 15px/20px 'Sofadi One', cursive;
-    top: 40px;
-    padding-left: 17px;
-    box-sizing: border-box;
+    font: 400 15px/20px 'Gloria Hallelujah', cursive;
+    margin: 10px;
   }
 
   .postit__link {
