@@ -30,14 +30,13 @@ Template.postit.events = {
         if (!e.target.hasAttribute('postit-link')) {
             var postit = $(e.target).closest('[postit]');
 
-            $('[edit-task]').position({
+            $('[manip-task]').position({
                 of: postit,
                 my: 'center center',
                 at: 'center center',
                 collision: 'fit fit'
             });
-            Template.editTask.show(Tasks.findOne({_id: postit.attr('data-id')}));
+            Template.manipTask.show(Tasks.findOne({_id: postit.attr('data-id')}));
         }
-        event.stopPropagation();
     }
 }

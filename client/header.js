@@ -10,7 +10,6 @@ Template.header.rendered = function () {
 
 Template.header.events = {
     'click [config]': function () {
-        App.outsideClick.isDirty = true;
         Template.configMenu.show();
     }
 };

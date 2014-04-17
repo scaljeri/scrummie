@@ -31,5 +31,9 @@
 
         <a cancel-task class="btn cancel-task">Cancel</a>
         <a save-task class="btn save-task">Save</a>
+
+        {{#if task}}
+            <a delete-task class="delete-task">Delete task</a>
+        {{/if}}
     </form>
 </template>

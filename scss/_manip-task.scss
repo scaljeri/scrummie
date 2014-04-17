@@ -1,0 +1,41 @@
+.manip-task {
+  position: absolute;
+  visibility: hidden;
+  padding: 10px;
+  width: 300px;
+  height: 412px;
+  z-index: $on-top; // 47 less than the maximum value
+
+    background-color: #fff;
+    border-radius: 2px;
+  -webkit-box-shadow: 0px 0px 11px 0px rgba(50, 50, 50, 1);
+  -moz-box-shadow: 0px 0px 11px 0px rgba(50, 50, 50, 1);
+  box-shadow: 0px 0px 11px 0px rgba(50, 50, 50, 1);
+  margin-left: 5px;
+
+  .select2-container {
+    margin-bottom: 10px;
+  }
+  .delete-task {
+    display: block;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /*
+  &:before {
+    border-bottom: 10px solid green;//#fff;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    content: '';
+    position: absolute;
+    right: 45px;
+    top: 4px;
+    height: 0;
+    width: 0;
+    z-index: 1;
+  }
+  */
+}
+
+

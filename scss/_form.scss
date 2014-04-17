@@ -1,13 +1,12 @@
 form {
   margin-top: 0;
 }
-input--shadow, textarea--shadow {
+.input--shadow, .textarea--shadow {
+  font: 100 20px/35px $font-normal;
   margin-bottom: 10px;
-  font: 100 20px/35px $font-normal, 'Titillium Web', sans-serif;
+  width: 100%;
 
-  -webkit-box-shadow: inset 4px 5px 7px -6px rgba(50, 50, 50, 0.75);
-  -moz-box-shadow:    inset 4px 5px 7px -6px rgba(50, 50, 50, 0.75);
-  box-shadow:         inset 4px 5px 7px -6px rgba(50, 50, 50, 0.75);
+  @include vendor-prefix(box-shadow, inset 4px 5px 7px -6px rgba(50, 50, 50, 0.75));
 }
 
 textarea {
