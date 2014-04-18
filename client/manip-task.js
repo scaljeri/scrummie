@@ -29,7 +29,9 @@ Template.manipTask.show = function (task, callback) {
 
     if (task) {
       select.removeAttr('multiple');
-      taskColors = TaskColors.findOne({_id: task.colorId}).value;
+      if (task.colorId) { // TODO: can happen now, but should not happen
+        taskColors = TaskColors.findOne({_id: task.colorId}).value;
+      }
     }
     else {
       select.attr('multiple', 'multiple')
