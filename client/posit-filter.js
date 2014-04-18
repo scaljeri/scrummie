@@ -27,8 +27,10 @@ Template.postitFilter.rendered = function () {
   });
 };
 
-Template.taskManip.events = {
+/*
+Template.postitFilter.events = {
 };
+*/
 
 function format(color) {
   return ['<span class="select-option-color"',

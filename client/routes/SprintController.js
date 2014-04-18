@@ -1,7 +1,7 @@
 SprintController = RouteController.extend({
     template: 'layout',
 
-    before: function () {
+    onBeforeAction: function () {
         //console.log("TEAM: " + process.env.TEAM);
         //console.log("SPRINT: " + process.env.SPRINT);
         /*
