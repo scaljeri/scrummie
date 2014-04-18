@@ -140,11 +140,11 @@ if (Meteor.isServer) {
     });
 
     Meteor.publish('task-positions', function () {
-      return Tasks.find({}, {sort: {updated: 1}, fields: {x: 1, y: 1, updated: 1}});     // only return task positions
+      return Tasks.find({$or: [{ deleted: {$exists: false}}, {deleted: false}]}, {sort: {updated: 1}, fields: {x: 1, y: 1, updated: 1}});     // only return task positions
     });
 
     Meteor.publish('tasks', function () {
-      return Tasks.find({}, {sort: {index: 1}, fields: {x: 0, y: 0, updated: 0}});          // return task without coordinates
+      return Tasks.find({$or: [{ deleted: {$exists: false}}, {deleted: false}]}, {fields: {x: 0, y: 0, updated: 0}});          // return task without coordinates
     });
 
     Meteor.publish('lanes', function () {

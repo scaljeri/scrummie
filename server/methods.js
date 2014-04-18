@@ -41,6 +41,9 @@ Meteor.methods({
 
         return retVal;
     },
+    deleteTask: function(id) {
+      Tasks.update({_id: id}, {$set: {deleted: true}});
+    },
     updatePostitPosition: function (task) {
         console.dir(task);
         Tasks.update({_id: task._id}, {$set: {x: task.x, y: task.y, updated: new Date().getTime(), laneId: task.laneId}});

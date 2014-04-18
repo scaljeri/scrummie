@@ -33,7 +33,7 @@
 
   display: inline-block;
   //position: relative;
-  height: 134px;
+  height: 100px;
   width: 145px;
   padding-top: 5px;
 
@@ -74,7 +74,7 @@
 
   .postit__link {
     position: absolute;
-    bottom: 2px;
+    bottom: 0;
     left: 5px;
     background-image: url(/img/link.png);
     background-repeat: no-repeat;
@@ -84,7 +84,7 @@
 
   .postit__initials {
     position: absolute;
-    bottom: 8px;
+    bottom: 0;
     right: 5px;
   }
 

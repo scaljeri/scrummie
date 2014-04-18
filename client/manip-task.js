@@ -13,6 +13,8 @@ Template.manipTask.members = function () {
 };
 
 Template.manipTask.show = function (task, callback) {
+  var taskColors = [], memberId, members, select;
+
   if (task && typeof task === 'function') {
     callback = task;
     task = null;
@@ -22,8 +24,8 @@ Template.manipTask.show = function (task, callback) {
   closeCallback = callback||App.noob;
 
   setTimeout(function () { // make sure App.selectedTask is applied
-    var select = $('[manip-task] [dropdown][colors]'),
-      taskColors = [];
+    select = $('[manip-task] [dropdown][colors]');
+    members = $('[manip-task] [dropdown][members]');
 
     if (task) {
       select.removeAttr('multiple');
@@ -45,6 +47,16 @@ Template.manipTask.show = function (task, callback) {
 
     $('[manip-task]').css('visibility', 'visible');
 
+    members.select2({
+      minimumResultsForSearch: -1,
+      placeholder: "Team member"
+    });
+
+    if (task && task.memberId) {
+      memberId = Members.findOne({_id: task.memberId})._id;
+    }
+    members.select2('val', memberId);
+
   }, 0);
   App.outsideClick.register('[manip-task]', Template.manipTask.hide);
 };
@@ -57,13 +69,7 @@ Template.manipTask.hide = function () {
 };
 
 Template.manipTask.rendered = function () {
-  $('[manip-task] [dropdown][members]').select2({
-    //formatResult: format,
-    //formatSelection: format,
-    //maximumSelectionSize: 5,
-    minimumResultsForSearch: -1,
-    placeholder: "Team member"
-  });
+
 };
 
 Template.manipTask.events = {
@@ -73,7 +79,7 @@ Template.manipTask.events = {
   'click [cancel-task]': function () {
     $('[manip-task]').css('visibility', 'hidden');
     $('[add-task]').removeClass('active');
-    window.scrummie.edit.createNew();
+    App.selectedTask = null;
   },
   'click [save-task]': function (e) {
     Meteor.call('upsertTask', $('[manip-task]').serializeObject(), function (err, response) {
@@ -86,6 +92,13 @@ Template.manipTask.events = {
     $('[manip-task]').css('visibility', 'hidden');
     $('[add-task]').removeClass('active');  // TODO: implement closeCallback
     $('[manip-task]')[0].reset();
+    App.selectedTask = null;
+  },
+  'click [delete-task]': function () {
+    Meteor.call('deleteTask', App.selectedTask._id);
+    $('[manip-task]').css('visibility', 'hidden');
+    $('[add-task]').removeClass('active');
+    App.selectedTask = null;
   }
 };
 
