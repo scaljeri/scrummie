@@ -19,7 +19,6 @@ Template.postits.rendered = function (t) {
         top = parseInt(ui.draggable.css('top')),
         width = $('[scrumboard]').width();
       height = $('[scrumboard]').height();
-      debugger;
 
       Meteor.call('updatePostitPosition', {
         _id: taskId,
