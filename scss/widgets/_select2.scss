@@ -1,14 +1,17 @@
-.select2-default .select2-chosen {
+.select2-default.select2-chosen {
   color: #a1b2c3;
-  line-height: 26px;
+  line-height: 25px;
 }
 .select2-chosen {
-  font: 300 16px/20px $font-normal;
+  font: 300 16px/24px $font-normal;
   color: $text;
 }
 
 .select2-container {
   width: 100%;
+  .select2-search-choice-close {
+    margin-top: -1px;
+  }
 }
 
 .select2-results .select-option-color {

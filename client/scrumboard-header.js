@@ -2,8 +2,8 @@ Template.scrumboardHeader.events = {
   'click [add-task]': function () {
     var addTask = $('[add-task]');
 
-    if (!addTask.hasClass('active')) {
-      addTask.addClass('active');
+    if (!addTask.hasClass('btn--active')) {
+      addTask.addClass('btn--active');
       $('[manip-task]').position({
         of: $('[add-task]'),
         my: 'center bottom',

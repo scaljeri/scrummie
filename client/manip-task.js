@@ -66,6 +66,7 @@ Template.manipTask.show = function (task, callback) {
 Template.manipTask.hide = function () {
   $('[manip-task] [dropdown]').blur();
   $('[manip-task]').css('visibility', 'hidden');
+  $('[add-task]').removeClass('btn--active');  // TODO: implement closeCallback
 
   App.outsideClick.remove(Template.manipTask.hide);
 };
@@ -92,14 +93,14 @@ Template.manipTask.events = {
     });
 
     $('[manip-task]').css('visibility', 'hidden');
-    $('[add-task]').removeClass('active');  // TODO: implement closeCallback
+    $('[add-task]').removeClass('btn--active');  // TODO: implement closeCallback
     $('[manip-task]')[0].reset();
     App.selectedTask = null;
   },
   'click [delete-task]': function () {
     Meteor.call('deleteTask', App.selectedTask._id);
     $('[manip-task]').css('visibility', 'hidden');
-    $('[add-task]').removeClass('active');
+    $('[add-task]').removeClass('btn--active');
     App.selectedTask = null;
   }
 };
@@ -109,4 +110,3 @@ function format(color) {
       'style="background-color:' + color.id + '"></span>',
       '<h3 class="select-option-title">' + color.text + '</h3>'].join('');
 }
-
