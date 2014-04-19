@@ -133,6 +133,7 @@ if (Meteor.isServer) {
     }
 
     if (Members.find({}).count() === 0) {
+      Members.insert({name: 'Anne Heijkoop', initials: 'AH'});
       Members.insert({name: 'Arjan Eising', initials: 'AE'});
       Members.insert({name: 'Jan Willem', initials: 'JW'});
       Members.insert({name: 'Jeroen Zwartenpoort', initials: 'JZ'});

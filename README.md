@@ -12,6 +12,27 @@ Setup
 	$> meteor remove autopublish
 
 
+Bundle
+  $> meteor bundle scrummie.tgz
+
+  # unpack on destination
+  $> cd bundle
+
+  # rebuild native packages
+  $> rm -rf programs/server/node_modules/fibers
+  $> npm install fibers@1.0.1
+
+  # setup environment variables
+  $> export MONGO_URL='mongodb://localhost'
+  $> export ROOT_URL='http://example.com'
+  $> export PORT=3000
+  $> node main.js
+
+  # if wrong version of node
+  $> sudo npm install n -g
+  $> sudo n 0.10.26   // This will give you the specific version
+
+
 Resources:
 
   * http://stackoverflow.com/questions/21324716/db-not-defined-error-in-mongodb-using-meteor-js/21325934#21325934

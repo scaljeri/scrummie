@@ -17,9 +17,11 @@
     margin-bottom: 10px;
   }
   .delete-task {
-    display: block;
-    text-decoration: underline;
     cursor: pointer;
+    display: block;
+    margin-top: 10px;
+    text-decoration: underline;
+    width: 80px;
   }
 
   /*
