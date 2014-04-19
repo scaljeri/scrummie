@@ -37,24 +37,25 @@
   width: 145px;
   padding-top: 5px;
 
-  .description,
-  .title {
+  .postit__description,
+  .postit__title {
     //position: absolute;
     width: 100%;
     color: rgba(35,48,70,.6);
   }
 
-  .title {
-    box-sizing: border-box;
+  .postit__title {
     top: 12px;
     padding-left: 6px;
-    //left: 25px;
     font: 400 20px/20px 'Gloria Hallelujah', cursive;
+    overflow:hidden;
     text-align: center;
+    text-overflow:ellipsis;
     margin-bottom: 10px;
+    white-space:nowrap;
+
 
     &:after {
-      box-sizing: border-box;
       position: absolute;
       left: 17px;
       right: 21px;
@@ -67,9 +68,24 @@
     }
   }
 
-  .description {
+  .postit__description {
     font: 400 15px/20px 'Gloria Hallelujah', cursive;
-    margin: 10px;
+    padding: 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break:break-all;
+    @include vendor-prefix-value(display, box);
+    @include vendor-prefix(box-orient, vertical);
+
+    &.postit__description--2lines {
+        max-height: 40px;      /* fallback */
+        @include vendor-prefix(line-clamp, 2);
+    }
+
+    &.postit__description--3lines {
+        max-height: 80px;      /* fallback */
+        @include vendor-prefix(line-clamp, 4);
+    }
   }
 
   .postit__link {

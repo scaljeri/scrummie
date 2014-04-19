@@ -14,8 +14,9 @@ Router.configure({
 });
 //RsprintNumberouter.onBeforeAction('notFound');
 Router.map(function () {
-  this.route('/', {
-    controller: 'SprintController'
+  this.route('home', {
+     path: '/',
+     controller: 'SprintController'
     //action: 'start'
   });
 
@@ -93,17 +94,18 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
 
-    /*
+/*
      Sprints.remove({});
      Lanes.remove({});
      Tasks.remove({});
      TaskColors.remove({});
      Members.remove({});
      */
+
     if (Lanes.find({}).count() === 0) {
       Lanes.insert({ title: 'todo', message: 'Tasks to be done', index: 0});
       Lanes.insert({ title: 'in progress', message: 'Tasks in progress', index: 1});
-      Lanes.insert({ title: 'test', message: 'Tasks under test', index: 2});
+      //Lanes.insert({ title: 'test', message: 'Tasks under test', index: 2});
       Lanes.insert({ title: 'done', message: 'Tasks done', index: 1000000});
     }
 
@@ -131,8 +133,13 @@ if (Meteor.isServer) {
     }
 
     if (Members.find({}).count() === 0) {
-      Members.insert({name: 'Lucas Calje', initials: 'LC'});
+      Members.insert({name: 'Arjan Eising', initials: 'AE'});
+      Members.insert({name: 'Jan Willem', initials: 'JW'});
+      Members.insert({name: 'Jeroen Zwartenpoort', initials: 'JZ'});
       Members.insert({name: 'Joost van Dieten', initials: 'JD'});
+      Members.insert({name: 'Lucas Calje', initials: 'LC'});
+      Members.insert({name: 'Maurice de Chateau', initials: 'MC'});
+      Members.insert({name: 'Sander van Geloven', initials: 'SG'});
     }
 
     Meteor.publish('task-colors', function () {

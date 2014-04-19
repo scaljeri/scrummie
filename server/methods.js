@@ -70,7 +70,7 @@ function upsertTask(task) {
         var lane = Lanes.findOne({index: 0}); // find first lane
         task.laneId = lane._id;
         task.x = 0;
-        task.y = 0;
+        task.y = 5;
     }
     task.updated = new Date().getTime();
     var _id = task._id;

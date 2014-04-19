@@ -3,6 +3,11 @@
 
   .postit-filter {
     float: right;
+
+    .postit-filter__label {
+      font: 300 15px/15px $font-normal;
+      color: $button-bg;
+    }
   }
 
   /*

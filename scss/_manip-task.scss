@@ -3,7 +3,7 @@
   visibility: hidden;
   padding: 10px;
   width: 300px;
-  height: 412px;
+  min-height: 412px;
   z-index: $on-top; // 47 less than the maximum value
 
     background-color: #fff;
@@ -37,5 +37,3 @@
   }
   */
 }
-
-
