@@ -1,0 +1,12 @@
+<template name="taskOverview">
+  <section class="comments">
+    <ol class="comment__history">
+      {{#each comments}}
+        {{text}}
+      {{/each}}
+    </ol>
+    <form comment class="comment">
+      <textarea name="text"></textarea>
+    </form>
+  </section>
+</template>

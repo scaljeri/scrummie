@@ -1,5 +1,5 @@
 SprintController = RouteController.extend({
-    template: 'layout',
+    layoutTemplate: 'layout',
 
     onBeforeAction: function () {
         //console.log("TEAM: " + process.env.TEAM);
@@ -33,7 +33,7 @@ SprintController = RouteController.extend({
     },
     action: function () {
         if (this.ready())
-            this.render();
+            this.render('scrumboard');
         else
             ;//this.render('loading');
     }

@@ -4,11 +4,12 @@ Lanes = new Meteor.Collection('lanes');
 Tasks = new Meteor.Collection('tasks');
 TaskColors = new Meteor.Collection('task-colors');
 Members = new Meteor.Collection('members');
+Comments = new Meteor.Collection('comments');
 
 
 // Routes
 Router.configure({
-  layout: 'layout',
+  layoutTemplate: 'layout',
   loadingTemplate: 'loading',
   notFoundTemplate: 'notFound'
 });
@@ -20,18 +21,15 @@ Router.map(function () {
     //action: 'start'
   });
 
-  /*
-   this.route('/:team', {
-   controller: 'SprintController',
-   action: 'start'
-   });
+  this.route('task', {
+     path: '/task/:id',
+     controller: 'TaskController'
+  });
 
-   this.route('home', {
-   path: '/:team/:sprint',
-   controller: 'SprintController',
-   action: 'start'
-   });
-   */
+  this.route('stats', {
+      path: '/stats',
+      controller: 'StatsController'
+  });
 });
 
 if (Meteor.isClient) {
@@ -172,6 +170,23 @@ if (Meteor.isServer) {
 
     Meteor.publish('members', function () {
       return Members.find({}, {sort: {name: 1}});
+    });
+
+    Meteor.publish('comments', function (taskId) {
+      console.log("TASK ID=" + taskId);
+      return Comments.find({taskId: taskId}, {sort: {insertDate: 1}});
+    });
+
+    // stats
+    Meteor.publish('velocity', function () {
+        return ;
+    });
+
+    Meteor.publish('burndown', function () { // stories
+        return
+    });
+    Meteor.publish('burnup', function () {  // tasks
+        return
     });
   });
 }
