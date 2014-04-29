@@ -3,7 +3,15 @@
   "dependencies": {
     "basePackages": {
       "scss": {},
-      "iron-router": {}
+      "iron-router": {},
+      "normalize.css": {
+        "git": "https://github.com/rithis-archive/meteor-normalize.css.git",
+        "branch": "master"
+      },
+      "Meteor.cron": {
+        "git": "https://github.com/alexsuslov/Meteor.cron.git",
+        "branch": "master"
+      }
     },
     "packages": {
       "scss": {
@@ -15,6 +23,16 @@
         "git": "https://github.com/EventedMind/iron-router.git",
         "tag": "v0.7.1",
         "commit": "d1ffb3f06ea4c112132b030f2eb1a70b81675ecb"
+      },
+      "normalize.css": {
+        "git": "https://github.com/rithis-archive/meteor-normalize.css.git",
+        "branch": "master",
+        "commit": "f9a0b29953a4b6ed541530c79c96f58d499af312"
+      },
+      "Meteor.cron": {
+        "git": "https://github.com/alexsuslov/Meteor.cron.git",
+        "branch": "master",
+        "commit": "8d0636499261f422ed3dfac4046d1327da782ebc"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

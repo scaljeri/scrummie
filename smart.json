@@ -1,6 +1,12 @@
 {
   "packages": {
     "scss": {},
-    "iron-router": {}
+    "iron-router": {},
+    "normalize.css": {
+        "git": "https://github.com/rithis-archive/meteor-normalize.css.git"
+    },
+    "Meteor.cron": {
+        "git": "https://github.com/alexsuslov/Meteor.cron.git"
+    }
   }
 }

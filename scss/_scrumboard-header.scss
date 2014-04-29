@@ -1,14 +1,23 @@
 .scrumboard__header {
   height: 38px;
 
+  .add-github-issues {
+    background-image: url($add-github);
+    background-size: 25px 25px;
+    background-position: left center;
+    background-repeat: no-repeat;
+  }
+
   .postit-filter {
     float: right;
 
     .postit-filter__label {
-      font: 300 15px/15px $font-normal;
       color: $button-bg;
+      font: 300 15px/15px $font-normal;
+      vertical-align: middle;
     }
   }
+
 
   /*
   .postit-filter__dropdown {

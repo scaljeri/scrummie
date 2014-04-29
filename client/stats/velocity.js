@@ -5,6 +5,7 @@ Template.velocity.data = function () {
 */
 
 Template.velocity.rendered = function () {
+  //http://nvd3.org/examples/line.html
   /*These lines are all chart setup.  Pick and choose which chart features you want to utilize. */
 nv.addGraph(function() {
   var chart = nv.models.lineChart()
@@ -27,7 +28,7 @@ nv.addGraph(function() {
   /* Done setting the chart up? Time to render it!*/
   var myData = sinAndCos();   //You need data...
 
-  d3.select('#velocity')    //Select the <svg> element you want to render the chart in.   
+  d3.select('#velocity')    //Select the <svg> element you want to render the chart in.
       .datum(myData)         //Populate the <svg> element with chart data...
       .call(chart);          //Finally, render the chart!
 
