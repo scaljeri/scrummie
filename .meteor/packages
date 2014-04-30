@@ -8,3 +8,4 @@ insecure
 scss
 iron-router
 blaze-layout
+mongodb-server-aggregation

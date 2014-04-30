@@ -9,23 +9,6 @@
 
 // http://webdesignandsuch.com/posts/css3-post-it/index.html
 .postit {
-  background:#fefabc;
-  font-family: 'Gloria Hallelujah', cursive;
-  font-size:15px;
-  color: #000;
-  width:200px;
-
-  /*
-  transform: rotate(7deg);
-  */
-
-  box-shadow: 0px 4px 6px #d3d3d3;
-  -moz-box-shadow: 0px 4px 6px #d3d3d3;
-  -webkit-box-shadow: 0px 4px 6px #d3d3d3;
-
-}
-
-.postit {
   overflow: hidden;
   position: absolute;
   top: 100px;
@@ -34,10 +17,11 @@
 
   display: inline-block;
   //position: relative;
-  height: 105px;
+  height: 124px;
   width: 155px;
   padding-top: 5px;
 
+  @include vendor-prefix(box-shadow, 0px 4px 6px #d3d3d3);
   .postit__description,
   .postit__title {
     //position: absolute;
@@ -52,7 +36,7 @@
     overflow:hidden;
     text-align: center;
     text-overflow:ellipsis;
-    margin-bottom: 10px;
+    margin-bottom: 13px;
     white-space:nowrap;
 
 
@@ -79,13 +63,13 @@
     @include vendor-prefix(box-orient, vertical);
 
     &.postit__description--2lines {
-        max-height: 40px;      /* fallback */
-        @include vendor-prefix(line-clamp, 2);
+        max-height: 60px;      /* fallback */
+        @include vendor-prefix(line-clamp, 3);
     }
 
     &.postit__description--3lines {
-        max-height: 80px;      /* fallback */
-        @include vendor-prefix(line-clamp, 4);
+        max-height: 100px;      /* fallback */
+        @include vendor-prefix(line-clamp, 5);
     }
   }
 

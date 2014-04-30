@@ -11,7 +11,8 @@
       "Meteor.cron": {
         "git": "https://github.com/alexsuslov/Meteor.cron.git",
         "branch": "master"
-      }
+      },
+      "mongodb-server-aggregation": {}
     },
     "packages": {
       "scss": {
@@ -33,6 +34,11 @@
         "git": "https://github.com/alexsuslov/Meteor.cron.git",
         "branch": "master",
         "commit": "8d0636499261f422ed3dfac4046d1327da782ebc"
+      },
+      "mongodb-server-aggregation": {
+        "git": "https://github.com/zvictor/meteor-mongo-server.git",
+        "tag": "v1.0.3",
+        "commit": "416293e383f53e2506f1b7a1a7687390cbaf0e68"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

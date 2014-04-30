@@ -9,28 +9,29 @@ An analogue digital scrumboard
 
 Setup
 
-	$> meteor remove autopublish
+	  $> meteor remove autopublish
 
 
 Bundle
-  $> meteor bundle scrummie.tgz
 
-  # unpack on destination
-  $> cd bundle
+    $> meteor bundle scrummie.tgz
 
-  # rebuild native packages
-  $> rm -rf programs/server/node_modules/fibers
-  $> npm install fibers@1.0.1
+    # unpack on destination
+    $> cd bundle
 
-  # setup environment variables
-  $> export MONGO_URL='mongodb://localhost'
-  $> export ROOT_URL='http://example.com'
-  $> export PORT=3000
-  $> node main.js
+    # rebuild native packages
+    $> rm -rf programs/server/node_modules/fibers
+    $> npm install fibers@1.0.1
 
-  # if wrong version of node
-  $> sudo npm install n -g
-  $> sudo n 0.10.26   // This will give you the specific version
+    # setup environment variables
+    $> export MONGO_URL='mongodb://localhost'
+    $> export ROOT_URL='http://example.com'
+    $> export PORT=3000
+    $> node main.js
+
+    # if wrong version of node
+    $> sudo npm install n -g
+    $> sudo n 0.10.26   // This will give you the specific version
 
 
 Resources:
