@@ -32,7 +32,8 @@
   .postit__title {
     top: 12px;
     padding-left: 6px;
-    font: 400 20px/20px 'Gloria Hallelujah', cursive;
+    font: 200 20px/20px 'Gloria Hallelujah', cursive;
+    //font-family: 'Bad Script', cursive;
     overflow:hidden;
     text-align: center;
     text-overflow:ellipsis;
@@ -54,7 +55,8 @@
   }
 
   .postit__description {
-    font: 400 15px/20px 'Gloria Hallelujah', cursive;
+    font: 200 15px/20px 'Gloria Hallelujah', cursive;
+    //font-family: 'Bad Script', cursive;
     padding: 0 10px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -97,5 +99,17 @@
     left: -5px;
     position: absolute;
     z-index: -1;
+  }
+}
+
+.scrumboard--small .postit {
+  height: 30px;
+  width: 30px;
+
+
+  .postit__description,
+  .postit__link,
+  .postit__title {
+    display: none;
   }
 }

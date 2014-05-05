@@ -33,7 +33,10 @@
         <a save-task class="btn save-task">Save</a>
 
         {{#if task}}
-            <a delete-task class="delete-task">Delete task</a>
+            {{#if isReadonly}}
+            {{else}}
+                <a delete-task class="delete-task">Delete task</a>
+            {{/if}}
         {{/if}}
     </form>
 </template>

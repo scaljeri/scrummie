@@ -4,7 +4,7 @@ SprintController = RouteController.extend({
     onBeforeAction: function () {
         //console.log("TEAM: " + process.env.TEAM);
         //console.log("SPRINT: " + process.env.SPRINT);
-        /*
+      /*
         var team = this.params.team,
             sprintNumber = this.params.sprint;
 
@@ -13,6 +13,8 @@ SprintController = RouteController.extend({
         }
         App.subs.sprint = Meteor.subscribe('sprint', sprintNumber);
         */
+      App.scrumboard.view = 'normal';
+      App.scrumboard.readonly = false;
     },
     waitOn: function () {
         return [App.subs.lanes, App.subs.taskColors]; // TODO: define a list to wait for
@@ -32,9 +34,11 @@ SprintController = RouteController.extend({
     start: function () {
     },
     action: function () {
-        if (this.ready())
-            this.render('scrumboard');
-        else
-            ;//this.render('loading');
+        if (this.ready()) {
+          this.render('scrumboard');
+        }
+        else {
+          ;//this.render('loading');
+        }
     }
 });

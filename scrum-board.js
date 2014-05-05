@@ -35,6 +35,7 @@ Router.map(function () {
 if (Meteor.isClient) {
   App = {
     noob: function () {},
+    scrumboard: {view: 'normal', readonly: false},
     subs: {
       sprint: Meteor.subscribe('sprint'),
       lanes: Meteor.subscribe('lanes'),

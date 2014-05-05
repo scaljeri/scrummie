@@ -27,3 +27,13 @@
   }
   */
 }
+
+.scrumboard--readonly {
+  .add-task {
+    display: none;
+  }
+}
+
+.scrumboard--small .scrumboard__header {
+  display: none;
+}

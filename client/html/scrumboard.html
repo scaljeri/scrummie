@@ -1,10 +1,10 @@
 <template name="scrumboard">
-    <section scrumboard class="scrumboard">
+    <section scrumboard class="scrumboard {{scrumboardView}} {{scrumboardState}}">
         {{> scrumboardHeader}}
 
         <ol class="lanes">
             {{#each lanes}}
-            <li droppable class="lane" data-id="{{_id}}">
+            <li droppable class="lane {{_id}}" data-id="{{_id}}">
                 <h1 class="lane-title">{{title}} <span class="task-count">{{tasksOnLane[_id]}}</span></h1>
             </li>
             {{/each}}

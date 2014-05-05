@@ -1,4 +1,17 @@
 /*
+  <section class="{{scrumboardState}}">
+ */
+Handlebars.registerHelper('scrumboardView',function(){
+  return 'scrumboard--' + App.scrumboard.view;
+});
+Handlebars.registerHelper('scrumboardState',function(){
+  return App.scrumboard.readonly === true ? 'scrumboard--readonly' : '';
+});
+Handlebars.registerHelper('isReadonly',function(){
+  return App.scrumboard.readonly;
+});
+
+/*
 {{#each states}}
     <option value="{{this}}" {{selected this ../selectedState}}>{{this}}</option>
 {{/each}}

@@ -6,17 +6,20 @@
 @import 'widgets/select2-colors';
 @import 'header';
 @import 'scrumboard';
+@import 'scrumboard/small';
 @import 'scrumboard-header';
 @import 'config-menu';
 @import 'lanes';
 @import 'postit';
 @import 'manip-task';
 @import 'add-task';
+@import 'statistics';
+@import 'statistics/velocity';
 
 @import 'widgets/button';
 
 * {
-  @include vendor-prefix(box-sizing, border-box);
+  box-sizing: border-box;
 }
 
 html, body {
@@ -31,8 +34,8 @@ body {
 }
 
 .viewport {
-  @include vendor-prefix-value(display, flex);
-  @include vendor-prefix(flex-direction, column);
+  display: flex;
+  flex-direction: column;
 }
 
 .error {

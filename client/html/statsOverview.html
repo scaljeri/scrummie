@@ -1,6 +1,17 @@
 <template name="statsOverview">
-  <section class="stats">
-    <h1>STATS</h1>
+  {{> statisticsHeader}}
+  <section class="statistics">
+    <article class="charts">
+        <div class="charts__item">
+            {{> burnup}}
+        </div>
+        <div class="charts__item">
+            {{> burndown}}
+        </div>
+        <div class="charts__item">
+            {{> scrumboard}}
+        </div>
+    </article>
 
     {{> velocity}}
   </section>

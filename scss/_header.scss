@@ -6,6 +6,13 @@
     float: right;
     height: 100%;
   }
+
+  .clickable-logo {
+    cursor: pointer;
+    display: inline-block;
+    width: 123px;
+    height: 34px;
+  }
 }
 
 .logo {

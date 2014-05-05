@@ -1,0 +1,27 @@
+.statistics {
+  background-color: #fff;
+  display: flex;
+  height: 100%;
+  @include vendor-prefix(flex-flow, column);
+
+  .charts {
+    display: flex;
+    flex: 1;
+    height: 40%;
+    margin: 20px;
+    overflow:hidden;
+
+    .charts__item {
+      border: 1px solid #444444;
+      height: 100%;
+      @include vendor-prefix(flex, 1);
+      margin-left: 20px;
+    }
+  }
+
+  .burnup,
+  .burndown,
+  .scrumboard {
+    height: 100%;
+  }
+}
