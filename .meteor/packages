@@ -5,7 +5,7 @@
 
 standard-app-packages
 insecure
-scss
 iron-router
 blaze-layout
 mongodb-server-aggregation
+npm

@@ -2,7 +2,6 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "scss": {},
       "iron-router": {},
       "normalize.css": {
         "git": "https://github.com/rithis-archive/meteor-normalize.css.git",
@@ -12,14 +11,10 @@
         "git": "https://github.com/alexsuslov/Meteor.cron.git",
         "branch": "master"
       },
-      "mongodb-server-aggregation": {}
+      "mongodb-server-aggregation": {},
+      "npm": {}
     },
     "packages": {
-      "scss": {
-        "git": "https://github.com/fourseven/meteor-scss.git",
-        "tag": "v0.8.4",
-        "commit": "11af0da643944d241fe7d173af76162c4b670dee"
-      },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
         "tag": "v0.7.1",
@@ -39,6 +34,11 @@
         "git": "https://github.com/zvictor/meteor-mongo-server.git",
         "tag": "v1.0.3",
         "commit": "416293e383f53e2506f1b7a1a7687390cbaf0e68"
+      },
+      "npm": {
+        "git": "https://github.com/arunoda/meteor-npm.git",
+        "tag": "v0.2.6",
+        "commit": "177ab6118de5bf8cffb19481343d5762ff7a2aaf"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
