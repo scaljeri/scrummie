@@ -1,0 +1,25 @@
+{
+  "id": "0",
+  "name": "Scrumboard",
+  "description": "A Analoque digital scrumboard.",
+  "version": "0.0.1",
+  "private": false,
+  "devDependencies": {
+    "event-stream": "^3.1.5",
+    "gulp-load-plugins": "^0.5.0",
+    "gulp-sass": "^0.7.1",
+    "gulp-autoprefixer": "0.0.7",
+    "gulp-rename": "^1.2.0",
+    "gulp-size": "^0.3.0",
+    "gulp-filelog": "^0.2.0",
+    "gulp-watch": "^0.6.4",
+    "gulp-plumber": "^0.6.1"
+  },
+  "engines": {
+    "node": ">=0.10.22"
+  },
+  "scripts": {
+    "install": "bower install",
+    "update": "bower update"
+  }
+}
