@@ -14,6 +14,9 @@ Setup
 
 Bundle
 
+    $> cd .gulp
+    $.gulp> gulp styles
+    $> cd ..
     $> meteor bundle scrummie.tgz
 
     # unpack on destination
