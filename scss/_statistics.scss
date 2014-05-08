@@ -2,20 +2,28 @@
   background-color: #fff;
   display: flex;
   height: 100%;
-  @include vendor-prefix(flex-flow, column);
+  flex-flow: column;
 
   .charts {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    //flex-flow: row nowrap
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: center;
+
     flex: 1;
     height: 40%;
-    margin: 20px;
+    margin: 0 20px 20px;
     overflow:hidden;
 
     .charts__item {
-      border: 1px solid #444444;
-      height: 100%;
-      @include vendor-prefix(flex, 1);
-      margin-left: 20px;
+      margin: 0 20px;
+      height: 200px;
+      width: 300px;
+      border: 2px solid #d3d3d3;
+      flex: 1;
     }
   }
 

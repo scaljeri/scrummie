@@ -1,6 +1,7 @@
 <template name="statsOverview">
-  {{> statisticsHeader}}
   <section class="statistics">
+    {{> statisticsHeader}}
+
     <article class="charts">
         <div class="charts__item">
             {{> burnup}}
@@ -10,9 +11,10 @@
         </div>
         <div class="charts__item">
             {{> scrumboard}}
+            {{> chartFooter}}
         </div>
     </article>
 
-    {{> velocity}}
+<!--    {{> velocity}}-->
   </section>
 </template>

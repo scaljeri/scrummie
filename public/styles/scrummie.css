@@ -38,7 +38,7 @@ body, div, h1, form, fieldset, input, textarea {
   outline: none; }
 
 h1 {
-  font-size: 35px;
+  font-size: 25px;
   color: #445668;
   text-transform: uppercase;
   text-align: center; }
@@ -244,6 +244,8 @@ textarea {
   -ms-user-select: none;
   user-select: none; }
 
+.scrumboard.scrumboard--small .lanes .lane-title {
+  font-size: 10px; }
 
 .scrumboard__header {
   height: 38px;
@@ -563,7 +565,6 @@ textarea {
   display: -ms-flexbox;
   display: flex;
   height: 100%;
-  -xxx-flex-flow: column;
   -webkit-flex-flow: column;
   -ms-flex-flow: column;
   flex-flow: column; }
@@ -572,24 +573,54 @@ textarea {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
     height: 40%;
-    margin: 20px;
+    margin: 0 20px 20px;
     overflow: hidden; }
     .statistics .charts .charts__item {
-      border: 1px solid #444444;
-      height: 100%;
-      -xxx-flex: 1;
+      margin: 0 20px;
+      height: 200px;
+      width: 300px;
+      border: 2px solid #d3d3d3;
       -webkit-box-flex: 1;
       -webkit-flex: 1;
       -ms-flex: 1;
-      flex: 1;
-      margin-left: 20px; }
+      flex: 1; }
   .statistics .burnup, .statistics .burndown, .statistics .scrumboard {
     height: 100%; }
+
+.statistics__header {
+  height: 40px;
+  position: relative; }
+  .statistics__header .back {
+    position: absolute;
+    left: 40px;
+    top: 10px;
+    color: #1c1c1c; }
+  .statistics__header .title {
+    line-height: 40px; }
 
 .velocity {
   height: 100%;
