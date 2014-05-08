@@ -434,7 +434,8 @@ textarea {
   .postit .postit__title {
     top: 12px;
     padding-left: 6px;
-    font: 200 20px/20px 'Gloria Hallelujah', cursive;
+    font: 400 18px/20px 'Bad Script', cursive;
+    font-family: 'Architects Daughter', cursive;
     overflow: hidden;
     text-align: center;
     text-overflow: ellipsis;
@@ -453,11 +454,16 @@ textarea {
       -webkit-transform: rotate(-3deg);
       /* Opera, Chrome, and Safari */ }
   .postit .postit__description {
-    font: 200 15px/20px 'Gloria Hallelujah', cursive;
+    font: 200 15px/20px 'Bad Script', cursive;
+    font-family: 'Architects Daughter', cursive;
     padding: 0 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-all;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
     display: -xxx-box;
     display: box;
     -xxx-box-orient: vertical;

@@ -32,8 +32,8 @@
   .postit__title {
     top: 12px;
     padding-left: 6px;
-    font: 200 20px/20px 'Gloria Hallelujah', cursive;
-    //font-family: 'Bad Script', cursive;
+    font: 400 18px/20px 'Bad Script', cursive;
+    font-family: 'Architects Daughter', cursive;
     overflow:hidden;
     text-align: center;
     text-overflow:ellipsis;
@@ -55,12 +55,16 @@
   }
 
   .postit__description {
-    font: 200 15px/20px 'Gloria Hallelujah', cursive;
+    font: 200 15px/20px 'Bad Script', cursive;
+    font-family: 'Architects Daughter', cursive;
+    //font: 200 15px/20px 'Gloria Hallelujah', cursive;
     //font-family: 'Bad Script', cursive;
     padding: 0 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break:break-all;
+    hyphens: auto;
+
     @include vendor-prefix-value(display, box);
     @include vendor-prefix(box-orient, vertical);
 
