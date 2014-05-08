@@ -37,6 +37,10 @@ if (Meteor.isClient) {
     noob: function () {},
     scrumboard: {view: 'normal', readonly: false},
     subs: {
+      velocity: Meteor.subscribe('velocity'),
+      burndown: Meteor.subscribe('burndown'),
+      burnup: Meteor.subscribe('burnup'),
+
       sprint: Meteor.subscribe('sprint'),
       lanes: Meteor.subscribe('lanes'),
       tasks: Meteor.subscribe('tasks'),
