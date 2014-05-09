@@ -5,25 +5,25 @@
  */
 
 Template.burnup.rendered = function () {
-  //http://nvd3.org/examples/line.html
+  // http://nvd3.org/examples/line.html
+  // https://github.com/novus/nvd3/wiki/API-Documentation
   /*These lines are all chart setup.  Pick and choose which chart features you want to utilize. */
   nv.addGraph(function() {
-    var chart = nv.models.lineChart()
-        .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
-        .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
-        .transitionDuration(350)  //how fast do you want the lines to transition?
-        .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
-        .showYAxis(true)        //Show the y-axis
-        .showXAxis(true)        //Show the x-axis
-      ;
+      var chart = nv.models.lineChart()
+              .margin({left: 0, right: 0, top: 10, bottom: 10})  //Adjust chart margins to give the x-axis some breathing room.
+              .useInteractiveGuideline(false)  //We want nice looking tooltips and a guideline!
+              .transitionDuration(350)  //how fast do you want the lines to transition?
+              .showLegend(false)       //Show the legend, allowing users to turn on/off line series.
+              .showYAxis(false)        //Show the y-axis
+              .showXAxis(false)        //Show the x-axis
+          ;
 
-    chart.xAxis     //Chart x-axis settings
-      .axisLabel('Time (ms)')
-      .tickFormat(d3.format(',r'));
+      chart.xAxis     //Chart x-axis settings
+          //.axisLabel('Time (ms)')
+          .tickFormat(d3.format(',r'));
 
-    chart.yAxis     //Chart y-axis settings
-      .axisLabel('Voltage (v)')
-      .tickFormat(d3.format('.02f'));
+      chart.yAxis     //Chart y-axis settings
+      //.axisLabel('Voltage (v)')
 
     /* Done setting the chart up? Time to render it!*/
     var myData = sinAndCos();   //You need data...

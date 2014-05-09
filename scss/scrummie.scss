@@ -15,6 +15,7 @@
 @import 'add-task';
 @import 'statistics';
 @import 'statistics/header';
+@import 'statistics/chart-footer';
 @import 'statistics/velocity';
 
 @import 'widgets/button';
@@ -44,4 +45,15 @@ body {
 }
 .ui-dialog {
   z-index: 1000000!important;
+}
+
+.clickable-overlay {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+
 }

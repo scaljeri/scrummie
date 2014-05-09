@@ -4,17 +4,20 @@
 
     <article class="charts">
         <div class="charts__item">
-            {{> burnup}}
+            <a href="#burnup" class="clickable-overlay"></a>
+            {{> burnup }}
         </div>
         <div class="charts__item">
+            <a href="#burndown" class="clickable-overlay"></a>
             {{> burndown}}
         </div>
         <div class="charts__item">
+            <a href="#scrumboard" class="clickable-overlay"></a>
             {{> scrumboard}}
-            {{> chartFooter}}
+            {{chartFooter data='{"name": "Scrumboard", "startDate": "02/05/2014", "endDate": "17/05/2014"}' }}
         </div>
     </article>
 
-<!--    {{> velocity}}-->
+   {{> velocity}}
   </section>
 </template>

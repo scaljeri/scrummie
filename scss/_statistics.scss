@@ -1,8 +1,9 @@
 .statistics {
   background-color: #fff;
   display: flex;
+  flex-direction: column;
   height: 100%;
-  flex-flow: column;
+  flex-flow: column nowrap;
 
   .charts {
     display: flex;
@@ -12,18 +13,17 @@
     justify-content: space-between;
     align-items: stretch;
     align-content: center;
-
-    flex: 1;
-    height: 40%;
+    height: 250px;
     margin: 0 20px 20px;
     overflow:hidden;
 
     .charts__item {
-      margin: 0 20px;
-      height: 200px;
-      width: 300px;
       border: 2px solid #d3d3d3;
       flex: 1;
+      margin: 0 20px;
+      position: relative;
+      height: 250px;
+      width: 300px;
     }
   }
 

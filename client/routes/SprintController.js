@@ -13,15 +13,16 @@ SprintController = RouteController.extend({
         }
         App.subs.sprint = Meteor.subscribe('sprint', sprintNumber);
         */
+      App.page = 'scrumboard';
       App.scrumboard.view = 'normal';
       App.scrumboard.readonly = false;
     },
     waitOn: function () {
         return [App.subs.lanes, App.subs.taskColors]; // TODO: define a list to wait for
-    },/*
-    data: {  // or a function
-
     },
+    data: function () {  // or a function
+        return { pageCls: 'page-scrumboard'};
+    },/*
 
     run: function () {
         this.render() ; // or this.render('scrumboard') (default) or this.render('scrumboard', { data: {..}, waitOn: funct....

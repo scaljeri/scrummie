@@ -50,3 +50,16 @@ Handlebars.registerHelper("foreach",function(arr,options) {
         return options.fn(item);
     }).join('');
 });
+
+// {{chartFooter data='{"name":"Buronup", "startDate":"02/10/2014"}'}}
+Handlebars.registerHelper('chartFooter', function(options) {
+    var dom   = '<p class="chart__footer">',
+        data = JSON.parse(options.hash.data);
+
+    dom += '<span class="chart__name">' + data.name + '</span>';
+    if (data.startDate) {
+        dom += '<span class="chart__dates">' + data.startDate + ' - ' + data.endDate + '</span>';
+    }
+
+    return new Handlebars.SafeString(dom);
+});

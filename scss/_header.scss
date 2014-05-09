@@ -47,8 +47,14 @@
       border-width: 0;
     }
 
+    .nav-list__item__stats {
+      display: inline-block;
+      width: 65px;
+    }
+
     .nav-list__item__config {
       display: inline-block;
+      cursor: pointer;
       width: 20px;
       height: 100%;
       background-image: url($config-icon);
@@ -62,7 +68,7 @@
       font-size: 15px;
       font-weight: 300;
       line-height: 23px;
-      padding-right: 10px;
+      margin-right: 10px;
       text-decoration: none;
 
       &, &:hover, &:visited, &:active {
@@ -70,5 +76,16 @@
         color: $text;
       }
     }
+  }
+}
+
+.viewport.page-statistics .header-main {
+  .nav-list__item__config {
+    background-image: url($config-icon-disabled);
+    cursor: default;
+  }
+  .nav-list__item__stats {
+    //padding-right: 0;
+    font-weight: 700;
   }
 }

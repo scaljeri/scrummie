@@ -199,8 +199,12 @@ textarea {
       bottom: 5px; }
     .nav-list .nav-list__item:last-child:before {
       border-width: 0; }
+    .nav-list .nav-list__item .nav-list__item__stats {
+      display: inline-block;
+      width: 65px; }
     .nav-list .nav-list__item .nav-list__item__config {
       display: inline-block;
+      cursor: pointer;
       width: 20px;
       height: 100%;
       background-image: url('/img/config-icon.png');
@@ -212,11 +216,17 @@ textarea {
       font-size: 15px;
       font-weight: 300;
       line-height: 23px;
-      padding-right: 10px;
+      margin-right: 10px;
       text-decoration: none; }
       .nav-list .nav-list__item > a, .nav-list .nav-list__item > a:hover, .nav-list .nav-list__item > a:visited, .nav-list .nav-list__item > a:active {
         font-family: 'Lato', sans-serif;
         color: #233046; }
+
+.viewport.page-statistics .header-main .nav-list__item__config {
+  background-image: url('/img/config-icon-disabled.png');
+  cursor: default; }
+.viewport.page-statistics .header-main .nav-list__item__stats {
+  font-weight: 700; }
 
 .scrumboard {
   background-color: #fff;
@@ -500,10 +510,14 @@ textarea {
     z-index: -1; }
 
 .scrumboard--small .postit {
+  box-shadow: 0px 0px 6px #d3d3d3;
   height: 30px;
-  width: 30px; }
+  width: 30px;
+  z-index: 0 !important; }
   .scrumboard--small .postit .postit__description, .scrumboard--small .postit .postit__link, .scrumboard--small .postit .postit__title {
     display: none; }
+  .scrumboard--small .postit .postit__initials {
+    top: 8px; }
 
 .manip-task {
   position: absolute;
@@ -564,10 +578,15 @@ textarea {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   height: 100%;
-  -webkit-flex-flow: column;
-  -ms-flex-flow: column;
-  flex-flow: column; }
+  -webkit-flex-flow: column nowrap;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap; }
   .statistics .charts {
     display: -webkit-box;
     display: -webkit-flex;
@@ -592,22 +611,19 @@ textarea {
     -webkit-align-content: center;
     -ms-flex-line-pack: center;
     align-content: center;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    height: 40%;
+    height: 250px;
     margin: 0 20px 20px;
     overflow: hidden; }
     .statistics .charts .charts__item {
-      margin: 0 20px;
-      height: 200px;
-      width: 300px;
       border: 2px solid #d3d3d3;
       -webkit-box-flex: 1;
       -webkit-flex: 1;
       -ms-flex: 1;
-      flex: 1; }
+      flex: 1;
+      margin: 0 20px;
+      position: relative;
+      height: 250px;
+      width: 300px; }
   .statistics .burnup, .statistics .burndown, .statistics .scrumboard {
     height: 100%; }
 
@@ -617,18 +633,31 @@ textarea {
   .statistics__header .back {
     position: absolute;
     left: 40px;
-    top: 10px;
+    top: 12px;
     color: #1c1c1c; }
   .statistics__header .title {
     line-height: 40px; }
 
+.chart__footer {
+  background-color: rgba(35, 48, 70, 0.9);
+  color: #fff;
+  font: 100 15px/30px Lato;
+  height: 30px;
+  padding: 0 10px;
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: -2px; }
+  .chart__footer .chart__dates {
+    float: right; }
+
 .velocity {
   height: 100%;
   width: 100%;
-  -webkit-box-flex: 2;
-  -webkit-flex: 2;
-  -ms-flex: 2;
-  flex: 2; }
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1; }
 
 .btn {
   font: 300 15px/15px Lato;
@@ -677,3 +706,12 @@ body {
 
 .ui-dialog {
   z-index: 1000000 !important; }
+
+.clickable-overlay {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1; }
