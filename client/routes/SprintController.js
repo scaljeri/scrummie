@@ -63,7 +63,7 @@ SprintController = RouteController.extend({
                     result = Members.findOne({$or: [{name: re}, {initials: re}]});
 
                     if (result) {
-                        App.defaults.member = result;
+                        App.defaults.member = result._id;
                     }
                 }
             });

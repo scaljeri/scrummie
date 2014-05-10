@@ -44,8 +44,26 @@ Meteor.methods({
       Tasks.update({_id: id}, {$set: {deleted: true}});
     },
     updatePostitPosition: function (task) {
-        console.dir(task);
-        Tasks.update({_id: task._id}, {$set: {x: task.x, y: task.y, updated: new Date().getTime(), laneId: task.laneId}});
+        var fields = {
+            x: task.x,
+            y: task.y,
+            updated: new Date().getTime(),
+            laneId: task.laneId
+        };
+
+        if (task.memberId) {
+            fields.memberId = task.memberId;
+        }
+
+        Tasks.update({_id: task._id}, {$set: fields});
+
+        /*{
+            x: task.x,
+            y: task.y,
+            updated: new Date().getTime(),
+            laneId: task.laneId,
+            memberId: task.memberId}
+        });*/
     }
 });
 

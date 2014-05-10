@@ -14,15 +14,23 @@ Template.postits.rendered = function (t) {
     hoverClass: "ui-state-active",
     drop: function (event, ui) {
       var taskId = ui.draggable.attr('data-id'),
-        laneId = $(event.target).attr('data-id'),
+        laneId = $(event.target).attr('data-id'), // lane in which the post-it was dropped
         left = parseInt(ui.draggable.css('left')),
         top = parseInt(ui.draggable.css('top')),
-        width = $('[scrumboard]').width();
+        task = Tasks.findOne({_id: taskId}),
+        firstLaneId = Lanes.findOne({index: 0})._id;
+
+      width = $('[scrumboard]').width();
       height = $('[scrumboard]').height();
+
+      if (App.defaults.member && task.memberId === "" && laneId !== firstLaneId ) {
+        task.memberId = App.defaults.member;
+      }
 
       Meteor.call('updatePostitPosition', {
         _id: taskId,
         laneId: laneId,
+        memberId: task.memberId,    // optimise this, because its not always needed
         x: (1 - (width - left) / width) * 100,
         y: (1 - (height - top) / height) * 100
       });
