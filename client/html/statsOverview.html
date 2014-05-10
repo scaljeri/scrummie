@@ -3,7 +3,7 @@
     {{> statisticsHeader}}
 
     <article class="charts">
-        <div class="charts__item">
+        <div class="charts__item burnup-item">
             <a href="#burnup" class="clickable-overlay"></a>
             {{> burnup }}
         </div>
@@ -12,7 +12,7 @@
             {{> burndown}}
         </div>
         <div class="charts__item">
-            <a href="#scrumboard" class="clickable-overlay"></a>
+            <a href="#scrumboard-item" class="clickable-overlay"></a>
             {{> scrumboard}}
             {{chartFooter data='{"name": "Scrumboard", "startDate": "02/05/2014", "endDate": "17/05/2014"}' }}
         </div>

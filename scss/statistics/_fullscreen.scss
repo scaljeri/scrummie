@@ -1,0 +1,12 @@
+.cloned-chart {
+  position: absolute;
+  background-color: #fff;
+}
+
+.fullscreen {
+  transition: all .2s linear;
+
+  .chart__footer {
+    display: none;
+  }
+}

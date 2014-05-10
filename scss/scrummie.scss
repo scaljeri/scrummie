@@ -17,6 +17,7 @@
 @import 'statistics/header';
 @import 'statistics/chart-footer';
 @import 'statistics/velocity';
+@import 'statistics/fullscreen';
 
 @import 'widgets/button';
 
@@ -57,3 +58,5 @@ body {
   z-index: 1;
 
 }
+
+:target { outline: solid red; }
