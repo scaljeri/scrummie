@@ -5,6 +5,8 @@ Template.velocity.data = function () {
 */
 
 Template.velocity.rendered = function () {
+  $('#velocity').height($('.velocity').height()); // hack
+
   //http://nvd3.org/examples/line.html
   /*These lines are all chart setup.  Pick and choose which chart features you want to utilize. */
 nv.addGraph(function() {
@@ -33,7 +35,11 @@ nv.addGraph(function() {
       .call(chart);          //Finally, render the chart!
 
   //Update the chart when window resizes.
-  nv.utils.windowResize(function() { chart.update() });
+  nv.utils.windowResize(function() {
+      $('#velocity').height($('.velocity').height()); // hack, because '100%' doesn't work very well
+      chart.update()
+  });
+
   return chart;
 });
 /**************************************

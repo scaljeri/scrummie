@@ -2,6 +2,11 @@ SprintController = RouteController.extend({
     layoutTemplate: 'layout',
 
     onBeforeAction: function () {
+        // Define defaults using the URL
+        // http://scrummie.meteor.com?colors=111111,222222&initials=XX
+        App.defaults = {};  // reset
+
+        //window.location.searc
         //console.log("TEAM: " + process.env.TEAM);
         //console.log("SPRINT: " + process.env.SPRINT);
       /*
@@ -36,7 +41,34 @@ SprintController = RouteController.extend({
     },
     action: function () {
         if (this.ready()) {
-          this.render('scrumboard');
+            var strs = (window.location.search.match(/([^\?=&]+=[^=&]+)/g)||[]);
+
+            strs.forEach(function (pair) {
+                var re, colors, result, splitted = pair.split(/=/);
+
+                if (splitted[0] === 'colors') {
+                    App.defaults.colors = [];
+
+                    colors = splitted[1].split(/,/);
+                    colors.forEach(function (color) {
+                        re = new RegExp(color);
+                        result = TaskColors.findOne({$or: [{title: re}, {value: re}] });
+                        if (result) {
+                            App.defaults.colors.push(result.value);
+                        }
+                    });
+                }
+                else if (splitted[0] === 'member') {
+                    re = RegExp(splitted[1]);
+                    result = Members.findOne({$or: [{name: re}, {initials: re}]});
+
+                    if (result) {
+                        App.defaults.member = result;
+                    }
+                }
+            });
+
+            this.render('scrumboard');
         }
         else {
           ;//this.render('loading');

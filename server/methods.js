@@ -11,8 +11,6 @@ Meteor.methods({
         if (sprint.status === 'open') {
 
         }
-
-
     },
     upsertMember: function (member) {
         Members.upsert(
@@ -25,11 +23,12 @@ Meteor.methods({
     },
     upsertTask: function (task) {
         var retVal = null;
+
         if (Array.isArray(task.color)) {
             var colors = task.color;
             for( var i = 0; i < colors.length; i++) {
                 task.color = colors[i];
-                delete task._id;
+                delete task._id; // is this needed ?
                 if ( (retVal = upsertTask(task)).status === 'error' ) {
                     break;
                 }

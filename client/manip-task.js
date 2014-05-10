@@ -85,7 +85,12 @@ Template.manipTask.events = {
     App.selectedTask = null;
   },
   'click [save-task]': function (e) {
-    Meteor.call('upsertTask', $('[manip-task]').serializeObject(), function (err, response) {
+    var data = $('[manip-task]').serializeObject();
+    if (!data.color) {
+        data.color = App.defaults.colors;
+    }
+
+    Meteor.call('upsertTask', data, function (err, response) {
       if (response.status === 'error') {
         App.errorMessage = response.msg;
         $('[error-dialog]').dialog('open');

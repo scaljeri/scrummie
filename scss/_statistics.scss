@@ -2,8 +2,8 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  height: 100%;
   flex-flow: column nowrap;
+  height: 100%;
 
   .charts {
     display: flex;
@@ -13,9 +13,7 @@
     justify-content: space-between;
     align-items: stretch;
     align-content: center;
-    height: 250px;
     margin: 0 20px 20px;
-    overflow:hidden;
 
     .charts__item {
       border: 2px solid #d3d3d3;
@@ -24,12 +22,13 @@
       position: relative;
       height: 250px;
       width: 300px;
-    }
-  }
 
-  .burnup,
-  .burndown,
-  .scrumboard {
-    height: 100%;
+      &:first-child {
+        margin-left: 0;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
 }

@@ -5,6 +5,7 @@ Tasks = new Meteor.Collection('tasks');
 TaskColors = new Meteor.Collection('task-colors');
 Members = new Meteor.Collection('members');
 Comments = new Meteor.Collection('comments');
+App = {};
 
 
 // Routes
