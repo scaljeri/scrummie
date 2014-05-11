@@ -82,8 +82,8 @@ Template.configMenu.events = {
     'click [stop-start-sprint]': function () {
         var sprintNumber = $('[sprint-number]').removeClass('error'),
             startdate = $('[start-date]'),
-            enddate = $('[end-date]').removeClass('error'),
-            sprint = Sprints.findOne({sprintNumber: parseInt(sprintNumber.val())});
+            enddate = $('[end-date]').removeClass('error'), sprint;
+
 
         var error = false;
         if (!sprintNumber.val()) {
@@ -98,14 +98,22 @@ Template.configMenu.events = {
             endtime.addClass('error');
             error = true;
         }
+        sprintNumber = parseInt(sprintNumber.val());
+        sprint = Sprints.findOne({sprintNumber: sprintNumber});
 
         if (!error) {
+            // Change subscriptions sprint number
+            App.subs.tasks.stop();
+            App.subs.tasks = Meteor.subscribe('tasks', sprint === undefined ? sprintNumber : -3);
+            App.subs.taskPositions.stop();
+            App.subs.taskPositions = Meteor.subscribe('task-positions', sprint === undefined ? sprintNumber : -3);
+
             Meteor.call('upsertSprint', {
-                sprintNumber: sprintNumber.val(),
+                sprintNumber: sprintNumber,
                 startdate: startdate.val() === 'Now' ?
                     new Date() : new Date(startdate.val()),
                 enddate: new Date(enddate.val()),
-                active: sprint === undefined
+                active: sprint === undefined // if sprint is defined --> its closed now (active === false)
             });
         }
 
