@@ -6,6 +6,15 @@ SprintController = RouteController.extend({
         // http://scrummie.meteor.com?colors=111111,222222&initials=XX
         App.defaults = {};  // reset
 
+        sprint = Sprints.findOne({active: true});
+
+        if (sprint) { // initialize subscriptions which depend on the sprint number
+            App.subs.tasks.stop();
+            App.subs.tasks = Meteor.subscribe('tasks', sprint.sprintNumber);
+            App.subs.taskPositions.stop();
+            App.subs.taskPositions = Meteor.subscribe('task-positions', sprint.sprintNumber);
+        }
+
         //window.location.searc
         //console.log("TEAM: " + process.env.TEAM);
         //console.log("SPRINT: " + process.env.SPRINT);
