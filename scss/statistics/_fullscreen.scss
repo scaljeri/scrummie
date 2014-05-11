@@ -3,7 +3,19 @@
   background-color: #fff;
 }
 
+body > .clickable-overlay {
+  background-color: rgba(0,0,0,0.8);
+  z-index: 1;
+}
+
 .fullscreen {
+  z-index: 10;
+
+  .cloned {
+    background-color: #fff;
+    position: relative;
+    //z-index: 11;
+  }
 
   .chart__footer {
     display: none;

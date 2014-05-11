@@ -3,8 +3,14 @@ Template.statsOverview.events = {
         var target = $(e.target);
         var container = $('.statistics');
         var item = $(e.target).parent().clone();
+        $('.clickable-overlay', item).appendTo('body')
+            .on('click', function () {
+                item.remove();
+                $('body > .clickable-overlay').remove();
+            });
+
         $('svg', item).remove(); // cannot be reused from
-        item.append('<svg id="cloned"></svg>');
+        item.append('<svg class="cloned"></svg>');
 
         item.addClass('cloned-chart');
         item.width(target.width());
@@ -12,9 +18,9 @@ Template.statsOverview.events = {
         item.appendTo('body');
 
         item.position({
-            my: "center",
-            at: "center",
-            of: ".burnup-item"
+            my: 'center',
+            at: 'center',
+            of: '#' + target.parent()[0].id
         });
 
         item.addClass('fullscreen animation');
@@ -28,7 +34,7 @@ Template.statsOverview.events = {
 
         item.on('transitionend', function (e) {
             if (e.originalEvent.propertyName === 'width') {
-                create('#cloned', item, container);
+                create('.cloned', item, container);
                 item.removeClass('animation');
             }
         })

@@ -3,15 +3,15 @@
     {{> statisticsHeader}}
 
     <article class="charts">
-        <div class="charts__item burnup-item">
+        <div id="burnup-item" class="charts__item">
             <a href="#burnup" class="clickable-overlay"></a>
             {{> burnup }}
         </div>
-        <div class="charts__item">
+        <div id="burndown-item" class="charts__item">
             <a href="#burndown" class="clickable-overlay"></a>
             {{> burndown}}
         </div>
-        <div class="charts__item">
+        <div id="scrumboard-item" class="charts__item scrumboard-item">
             <a href="#scrumboard-item" class="clickable-overlay"></a>
             {{> scrumboard}}
             {{chartFooter data='{"name": "Scrumboard", "startDate": "02/05/2014", "endDate": "17/05/2014"}' }}
