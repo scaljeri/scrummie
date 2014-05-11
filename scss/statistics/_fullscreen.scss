@@ -5,6 +5,7 @@
 
 body > .clickable-overlay {
   background-color: rgba(0,0,0,0.8);
+  transition: background-color 1s linear;
   z-index: 1;
 }
 
@@ -14,7 +15,6 @@ body > .clickable-overlay {
   .cloned {
     background-color: #fff;
     position: relative;
-    //z-index: 11;
   }
 
   .chart__footer {

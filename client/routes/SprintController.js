@@ -7,7 +7,6 @@ SprintController = RouteController.extend({
         App.defaults = {};  // reset
 
         sprint = Sprints.findOne({active: true});
-
         if (sprint) { // initialize subscriptions which depend on the sprint number
             App.subs.tasks.stop();
             App.subs.tasks = Meteor.subscribe('tasks', sprint.sprintNumber);

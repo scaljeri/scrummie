@@ -2,15 +2,28 @@ Template.statsOverview.events = {
     'click .clickable-overlay': function (e) {
         var target = $(e.target);
         var container = $('.statistics');
-        var item = $(e.target).parent().clone();
+        var item = $(e.target).parent().clone(true);
+
+        if (item[0].id === 'scrumboard-item') {
+            item.find('.scrumboard--small').removeClass('scrumboard--small');
+        }
+        else {
+            $('svg', item).remove(); // cannot be reused from
+            item.append('<svg class="cloned"></svg>');
+
+            item.on('transitionend', function (e) {
+                if (e.originalEvent.propertyName === 'width') {
+                    create('.cloned', item, container);
+                    item.removeClass('animation');
+                }
+            });
+        }
+
         $('.clickable-overlay', item).appendTo('body')
             .on('click', function () {
                 item.remove();
                 $('body > .clickable-overlay').remove();
             });
-
-        $('svg', item).remove(); // cannot be reused from
-        item.append('<svg class="cloned"></svg>');
 
         item.addClass('cloned-chart');
         item.width(target.width());
@@ -31,13 +44,6 @@ Template.statsOverview.events = {
         });
         item.width(container.width());
         item.height(container.height());
-
-        item.on('transitionend', function (e) {
-            if (e.originalEvent.propertyName === 'width') {
-                create('.cloned', item, container);
-                item.removeClass('animation');
-            }
-        })
     }
 };
 

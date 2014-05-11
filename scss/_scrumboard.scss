@@ -8,4 +8,8 @@
   @include vendor-prefix-value(display, flex);
   @include vendor-prefix(flex-direction, column);
   @include vendor-prefix(user-select, none);
+
+  &.scrumboard--readonly {
+    height:  100%;
+  }
 }
