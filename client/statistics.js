@@ -1,6 +1,5 @@
 Template.statsOverview.events = {
     'click .clickable-overlay': function (e) {
-        console.log("CLICKED");
         var target = $(e.target);
         var container = $('.statistics');
         var item = $(e.target).parent().clone();
@@ -18,27 +17,23 @@ Template.statsOverview.events = {
             of: ".burnup-item"
         });
 
+        item.addClass('fullscreen animation');
+        item.position({
+            my: "left top",
+            at: "left top",
+            of: ".statistics"
+        });
+        item.width(container.width());
+        item.height(container.height());
 
-        // FIX THIS!
-
-        setTimeout(function () {
-            item.addClass('fullscreen');
-
-            item.width(container.width());
-            item.height(container.height());
-
-            item.position({
-                my: "left top",
-                at: "left top",
-                of: ".statistics"
-            });
-
-            setTimeout(function () {
+        item.on('transitionend', function (e) {
+            if (e.originalEvent.propertyName === 'width') {
                 create('#cloned', item, container);
-            },1000);
-        }, 100);
+                item.removeClass('animation');
+            }
+        })
     }
-}
+};
 
 function create(id, item, container) {
     nv.addGraph(function () {
@@ -72,7 +67,7 @@ function create(id, item, container) {
             item.width(container.width());
             item.height(container.height());
             $('.cloned', item).css( {width: container.width(), height: container.height()});
-            setTimeout(chart.update,1000);
+            chart.update();
         });
         return chart;
     });
