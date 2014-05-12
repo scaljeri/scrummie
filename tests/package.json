@@ -1,0 +1,15 @@
+{
+  "name": "tests",
+  "version": "0.0.0",
+  "description": "",
+  "main": "populate.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^3.8.9"
+  }
+}
