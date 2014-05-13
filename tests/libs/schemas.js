@@ -1,27 +1,29 @@
 var mongoose = require('mongoose'),
     schemas = {
-        tasks: {
-            colorId: 'String',
-            description: 'String',
-            laneId: 'String',
-            link: 'String',
-            memberId: 'String',
-            sprintNumber: 'Number',
-            title: 'String',
-            updated: 'Number',
-            x: 'Number',
-            y: 'Number'
+        Tasks: {
+            colorId:        {type: 'String', required: true }, // index: true
+            description:    {type: 'String', required: true},
+            laneId:         {type: 'String', required: true},
+            link:           {type: 'String'},
+            memberId:       {type: 'String'},
+            sprintNumber:   {type: 'Number', required: true},
+            title:          {type: 'String'},
+            updated:        {type: 'Number', required: true},
+            x:              {type: 'Number', required: true},
+            y:              {type: 'Number', required: true}
         },
-        lanes: {
+        Lanes: {
+            title:          {type: 'String', required: true},
+            message:        {type: 'String'},
+            index:          {type: 'Number', required: true}
+        },
+        Sprints: {
 
         },
-        sprints: {
+        Members: {
 
         },
-        members: {
-
-        },
-        taskColors: {
+        TaskColors: {
 
         }
     };

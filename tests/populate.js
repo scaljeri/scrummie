@@ -1,16 +1,16 @@
 var mongoose = require('mongoose'),
     cli = require('./libs/cli'),
-    schemas = require('./libs/schemas'),
+    createLanes = require('./libs/populate-lanes'),
 
-    dbname = cli('db') || 'scrummie',
-    Tasks = schemas('tasks');
+    dbname = cli('db') || 'scrummie';
 
 mongoose.connect('mongodb://localhost/' + dbname, function (err) {
    if (err) throw err;
 
    console.log('Connected to ' + dbname);
+   var Lanes = createLanes(Lanes);
 
-   mongoose.disconnect();
+   //mongoose.disconnect();
 });
 
 
