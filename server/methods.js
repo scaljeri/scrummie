@@ -102,6 +102,7 @@ function upsertTask(task) {
         task.x = 0;
         task.y = 5;
     }
+    task.sprintNumber = parseInt(task.sprintNumber);
     task.updated = new Date().getTime();
     var _id = task._id;
     delete task._id;

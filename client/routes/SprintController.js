@@ -8,9 +8,11 @@ SprintController = RouteController.extend({
 
         sprint = Sprints.findOne({active: true});
         if (sprint) { // initialize subscriptions which depend on the sprint number
-            App.subs.tasks.stop();
+            if (App.subs.tasks) {
+                App.subs.tasks.stop();
+                App.subs.taskPositions.stop();
+            }
             App.subs.tasks = Meteor.subscribe('tasks', sprint.sprintNumber);
-            App.subs.taskPositions.stop();
             App.subs.taskPositions = Meteor.subscribe('task-positions', sprint.sprintNumber);
         }
 

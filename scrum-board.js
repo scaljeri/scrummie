@@ -44,9 +44,9 @@ if (Meteor.isClient) {
 
       sprint: Meteor.subscribe('sprint'),
       lanes: Meteor.subscribe('lanes'),
-      tasks: Meteor.subscribe('tasks'),
+      //tasks: Meteor.subscribe('tasks'),
       taskColors: Meteor.subscribe('task-colors'),
-      taskPositions: Meteor.subscribe('task-positions'),
+      //taskPositions: Meteor.subscribe('task-positions'),
       members: Meteor.subscribe('members')
     },
     deps: {},
