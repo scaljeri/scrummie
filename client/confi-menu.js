@@ -4,10 +4,11 @@ Template.configMenu.sprint = function () {
 
 Template.configMenu.lanes = function () {
     return Lanes.find({}, {sort: {index: 1}});
-}
+};
 
 Template.configMenu.sprintNumber = function () {
     var sprint = Template.configMenu.sprint();//Sprints.findOne({}, {sort: {sprintNumber: -1}});
+
     if (sprint) {
         return  sprint.sprintNumber + (sprint.active === false ? 1 : 0 );
     }
@@ -27,7 +28,7 @@ Template.configMenu.isSprintOpen = function () {
     if (sprint) {
         return sprint.active === true;
     }
-}
+};
 
 Template.configMenu.members = function () {
     return Members.find({}, {sort: {name: 1}});
@@ -65,7 +66,7 @@ Template.configMenu.hide = function () {
 };
 
 Template.configMenu.sprintButtonLabel = function () {
-    var sprint = Sprints.findOne({}, {sort: {sprintNumber: -1}});
+    var sprint = Sprints.findOne({projectId: App.defaults.project}, {sort: {sprintNumber: -1}});
 
     if (sprint) {
         return (sprint.active === true ? 'End' : 'Start') + ' Sprint';
@@ -99,16 +100,17 @@ Template.configMenu.events = {
             error = true;
         }
         sprintNumber = parseInt(sprintNumber.val());
-        sprint = Sprints.findOne({sprintNumber: sprintNumber});
+        sprint = Sprints.findOne({sprintNumber: sprintNumber, projectId: App.defaults.project});
 
         if (!error) {
             // Change subscriptions sprint number
             App.subs.tasks.stop();
-            App.subs.tasks = Meteor.subscribe('tasks', sprint === undefined ? sprintNumber : -3);
             App.subs.taskPositions.stop();
-            App.subs.taskPositions = Meteor.subscribe('task-positions', sprint === undefined ? sprintNumber : -3);
+            App.subs.tasks = Meteor.subscribe('tasks', App.defaults.project, (sprint === undefined ? sprintNumber : -3));
+            App.subs.taskPositions = Meteor.subscribe('task-positions', App.defaults.project, (sprint === undefined ? sprintNumber : -3));
 
             Meteor.call('upsertSprint', {
+                projectId: App.defaults.project,
                 sprintNumber: sprintNumber,
                 startdate: startdate.val() === 'Now' ?
                     new Date() : new Date(startdate.val()),

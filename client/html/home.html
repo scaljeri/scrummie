@@ -1,0 +1,11 @@
+<template name="home">
+    <h3>Projects</h3>
+    <ol>
+        {{#each projects}}
+            <li><a href="/{{name}}">{{name}}</a></li>
+        {{/each}}
+    </ol>
+    <h4>Create project:</h4>
+    <label>name: <input project-name/></label>
+    <button create-project>Submit</button>
+</template>

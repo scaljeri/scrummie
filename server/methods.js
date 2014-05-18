@@ -2,6 +2,7 @@ Meteor.methods({
     upsertSprint: function (sprint) {
        var _id = Sprints.upsert({ sprintNumber: parseInt(sprint.sprintNumber)}, {
             $set: {
+                projectId: sprint.projectId,
                 startdate: sprint.startdate,
                 enddate: sprint.enddate,
                 active: sprint.active
@@ -9,8 +10,11 @@ Meteor.methods({
         });
 
         if (sprint.active === false) { // its closed now -> clone unfinished tasks
-            var tasks = Tasks.find({sprintNumber: parseInt(sprint.sprintNumber)}).fetch(),
+            var tasks = Tasks.find({
+                    projectId: sprint.projectId,
+                    sprintNumber: parseInt(sprint.sprintNumber)} ).fetch(),
                 todoLaneId = Lanes.find({}, {sort: {index: -1}}).fetch()[0]._id;
+
             tasks.forEach(function (task) {
                 if(task.laneId !== todoLaneId) {
                     delete task._id;
@@ -20,7 +24,7 @@ Meteor.methods({
             });
         }
         else { // new sprint
-            Tasks.find({sprintNumber: -1}).fetch().forEach(function (task) {
+            Tasks.find({projectId: sprint.projectId, sprintNumber: -1}).fetch().forEach(function (task) {
                 Tasks.update({_id: task._id}, {$set: {sprintNumber: parseInt(sprint.sprintNumber)}});
             });
         }
@@ -88,7 +92,7 @@ function upsertTask(task) {
     }
 
     if (!task.sprintNumber) { // new tasks do not have a sprint number yet
-        var currentSprint = Sprints.findOne({active: true});
+        var currentSprint = Sprints.findOne({projectId: task.projectId, active: true});
 
         if (currentSprint) { // first define a sprint
             task.sprintNumber = currentSprint.sprintNumber;

@@ -8,6 +8,7 @@
       "git": "https://github.com/alexsuslov/Meteor.cron.git"
     },
     "mongodb-server-aggregation": {},
-    "npm": {}
+    "npm": {},
+    "reactive-publish": {}
   }
 }

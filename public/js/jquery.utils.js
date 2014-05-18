@@ -1,6 +1,6 @@
 //http://stackoverflow.com/questions/11338774/serialize-form-data-to-json
-$.fn.serializeObject = function(){
-    var o = {};
+$.fn.serializeObject = function(defaults){
+    var o = defaults;
     var a = this.serializeArray();
     $.each(a, function() {
         if (o[this.name]) {
@@ -12,5 +12,6 @@ $.fn.serializeObject = function(){
             o[this.name] = this.value || '';
         }
     });
+
     return o;
 };

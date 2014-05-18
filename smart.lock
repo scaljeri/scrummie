@@ -12,7 +12,8 @@
         "branch": "master"
       },
       "mongodb-server-aggregation": {},
-      "npm": {}
+      "npm": {},
+      "reactive-publish": {}
     },
     "packages": {
       "iron-router": {
@@ -40,10 +41,20 @@
         "tag": "v0.2.6",
         "commit": "177ab6118de5bf8cffb19481343d5762ff7a2aaf"
       },
+      "reactive-publish": {
+        "git": "https://github.com/Diggsey/meteor-reactive-publish.git",
+        "tag": "v0.1.6",
+        "commit": "dd8c149f109a1f3d1cac7e36293cf5904538ca90"
+      },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
         "tag": "v0.2.4",
         "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
+      },
+      "server-deps": {
+        "git": "https://github.com/Diggsey/meteor-server-deps.git",
+        "tag": "v0.1.2",
+        "commit": "2db5d15fad9240723549cbbc5260a74b6b7e1c61"
       }
     }
   }

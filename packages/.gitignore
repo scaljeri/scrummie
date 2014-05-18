@@ -7,3 +7,6 @@
 /Meteor.Cron
 /mongodb-server-aggregation
 /npm
+/publish-with-relations
+/reactive-publish
+/server-deps

@@ -67,3 +67,6 @@ Interesting:
   * https://www.eventedmind.com/feed/meteor-ironrouter
   * https://www.eventedmind.com/feed/meteor-introducing-deps
   * https://www.eventedmind.com/feed/
+  * Fast renderer
+    * http://meteorhacks.com/introducing-fast-render.html
+    * http://meteorhacks.com/fast-render-internals-and-how-it-works.html

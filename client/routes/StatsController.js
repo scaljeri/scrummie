@@ -5,13 +5,24 @@ StatsController = RouteController.extend({
         App.scrumboard.readonly = true;
 
         sprint = Sprints.findOne({active: true});
-        if (sprint) { // initialize subscriptions which depend on the sprint number
-            if (App.subs.tasks) {
-                App.subs.tasks.stop();
-                App.subs.taskPositions.stop();
+        if (sprint) {
+            for (sub in App.subs) {
+                sub.stop();
             }
-            App.subs.tasks = Meteor.subscribe('tasks', sprint.sprintNumber);
-            App.subs.taskPositions = Meteor.subscribe('task-positions', sprint.sprintNumber);
+
+            App.subs = {
+                lanes: Meteor.subscribe('lanes'),
+                taskColors: Meteor.subscribe('task-colors'),
+                members: Meteor.subscribe('members', project),
+                velocity: Meteor.subscribe('velocity', project),
+                lanesSetup: Meteor.subscribe('lanes-setup', project),
+                tasks: Meteor.subscribe('tasks', project, sprint.sprintNumber),
+                taskColorsSetup: Meteor.subscribe('task-colors-setup', project),
+                burnup: Meteor.subscribe('burnup', project, sprint.sprintNumber),
+                sprint: Meteor.subscribe('sprint', project, sprint.sprintNumber),
+                burndown: Meteor.subscribe('burndown', project, sprint.sprintNumber),
+                taskPositions: Meteor.subscribe('task-positions', project, sprint.sprintNumber)
+            };
         }
     },
     data: { pageCls: 'page-statistics'},

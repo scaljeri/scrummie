@@ -85,7 +85,7 @@ Template.manipTask.events = {
     App.selectedTask = null;
   },
   'click [save-task]': function (e) {
-    var data = $('[manip-task]').serializeObject();
+    var data = $('[manip-task]').serializeObject({projectId: App.defaults.project, sprintNumber: App.defaults.sprintNumber});
     if (!data.color) {
         data.color = App.defaults.colors;
     }
