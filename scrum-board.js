@@ -254,7 +254,8 @@ if (Meteor.isServer) {
         });
 
         Meteor.reactivePublish('tasks', function (projectId) {
-            var sprint = Sprints.findOne({active:true, projectId: projectId});
+            var sprint = Sprints.findOne({active:true, projectId: projectId}, {reactive: true});
+            console.log("tasks reactivePublish " + (sprint ? sprint.sprintNumber:-10) + ' pid=' + projectId);
             return Tasks.find({$and: [
                 {projectId: projectId},
                 {sprintNumber: sprint ? sprint.sprintNumber : -10},
@@ -266,7 +267,7 @@ if (Meteor.isServer) {
         });
 
         Meteor.reactivePublish('task-positions', function (projectId) {
-            var sprint = Sprints.findOne({active:true, projectId: projectId});
+            var sprint = Sprints.findOne({active:true, projectId: projectId}, {reactive: true});
             return Tasks.find({$and: [
                     {projectId: projectId},
                     {sprintNumber: sprint ? sprint.sprintNumber : -10},
