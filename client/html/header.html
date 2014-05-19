@@ -1,19 +1,22 @@
 <template name="header">
     <header class="header-main logo">
-        <a href="/" class="clickable-logo"></a>
+        <a href="/{{project}}" class="clickable-logo"></a>
         <nav class="header-main__nav">
             <ol class="nav-list">
                 <li class="nav-list__item">
                     <a config class="nav-list__item__config" title="Configuration"></a>
                 </li>
                 <li class="nav-list__item">
-                    <a stats href="/stats" class="nav-list__item__stats">Statistics</a>
+                    <a stats href="/{{project}}/stats" class="nav-list__item__stats">Statistics</a>
                 </li>
                 <li class="nav-list__item">
-                    <a stats href="https://github.com/scaljeri/scrummie" class="nav-list__item__about">About</a>
+                    <a target="_blank" href="https://github.com/scaljeri/scrummie" class="nav-list__item__about">About</a>
                 </li>
                 <li class="nav-list__item">
-                    <a stats href="/backlog" class="nav-list__item__backlog">Backlog</a>
+                    <a href="/{{project}}backlog" class="nav-list__item__backlog">Backlog</a>
+                </li>
+                <li class="nav-list__item">
+                    <a href="/" class="nav-list__item__home">Home</a>
                 </li>
             </ol>
         </nav>

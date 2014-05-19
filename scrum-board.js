@@ -30,12 +30,12 @@ Router.map(function () {
     });
 
     this.route('task', {
-        path: '/task/:id',
+        path: '/:project/task/:id',
         controller: 'TaskController'
     });
 
     this.route('stats', {
-        path: '/stats',
+        path: '/:project/stats',
         controller: 'StatsController'
     });
 });
@@ -46,31 +46,9 @@ if (Meteor.isClient) {
         noob: function () {},
         scrumboard: {view: 'normal', readonly: false},
         subs: null,
-        /*
-         subs: {
-         velocity: Meteor.subscribe('velocity'),
-         burndown: Meteor.subscribe('burndown'),
-         burnup: Meteor.subscribe('burnup'),
-
-         sprint: Meteor.subscribe('sprint'),
-         lanes: Meteor.subscribe('lanes'),
-         //tasks: Meteor.subscribe('tasks'),
-         taskColors: Meteor.subscribe('task-colors'),
-         //taskPositions: Meteor.subscribe('task-positions'),
-         members: Meteor.subscribe('members')
-         }, */
         deps: {},
         outsideClick: {
             list: [],
-            /*
-             When a click is supposed to show a widget, this widget should be ignored when this
-             click is handled in the outside-click code. Otherwise this click will show the widget
-             and immediately close it again. So, when a widget is shown also set dirty to true
-
-             App.outsideClick.isDirty = true;
-             Template.configMenu.show();       // the widget registers itself for an outside-click
-
-             */
             register: function (selector, callback) {
                 this.remove(callback);
                 this.list.push({ selector: selector, callback: callback, dirty: true});
@@ -162,14 +140,17 @@ if (Meteor.isServer) {
         }
 
         if (Members.find({}).count() === 0) {
-            Members.insert({name: 'Anne Heijkoop', initials: 'AH'});
-            Members.insert({name: 'Arjan Eising', initials: 'AE'});
-            Members.insert({name: 'Jan Willem', initials: 'JW'});
-            Members.insert({name: 'Jeroen Zwartenpoort', initials: 'JZ'});
-            Members.insert({name: 'Joost van Dieten', initials: 'JD'});
-            Members.insert({name: 'Lucas Calje', initials: 'LC'});
-            Members.insert({name: 'Maurice de Chateau', initials: 'MC'});
-            Members.insert({name: 'Sander van Geloven', initials: 'SG'});
+            Members.insert({projectId: 'VOoruit', name: 'Anne Heijkoop', initials: 'AH'});
+            Members.insert({projectId: 'VOoruit', name: 'Arjan Eising', initials: 'AE'});
+            Members.insert({projectId: 'VOoruit', name: 'Jan Willem', initials: 'JW'});
+            Members.insert({projectId: 'VOoruit', name: 'Jeroen Zwartenpoort', initials: 'JZ'});
+            Members.insert({projectId: 'VOoruit', name: 'Joost van Dieten', initials: 'JD'});
+            Members.insert({projectId: 'VOoruit', name: 'Lucas Calje', initials: 'LC'});
+            Members.insert({projectId: 'VOoruit', name: 'Maurice de Chateau', initials: 'MC'});
+            Members.insert({projectId: 'VOoruit', name: 'Sander van Geloven', initials: 'SG'});
+            Members.insert({projectId: 'VOoruit', name: 'Joost den Boer', initials: 'JdB'});
+
+            Members.insert({projectId: 'P3', name: 'Bob Bijvoet', initials: 'BB'});
         }
 
         Meteor.publish('projects', function (project) {
@@ -233,12 +214,12 @@ if (Meteor.isServer) {
             return Sprints.find(query, {limit: 1, sort: {sprintNumber: -1}});
         });
 
-        Meteor.publish('members', function () {
-            return Members.find({}, {sort: {name: 1}});
+        Meteor.publish('members', function (projectId) {
+            return Members.find({projectId: projectId}, {sort: {name: 1}});
         });
 
-        Meteor.publish('comments', function (taskId) {
-            return Comments.find({taskId: taskId}, {sort: {insertDate: 1}});
+        Meteor.publish('comments', function (projectId, taskId) {
+            return Comments.find({projectId: projectId, taskId: taskId}, {sort: {insertDate: 1}});
         });
 
         // stats

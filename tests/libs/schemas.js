@@ -44,8 +44,9 @@ var mongoose = require('mongoose'),
 
         },
         Members: {
-            projectId:        {type: 'String', required: true}
-
+            projectId:        {type: 'String', required: true},
+            name:             {type: 'String', required: true},
+            initials:         {type: 'String', required: true}
         },
         TaskColors: {
 
