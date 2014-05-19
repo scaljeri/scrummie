@@ -93,8 +93,8 @@ if (Meteor.isServer) {
          LanesSetup.remove({});
          Tasks.remove({});
          TaskColors.remove({});
-         TaskColorsSetup.remove({});
          Members.remove({});
+         TaskColorsSetup.remove({});
          */
 
         if (Lanes.find({}).count() === 0) {
@@ -130,13 +130,13 @@ if (Meteor.isServer) {
             TaskColors.insert({ value: '#a0a0ff', title: 'other', index: 5});
             TaskColors.insert({ value: '#9effe6', title: 'infra', index: 6});
 
-            TaskColorsSetup.insert({ value: '#ffff92', title: 'Frontend', index: 0, project: 'VOoruit'});
-            TaskColorsSetup.insert({ value: '#ffa2e7', title: 'Design', index: 1, project: 'VOoruit'});
-            TaskColorsSetup.insert({ value: '#73dcff', title: 'Backend', index: 2, project: 'VOoruit'});
-            TaskColorsSetup.insert({ value: '#93e89f', title: 'Unknown', index: 3, project: 'VOoruit'});
-            TaskColorsSetup.insert({ value: '#ff9999', title: 'Test', index: 4, project: 'VOoruit'});
-            TaskColorsSetup.insert({ value: '#a0a0ff', title: 'other', index: 5, project: 'VOoruit'});
-            TaskColorsSetup.insert({ value: '#9effe6', title: 'infra', index: 6, project: 'VOoruit'});
+            TaskColorsSetup.insert({ value: '#ffff92', title: 'Frontend', index: 0, projectId: 'VOoruit'});
+            TaskColorsSetup.insert({ value: '#ffa2e7', title: 'Design', index: 1, projectId: 'VOoruit'});
+            TaskColorsSetup.insert({ value: '#73dcff', title: 'Backend', index: 2, projectId: 'VOoruit'});
+            TaskColorsSetup.insert({ value: '#93e89f', title: 'Unknown', index: 3, projectId: 'VOoruit'});
+            TaskColorsSetup.insert({ value: '#ff9999', title: 'Test', index: 4, projectId: 'VOoruit'});
+            TaskColorsSetup.insert({ value: '#a0a0ff', title: 'other', index: 5, projectId: 'VOoruit'});
+            TaskColorsSetup.insert({ value: '#9effe6', title: 'infra', index: 6, projectId: 'VOoruit'});
         }
 
         if (Members.find({}).count() === 0) {
@@ -165,8 +165,8 @@ if (Meteor.isServer) {
             return TaskColors.find({}, {sort: {index: 1}});
         });
 
-        Meteor.publish('task-colors-setup', function (project) {
-            return TaskColorsSetup.find({project: project}, {sort: {index: 1}});
+        Meteor.publish('task-colors-setup', function (projectId) {
+            return TaskColorsSetup.find({projectId: projectId}, {sort: {index: 1}});
         });
 
         /*

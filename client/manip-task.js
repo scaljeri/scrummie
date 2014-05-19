@@ -5,7 +5,7 @@ Template.manipTask.task = function () {
 };
 
 Template.manipTask.colors = function () {
-  return TaskColors.find({}, {sort: {index: 1}}).fetch();
+  return TaskColorsSetup.find({}, {sort: {index: 1}}).fetch();
 };
 
 Template.manipTask.members = function () {
@@ -30,7 +30,7 @@ Template.manipTask.show = function (task, callback) {
     if (task) {
       select.removeAttr('multiple');
       if (task.colorId) { // TODO: can happen now, but should not happen
-        taskColors = TaskColors.findOne({_id: task.colorId}).value;
+        taskColors = TaskColors.findOne({_id: task.colorId});
       }
     }
     else {
@@ -45,7 +45,7 @@ Template.manipTask.show = function (task, callback) {
       minimumResultsForSearch: -1,
       placeholder: "Colors"
     });
-    select.select2('val', taskColors);
+    select.select2('val', taskColors ? taskColors.value : null);
 
     $('[manip-task]').css('visibility', 'visible');
 
