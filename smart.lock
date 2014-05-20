@@ -13,7 +13,8 @@
       },
       "mongodb-server-aggregation": {},
       "npm": {},
-      "reactive-publish": {}
+      "reactive-publish": {},
+      "reststop2": {}
     },
     "packages": {
       "iron-router": {
@@ -45,6 +46,11 @@
         "git": "https://github.com/Diggsey/meteor-reactive-publish.git",
         "tag": "v0.1.6",
         "commit": "dd8c149f109a1f3d1cac7e36293cf5904538ca90"
+      },
+      "reststop2": {
+        "git": "https://github.com/Differential/reststop2.git",
+        "tag": "v0.5.9",
+        "commit": "f006994d2505a0c68ea46c84ab0e3a9040641a9d"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

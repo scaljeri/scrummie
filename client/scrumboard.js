@@ -1,5 +1,5 @@
 Template.scrumboard.lanes = function () {
-    return Lanes.find({}, {sort: {index: 1}}).fetch();
+    return LanesSetup.find({}, {sort: {index: 1}}).fetch();
 };
 
 Template.scrumboard.tasksOnLane = function(laneId) {

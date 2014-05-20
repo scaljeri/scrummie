@@ -81,6 +81,21 @@ Meteor.methods({
             laneId: task.laneId,
             memberId: task.memberId}
         });*/
+    },
+    createProject: function(data) {
+        TaskColors.find().forEach(function(color) {
+            color.projectId = data.name;
+            delete color._id;
+            TaskColorsSetup.insert(color);
+        });
+
+        Lanes.find().forEach(function(lane) {
+            lane.projectId = data.name;
+            delete lane._id;
+            LanesSetup.insert(lane);
+        });
+
+        Projects.insert(data);
     }
 });
 

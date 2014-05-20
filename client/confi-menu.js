@@ -3,7 +3,7 @@ Template.configMenu.sprint = function () {
 };
 
 Template.configMenu.lanes = function () {
-    return Lanes.find({}, {sort: {index: 1}});
+    return LanesSetup.find({}, {sort: {index: 1}});
 };
 
 Template.configMenu.sprintNumber = function () {

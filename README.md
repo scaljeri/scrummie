@@ -70,3 +70,4 @@ Interesting:
   * Fast renderer
     * http://meteorhacks.com/introducing-fast-render.html
     * http://meteorhacks.com/fast-render-internals-and-how-it-works.html
+  * http://github.differential.io/reststop2/

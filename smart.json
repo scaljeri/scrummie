@@ -9,6 +9,7 @@
     },
     "mongodb-server-aggregation": {},
     "npm": {},
-    "reactive-publish": {}
+    "reactive-publish": {},
+    "reststop2": {}
   }
 }

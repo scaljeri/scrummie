@@ -4,6 +4,6 @@ Template.home.projects = function () {
 
 Template.home.events = {
     'click [create-project]': function () {
-        Projects.insert({name: $('[project-name]').val(), created: new Date().getTime()});
+        Meteor.call('createProject', {name: $('[project-name]').val(), created: new Date().getTime()});
     }
 };

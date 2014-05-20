@@ -8,8 +8,15 @@
     background-repeat: no-repeat;
   }
 
+  .add-task {
+    position: relative;
+    z-index: 1;
+  }
+
   .postit-filter {
     float: right;
+    position: relative;
+    z-index: 1;
 
     .postit-filter__label {
       color: $button-bg;

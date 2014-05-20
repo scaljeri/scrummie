@@ -86,7 +86,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
     Meteor.startup(function () {
 
-        /*
+      /*
          Projects.remove({});
          Sprints.remove({});
          Lanes.remove({});
@@ -100,12 +100,7 @@ if (Meteor.isServer) {
         if (Lanes.find({}).count() === 0) {
             Lanes.insert({ title: 'todo', message: 'Tasks to be done', index: 0});
             Lanes.insert({ title: 'in progress', message: 'Tasks in progress', index: 1});
-            //Lanes.insert({ title: 'test', message: 'Tasks under test', index: 2});
             Lanes.insert({ title: 'done', message: 'Tasks done', index: 1000000});
-
-            LanesSetup.insert({ title: 'todo', message: 'Tasks to be done', index: 0, project: 'VOoruit'});
-            LanesSetup.insert({ title: 'in progress', message: 'Tasks in progress', index: 1, project: 'VOoruit'});
-            LanesSetup.insert({ title: 'done', message: 'Tasks done', index: 1000000, project: 'VOoruit'});
         }
 
         if (Sprints.find({}).count() === 0) {
@@ -129,14 +124,6 @@ if (Meteor.isServer) {
             TaskColors.insert({ value: '#ff9999', title: 'Test', index: 4});
             TaskColors.insert({ value: '#a0a0ff', title: 'other', index: 5});
             TaskColors.insert({ value: '#9effe6', title: 'infra', index: 6});
-
-            TaskColorsSetup.insert({ value: '#ffff92', title: 'Frontend', index: 0, projectId: 'VOoruit'});
-            TaskColorsSetup.insert({ value: '#ffa2e7', title: 'Design', index: 1, projectId: 'VOoruit'});
-            TaskColorsSetup.insert({ value: '#73dcff', title: 'Backend', index: 2, projectId: 'VOoruit'});
-            TaskColorsSetup.insert({ value: '#93e89f', title: 'Unknown', index: 3, projectId: 'VOoruit'});
-            TaskColorsSetup.insert({ value: '#ff9999', title: 'Test', index: 4, projectId: 'VOoruit'});
-            TaskColorsSetup.insert({ value: '#a0a0ff', title: 'other', index: 5, projectId: 'VOoruit'});
-            TaskColorsSetup.insert({ value: '#9effe6', title: 'infra', index: 6, projectId: 'VOoruit'});
         }
 
         if (Members.find({}).count() === 0) {
@@ -201,7 +188,7 @@ if (Meteor.isServer) {
         });
 
         Meteor.publish('lanes-setup', function (project) {
-            return LanesSetup.find({project: project}, {sort: {index: 1}});
+            return LanesSetup.find({projectId: project}, {sort: {index: 1}});
         });
 
         Meteor.publish('sprint', function (projectId, sprintNumber) {
@@ -236,12 +223,12 @@ if (Meteor.isServer) {
 
         Meteor.reactivePublish('tasks', function (projectId) {
             var sprint = Sprints.findOne({active:true, projectId: projectId}, {reactive: true});
-            console.log("tasks reactivePublish " + (sprint ? sprint.sprintNumber:-10) + ' pid=' + projectId);
+
             return Tasks.find({$and: [
                 {projectId: projectId},
                 {sprintNumber: sprint ? sprint.sprintNumber : -10},
                 {$or: [
-                    { deleted: {$exists: false}},
+                    {deleted: {$exists: false}},
                     {deleted: false}
                 ]}
             ]}, {fields: {x: 0, y: 0, updated: 0}});          // return task without coordinates
