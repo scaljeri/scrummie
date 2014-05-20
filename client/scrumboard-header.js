@@ -1,3 +1,8 @@
+Template.scrumboardHeader.sprintNumber = function () {
+    var sprint = Sprints.findOne();
+    return sprint ? sprint.sprintNumber : '???';
+};
+
 Template.scrumboardHeader.events = {
   'click [add-task]': function () {
     var addTask = $('[add-task]');

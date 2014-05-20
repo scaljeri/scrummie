@@ -20,6 +20,7 @@
   height: 124px;
   width: 155px;
   padding-top: 5px;
+  background: linear-gradient(135deg, rgba(255,255,255,.4) 0%,rgba(255,255,255,.3) 23%,rgba(0,0,0,0) 100%); /* W3C */
 
   @include vendor-prefix(box-shadow, 0px 4px 6px #d3d3d3);
   .postit__description,
