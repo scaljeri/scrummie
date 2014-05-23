@@ -9,61 +9,46 @@
 
 // http://webdesignandsuch.com/posts/css3-post-it/index.html
 .postit {
-  overflow: hidden;
-  position: absolute;
-  top: 100px;
-  z-index: 100;
-  left: 20px;
-
-  display: inline-block;
-  //position: relative;
-  height: 124px;
-  width: 155px;
-  padding-top: 5px;
   background: linear-gradient(135deg, rgba(255,255,255,.4) 0%,rgba(255,255,255,.3) 23%,rgba(0,0,0,0) 100%); /* W3C */
+  display: inline-block;
+  box-shadow: 0px 4px 6px #d3d3d3;
+  overflow: hidden;
+  padding-top: 5px;
+  z-index: 100;
+  @include position(absolute, 100px 0 0 20px);
+  @include size(155px, 124px);
 
-  @include vendor-prefix(box-shadow, 0px 4px 6px #d3d3d3);
   .postit__description,
   .postit__title {
-    //position: absolute;
-    width: 100%;
     color: rgba(35,48,70,.8);
+    width: 100%;
   }
 
   .postit__title {
-    top: 12px;
-    padding-left: 6px;
     font: 400 18px/20px 'Bad Script', cursive;
-    font-family: 'Architects Daughter', cursive;
+    margin-bottom: 13px;
     overflow:hidden;
+    padding-left: 6px;
     text-align: center;
     text-overflow:ellipsis;
-    margin-bottom: 13px;
     white-space:nowrap;
 
 
     &:after {
-      position: absolute;
-      left: 17px;
-      right: 21px;
-      top: 28px;
-      content: '';
       border-bottom: 1px solid rgba(35,48,70,.3);
+      content: '';
       transform:rotate(-3deg);
-      -ms-transform:rotate(-3deg); /* IE 9 */
-      -webkit-transform:rotate(-3deg); /* Opera, Chrome, and Safari */
+      @include position(absolute, 28px 21px 0 17px);
     }
   }
 
   .postit__description {
     font: 200 15px/20px 'Bad Script', cursive;
     font-family: 'Architects Daughter', cursive;
-    //font: 200 15px/20px 'Gloria Hallelujah', cursive;
-    //font-family: 'Bad Script', cursive;
-    padding: 0 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
     hyphens: auto;
+    overflow: hidden;
+    padding: 0 10px;
+    text-overflow: ellipsis;
 
     @include vendor-prefix-value(display, box);
     @include vendor-prefix(box-orient, vertical);
@@ -80,38 +65,30 @@
   }
 
   .postit__link {
-    position: absolute;
-    bottom: 3px;
-    left: 10px;
     padding: 10px;
+    @include position(absolute, 0 0 3px 10px);
 
     svg {
-      width: 20px;
-      height: 10px;
       fill: rgba(35,48,70,.3);
+      @include size(20px, 10px);
     }
   }
 
   .postit__initials {
-    position: absolute;
-    bottom: 0;
-    right: 5px;
     color: rgba(35,48,70,.3);
+    @include position(absolute, 0 5px 0px 0);
   }
 
   svg {
-    left: -5px;
-    position: absolute;
     z-index: -1;
+    @include position(absolute, 0 0 0 -5px);
   }
 }
 
 .scrumboard--small .postit {
   box-shadow: 0px 0px 6px #d3d3d3;
-  height: 30px;
-  width: 30px;
   z-index: 0!important;
-
+  @include size(30px, 30px);
 
   .postit__description,
   .postit__link,
