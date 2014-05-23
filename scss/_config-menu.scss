@@ -1,19 +1,10 @@
 .config-menu {
   color: #fff;
-
-  position: absolute;
-  top: 0;
-  right: -400px;
-  height: 100%;
-  width: 400px;
-  z-index: $on-top;
-
   transition-duration: 500ms;
-  -webkit-transition-duration: 500ms; /* Safari */
   transition-property: right;
-  -moz-transition-property: right; /* Firefox 4 */
-  -webkit-transition-property: right; /* Safari and Chrome */
-  -o-transition-property: right; /* Opera */
+  z-index: $on-top;
+  @include position(absolute, 0px -400px 0 0);
+  @include size(400px, 100%);
 
   .config-content {
     background-color: $button-bg;

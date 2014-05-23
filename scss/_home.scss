@@ -1,0 +1,80 @@
+.home {
+  background-color: #fff;
+  border: 10px solid rgba(0, 0, 0, 0);
+  border-radius: 2px;
+  position: relative;
+  min-height: 400px;
+  font-size: 0;
+
+  &::after {
+    content: '';
+    display: inline-block;
+    border-right: 1px dashed #d2d4d8;
+    @include position(absolute, 60px 0 0px 30%);
+  }
+
+  .home__header {
+    height: 38px;
+    border-bottom: 1px dashed #d2d4d8;
+  }
+
+  .home__new-project {
+    display: inline-block;
+    font-size: 20px;
+    padding: 20px 10px 0 0;
+    width: 30%;
+
+    .home__project-title {
+      font: 300 17px/40px Lato;
+    }
+
+    .home__project-name {
+      box-shadow: inset 4px 5px 7px -6px rgba(50, 50, 50, 0.75);
+      width: 100%;
+    }
+
+    .home__add-project {
+      float: right;
+      margin-top: 10px;
+      width: 67px;
+    }
+  }
+
+  .home__projects {
+    display: inline-block;
+    font: 300 17px/40px Lato;
+    padding: 20px 10px;
+    vertical-align: top;
+    width: 70%;
+
+    .project__item {
+      display: inline-block;
+      width: 100%;
+
+      &:hover {
+        background-color: #d3d3d3;
+        cursor: pointer;
+
+        .project__icon {
+          background-size: 50px 50px;
+        }
+      }
+    }
+
+    .project__icon {
+      background-color: #d2d4d8;
+      background-image: url(../img/project-icon.png);
+      background-size: 40px 40px;
+      border-radius: 20px;
+      display: inline-block;
+      vertical-align: middle;
+      @include size(40px, 40px);
+    }
+
+    .project__title {
+      color: #445668;
+      margin-left: 20px;
+    }
+
+  }
+}

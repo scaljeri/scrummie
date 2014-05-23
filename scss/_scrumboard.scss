@@ -2,12 +2,10 @@
   background-color: #fff;
   border: 10px solid rgba(0, 0, 0, 0);
   border-radius: 2px;
+  display: flex;
   flex: 1;
+  flex-direction: column;
   position: relative;
-
-  @include vendor-prefix-value(display, flex);
-  @include vendor-prefix(flex-direction, column);
-  @include vendor-prefix(user-select, none);
 
   &.scrumboard--readonly {
     height:  100%;

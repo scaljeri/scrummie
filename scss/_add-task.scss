@@ -3,29 +3,24 @@
     padding: 10px;
 
     .btn {
+      box-shadow: 0 4px 2px -2px gray;
       line-height: 25px;
       padding: 4px 30px;
       width: 120px;
 
-      box-shadow: 0 4px 2px -2px gray;
-      -webkit-box-shadow: 0 4px 2px -2px gray;
-      -moz-box-shadow: 0 4px 2px -2px gray;
-
       &:active {
-       -webkit-box-shadow: none;
-        -moz-box-shadow: none;
         box-shadow: none;
         margin-top: 1px;
       }
 
       &.cancel-task {
-        float: left;
         background-color: #a4a5a8;
+        float: left;
       }
 
       &.save-task {
-        float: right;
         background-color: #ff2ecb;
+        float: right;
       }
     }
   }
