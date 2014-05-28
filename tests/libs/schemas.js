@@ -14,7 +14,7 @@ var mongoose = require('mongoose'),
             name:           {type: 'String', required: true, index: { unique: true }},
             created:        {type: 'String', required: true},
             description:    {type: 'String'},
-            icon:           {type: 'String'}
+            resourceId:     {type: 'String'}
         },
         Tasks: {
             projectId:      {type: 'String', required: true},
@@ -62,6 +62,10 @@ var mongoose = require('mongoose'),
            value:           {type: 'String', required: true},
            title:           {type: 'String', required: true},
            index:           {type: 'Number', required: true}
+        },
+        Resources: {
+           fileName:            {type: 'String', required: true},
+           originalName:        {type: 'String', required: true}
         }
     };
 

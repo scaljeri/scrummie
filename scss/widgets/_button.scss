@@ -11,8 +11,12 @@
   user-select: none;
   -webkit-user-select: none;
 
+  &:hover {
+    background-color: $button-hover;
+  }
+
   &.btn--active {
-    //background-color: #395077;
+    background-color: $button-active;
     -webkit-box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);
     box-shadow: inset 7px 7px 5px -5px rgba(50, 50, 50, 0.75);

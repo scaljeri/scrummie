@@ -3,24 +3,43 @@
         <header class="home__header">
             <h1>Projects</h1>
         </header>
-        <article class="home__new-project">
-            <h4 class="home__project-title">New Project:</h4>
-            <input project-name class="home__project-name"/>
-            <input project-file class="file-upload-input" type="file"/>
-            <a submit-project class="btn input--shadow home__add-project">Add</a>
-        </article>
-        <article class="home__projects">
-            <h4>All projects</h4>
-            <ol>
-                {{#each projects}}
-                <li>
-                    <a href="/{{name}}" class="project__item">
-                        <span class="project__icon"></span><span class="project__title" href="/{{name}}">{{name}}</span>
-                    </a>
-                </li>
-                {{/each}}
-            </ol>
-        </article>
-        <h3>Projects</h3>
+        <div class="wrapper home__wrapper">
+            <article class="new-project">
+                <h4 class="section__name">New Project:</h4>
+                <a class="file-upload">
+                    <img file-upload-preview class="file-upload__preview" src="/img/scrum-icon.png">
+                    <input file-upload type="file" class="file-upload"/>
+                </a>
+                <input new-project__name class="new-project__name"/>
+                <a submit-project class="btn input--shadow new-project__add">Add</a>
+            </article>
+            <article class="home__projects">
+                <h4 class="section__name">All projects</h4>
+                <ol>
+                    {{#each projects}}
+                    <li class="project-item">
+                        <span class="project-item__icon">
+                            {{#if icon}}
+                                <img src="{{icon}}">
+                            {{else}}
+                                <img src="/img/project-icon.png">
+                            {{/if}}
+                        </span>
+                        <a href="/{{name}}" class="project-item__name">{{name}}</a>
+                    </li>
+                    {{/each}}
+                </ol>
+            </article>
+            <h3>Projects</h3>
+        </div>
     </section>
 </template>
+
+<!--
+<div class="new-project__buttons">
+<span class="file-upload btn btn-primary">
+ <span>Upload</span>
+ <input file-upload type="file" class="upload"/>
+</span>
+</div>
+-->

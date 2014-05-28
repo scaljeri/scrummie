@@ -7,33 +7,52 @@ Template.home.projects = function () {
 
 Template.home.errorMsg = function () {
   return error;
-}
+};
 
 Template.home.events = {
-  'click [submit-project]': function () {
-    var name = $('[project-name]').val(),
-      project = Projects.findOne({name: name});
+  'mousedown [submit-project]' : function (e) {
+    $(e.target).addClass('btn--active');
+  },
+  'click [submit-project]': function (e) {
+    var name = $('[new-project__name]').val(),
+      project;
 
+    $(e.target).removeClass('btn--active');
+
+    if (!name) {
+      App.errorMessage = 'A project name is required';
+      $('[error-dialog]').dialog('open');
+    }
+
+    project = Projects.findOne({name: name});
     if (project) {
       App.errorMessage = 'Project already exists';
       $('[error-dialog]').dialog('open');
     }
     else {
-      console.log("IMG DATA " + fileData.length);
-      Meteor.call('file-upload', fileInfo, fileData, function(response) {
-        debugger;
-        Meteor.call('createProject', {name: name, created: new Date().getTime()});
+      Meteor.call('createProject', name, fileInfo, fileData, function(err, response) {
+        if (response.status === 'error') {
+          App.errorMessage = response.msg;
+          $('[error-dialog]').dialog('open');
+        }
       });
     }
-    $('[project-name]').val('');
+    $('[new-project__name]').val('');
   },
-  'change [project-file]': function (event, template) {
-    var reader = new FileReader();
+  'change [file-upload]': function (event) {
+    var readerPreview = new FileReader(),
+        readerBinary  = new FileReader();
+
     fileInfo   = event.currentTarget.files[0];
 
-    reader.onload = function (fileLoadEvent) {
-      fileData = reader.result;
+    readerPreview.onload = function () {
+      $('[file-upload-preview]').attr('src', readerPreview.result);
     };
-    reader.readAsBinaryString(fileInfo);
+    readerBinary.onload = function () {
+      fileData = readerBinary.result;
+    };
+
+    readerPreview.readAsDataURL(fileInfo);
+    readerBinary.readAsBinaryString(fileInfo);
   }
 };

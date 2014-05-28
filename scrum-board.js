@@ -8,6 +8,7 @@ TaskColors = new Meteor.Collection('task-colors');
 TaskColorsSetup = new Meteor.Collection('task-colors-setup');
 Members = new Meteor.Collection('members');
 Comments = new Meteor.Collection('comments');
+Resources = new Meteor.Collection('resources');
 App = {};
 
 
@@ -140,14 +141,66 @@ if (Meteor.isServer) {
             Members.insert({projectId: 'P3', name: 'Bob Bijvoet', initials: 'BB'});
         }
 
-        Meteor.publish('projects', function (project) {
-            var query = {};
+      Meteor.publish("projects", function(projectId) {
+        var projects, query = {};
+
+        if (projectId) {
+          query.name = projectId;
+        }
+
+        var transform = function(project) {
+          var resource = Resources.findOne({_id: project.resourceId});
+          if (resource) {
+            project.icon = '/uploads/' + resource.fileName;
+          }
+          return project;
+        };
+
+        var self = this;
+
+        var projects = Projects.find(query).observe({
+          added: function (document) {
+            self.added('projects', document._id, transform(document));
+          },
+          changed: function (newDocument, oldDocument) {
+            self.changed('projects', document._id, transform(newDocument));
+          },
+          removed: function (oldDocument) {
+            self.removed('projects', oldDocument._id);
+          }
+        });
+
+        self.ready();
+
+        self.onStop(function () {
+          projects.stop();
+        });
+      });
+
+
+      /*
+      Meteor.publish('projects', function (project) {
+            var projects, query = {};
+
             if (project) {
                 query.name = project;
             }
-            return Projects.find(query, {sort: {name: 1}});
-        });
+            projects = Projects.find(query, {sort: {name: 1}}, {reactive: true});
+            projects.forEach(function (item) {
+                var resource;
 
+                if (item.resourceId) {
+                  resource = Resources.findOne({_id: item.resourceId});
+                  if (resource) {
+                    item.icon = '/uploads/' + resource.fileName;
+                    console.log(item.icon);
+                  }
+                }
+            });
+
+            return projects;
+        });
+        */
         Meteor.publish('task-colors', function () {
             return TaskColors.find({}, {sort: {index: 1}});
         });

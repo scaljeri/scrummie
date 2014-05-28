@@ -2,8 +2,13 @@
 @import 'mixins';
 @import 'reset';
 @import 'form';
+
 @import 'widgets/select2';
 @import 'widgets/select2-colors';
+@import 'widgets/button';
+@import 'widgets/upload-button';
+@import 'widgets/wrapper';
+
 @import 'header';
 @import 'home';
 @import 'scrumboard';
@@ -20,7 +25,6 @@
 @import 'statistics/velocity';
 @import 'statistics/fullscreen';
 
-@import 'widgets/button';
 
 * {
   box-sizing: border-box;

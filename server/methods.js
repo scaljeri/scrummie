@@ -104,16 +104,46 @@ Meteor.methods({
 
     Projects.insert(data);
   },
-  'file-upload': function (fileInfo, fileData) {
-    fs.writeFile(process.env.PWD + '/.uploads/file.png'/* + fileInfo.name*/, fileData, "binary", function (err) {
+  'createProject': function (name, fileInfo, fileData) {
+    console.log("CREATE PROJECT " + name);
+    var path, imgType, resourceId,
+        projectId = Projects.insert({name: name, created: new Date().getTime()});
+
+    if (fileInfo) {
+      try {
+        imgType = fileInfo.name.match(/(\..*)/)[1];
+        resourceId = Resources.insert({originalName: fileInfo.name});
+        path = process.env.PWD + '/.uploads/' + resourceId + imgType;
+
+        Projects.update({_id: projectId}, {$set: {resourceId: resourceId}});
+
+        Async.wrap(fs.writeFile)(path, fileData, "binary");
+        Resources.update({_id: resourceId}, {$set: {fileName: resourceId + imgType}});
+        return {status: 'ok'};
+      }
+      catch (e) {
+        Resources.remove({_id: resourceId}); // undo
+        return { status: 'error', msg: 'Could not save project icon'};
+      }
+    }
+    else {
+      return {status: 'ok'};
+    }
+
+    /*
+
+    //fs.writeFile(process.env.PWD + '/.uploads/' + resourceId + imgType,  fileData, "binary", Meteor.bindEnvironment(function (err) {
+    fs.writeFile(process.env.PWD + '/.uploads/' + resourceId + imgType,  fileData, "binary", function (err) {
       if (err) {
+        Resources.remove({_id: resourceId}); // undo
         return { status: 'error', msg: 'Could not save file', code: err.message};
       }
-      else {
-       return { status: 'ok', filePath: 'public/uploads/' + fileInfo.name}
-      }
+
+      //Resources.update({_id: resourceId}, {$set: {name: resourceId + imgType, type: fileInfo.type}});
+      console.log("DONE1");
+      return { status: 'ok', resourceId: resourceId, url: '/uploads/' + resourceId + imgType};
     });
-    return { status: 'ok', filePath: 'public/uploads/' + fileInfo.name}
+    */
   }
 });
 
