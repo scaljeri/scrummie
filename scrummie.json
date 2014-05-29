@@ -1,0 +1,11 @@
+{
+  "hipchat": {
+    "message"   : "{{member.name}} finished task `{{task.title}}`",
+    "rooId"     : "123456",
+    "authToken" : "jndwekjfbnwkejvbwkejv"
+  },
+  "github" : {
+
+  },
+  "uploadFolder" : ".uploads"
+}

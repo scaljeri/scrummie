@@ -85,6 +85,9 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
+    Scrummie = {};
+    loadSettings(Scrummie);
+
     Meteor.startup(function () {
 
       /*
@@ -141,42 +144,6 @@ if (Meteor.isServer) {
             Members.insert({projectId: 'P3', name: 'Bob Bijvoet', initials: 'BB'});
         }
 
-      Meteor.publish("projects", function(projectId) {
-        var projects, query = {};
-
-        if (projectId) {
-          query.name = projectId;
-        }
-
-        var transform = function(project) {
-          var resource = Resources.findOne({_id: project.resourceId});
-          if (resource) {
-            project.icon = '/uploads/' + resource.fileName;
-          }
-          return project;
-        };
-
-        var self = this;
-
-        var projects = Projects.find(query).observe({
-          added: function (document) {
-            self.added('projects', document._id, transform(document));
-          },
-          changed: function (newDocument, oldDocument) {
-            self.changed('projects', document._id, transform(newDocument));
-          },
-          removed: function (oldDocument) {
-            self.removed('projects', oldDocument._id);
-          }
-        });
-
-        self.ready();
-
-        self.onStop(function () {
-          projects.stop();
-        });
-      });
-
 
       /*
       Meteor.publish('projects', function (project) {
@@ -201,13 +168,7 @@ if (Meteor.isServer) {
             return projects;
         });
         */
-        Meteor.publish('task-colors', function () {
-            return TaskColors.find({}, {sort: {index: 1}});
-        });
 
-        Meteor.publish('task-colors-setup', function (projectId) {
-            return TaskColorsSetup.find({projectId: projectId}, {sort: {index: 1}});
-        });
 
         /*
         Meteor.publish('task-positions', function (projectId, sprintNumber) {
@@ -236,27 +197,11 @@ if (Meteor.isServer) {
         });
         */
 
-        Meteor.publish('lanes', function () {
-            return Lanes.find({}, {sort: {index: 1}});
-        });
 
-        Meteor.publish('lanes-setup', function (project) {
-            return LanesSetup.find({projectId: project}, {sort: {index: 1}});
-        });
 
-        Meteor.publish('sprint', function (projectId, sprintNumber) {
-            var query = { projectId: projectId};
-            if (sprintNumber) { // TODO: rename sprintNumber to number in Collection
-                query.sprintNumber = sprintNumber;
-            }
 
-            //return Sprints.find({ startDate: {$gt: new Date().getTime()}, endDate: { $lt: new Date().getTime()}});
-            return Sprints.find(query, {limit: 1, sort: {sprintNumber: -1}});
-        });
 
-        Meteor.publish('members', function (projectId) {
-            return Members.find({projectId: projectId}, {sort: {name: 1}});
-        });
+
 
         Meteor.publish('comments', function (projectId, taskId) {
             return Comments.find({projectId: projectId, taskId: taskId}, {sort: {insertDate: 1}});
@@ -272,32 +217,6 @@ if (Meteor.isServer) {
         });
         Meteor.publish('burnup', function () {  // tasks
             return
-        });
-
-        Meteor.reactivePublish('tasks', function (projectId) {
-            var sprint = Sprints.findOne({active:true, projectId: projectId}, {reactive: true});
-
-            return Tasks.find({$and: [
-                {projectId: projectId},
-                {sprintNumber: sprint ? sprint.sprintNumber : -10},
-                {$or: [
-                    {deleted: {$exists: false}},
-                    {deleted: false}
-                ]}
-            ]}, {fields: {x: 0, y: 0, updated: 0}});          // return task without coordinates
-        });
-
-        Meteor.reactivePublish('task-positions', function (projectId) {
-            var sprint = Sprints.findOne({active:true, projectId: projectId}, {reactive: true});
-            return Tasks.find({$and: [
-                    {projectId: projectId},
-                    {sprintNumber: sprint ? sprint.sprintNumber : -10},
-                    {$or: [
-                        { deleted: {$exists: false}},
-                        {deleted: false}
-                    ]}
-                ]},
-                {sort: {updated: 1}, fields: {x: 1, y: 1, updated: 1}});     // only return task positions
         });
     });
 }

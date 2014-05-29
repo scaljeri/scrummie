@@ -4,8 +4,8 @@ var fs = Meteor.require('fs');
 
 
 HipChat = function (message) {
-  var ROOM_ID = 1111111,
-    AUTH_TOKEN = '******';
+  var ROOM_ID = 578908,
+    AUTH_TOKEN = 'ZFZnQEIKEPmmbAq6P6fg6vkGXUIQyaGmJIdXHuAw';
 
 // Build the post string from an object
   var post_data = JSON.stringify({
