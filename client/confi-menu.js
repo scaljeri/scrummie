@@ -66,14 +66,9 @@ Template.configMenu.hide = function () {
 };
 
 Template.configMenu.sprintButtonLabel = function () {
-    var sprint = Sprints.findOne({projectId: App.defaults.project}, {sort: {sprintNumber: -1}});
+    var sprint = Sprints.findOne({active: true});
 
-    if (sprint) {
-        return (sprint.active === true ? 'End' : 'Start') + ' Sprint';
-    }
-    else {
-        return 'Start Sprint';
-    }
+    return (sprint ? 'End' : 'Start') + ' Sprint';
 };
 
 Template.configMenu.events = {
@@ -83,7 +78,8 @@ Template.configMenu.events = {
     'click [stop-start-sprint]': function () {
         var sprintNumber = $('[sprint-number]').removeClass('error'),
             startdate = $('[start-date]'),
-            enddate = $('[end-date]').removeClass('error'), sprint;
+            enddate = $('[end-date]').removeClass('error'),
+            sprint;
 
 
         var error = false;
@@ -100,7 +96,7 @@ Template.configMenu.events = {
             error = true;
         }
         sprintNumber = parseInt(sprintNumber.val());
-        sprint = Sprints.findOne({sprintNumber: sprintNumber, projectId: App.defaults.project});
+        sprint = Sprints.findOne({sprintNumber: sprintNumber}); // on the client we only have the data for a specific project
 
         if (!error) {
             // Change subscriptions sprint number
@@ -109,13 +105,14 @@ Template.configMenu.events = {
             App.subs.tasks = Meteor.subscribe('tasks', App.defaults.project, (sprint === undefined ? sprintNumber : -3));
             App.subs.taskPositions = Meteor.subscribe('task-positions', App.defaults.project, (sprint === undefined ? sprintNumber : -3));
 
-            Meteor.call('upsertSprint', {
-                projectId: App.defaults.project,
+            Meteor.call('upsertSprint', App.defaults.project, {
                 sprintNumber: sprintNumber,
                 startdate: startdate.val() === 'Now' ?
                     new Date() : new Date(startdate.val()),
                 enddate: new Date(enddate.val()),
                 active: sprint === undefined // if sprint is defined --> its closed now (active === false)
+            }, function (result) {
+              // TODO
             });
         }
 

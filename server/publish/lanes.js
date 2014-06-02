@@ -4,6 +4,10 @@ Meteor.startup(function () {
   });
 
   Meteor.publish('lanes-setup', function (project) {
-    return LanesSetup.find({projectId: project}, {sort: {index: 1}});
+    var document = Projects.findOne({name: project});
+
+    if (document) {
+      return LanesSetup.find({projectId: document._id}, {sort: {index: 1}});
+    }
   });
 });

@@ -30,7 +30,7 @@ Template.postits.rendered = function (t) {
       Meteor.call('updatePostitPosition', {
         _id: taskId,
         laneId: laneId,
-        memberId: task.memberId,    // optimise this, because its not always needed
+        //memberId: task.memberId,    // optimise this, because its not always needed
         x: (1 - (width - left) / width) * 100,
         y: (1 - (height - top) / height) * 100
       });

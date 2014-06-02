@@ -63,3 +63,12 @@ Handlebars.registerHelper('chartFooter', function(options) {
 
     return new Handlebars.SafeString(dom);
 });
+
+Handlebars.registerHelper('taskLink', function (link, taskTitle) {
+  var output = {href: link || '/' + App.defaults.project + '/task/' + taskTitle.replace(/ /g,'-')};
+
+  if (link) {
+    output.target = '_blank';
+  }
+  return output;
+});

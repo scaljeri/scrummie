@@ -2,8 +2,6 @@ var fs = Npm.require('fs');
 
 Meteor.methods({
   'createProject': function (name, fileInfo, fileData) {
-    console.log("CREATE PROJECT " + name);
-    console.dir(Scrummie);
     var path, imgType, resourceId,
       projectId = Projects.insert({name: name, created: new Date().getTime()});
 

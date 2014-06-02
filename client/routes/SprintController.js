@@ -23,8 +23,8 @@ SprintController = RouteController.extend({
             members: Meteor.subscribe('members', project),
             lanesSetup: Meteor.subscribe('lanes-setup', project),
             taskColorsSetup: Meteor.subscribe('task-colors-setup', project),
-            tasks: Meteor.subscribe('tasks', project),
-            taskPositions: Meteor.subscribe('task-positions', project)
+            taskPositions: Meteor.subscribe('task-positions', project),
+            tasks: Meteor.subscribe('tasks', project)
         };
         return [
             App.subs.projects,

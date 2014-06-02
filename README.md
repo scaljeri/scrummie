@@ -71,3 +71,4 @@ Interesting:
     * http://meteorhacks.com/introducing-fast-render.html
     * http://meteorhacks.com/fast-render-internals-and-how-it-works.html
   * http://github.differential.io/reststop2/
+  * https://github.com/meteor/meteor/blob/devel/packages/spacebars/README.md

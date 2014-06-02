@@ -9,6 +9,7 @@ TaskColorsSetup = new Meteor.Collection('task-colors-setup');
 Members = new Meteor.Collection('members');
 Comments = new Meteor.Collection('comments');
 Resources = new Meteor.Collection('resources');
+History = new Meteor.Collection('history');
 App = {};
 
 
@@ -87,6 +88,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
     Scrummie = {};
     loadSettings(Scrummie);
+    initializeLogger();
 
     Meteor.startup(function () {
 
@@ -97,10 +99,10 @@ if (Meteor.isServer) {
          LanesSetup.remove({});
          Tasks.remove({});
          TaskColors.remove({});
-         Members.remove({});
          TaskColorsSetup.remove({});
-         */
-
+         Members.remove({});
+         Resources.remove({});
+*/
         if (Lanes.find({}).count() === 0) {
             Lanes.insert({ title: 'todo', message: 'Tasks to be done', index: 0});
             Lanes.insert({ title: 'in progress', message: 'Tasks in progress', index: 1});

@@ -10,12 +10,16 @@ Template.postit.isVisible = function () {
 };
 
 Template.postit.color = function () {
-  return TaskColors.findOne({_id: this.colorId});
+  return TaskColorsSetup.findOne({_id: this.colorId});
 };
 
 Template.postit.member = function () {
   return Members.findOne({_id: this.memberId});
 };
+
+Template.postit.projectName = function () {
+  return App.defaults.project;
+}
 
 Template.postit.rendered = function () {
   var postit = $(this.find('[postit]'));

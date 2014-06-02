@@ -27,7 +27,8 @@ var mongoose = require('mongoose'),
             title:          {type: 'String'},
             updated:        {type: 'Number', required: true},
             x:              {type: 'Number', required: true},
-            y:              {type: 'Number', required: true}
+            y:              {type: 'Number', required: true},
+            history:        {type: 'Array'} // contains 'title', 'description' and 'updated'
         },
         Lanes: {
             title:          {type: 'String', required: true},
@@ -64,8 +65,16 @@ var mongoose = require('mongoose'),
            index:           {type: 'Number', required: true}
         },
         Resources: {
-           fileName:            {type: 'String', required: true},
-           originalName:        {type: 'String', required: true}
+           fileName:        {type: 'String', required: true},
+           originalName:    {type: 'String', required: true}
+        },
+        History: {
+          action:           {type: 'String', required: true},
+          created:          {type: 'Number', required: true},
+          memberId:         {type: 'ObjectId'},
+          object:           {type: 'ObjectId', required: true},
+          projectId:        {type: 'ObjectId', required: true},
+          sprintId:         {type: 'ObjectId', required: true}
         }
     };
 

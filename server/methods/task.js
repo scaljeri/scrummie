@@ -2,21 +2,24 @@ Meteor.methods({
   touchTask: function (id) {
     Task.update({_id: id}, {$set: {updated: new Date().getTime()}});
   },
-  upsertTask: function (task) {
-    var retVal = null;
+  upsertTask: function (projectName, task) {
+    var retVal = {status: 'error', msg: 'Project `' + projectName + '` does not exist'},
+      project = Projects.findOne({name: projectName});
 
-    if (Array.isArray(task.color)) {
-      var colors = task.color;
-      for (var i = 0; i < colors.length; i++) {
-        task.color = colors[i];
-        delete task._id; // is this needed ?
-        if ((retVal = upsertTask(task)).status === 'error') {
-          break;
+    if (project) {
+      if (Array.isArray(task.color)) {
+        var colors = task.color;
+        for (var i = 0; i < colors.length; i++) {
+          task.color = colors[i];
+          delete task._id; // is this needed ?
+          if ((retVal = upsertTask(project._id, task)).status === 'error') {
+            break;
+          }
         }
       }
-    }
-    else {
-      retVal = upsertTask(task);
+      else {
+        retVal = upsertTask(project._id, task);
+      }
     }
 
     return retVal;
@@ -26,19 +29,23 @@ Meteor.methods({
   },
   updatePostitPosition: function (task) {
     var fields = {
-      x: task.x,
-      y: task.y,
-      updated: new Date().getTime(),
-      laneId: task.laneId
-    };
+        x: task.x,
+        y: task.y,
+        updated: new Date().getTime(),
+        laneId: task.laneId
+      },
+      lane = LanesSetup.findOne({_id: task.laneId});
 
+    /*
     if (task.memberId) {
       fields.memberId = task.memberId;
     }
+    */
 
     var oldTask = Tasks.findOne({_id: task._id});
-    var msg = 'Task "' + oldTask.title + '" moved from ' + LanesSetup.findOne({_id: oldTask.laneId}).title + ' to ' + LanesSetup.findOne({_id: task.laneId}).title;
-    HipChat(msg);
+    if (lane.title === 'done' && oldTask.laneId !== lane._id) {
+      HipChat(oldTask, Projects.findOne({_id: oldTask.projectId}).name, Members.findOne({_id: oldTask.memberId}));
+    }
 
     Tasks.update({_id: task._id}, {$set: fields});
 
@@ -52,15 +59,17 @@ Meteor.methods({
   }
 });
 
-function upsertTask(task) {
+function upsertTask(projectId, task) {
+  var _id;
+
   if (task.color !== undefined) {
-    var color = TaskColors.findOne({value: task.color});
+    var color = TaskColorsSetup.findOne({projectId: projectId, value: task.color});
     task.colorId = color._id;
     delete task.color;
   }
 
   if (!task.sprintNumber) { // new tasks do not have a sprint number yet
-    var currentSprint = Sprints.findOne({projectId: task.projectId, active: true});
+    var currentSprint = Sprints.findOne({projectId: projectId, active: true});
 
     if (currentSprint) { // first define a sprint
       task.sprintNumber = currentSprint.sprintNumber;
@@ -69,18 +78,17 @@ function upsertTask(task) {
       return {status: 'error', msg: 'No active Sprint'}; // TODO: doesn't work
     }
 
-    var lane = Lanes.findOne({index: 0}); // find first lane
+    var lane = LanesSetup.findOne({projectId: projectId, index: 0}); // find first lane
     task.laneId = lane._id;
     task.x = 0;
     task.y = 5;
   }
-  task.sprintNumber = parseInt(task.sprintNumber);
+  task.sprintNumber = parseInt(task.sprintNumber); // TODO: is this really necessary
   task.updated = new Date().getTime();
-  var _id = task._id;
-  delete task._id;
+  task.projectId = projectId;
 
-  console.log("BEFORE INSERT");
-  console.dir(task);
+  _id = task._id;
+  delete task._id;
 
   Tasks.upsert({_id: _id}, {$set: task});
   return {status: 'ok'};
