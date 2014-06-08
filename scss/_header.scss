@@ -1,6 +1,7 @@
 .header-main {
   height: 34px;
   margin-bottom: 10px;
+  z-index: 999999;
 
   .header-main__nav {
     float: right;
@@ -50,6 +51,11 @@
     .nav-list__item__stats {
       display: inline-block;
       width: 65px;
+    }
+
+
+    .nav-list__item__login {
+      cursor: pointer;
     }
 
     .nav-list__item__config {

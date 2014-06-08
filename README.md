@@ -51,6 +51,11 @@ Examples:
     http://scrummie.meteor.com?member=Lucas
     http://scrummie.meteor.com?member=LC
 
+### Reset deployed application
+
+    $> meteor deploy test.meteor.com --delete
+    $> meteor deploy test.meteor.com
+
 
 Resources:
 
@@ -67,8 +72,17 @@ Interesting:
   * https://www.eventedmind.com/feed/meteor-ironrouter
   * https://www.eventedmind.com/feed/meteor-introducing-deps
   * https://www.eventedmind.com/feed/
+  * http://meteorhacks.com/complete-npm-integration-for-meteor.html
   * Fast renderer
     * http://meteorhacks.com/introducing-fast-render.html
     * http://meteorhacks.com/fast-render-internals-and-how-it-works.html
   * http://github.differential.io/reststop2/
   * https://github.com/meteor/meteor/blob/devel/packages/spacebars/README.md
+  * http://meteorhacks.com/fibers-eventloop-and-meteor.htmlre
+  * Async stuff:
+    * http://meteorhacks.com/improved-async-utilities-in-meteor-npm.html
+  * Logging - https://www.npmjs.org/package/winston
+
+
+TODO:
+  * autofocus first input field when creating new task

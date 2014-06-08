@@ -37,11 +37,6 @@
         "tag": "v1.0.3",
         "commit": "416293e383f53e2506f1b7a1a7687390cbaf0e68"
       },
-      "npm": {
-        "git": "https://github.com/arunoda/meteor-npm.git",
-        "tag": "v0.2.6",
-        "commit": "177ab6118de5bf8cffb19481343d5762ff7a2aaf"
-      },
       "reactive-publish": {
         "git": "https://github.com/Diggsey/meteor-reactive-publish.git",
         "tag": "v0.1.6",

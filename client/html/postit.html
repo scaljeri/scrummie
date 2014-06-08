@@ -1,5 +1,5 @@
 <template name="postit">
-    <li class="postit" data-id="{{_id}}" draggable postit
+    <li class="postit {{state}}" data-id="{{_id}}" draggable postit
         style="top:{{y}}%;left:{{x}}%;z-index:{{zIndex}};background-color:{{color.value}}" data-z-index="{{zIndex}}"
             title="{{color.title}} {{#if member}}- {{/if}}{{member.name}}">
         {{#if title}}

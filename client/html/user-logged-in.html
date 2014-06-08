@@ -1,0 +1,14 @@
+<template name="userLoggedIn">
+    <span class="login">
+        {{#if loggingIn}}
+            <span class="login__busy">logging in....</span>
+        {{else}}
+            <a login__name class="login__name">{{currentUser.profile.login}}</a>
+
+        {{/if}}
+    </span>
+    <ol login__dropdown class="login__dropdown">
+        <li class="login__dropdown__item"><a login__dropdown__logout>Logout</a></li>
+        <li class="login__dropdown__item"><a login__dropdown__profile>Profile</a></li>
+    </ol>
+</template>

@@ -1,16 +1,4 @@
-// Collections
-Projects = new Meteor.Collection('projects');
-Sprints = new Meteor.Collection('sprints');
-Lanes = new Meteor.Collection('lanes');
-LanesSetup = new Meteor.Collection('lanes-setup');
-Tasks = new Meteor.Collection('tasks');
-TaskColors = new Meteor.Collection('task-colors');
-TaskColorsSetup = new Meteor.Collection('task-colors-setup');
-Members = new Meteor.Collection('members');
-Comments = new Meteor.Collection('comments');
-Resources = new Meteor.Collection('resources');
-History = new Meteor.Collection('history');
-App = {};
+
 
 
 // Routes
@@ -62,11 +50,9 @@ if (Meteor.isClient) {
             }
         }
     };
-    makeReactive('selectedTask');
-    makeReactive('errorMessage');
-    makeReactive('selectedColors');
-    makeReactive('filterColorId');
 
+
+    console.dir(App);
     /* PRIVATE HELPER FUNCTIONS */
     function makeReactive(property, defaultValue) {
         var value = null,
@@ -74,7 +60,7 @@ if (Meteor.isClient) {
 
         Object.defineProperty(App, property, {
             set: function (newVal) {
-                value = newVal || defaultValue;
+                value = newVal;
                 dep.changed();
             },
             get: function () {
@@ -82,12 +68,27 @@ if (Meteor.isClient) {
                 return value;
             }
         });
+
+        if (typeof(defaultValue) !== undefined) {
+            App[property] = defaultValue;
+        }
+    }
+
+    makeReactive('selectedTask');
+    makeReactive('errorMessage');
+    makeReactive('selectedColors');
+    makeReactive('filterColorId');
+    makeReactive('isLoggedIn', false);
+
+    xyz = function () {
+        console.log("-x-y-z-");
+        if (App.isLoggedIn)    {
+            console.log("true");
+        }
     }
 }
 
 if (Meteor.isServer) {
-    Scrummie = {};
-    loadSettings(Scrummie);
     initializeLogger();
 
     Meteor.startup(function () {
@@ -200,6 +201,16 @@ if (Meteor.isServer) {
         */
 
 
+
+        // server
+        Meteor.publish("userData", function () {
+            if (this.userId) {
+                return Meteor.users.find({_id: this.userId},
+                    {fields: {'profile': 1, 'projects': 1}});
+            } else {
+                this.ready();
+            }
+        });
 
 
 

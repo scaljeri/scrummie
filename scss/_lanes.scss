@@ -16,6 +16,7 @@
     border-bottom: 10px solid rgba(0, 0, 0, 0);
     flex: 1;
     text-align: center;
+    user-select: none;
 
     &:after {
       content: '';

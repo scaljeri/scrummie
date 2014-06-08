@@ -1,11 +1,20 @@
 {
-  "hipchat": {
-    "message"   : "{{member.name}} finished task `{{task.title}}`",
-    "rooId"     : "123456",
-    "authToken" : "jndwekjfbnwkejvbwkejv"
+  "loglevel" : "info",
+  "hipchat"  : {
+    "message"    : "{{member.name}} finished task <a href='{{url}}/{{project}}/task/{{task._id}}'>{{task.title}}</a>",
+    "rooId"      : "*******",
+    "authToken"  : "************************"
   },
-  "github" : {
-
+  "github"   : {
+    "clientId"      : "*****************",
+    "clientSecret"  : "*****************************************",
+    "appName"       : "Scrummie"
   },
-  "uploadFolder" : ".uploads"
+  "uploadFolder" : ".uploads",
+  "host"         : {
+    "domain"        : "localhost",
+    "port"          : "3000"
+                   },
+  "url"          : "localhost",
+  "test"         : "test value"
 }

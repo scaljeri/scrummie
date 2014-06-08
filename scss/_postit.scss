@@ -14,13 +14,24 @@
   box-shadow: 0px 4px 6px #d3d3d3;
   overflow: hidden;
   padding-top: 5px;
+  transition: all .1s linear;
   z-index: 100;
   @include position(absolute, 100px 0 0 20px);
   @include size(155px, 124px);
 
+  &:active {
+    cursor: move;
+    transition: none;
+  }
+
+  &.postit--fixed:active {
+    cursor: default;
+  }
+
   .postit__description,
   .postit__title {
     color: rgba(35,48,70,.8);
+    user-select: text;
     width: 100%;
   }
 

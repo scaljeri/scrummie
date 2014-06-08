@@ -13,8 +13,7 @@
 
   .home__header {
     border-bottom: 1px dashed #d2d4d8;
-    margin: 0 auto;
-    @include size(700px, 38px);
+    @include size(0, 38px);
   }
 
   .section__name,
@@ -69,7 +68,11 @@
       clear: right;
       float: right;
       margin-top: 10px;
-      width: 67px;
+      width: 140px;
+    }
+
+    .section__name {
+      margin-bottom: 4px;
     }
   }
 

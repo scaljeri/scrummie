@@ -8,6 +8,8 @@ insecure
 iron-router
 blaze-layout
 mongodb-server-aggregation
-npm
 reactive-publish
 reststop2
+npm
+accounts-github
+service-configuration

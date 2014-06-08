@@ -3,17 +3,21 @@ var http = Meteor.require('http');
 var fs = Meteor.require('fs');
 
 
-HipChat = function (message) {
-  var ROOM_ID = 578908,
-    AUTH_TOKEN = 'ZFZnQEIKEPmmbAq6P6fg6vkGXUIQyaGmJIdXHuAw';
+HipChat = function (task, project, member) {
+    // TODO
+  var ROOM_ID = '********',
+    AUTH_TOKEN = '********************************';
+
+  if (!member) {
+    member = Members.findOne({_id: task.memberId});
+  }
 
 // Build the post string from an object
   var post_data = JSON.stringify({
     color: 'purple',
-    message_format: 'text',
-    message: message
+    message_format: 'html',
+    message: addInfo(task, project, member)
   });
-  console.log(post_data);
 
 // An object of options to indicate where to post to
   var post_options = {
@@ -38,3 +42,29 @@ HipChat = function (message) {
   post_req.write(post_data);
   post_req.end();
 };
+
+function addInfo(task, project, member) {
+  var msg = Scrummie.hipchat.message,
+      url = (Scrummie.host.protocol ||'http://') + Scrummie.baseUrl;
+  console.log(url);
+
+  if (project) {
+    msg = msg.replace('{{project}}', project);
+  }
+
+  for(var key in member) {
+    msg = msg.replace('{{member.' + key + '}}', member[key]);
+  }
+
+  for(var key in task) {
+    msg = msg.replace('{{task.' + key + '}}', task[key]);
+  }
+
+  if (url) {
+    msg = msg.replace('{{url}}', url);
+  }
+
+  logger.info('Hipchat msg: ' + msg);
+
+  return msg;
+}

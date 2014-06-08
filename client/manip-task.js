@@ -59,16 +59,22 @@ Template.manipTask.show = function (task, callback) {
     }
     members.select2('val', memberId);
 
+    $('[manip-task] [dropdown]').on('select2-close', function () {
+      $('[manip-task] [dropdown]').not(this).select2('close');
+    });
+
+    $('[manip-task] [name="title"]').focus();
+
   }, 0);
   App.outsideClick.register('[manip-task]', Template.manipTask.hide);
 };
 
 Template.manipTask.hide = function () {
-  $('[manip-task] [dropdown]').blur();
-  $('[manip-task]').css('visibility', 'hidden');
-  $('[add-task]').removeClass('btn--active');  // TODO: implement closeCallback
+    $('[manip-task] [dropdown]').blur();
+    $('[manip-task]').css('visibility', 'hidden');
+    $('[add-task]').removeClass('btn--active');  // TODO: implement closeCallback
 
-  App.outsideClick.remove(Template.manipTask.hide);
+    App.outsideClick.remove(Template.manipTask.hide);
 };
 
 Template.manipTask.rendered = function () {

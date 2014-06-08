@@ -1,0 +1,35 @@
+.login {
+  display: inline-block;
+  margin-right: 10px;
+
+  .login__name {
+    color: $text;
+    cursor: pointer;
+    font: 300 15px/23px Lato;
+
+    &::after {
+      content: '';
+      margin-left: 4px;
+      position: relative;
+      top: 1px;
+      @include triangle(8px, $text, down);
+      border-top-color: $text-lighter;
+    }
+  }
+}
+
+.login__dropdown {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 0px 11px 0px #323232;
+  display: none;
+  padding: 10px;
+  position: absolute;
+  width: 100px;
+  z-index: $on-top;
+
+  .login__dropdown__item {
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
+}

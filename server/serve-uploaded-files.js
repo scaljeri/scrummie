@@ -5,8 +5,8 @@ if (Meteor.isServer) {
   WebApp.connectHandlers.use(function (req, res, next) {
     var path;
 
-    console.log("SERVRE UPLOADED FILES: " + req.originalUrl);
     if (req.originalUrl.match(/^\/uploads/)) {
+      console.log("SERVRE UPLOADED FILES: " + req.originalUrl);
       path = req.originalUrl.substr(1);
       //extension = path.match(/\..*$/);
       console.log(process.env.PWD + '/.' + path);
