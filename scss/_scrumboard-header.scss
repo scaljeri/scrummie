@@ -11,6 +11,10 @@
   .add-task {
     position: relative;
     z-index: 1;
+
+    &.manip-task--hidden {
+      visibility: hidden;
+    }
   }
 
   .postit-filter {

@@ -4,16 +4,18 @@
             <h1>Projects</h1>
         </header>
         <div class="wrapper home__wrapper">
-            <article class="new-project">
-                <h4 class="section__name">New Project:</h4>
-                <a class="file-upload">
-                    <img file-upload-preview class="file-upload__preview" src="/img/scrum-icon.png">
-                    <input file-upload type="file" class="file-upload"/>
-                </a>
-                <input new-project__name class="new-project__name"/>
-                <a submit-project class="btn input--shadow new-project__add">Add</a>
-            </article>
-            <article class="home__projects">
+            {{#if currentUser}}
+                <article class="home__item new-project">
+                    <h4 class="section__name">New Project:</h4>
+                    <a class="file-upload">
+                        <img file-upload-preview class="file-upload__preview" src="/img/scrum-icon.png">
+                        <input file-upload type="file" class="file-upload"/>
+                    </a>
+                    <input new-project__name class="new-project__name"/>
+                    <a submit-project class="btn input--shadow new-project__add">Add</a>
+                </article>
+            {{/if}}
+            <article class="home__item home__projects">
                 <h4 class="section__name">All projects</h4>
                 <ol>
                     {{#each projects}}

@@ -1,3 +1,7 @@
+Template.scrumboardHeader.addTaskState = function () {
+    return isDocumentEditable() ? '' : 'manip-task--hidden';
+};
+
 Template.scrumboardHeader.sprintNumber = function () {
     var sprint = Sprints.findOne();
     return sprint ? sprint.sprintNumber : '???';
