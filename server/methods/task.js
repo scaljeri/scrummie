@@ -1,36 +1,51 @@
 Meteor.methods({
     touchTask: function (id) {
-        Task.update({_id: id}, {$set: {updated: new Date().getTime()}});
+        var origTask = Tasks.findOne({_id: id});
+
+        if (isDocumentEditable(origTask)) {
+            Task.update({_id: id}, {$set: {updated: new Date().getTime()}});
+        }
     },
     upsertTask: function (projectName, task) {
-        var retVal = {status: 'error', msg: 'Project `' + projectName + '` does not exist'},
+        var retVal = {status: 'error'}, project,
+            origTask = Tasks.findOne({_id: task._id});
+
+        if (isDocumentEditable(origTask)) {
             project = Projects.findOne({name: projectName});
 
-        if (project) {
-            if (Array.isArray(task.color)) {
-                var colors = task.color;
-                for (var i = 0; i < colors.length; i++) {
-                    task.color = colors[i];
-                    delete task._id; // is this needed ?
-                    if ((retVal = upsertTask(project._id, task)).status === 'error') {
-                        break;
+            if (project) {
+                if (Array.isArray(task.color)) {
+                    var colors = task.color;
+                    for (var i = 0; i < colors.length; i++) {
+                        task.color = colors[i];
+                        delete task._id; // is this needed ?
+                        if ((retVal = upsertTask(project._id, task)).status === 'error') {
+                            break;
+                        }
                     }
+                }
+                else {
+                    retVal = upsertTask(project._id, task);
                 }
             }
             else {
-                retVal = upsertTask(project._id, task);
+                retVal = {status: 'error', msg: 'Project `' + projectName + '` does not exist'};
             }
         }
 
         return retVal;
     },
     deleteTask: function (id) {
-        Tasks.update({_id: id}, {$set: {deleted: true}});
+        var origTask = Tasks.findOne({_id: task._id});
+
+        if (isDocumentEditable(origTask)) {
+            Tasks.update({_id: id}, {$set: {deleted: true}});
+        }
     },
     updatePostitPosition: function (task) {
-        console.log("UPDATE POSITION");
-        if (isDocumentEditable(Tasks.findOne({_id: task._id}))) {
-            console.log("ACCEPTED");
+        var origTask = Tasks.findOne({_id: task._id});
+
+        if (isDocumentEditable(origTask)) {
             var fields = {
                     x: task.x,
                     y: task.y,
@@ -39,29 +54,14 @@ Meteor.methods({
                 },
                 lane = LanesSetup.findOne({_id: task.laneId});
 
-            /*
-             if (task.memberId) {
-             fields.memberId = task.memberId;
-             }
-             */
-
-            var oldTask = Tasks.findOne({_id: task._id});
-            if (lane.title === 'done' && oldTask.laneId !== lane._id) {
-                HipChat(oldTask, Projects.findOne({_id: oldTask.projectId}).name, Members.findOne({_id: oldTask.memberId}));
+            if (lane.title === 'done' && origTask.laneId !== lane._id) {
+                HipChat(origTask, Projects.findOne({_id: origTask.projectId}).name, Members.findOne({_id: origTask.memberId}));
             }
 
             Tasks.update({_id: task._id}, {$set: fields});
-
-            /*{
-             x: task.x,
-             y: task.y,
-             updated: new Date().getTime(),
-             laneId: task.laneId,
-             memberId: task.memberId}
-             });*/
         }
         else {
-            return {status: 'error'};
+            return {status: 'error'}; // should never happen
         }
     }
 });

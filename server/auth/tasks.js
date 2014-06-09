@@ -1,17 +1,22 @@
 Meteor.startup(function () {
     Tasks.allow({
-        insert: function (userId) {
-            return userId !== null;
+        insert: function (userId, doc) {
+            var retVal = false;
+
+            if (userId) {
+                retVal = isDocumentEditable(doc);
+            }
+
+            return retVal;
         },
         update: function (userId, doc) {
-            if (userId) {
-                var user = Accounts.findOne({_id: userId});
+            var retVal = false;
 
-                return userId && doc.projectId in user.projects;
+            if (userId) {
+                retVal = isDocumentEditable(doc);
             }
-            else {
-                return false;
-            }
+
+            return retVal;
         },
         remove: function () {
             return false; // never!
