@@ -4,7 +4,7 @@ Meteor.startup(function () {
             var retVal = false;
 
             if (userId) {
-                retVal = isDocumentEditable(doc);
+                retVal = isDocumentEditable(doc); // doc needs a productId
             }
 
             return retVal;
@@ -20,6 +20,7 @@ Meteor.startup(function () {
         },
         remove: function () {
             return false; // never!
-        }
+        },
+        fetch: ['productId'] // fields to load for `update` and `remove`
     });
 });
