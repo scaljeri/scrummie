@@ -1,40 +1,8 @@
-Template.configMenu.sprint = function () {
-    return Sprints.findOne({}, {sort: {sprintNumber: -1}});
-};
-
-Template.configMenu.lanes = function () {
-    return LanesSetup.find({}, {sort: {index: 1}});
-};
-
-Template.configMenu.sprintNumber = function () {
-    var sprint = Template.configMenu.sprint();//Sprints.findOne({}, {sort: {sprintNumber: -1}});
-
-    if (sprint) {
-        return  sprint.sprintNumber + (sprint.active === false ? 1 : 0 );
-    }
-    return null;
-};
-
-Template.configMenu.readonlySprintNumber = function () {
-    var sprint = Template.configMenu.sprint();//Sprints.findOne({}, {sort: {sprintNumber: -1}});
-    if (sprint) {
-        return  sprint.sprintNumber === undefined ? '' : 'readonly';
-    }
-};
-
-Template.configMenu.isSprintOpen = function () {
-    var sprint = Template.configMenu.sprint();//Sprints.findOne({}, {sort: {sprintNumber: -1}});
-
-    if (sprint) {
-        return sprint.active === true;
-    }
-};
-
-Template.configMenu.members = function () {
+Template.projectConfig.members = function () {
     return Members.find({}, {sort: {name: 1}});
 };
 
-Template.configMenu.rendered = function () {
+Template.projectConfig.rendered = function () {
     var sprint = Sprints.find({}, {sort: {sprintNumber: -1}});
 
     $('[start-date]').datepicker({
@@ -50,28 +18,26 @@ Template.configMenu.rendered = function () {
     $('[accordion]').accordion({heightStyle: 'fill'});
 };
 
-Template.configMenu.show = function () {
+Template.projectConfig.show = function () {
     $('[config-menu]').addClass('visible');
 
     var sprint = Sprints.find({}, {sort: {sprintNumber: -1}});
     $('[start-date]').datepicker("setDate", new Date(sprint.startdate));
     $('[end-date]').datepicker("setDate", new Date(sprint.enddate));
 
-    App.outsideClick.register('.config-content', Template.configMenu.hide);
+    App.outsideClick.register('.config-content', Template.projectConfig.hide);
 };
 
-Template.configMenu.hide = function () {
-    $('[config-menu]').removeClass('visible');
-    App.outsideClick.remove(Template.configMenu.hide);
+Template.projectConfig.hide = function (e) {
+    if ($(e.target).closest('.ui-datepicker-header').length === 0) { // make sure the config window doesn't close on calendar navigation
+        $('[config-menu]').removeClass('visible');
+        App.outsideClick.remove(Template.projectConfig.hide);
+    }
 };
 
-Template.configMenu.sprintButtonLabel = function () {
-    var sprint = Sprints.findOne({active: true});
 
-    return (sprint ? 'End' : 'Start') + ' Sprint';
-};
 
-Template.configMenu.events = {
+Template.projectConfig.events = {
     'click *': function (event) { // make sure the popover is not closed
         event.stopPropagation();
     },

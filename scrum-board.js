@@ -52,7 +52,6 @@ if (Meteor.isClient) {
     };
 
 
-    console.dir(App);
     /* PRIVATE HELPER FUNCTIONS */
     function makeReactive(property, defaultValue) {
         var value = null,
@@ -79,13 +78,6 @@ if (Meteor.isClient) {
     makeReactive('selectedColors');
     makeReactive('filterColorId');
     makeReactive('isLoggedIn', false);
-
-    xyz = function () {
-        console.log("-x-y-z-");
-        if (App.isLoggedIn)    {
-            console.log("true");
-        }
-    }
 }
 
 if (Meteor.isServer) {
@@ -206,7 +198,7 @@ if (Meteor.isServer) {
         Meteor.publish("userData", function () {
             if (this.userId) {
                 return Meteor.users.find({_id: this.userId},
-                    {fields: {'profile': 1, 'projects': 1}});
+                    {fields: {'profile': 1, 'projects': 1, initials: 1}});
             } else {
                 this.ready();
             }

@@ -26,11 +26,25 @@ Accounts.onCreateUser(function(options, user) {
 
     user.profile = profile;
     user.projects = [];
-    user.xyz = 'test';
+    user.initials = profile.name ? parseProfileName(profile.name) : '??';
 
-    console.dir(profile);
     return user;
 });
+
+function parseProfileName(name) {
+   var parts = name.split(' '),
+       output = parts[0].substring(0,1).toUpperCase();
+
+   for( var i = 1; i < parts.length - 1; i++) {
+       output += parts[i].substring(0,1);
+   }
+
+   if (parts.length > 1) {
+       output += parts[parts.length-1].substring(0,1).toUpperCase();
+   }
+
+   return output;
+}
 
 Meteor.startup(function () {
     Meteor.users.allow({

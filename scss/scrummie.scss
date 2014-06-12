@@ -14,7 +14,6 @@
 @import 'scrumboard';
 @import 'scrumboard/small';
 @import 'scrumboard-header';
-@import 'config-menu';
 @import 'lanes';
 @import 'postit';
 @import 'manip-task';
@@ -24,6 +23,9 @@
 @import 'statistics/chart-footer';
 @import 'statistics/velocity';
 @import 'statistics/fullscreen';
+
+@import 'project-config';
+@import 'config/sprint';
 
 @import 'user-logged-in';
 

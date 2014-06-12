@@ -24,17 +24,7 @@
       padding-right: 30px;
 
       .accordion-section {
-        padding-left: 10px;
-        padding-right: 10px;
-
-        .stop-start-sprint {
-          background-color: $color-theme1;
-          margin: 0 auto;
-          width: 150px;
-          display: block;
-          color: #fff;
-          line-height: 19px;
-        }
+        padding: 20px;
 
         &.team-members {
           .member-name {
@@ -60,27 +50,12 @@
         font-size: 15px;
       }
 
-      #sprint-number {
-        width: 76px;
-        text-align: center;
-      }
+
 
       .input-datepicker {
         position: relative;
 
-        .input-date {
-          width: 158px;
-        }
-        .calendar {
-          position: absolute;
-          right: 0;
-          top:-2px;
-          display: inline-block;
-          width: 25px;
-          height: 25px;
-          background-image: url(/img/calendar-icon-black.png);
-          background-size: 25px 25px;
-        }
+
       }
     }
   }

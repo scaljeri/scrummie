@@ -19,7 +19,7 @@ Template.header.rendered = function () {
 Template.header.events = {
     'click [config]': function () {
         if (App.page === 'scrumboard') {
-            Template.configMenu.show();
+            Template.projectConfig.show();
         }
     }
 };
