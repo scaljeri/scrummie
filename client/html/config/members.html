@@ -1,22 +1,20 @@
 <template name="configMembers">
     <h3>Team members</h3>
-
-    {{users}}
     <article class="accordion-section team-members">
-        <span>Name</span>
-        <span>Initials</span>
         <ol>
-            {{#each members}}
+            {{#each projectMembers}}
             <li>
-                <input class="member-name" value="{{name}}">
-                <input class="member-initials" value="{{initials}}">
+                <span class="member-name">{{profile.name}}</span>
+                <span class="member-initials">{{initials}}</span>
             </li>
             {{/each}}
-            <li>
-                <input add-member-name class="member-name" value="{{name}}">
-                <input add-member-initials class="member-initials" value="{{initials}}">
-                <span add-member class="btn add-member">+</span>
-            </li>
         </ol>
+        <select members-dropdown>
+            <option></option>
+            {{#each siteMembers}}
+                <option value="{{_id}}">{{profile.name}}</option>
+            {{/each}}
+        </select>
+        <a add-member class="btn config__button">Add member</a>
     </article>
 </template>

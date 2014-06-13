@@ -25,7 +25,7 @@ SprintController = RouteController.extend({
             taskColorsSetup: Meteor.subscribe('task-colors-setup', project),
             taskPositions: Meteor.subscribe('task-positions', project),
             tasks: Meteor.subscribe('tasks', project),
-            tasks: Meteor.subscribe('userData')
+            users: Meteor.subscribe('users')
         };
         return [
             App.subs.projects,
@@ -36,7 +36,8 @@ SprintController = RouteController.extend({
             App.subs.taskColorsSetup,
             App.subs.tasks,
             App.subs.taskPositions,
-            App.subs.userData
+            //App.subs.userData
+            App.subs.user
         ];
     },
     data: function () {  // or a function
