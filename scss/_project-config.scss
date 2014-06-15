@@ -1,10 +1,66 @@
-.config-menu {
+.project-config {
   color: #fff;
   transition-duration: 500ms;
   transition-property: right;
   z-index: $on-top;
-  @include position(absolute, 0px -400px 0 0);
-  @include size(400px, 100%);
+  @include position(absolute, 0px -350px 0 0);
+  @include size(350px, 100%);
+
+  &.accordion {
+    .accordion__item {
+      border-radius: 2px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      position: relative;
+
+      &::before {
+        content: '';
+        @include position(absolute, 0 0 0 10px);
+        top: 11px;
+      }
+      .accordion__item__wrapper {
+        background-color: #fff;
+        padding: 20px;
+      }
+
+      &.accordion__item--closed {
+        border: 1px solid grey;
+        border-radius: 2px;
+
+        .accordion__item__wrapper {
+          display: none;
+          border: 1px solid grey;
+          border-radius: 2px;
+        }
+
+        &::before {
+          @include triangle(10px, #fff, right);
+        }
+      }
+
+      &.accordion__item--open {
+        &::before {
+          color: $button-bg;
+          top: 15px;
+          @include triangle(10px, black, down);
+        }
+        .accordion__item__wrapper {
+          display: block;
+        }
+
+        .title {
+          background-color: #fff;
+          color: $button-bg;
+        }
+      }
+
+      .title {
+        cursor: pointer;
+        line-height: 30px;
+        padding: 0 0 0 30px;
+      }
+    }
+  }
 
   .config__button {
     background-color: $button-confirm;
@@ -16,18 +72,19 @@
 
     &:active {
       box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
-      position: relative; top: 3px;
+      position: relative;
+      top: 3px;
     }
   }
 
-  .config-content {
+  .project-content__wrapper {
     background-color: $button-bg;
-    width: 400px;
     color: #fff;
-    padding-right: 25px;
-    box-sizing: border-box;
-    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    @include size(350px, 100%);
 
+    /*
     .sub-title {
       color: inherit;
       font: 100 20px/40px 'Titillium Web';
@@ -64,24 +121,22 @@
         font-size: 15px;
       }
 
-
-
       .input-datepicker {
         position: relative;
 
-
       }
     }
+    */
   }
 
   &.visible {
-    right: -25px;
+    right: 0;
   }
 
   .title {
     color: inherit;
-    text-shadow: none;
     font: 100 20px/40px $font-normal;
+    padding-bottom: 20px;
+    text-shadow: none;
   }
-
 }

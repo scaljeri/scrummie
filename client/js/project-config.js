@@ -32,14 +32,40 @@ Template.projectConfig.hide = function (e) {
     if ($(e.target).closest('.ui-datepicker-header').length === 0) { // make sure the config window doesn't close on calendar navigation
         $('[config-menu]').removeClass('visible');
         App.outsideClick.remove(Template.projectConfig.hide);
+
+        if (accordion) {
+            accordion.addClass('accordion__item--open')
+                .removeClass('accordion__item--closed');
+            accordion = null;
+        }
+
     }
 };
 
 
 
+var accordion = null;
 Template.projectConfig.events = {
     'click *': function (event) { // make sure the popover is not closed
         event.stopPropagation();
+    },
+    'click .accordion .title' : function (e, t) {
+        var target;
+
+        if (accordion) { // close
+           accordion.addClass('accordion__item--closed')
+               .removeClass('accordion__item--open');
+        }
+
+        target = $(e.target).closest('[accordion-item]');
+        if (!accordion || target[0].className !== accordion[0].className) { // open
+            accordion = target;
+            accordion.addClass('accordion__item--open')
+                .removeClass('accordion__item--closed');
+        }
+        else {
+            accordion = null;
+        }
     },
     'click [stop-start-sprint]': function () {
         var sprintNumber = $('[sprint-number]').removeClass('error'),

@@ -1,4 +1,4 @@
-.config__sprint {
+.project-config .sprint {
   .sprint__stop-start {
     background-color: $button-confirm;
     box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
@@ -31,5 +31,19 @@
     height: 25px;
     background-image: url(/img/calendar-icon-black.png);
     background-size: 25px 25px;
+  }
+
+  .label {
+    color: $button-bg;
+    display: inline-block;
+    width: 120px;
+    text-align: right;
+    margin-right: 10px;
+    font-size: 15px;
+  }
+
+  .input-datepicker {
+    position: relative;
+
   }
 }

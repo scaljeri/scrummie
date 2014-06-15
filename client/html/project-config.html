@@ -1,16 +1,15 @@
 <template name="projectConfig">
-    <section config-menu class="config-menu">
-        <section class="config-content">
+    <section config-menu class="project-config accordion">
+        <div class="project-content__wrapper ">
             <h1 class="title">Configuration</h1>
 
-            <section accordion class="config-items">
+            <article accordion-item class="accordion__item sprint accordion__item--closed">
                 {{> configSprint}}
+            </article>
+
+            <article accordion-item class="accordion__item members accordion__item--closed">
                 {{> configMembers}}
-            </section>
-            <!--
-            <a cancel-task class="btn cancel-task">Cancel</a>
-            <a save-task class="btn save-task">Save</a>
-            -->
-        </section>
+            </article>
+        </div>
     </section>
 </template>

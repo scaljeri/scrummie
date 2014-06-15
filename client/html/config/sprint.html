@@ -1,9 +1,11 @@
 <template name="configSprint">
-    <h3>Sprint</h3>
-    <article class="accordion-section config__sprint">
+    <h3 class="title">Sprint</h3>
+
+    <div accordion__item__wrapper class="accordion__item__wrapper">
         <p>
             <label class="label" for="sprint-number">Sprint number:</label>
-            <input type="number" id="sprint-number" class="input--shadow sprint__number"  sprint-number {{readonlySprintNumber}} maxlength="3" value="{{sprintNumber}}">
+            <input type="number" id="sprint-number" class="input--shadow sprint__number" sprint-number
+            {{readonlySprintNumber}} maxlength="3" value="{{sprintNumber}}">
         </p>
 
         <p>
@@ -21,10 +23,12 @@
                 <span calendar--end class="calendar"></span>
             </span>
         </p>
+
         <p>
             <label class="label" for="sprint-fte">FTE:</label>
             <input type="number" id="sprint-fte" class="input--shadow sprint__fte" maxlength="4" value="{{fte}}">
         </p>
+
         <a stop-start-sprint class="btn config__button">{{sprintButtonLabel}}</a>
-    </article>
+    </div>
 </template>
