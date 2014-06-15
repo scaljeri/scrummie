@@ -51,6 +51,7 @@
       &.accordion__item--closed {
         border: 1px solid grey;
         border-radius: 2px;
+        transition: border-color 0s ease .9s;
 
         .title {
           transition: all 0s ease;
@@ -73,6 +74,8 @@
       }
 
       &.accordion__item--open {
+        border: 1px solid #fff;
+
         &::before {
           color: $button-bg;
           top: 15px;
