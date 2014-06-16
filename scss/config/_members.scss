@@ -1,0 +1,39 @@
+.project-config .members {
+  .add-member__title {
+    color: $button-bg;
+    display: inline-block;
+    font: 400 15px/20px Lato;
+    margin-bottom: 10px;
+    width: 50%;
+  }
+
+  .project-members {
+    font: 400 16px/20px Late;
+    color: $button-bg;
+
+    .project-member {
+      margin: 3px;
+      padding-left: 5px;
+
+      &:nth-child(even) { background-color: #F0F0F5; }
+
+      .member__name {line-height: 22px;}
+    }
+  }
+
+  .site-members {
+    margin-bottom: 10px;
+    .project-member:nth-child(odd) { background-color: grey; }
+  }
+
+  .seperator {
+    background-color: $button-bg;
+    height: 1px;
+    margin: 20px;
+  }
+
+  .member__remove {
+    float: right;
+    padding: 3px;
+  }
+}

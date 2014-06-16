@@ -1,3 +1,5 @@
+Template.projectConfig.items = {};
+
 Template.projectConfig.members = function () {
     return Members.find({}, {sort: {name: 1}});
 };
@@ -40,6 +42,9 @@ Template.projectConfig.hide = function (e) {
         }
 
     }
+
+    $('[accordion-item]').addClass('accordion__item--closed')
+        .removeClass('accordion__item--open');
 };
 
 
@@ -55,6 +60,10 @@ Template.projectConfig.events = {
         if (accordion) { // close
            accordion.addClass('accordion__item--closed')
                .removeClass('accordion__item--open');
+            var attr = accordion.attr('accordion-item');
+            if (attr) {
+                Template.projectConfig.items[attr].closing();
+            }
         }
 
         target = $(e.target).closest('[accordion-item]');

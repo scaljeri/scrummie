@@ -6,6 +6,7 @@ Template.userLoggedOut.events({
             throw err;
           }
           else {
+              Meteor.call('checkProfile');
               App.isLoggedIn = true;
           }
        });

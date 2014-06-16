@@ -3,7 +3,13 @@ Template.header.project = function () {
 };
 
 Template.header.showConfig = function () {
-    return App.page === 'scrumboard';
+    var retVal = false;
+
+    if (App.page === 'scrumboard' && hasPermissionsInProject(App.defaults.project)) {
+        retVal = true;
+    }
+
+    return retVal;
 };
 
 Template.header.sprint = function () {

@@ -54,8 +54,8 @@
         transition: border-color 0s ease .9s;
 
         .title {
-          transition: all 0s ease;
-          transition-delay: .9s;
+          transition: all 0.2s ease;
+          transition-delay: .8s;
         }
 
         .part {
@@ -64,7 +64,7 @@
         }
 
         .accordion__item__wrapper {
-          transition: padding-top .2s ease .7s;
+          transition: padding .2s ease .7s;
         }
 
         &::before {
@@ -85,9 +85,7 @@
           padding: 20px;
 
           .part {
-            //display: block;
             max-height: 100px;
-            //opacity: 1;
           }
         }
 

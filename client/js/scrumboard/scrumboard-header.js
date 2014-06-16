@@ -7,6 +7,10 @@ Template.scrumboardHeader.sprintNumber = function () {
     return sprint ? sprint.sprintNumber : '???';
 };
 
+Template.scrumboardHeader.hasUserPermissions = function () {
+    return hasPermissionsInProject(App.defaults.project) !== null;
+};
+
 Template.scrumboardHeader.events = {
   'click [add-task]': function () {
     var addTask = $('[add-task]');

@@ -67,6 +67,10 @@ SprintController = RouteController.extend({
                 App.defaults.sprintNumber = sprint.sprintNumber;
             }
 
+            if (Meteor.user) {
+                App.defaults.member = Meteor.user();
+            }
+
             strs.forEach(function (pair) {
                 var re, colors, result, splitted = pair.split(/=/);
 

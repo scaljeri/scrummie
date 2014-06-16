@@ -58,6 +58,10 @@ Meteor.methods({
                 HipChat(origTask, Projects.findOne({_id: origTask.projectId}).name, Members.findOne({_id: origTask.memberId}));
             }
 
+            if (lane.title !== 'todo' && !origTask.memberId) {
+                fields.memberId = Meteor.user()._id;
+            }
+
             Tasks.update({_id: task._id}, {$set: fields});
         }
         else {

@@ -24,7 +24,7 @@ Template.postits.rendered = function (t) {
             height = $('[scrumboard]').height();
 
             if (App.defaults.member && task.memberId === "" && laneId !== firstLaneId) {
-                task.memberId = App.defaults.member;
+                task.memberId = App.defaults.member._id;
             }
 
             Meteor.call('updatePostitPosition', {

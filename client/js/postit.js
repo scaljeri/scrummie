@@ -16,7 +16,7 @@ Template.postit.color = function () {
 };
 
 Template.postit.member = function () {
-    return Members.findOne({_id: this.memberId});
+    return Meteor.users.findOne({_id: this.memberId});
 };
 
 Template.postit.projectName = function () {

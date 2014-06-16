@@ -197,7 +197,7 @@ if (Meteor.isServer) {
         // server
         Meteor.publish("users", function () {
             if (this.userId) {
-                return Meteor.users.find({_id: this.userId},
+                return Meteor.users.find({},
                     {fields: {'profile': 1, 'projects': 1, initials: 1}});
             } else {
                 this.ready();

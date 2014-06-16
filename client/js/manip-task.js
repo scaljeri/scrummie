@@ -9,7 +9,11 @@ Template.manipTask.colors = function () {
 };
 
 Template.manipTask.members = function () {
-  return Members.find({}, {sort: {name: 1}});
+    var project = Projects.findOne();
+
+    if (project) {
+        return Meteor.users.find({projects: {$in: [project._id]}}, {sort: {name: 1}}).fetch();
+    }
 };
 
 Template.manipTask.show = function (task, callback) {
@@ -55,9 +59,9 @@ Template.manipTask.show = function (task, callback) {
     });
 
     if (task && task.memberId) {
-      memberId = Members.findOne({_id: task.memberId})._id;
+      ;//memberId = Meteor.users.findOne({_id: task.memberId})._id;
     }
-    members.select2('val', memberId);
+    members.select2('val', task.memberId);
 
     $('[manip-task] [dropdown]').on('select2-close', function () {
       $('[manip-task] [dropdown]').not(this).select2('close');
