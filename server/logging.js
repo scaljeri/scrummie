@@ -1,14 +1,17 @@
-var winston = Meteor.require('winston'),
+/*var winston = Meteor.require('winston'),
   MongoDB = Npm.require('winston-mongodb').MongoDB;
+  */
 
 initializeLogger = function () {
+    /*
   var options, loglevel = Scrummie.loglevel || 'error';
 
   logger = new (winston.Logger)({
     transports: [
       new (winston.transports.Console)({level: loglevel}),
       //new (winston.transports.MongoDB)(options)
-    ], exceptionHandlers: [ /*new (winston.transports.MongoDB)(options),*/ new winston.transports.Console() ]
+    ], exceptionHandlers: [ new winston.transports.Console() ]
+    //], exceptionHandlers: [ new (winston.transports.MongoDB)(options), new winston.transports.Console() ]
   });
 
   if (Scrummie.mongo) {
@@ -25,4 +28,5 @@ initializeLogger = function () {
 
     logger.add(winston.transports.MongoDB, options);
   }
+    */
 };

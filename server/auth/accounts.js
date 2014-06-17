@@ -6,7 +6,7 @@ Meteor.startup(function () {
 
         result = Meteor.http.get('https://api.github.com/user', {
             params: { access_token: accessToken },
-            headers: {'User-Agent': 'Scrummie'}
+            headers: {'User-Agent': Scrummie.appName}
         });
 
         if (result.error) {

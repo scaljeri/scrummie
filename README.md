@@ -24,7 +24,7 @@ An analogue digital scrumboard. You can find a demo [here](http://scrummie.meteo
 
     # setup environment variables
     $> export MONGO_URL='mongodb://localhost'
-    $> export ROOT_URL='http://example.com'
+    $> export ROOT_URL='http://example.com:3000'
     $> export PORT=3000
     $> node main.js
 
