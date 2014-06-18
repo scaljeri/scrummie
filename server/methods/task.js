@@ -36,7 +36,7 @@ Meteor.methods({
         return retVal;
     },
     deleteTask: function (id) {
-        var origTask = Tasks.findOne({_id: task._id});
+        var origTask = Tasks.findOne({_id: id});
 
         if (isDocumentEditable(origTask)) {
             Tasks.update({_id: id}, {$set: {deleted: true}});

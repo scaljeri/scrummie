@@ -56,6 +56,37 @@ Examples:
     $> meteor deploy test.meteor.com --delete
     $> meteor deploy test.meteor.com
 
+# linux startup script
+
+    #!/bin/sh -e
+
+    case "${1}" in
+        status)
+            echo -n "Status ${DESC}: "
+            echo TODO
+	          ;;
+        start)
+            echo -n "Starting ${DESC}: "
+            su - ubuntu -c 'nohup /mnt/scrummie/run &'
+            ;;
+        stop)
+            echo -n "Stopping ${DESC}: "
+            echo TODO
+            ;;
+        restart|force-reload)
+            echo -n "Restarting ${DESC}: "
+            echo TODO
+            ;;
+        *)
+            echo "Usage: /etc/init.d/${NAME} {status|start|stop|restart|force-reload
+    }" >&2
+        exit 1
+        ;;
+    esac
+
+    exit 0
+
+
 
 Resources:
 
