@@ -9,7 +9,8 @@
   }
 
   .add-task {
-    position: relative;
+    position: absolute;
+    left: 0;
     z-index: 1;
 
     &.manip-task--hidden {
@@ -18,8 +19,8 @@
   }
 
   .postit-filter {
-    float: right;
-    position: relative;
+    position: absolute;
+    right: 0;
     z-index: 1;
 
     .postit-filter__label {
@@ -33,7 +34,6 @@
     text-align: center;
     margin: auto;
     top: -26px;
-    position: relative;
   }
 
 
