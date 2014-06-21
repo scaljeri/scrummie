@@ -85,7 +85,39 @@ Examples:
     esac
 
     exit 0
+    
+# Application Configuration
 
+TODO
+
+Example scrummie.json:
+
+    {
+        "loglevel": "info",
+        "hipchat": {
+          "message": "{{member.name}} finished task <a href='{{url}}/{{project}}/task/{{task._id}}'>{{task.title}}</a>"
+        },
+        "github": {
+          "clientId": "*******",
+          "clientSecret": "******************"
+        },
+        "appName": "Scrummie",
+        "uploadFolder": ".uploads",
+        "host": {
+            "domain": "localhost",
+            "port": "3000"
+        },
+        "url": "localhost",
+    }
+
+
+ development:
+ 
+    $> mrt --settings=scrummie.json
+
+ production (bundled version):
+ 
+    $> export METEOR_SETTINGS="`car scrummie.json`"
 
 
 Resources:
