@@ -21,7 +21,6 @@ usage its needs input validation. For customisation purposes the configuration n
 apply branding or colour schemes.
 
 Scrummie is distributed under the GNU General Public License, version 3. You can download and use it for free. 
-See the project on GitHub https://github.com/scaljeri/scrummie for more information.
 
 Donate now to stabilise the development process and add functionality resulting in release of version 1.0 of Scrummie 
 at [pledgie](https://pledgie.com/campaigns/25781)
