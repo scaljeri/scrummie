@@ -1,14 +1,27 @@
-if (Scrummie.github) {
-    console.log("SETUP GITHUB AUTH");
+var github = Meteor.settings.github;
+
+if (github) {
+    validateGithubSettings(github);
+
     ServiceConfiguration.configurations.remove({
         service: 'github'
     });
 
     ServiceConfiguration.configurations.insert({
         service: 'github',
-        clientId: Scrummie.github.clientId,
-        secret: Scrummie.github.clientSecret
+        clientId: github.clientId,
+        secret: github.clientSecret
     });
+}
+
+function validateGithubSettings(github) {
+    if (!github.clientId) {
+        throw 'Github: please specify a "clientId" in your settings';
+    }
+
+    if (!github.clientSecret) {
+        throw 'Github: please specify a "clientSecret" in your settings';
+    }
 }
 
 /*
