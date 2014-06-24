@@ -59,9 +59,8 @@ Template.manipTask.show = function (task, callback) {
     });
 
     if (task && task.memberId) {
-      ;//memberId = Meteor.users.findOne({_id: task.memberId})._id;
+        members.select2('val', task.memberId);
     }
-    members.select2('val', task.memberId);
 
     $('[manip-task] [dropdown]').on('select2-close', function () {
       $('[manip-task] [dropdown]').not(this).select2('close');
