@@ -145,7 +145,3 @@ Interesting:
   * Async stuff:
     * http://meteorhacks.com/improved-async-utilities-in-meteor-npm.html
   * Logging - https://www.npmjs.org/package/winston
-
-
-TODO:
-  * autofocus first input field when creating new task

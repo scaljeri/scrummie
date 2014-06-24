@@ -25,4 +25,6 @@ Scrummie is distributed under the GNU General Public License, version 3. You can
 Donate now to stabilise the development process and add functionality resulting in release of version 1.0 of Scrummie 
 at [pledgie](https://pledgie.com/campaigns/25781)
 
+You can find a demo [here](http://scrummie.meteor.com)
+
 ![Scrummie Logo](/public/img/scrummie-logo-big.png)
