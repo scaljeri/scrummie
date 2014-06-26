@@ -7,7 +7,9 @@
                 <li class="project-member">
                     <span class="member__name">{{profile.name}}</span>
                     <span class="member__initials">({{initials}})</span>
-                    <span member__remove class="btn member__remove" data-userid="{{_id}}">X</span>
+                    {{#unless isOnlyMember}}
+                        <span member__remove class="btn member__remove" data-userid="{{_id}}">X</span>
+                    {{/unless}}
                 </li>
             {{/each}}
         </ol>

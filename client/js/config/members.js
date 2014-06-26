@@ -28,6 +28,10 @@ Template.configMembers.projectMembers = function () {
    }
 };
 
+Template.configMembers.isOnlyMember = function () {
+    return Template.configMembers.projectMembers().length < 2;
+};
+
 Template.configMembers.rendered = function () {
     Template.projectConfig.items.members = Template.configMembers;
 };
