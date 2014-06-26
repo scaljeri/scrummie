@@ -16,12 +16,16 @@
   .select2-container {
     margin-bottom: 10px;
   }
-  .delete-task {
-    cursor: pointer;
-    display: block;
-    margin-top: 10px;
-    text-decoration: underline;
-    width: 80px;
+
+  .task__links-wrapper {
+    @include position(absolute, 0 10px 13px 0);
+
+    .task__link {
+      cursor: pointer;
+      display: block;
+      line-height: 25px;
+      text-decoration: underline;
+    }
   }
 
   /*

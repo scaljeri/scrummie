@@ -85,14 +85,7 @@ Template.manipTask.rendered = function () {
 };
 
 Template.manipTask.events = {
-  /*'click [edit-task]': function (event) { // make sure the popover is not closed
-   event.stopPropagation();
-   },*/
-  'click [cancel-task]': function () {
-    $('[manip-task]').css('visibility', 'hidden');
-    $('[add-task]').removeClass('active');
-    App.selectedTask = null;
-  },
+  'click [cancel-task]': closeManip,
   'click [save-task]': function (e) {
     var data = $('[manip-task]').serializeObject({sprintNumber: App.defaults.sprintNumber});
     if (!data.color) {
@@ -106,18 +99,25 @@ Template.manipTask.events = {
       }
     });
 
-    $('[manip-task]').css('visibility', 'hidden');
-    $('[add-task]').removeClass('btn--active');  // TODO: implement closeCallback
-    $('[manip-task]')[0].reset();
-    App.selectedTask = null;
+    closeManip();
   },
   'click [delete-task]': function () {
     Meteor.call('deleteTask', App.selectedTask._id);
-    $('[manip-task]').css('visibility', 'hidden');
-    $('[add-task]').removeClass('btn--active');
-    App.selectedTask = null;
+    closeManip();
+  },
+  'click [clone-task]': function () {
+    var data = $('[manip-task]').serializeObject({sprintNumber: App.defaults.sprintNumber});
+    Meteor.call('cloneTask', data);
+    closeManip();
   }
 };
+
+function closeManip() {
+    $('[manip-task]').css('visibility', 'hidden');
+    $('[add-task]').removeClass('btn--active');
+    $('[manip-task]')[0].reset();
+    App.selectedTask = null;
+}
 
 function format(color) {
   return ['<span class="select-option-color"',

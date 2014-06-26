@@ -35,7 +35,10 @@
         {{#if task}}
             {{#if isReadonly}}
             {{else}}
-                <a delete-task class="delete-task">Delete task</a>
+                <div class="task__links-wrapper">
+                    <a delete-task class="task__link">Delete task</a>
+                    <a clone-task class="task__link">Clone task</a>
+                </div>
             {{/if}}
         {{/if}}
     </form>

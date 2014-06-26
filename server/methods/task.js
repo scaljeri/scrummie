@@ -42,6 +42,27 @@ Meteor.methods({
             Tasks.update({_id: id}, {$set: {deleted: true}});
         }
     },
+    cloneTask: function (task) {
+        var origTask = Tasks.findOne({_id: task._id});
+        replaceColor(task, origTask.projectId);
+
+        if (isDocumentEditable(origTask)) {
+           delete task.sprintNumber;
+
+           for( var prop in origTask) {
+               if (origTask.hasOwnProperty(prop) && !task[prop]) {
+                  console.log('adding ' + prop + ' --> ' + origTask[prop]);
+                  task[prop] = origTask[prop];
+               }
+           }
+
+           delete task._id;
+           task.updated = new Date().getTime();
+           task.x += 5;
+           task.y += 5;
+           Tasks.insert(task);
+        }
+    },
     updatePostitPosition: function (task) {
         var origTask = Tasks.findOne({_id: task._id});
 
@@ -54,9 +75,11 @@ Meteor.methods({
                 },
                 lane = LanesSetup.findOne({_id: task.laneId});
 
+            /*
             if (lane.title === 'done' && origTask.laneId !== lane._id) {
                 HipChat(origTask, Projects.findOne({_id: origTask.projectId}).name, Members.findOne({_id: origTask.memberId}));
             }
+            */
 
             if (lane.title !== 'todo' && !origTask.memberId) {
                 fields.memberId = Meteor.user()._id;
@@ -70,14 +93,18 @@ Meteor.methods({
     }
 });
 
-function upsertTask(projectId, task) {
-    var _id;
-
+function replaceColor(task, projectId) {
     if (task.color !== undefined) {
         var color = TaskColorsSetup.findOne({projectId: projectId, value: task.color});
         task.colorId = color._id;
         delete task.color;
     }
+}
+
+function upsertTask(projectId, task) {
+    var _id;
+
+    replaceColor(task, projectId);
 
     if (!task.sprintNumber) { // new tasks do not have a sprint number yet
         var currentSprint = Sprints.findOne({projectId: projectId, active: true});
