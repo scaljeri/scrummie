@@ -38,7 +38,8 @@ Template.postit.rendered = function () {
     postit.draggable({
         containment: '.' + (App.scrumboard.readonly ? this.data.laneId : 'lanes'),
         scroll: false,
-        disabled: !isDocumentEditable(this.data)
+        disabled: !isDocumentEditable(this.data),
+        zIndex: 1000000
     });
     return Tasks.find({}, { sort: {index: 1}}).fetch();
 };
