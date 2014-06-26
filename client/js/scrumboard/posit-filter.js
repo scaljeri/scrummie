@@ -22,7 +22,7 @@ Template.postitFilter.rendered = function () {
       App.filterColorId = null;
     }
     else {
-      App.filterColorId = TaskColors.findOne({value: select.val()})._id;
+      App.filterColorId = TaskColorsSetup.findOne({value: select.val()})._id;
     }
   });
 };
