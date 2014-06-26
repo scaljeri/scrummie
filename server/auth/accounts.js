@@ -26,11 +26,14 @@ Meteor.startup(function () {
             'html_url');
 
         user.profile = profile;
-        if (user.projects === undefined) { // only do this initially
+        user.initials = createInitials(profile);//.name ? parseProfileName(profile.name) : '??';
+
+        if (user.projects === undefined) {
             user.projects = [];
         }
-        if (user.initials === undefined) { // idem
-            user.initials = profile.name ? parseProfileName(profile.name) : '??';
+
+        if (!profile.name) {
+            profile.name = profile.login;
         }
 
         return user;
@@ -40,16 +43,17 @@ Meteor.startup(function () {
         return Scrummie.updateUserProfile(user);
     });
 
-    function parseProfileName(name) {
-        var parts = name.split(' '),
-            output = parts[0].substring(0, 1).toUpperCase();
+    function createInitials(profile) {
+        var email = profile.email, output;
 
-        for (var i = 1; i < parts.length - 1; i++) {
-            output += parts[i].substring(0, 1);
+        if (profile.name) {
+            output = profile.name.match(/\b(\w)/g);
         }
-
-        if (parts.length > 1) {
-            output += parts[parts.length - 1].substring(0, 1).toUpperCase();
+        else if (email) {
+            output = (email[0] + email[emai.indexOf('@')+1]).toUpperCase();
+        }
+        else {
+            output = '??';
         }
 
         return output;
