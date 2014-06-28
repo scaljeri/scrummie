@@ -29,17 +29,21 @@
 
         <input type="text" name="link" value="{{task.link}}" placeholder="Link" class="input--shadow">
 
+        <a save-task class="btn btn__confirm save-task">Save</a>
         <a cancel-task class="btn cancel-task">Cancel</a>
-        <a save-task class="btn save-task">Save</a>
+        <a delete-task class="btn delete-task">Delete</a>
+        <a clone-task class="btn clone-task">Clone</a>
 
+        <!--
         {{#if task}}
             {{#if isReadonly}}
             {{else}}
                 <div class="task__links-wrapper">
-                    <a delete-task class="task__link">Delete task</a>
-                    <a clone-task class="task__link">Clone task</a>
+                    <a delete-task class="task__link">Delete</a>
+                    <a clone-task class="task__link">Clone</a>
                 </div>
             {{/if}}
         {{/if}}
+        -->
     </form>
 </template>
