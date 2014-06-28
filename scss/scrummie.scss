@@ -72,3 +72,21 @@ body {
 }
 
 :target { outline: solid red; }
+
+.link {
+    &.link--disabled {
+      cursor: default!important;
+      color: grey!important;
+      pointer-events: none;
+    }
+
+    &.link--active {
+      cursor: default!important;
+      font-weight: 700!important;
+    }
+}
+
+// css fixes
+.ui-state-disabled {
+  opacity: 1;
+}

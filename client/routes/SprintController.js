@@ -104,6 +104,7 @@ SprintController = RouteController.extend({
                 }
             });
             this.render('scrumboard');
+            this.render('header', { to: 'header-section'});
         }
         else {
             ;//this.render('loading');

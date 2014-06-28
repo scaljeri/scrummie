@@ -1,6 +1,6 @@
 <template name="layout">
     <main class="viewport {{pageCls}}">
-        {{> header}}
+        {{> yield region='header-section'}}
 
         {{> yield}}
 

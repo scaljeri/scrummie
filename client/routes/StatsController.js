@@ -36,6 +36,7 @@ StatsController = RouteController.extend({
     action: function () {
         if (this.ready()) {
             this.render('statsOverview');
+            this.render('header', {to: 'header-section'});
         }
     }
 });

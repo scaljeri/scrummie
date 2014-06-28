@@ -1,24 +1,19 @@
-<template name="header">
+<template name="headerHome">
     <header class="header-main logo">
         <a href="/{{project}}" class="clickable-logo"></a>
         <nav class="header-main__nav">
             <ol class="nav-list">
-                {{#if showConfig}}
-                    <li class="nav-list__item">
-                        <a config class="nav-list__item__config" title="Configuration"></a>
-                    </li>
-                {{/if}}
                 <li class="nav-list__item">
-                    <a stats href="/{{project}}/stats" class="nav-list__item__stats">Statistics</a>
+                    <a stats href="/{{project}}/stats" class="link link--disabled nav-list__item__stats">Statistics</a>
                 </li>
                 <li class="nav-list__item">
-                    <a href="/{{project}}backlog" class="nav-list__item__backlog">Backlog</a>
+                    <a href="/{{project}}backlog" class="link link--disabled nav-list__item__backlog">Backlog</a>
                 </li>
                 <li class="nav-list__item">
                     <a target="_blank" href="https://github.com/scaljeri/scrummie" class="nav-list__item__about">About</a>
                 </li>
                 <li class="nav-list__item">
-                    <a href="/" class="nav-list__item__home">Home</a>
+                    <a href="/" class="link link--active nav-list__item__home">Home</a>
                 </li>
                 <li class="nav-list__item">
                     {{#if currentUser}}
