@@ -1,5 +1,3 @@
-var postit;
-
 Template.postit.zIndex = function () {
     if (this.updated) {
         //1396695841955 --> "95841"
@@ -24,24 +22,24 @@ Template.postit.projectName = function () {
 };
 
 Template.postit.state = function () {
-    if (postit) {
-        postit.draggable("option", "disabled", !isDocumentEditable(this));
-    }
-
     return 'postit--' + (isDocumentEditable(this) ? 'draggable' : 'fixed');
 };
 
 Template.postit.rendered = function () {
-    postit = $(this.find('[postit]'));
+    var postit = $(this.find('[postit]'));
 
-    // if readonly a postit is not allowed to move outside its lane
     postit.draggable({
         containment: '.' + (App.scrumboard.readonly ? this.data.laneId : 'lanes'),
         scroll: false,
         disabled: !isDocumentEditable(this.data),
         zIndex: 1000000
     });
-    return Tasks.find({}, { sort: {index: 1}}).fetch();
+
+    if (postit) {
+        Deps.autorun(function () {
+            postit.draggable("option", "disabled", !isDocumentEditable(this.data));
+        }.bind(this));
+    }
 };
 
 Template.postit.events = {
