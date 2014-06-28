@@ -2,27 +2,46 @@
     <h3 class="title">Team members</h3>
 
     <article accordion__item__wrapper class="accordion__item__wrapper">
-        <ol class="part part1 project-members">
-            {{#each projectMembers}}
-                <li class="project-member">
-                    <span class="member__name">{{profile.name}}</span>
-                    <span class="member__initials">({{initials}})</span>
-                    {{#unless isOnlyMember}}
-                        <span member__remove class="btn member__remove" data-userid="{{_id}}">X</span>
-                    {{/unless}}
-                </li>
-            {{/each}}
-        </ol>
-        <p class="part part1 seperator"></p>
-        <p class="part part2 site-members">
-            <label class="add-member__title">Add new member:</label>
-            <select members-dropdown name="site-members">
-                <option></option>
-                {{#each siteMembers}}
-                <option value="{{_id}}">{{profile.name}}</option>
+        {{isAuth}}
+        {{#if isAuthEnabled}}
+            <ol class="part part1 project-members">
+                {{#each projectMembers}}
+                    <li class="project-member">
+                        <span class="member__name">{{profile.name}}</span>
+                        <span class="member__initials">({{initials}})</span>
+                        {{#unless isOnlyMember}}
+                            <span member__remove class="btn member__remove" data-userid="{{_id}}">X</span>
+                        {{/unless}}
+                    </li>
                 {{/each}}
-            </select>
-        </p>
-        <a add-member class="part part3 btn config__button">Add member</a>
+            </ol>
+        {{else}}
+            <ol class="part part1 members">
+                {{#each members}}
+                    <li data-id="{{_id}}">
+                        <input class="input--shadow member__name" value="{{name}}">
+                        <input class="input--shadow member__initials" maxlength="3" value="{{initials}}">
+                        <span member__remove class="btn member__remove" data-userid="{{_id}}">X</span>
+                    </li>
+                {{/each}}
+                <li>
+                    <input name="member__new__name" class="input--shadow member__name">
+                     <input name="member__new__initials" maxlength="3" class="input--shadow member__initials">
+                </li>
+            </ol>
+        {{/if}}
+        {{#if isAuthEnabled}}
+            <p class="part part1 seperator"></p>
+            <p class="part part2 site-members">
+                <label class="add-member__title">Add new member:</label>
+                <select members-dropdown name="site-members">
+                    <option></option>
+                    {{#each siteMembers}}
+                        <option value="{{_id}}">{{profile.name}}</option>
+                    {{/each}}
+                </select>
+            </p>
+        {{/if}}
+        <a add-member class="part part3 btn config__button">Save</a>
     </article>
 </template>

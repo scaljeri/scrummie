@@ -42,9 +42,15 @@ Template.configMembers.closing = function () {
 
 Template.configMembers.events = {
     'click [add-member]' : function () {
-        var userId = $(arguments[1].find('[name="site-members"]')).val();
+        var userId, isAuth = Settings.findOne().isAuth;
 
-        Meteor.call('addUserToProject', userId, App.defaults.project);
+        if (isAuth) {
+            debugger;
+        }
+        else {
+            userId = $(arguments[1].find('[name="site-members"]')).val();
+            Meteor.call('addUserToProject', userId, App.defaults.project);
+        }
     },
     'click .accordion__item__wrapper' : function () {
         $('[members-dropdown]').select2('close');

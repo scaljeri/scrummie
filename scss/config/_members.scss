@@ -36,4 +36,14 @@
     float: right;
     padding: 3px;
   }
+
+  // without auth
+  .member__name {
+    margin-right: 10px;
+    width: 200px;
+  }
+  .member__initials {
+    width: 60px;
+    padding: 0 5px;
+  }
 }

@@ -16,6 +16,7 @@ SprintController = RouteController.extend({
         }
 
         App.subs = {
+            settings: Meteor.subscribe('settings', project),
             projects: Meteor.subscribe('projects', project),
             sprint: Meteor.subscribe('sprint', project),
             lanes: Meteor.subscribe('lanes'),
@@ -28,6 +29,7 @@ SprintController = RouteController.extend({
             users: Meteor.subscribe('users')
         };
         return [
+            App.subs.settings,
             App.subs.projects,
             App.subs.lanes,
             App.subs.taskColors,

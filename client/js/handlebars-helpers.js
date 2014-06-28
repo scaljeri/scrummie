@@ -72,3 +72,27 @@ Handlebars.registerHelper('taskLink', function (link, taskTitle) {
   }
   return output;
 });
+
+Handlebars.registerHelper('isAuthEnabled', function() {
+    return Boolean((Settings.findOne()||{}).isAuth);
+});
+
+/*
+Handlebars.registerHelper('if_bool', function() {
+    var args = [].slice.apply(arguments);
+    var opts = args.pop();
+
+    if (opts) {
+
+    var fn = opts.fn;
+    for(var i = 0; i < args.length; ++i) {
+        if(args[i])
+            continue;
+        fn = opts.inverse;
+        break;
+    }
+    return fn(this);
+    }
+    return null;
+});
+    */
