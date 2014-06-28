@@ -11,7 +11,10 @@
             <input name="_id" type="hidden" value="{{task._id}}">
             <input name="sprintNumber" type="hidden" value="{{task.sprintNumber}}">
         {{/if}}
-        <input type="text" name="title" value="{{task.title}}" placeholder="Title" class="input--shadow">
+        <p>
+            <input type="text" name="title" value="{{task.title}}" placeholder="Title" class="input--shadow task__title">
+            <input type="text" name="fte" maxlength="3" value="{{task.fte}}" placeholder="FTE" class="input--shadow task__fte">
+        </p>
         <textarea name="description" placeholder="Description" class="textarea--shadow">{{task.description}}</textarea>
 
         <select dropdown colors multiple class="dropdown" name="color">
