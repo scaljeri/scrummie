@@ -14,7 +14,12 @@ Template.postit.color = function () {
 };
 
 Template.postit.member = function () {
-    return Meteor.users.findOne({_id: this.memberId});
+    if (Settings.findOne().isAuth) {
+        return Meteor.users.findOne({_id: this.memberId});
+    }
+    else {
+        return Members.findOne({_id: this.memberId});
+    }
 };
 
 Template.postit.projectName = function () {

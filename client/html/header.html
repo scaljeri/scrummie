@@ -20,13 +20,15 @@
                 <li class="nav-list__item">
                     <a href="/" class="nav-list__item__home">Home</a>
                 </li>
-                <li class="nav-list__item">
-                    {{#if currentUser}}
-                        {{> userLoggedIn}}
-                    {{else}}
-                        {{> userLoggedOut}}
-                    {{/if}}
-                </li>
+                {{#if isAuthEnabled}}
+                    <li class="nav-list__item">
+                        {{#if currentUser}}
+                            {{> userLoggedIn}}
+                        {{else}}
+                            {{> userLoggedOut}}
+                        {{/if}}
+                    </li>
+                {{/if}}
             </ol>
         </nav>
     </header>

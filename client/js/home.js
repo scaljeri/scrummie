@@ -19,11 +19,13 @@ Template.home.events = {
 
         $(e.target).removeClass('btn--active');
 
+        /*
         if (!Meteor.user()) {
             App.errorMessage = 'Please login first';
             $('[error-dialog]').dialog('open');
             return;
         }
+        */
 
         if (!name) {
             App.errorMessage = 'A project name is required';
