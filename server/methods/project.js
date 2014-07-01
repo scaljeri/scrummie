@@ -1,8 +1,9 @@
-var fs = Npm.require('fs');
+var fs = Npm.require('fs'),
+    path = Meteor.require('path');
 
 Meteor.methods({
     'createProject': function (name, fileInfo, fileData) {
-        var path, imgType, resourceId, projectId;
+        var dir, imgType, resourceId, projectId;
 
         if (isAuthenticated()) {
             projectId = Projects.insert({
@@ -18,13 +19,13 @@ Meteor.methods({
 
             if (fileInfo) {
                 try {
-                    imgType = fileInfo.name.match(/(\..*)/)[1];
+                    imgType = path.extname(fileInfo.name);
                     resourceId = Resources.insert({originalName: fileInfo.name});
-                    path = process.env.PWD + '/.uploads/' + resourceId + imgType;
+                    dir = path.normalize(Meteor.settings.uploadFolder || (process.env.PWD + '/.uploads')) + '/';
 
                     Projects.update({_id: projectId}, {$set: {resourceId: resourceId}});
 
-                    Async.wrap(fs.writeFile)(path, fileData, "binary");
+                    Async.wrap(fs.writeFile)(dir + resourceId + imgType, fileData, "binary");
                     Resources.update({_id: resourceId}, {$set: {fileName: resourceId + imgType}});
                     return {status: 'ok'};
                 }
