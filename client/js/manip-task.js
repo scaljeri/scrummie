@@ -53,7 +53,8 @@ Template.manipTask.show = function (task, callback) {
             formatSelection: format,
             maximumSelectionSize: 5,
             minimumResultsForSearch: -1,
-            placeholder: "Colors"
+            placeholder: "Colors",
+            containerCssClass: 'select2-colors'
         });
 
         select.select2('val', taskColors ? taskColors.value : null);

@@ -1,6 +1,3 @@
-
-
-
 // Routes
 Router.configure({
     layoutTemplate: 'layout',
@@ -31,6 +28,8 @@ Router.map(function () {
 });
 
 if (Meteor.isClient) {
+    Settings = new Meteor.Collection('settings');
+
     App = {
         defaults: {},
         noob: function () {},
@@ -85,7 +84,7 @@ if (Meteor.isServer) {
 
     Meteor.startup(function () {
 
-      /*
+        /*
          Projects.remove({});
          Sprints.remove({});
          Lanes.remove({});
@@ -95,7 +94,7 @@ if (Meteor.isServer) {
          TaskColorsSetup.remove({});
          Members.remove({});
          Resources.remove({});
-*/
+         */
         if (Lanes.find({}).count() === 0) {
             Lanes.insert({ title: 'todo', message: 'Tasks to be done', index: 0});
             Lanes.insert({ title: 'in progress', message: 'Tasks in progress', index: 1});
@@ -140,58 +139,57 @@ if (Meteor.isServer) {
         }
 
 
-      /*
-      Meteor.publish('projects', function (project) {
-            var projects, query = {};
+        /*
+         Meteor.publish('projects', function (project) {
+         var projects, query = {};
 
-            if (project) {
-                query.name = project;
-            }
-            projects = Projects.find(query, {sort: {name: 1}}, {reactive: true});
-            projects.forEach(function (item) {
-                var resource;
+         if (project) {
+         query.name = project;
+         }
+         projects = Projects.find(query, {sort: {name: 1}}, {reactive: true});
+         projects.forEach(function (item) {
+         var resource;
 
-                if (item.resourceId) {
-                  resource = Resources.findOne({_id: item.resourceId});
-                  if (resource) {
-                    item.icon = '/uploads/' + resource.fileName;
-                    console.log(item.icon);
-                  }
-                }
-            });
+         if (item.resourceId) {
+         resource = Resources.findOne({_id: item.resourceId});
+         if (resource) {
+         item.icon = '/uploads/' + resource.fileName;
+         console.log(item.icon);
+         }
+         }
+         });
 
-            return projects;
-        });
-        */
+         return projects;
+         });
+         */
 
 
         /*
-        Meteor.publish('task-positions', function (projectId, sprintNumber) {
-            return Tasks.find({$and: [
-                    {projectId: projectId},
-                    {sprintNumber: sprintNumber},
-                    {$or: [
-                        { deleted: {$exists: false}},
-                        {deleted: false}
-                    ]}
-                ]},
-                {sort: {updated: 1}, fields: {x: 1, y: 1, updated: 1}});     // only return task positions
-        });
-        */
+         Meteor.publish('task-positions', function (projectId, sprintNumber) {
+         return Tasks.find({$and: [
+         {projectId: projectId},
+         {sprintNumber: sprintNumber},
+         {$or: [
+         { deleted: {$exists: false}},
+         {deleted: false}
+         ]}
+         ]},
+         {sort: {updated: 1}, fields: {x: 1, y: 1, updated: 1}});     // only return task positions
+         });
+         */
 
         /*
-        Meteor.publish('tasksx', function (projectId, sprintNumber) {
-            return Tasks.find({$and: [
-                {projectId: projectId},
-                {sprintNumber: sprintNumber},
-                {$or: [
-                    { deleted: {$exists: false}},
-                    {deleted: false}
-                ]}
-            ]}, {fields: {x: 0, y: 0, updated: 0}});          // return task without coordinates
-        });
-        */
-
+         Meteor.publish('tasksx', function (projectId, sprintNumber) {
+         return Tasks.find({$and: [
+         {projectId: projectId},
+         {sprintNumber: sprintNumber},
+         {$or: [
+         { deleted: {$exists: false}},
+         {deleted: false}
+         ]}
+         ]}, {fields: {x: 0, y: 0, updated: 0}});          // return task without coordinates
+         });
+         */
 
 
         // server
@@ -203,9 +201,6 @@ if (Meteor.isServer) {
                 this.ready();
             }
         });
-
-
-
 
 
         Meteor.publish('comments', function (projectId, taskId) {

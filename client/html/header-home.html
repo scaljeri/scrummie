@@ -3,6 +3,15 @@
         <a href="/{{project}}" class="clickable-logo"></a>
         <nav class="header-main__nav">
             <ol class="nav-list">
+                {{#if isAuthEnabled}}
+                <li class="nav-list__item">
+                    {{#if currentUser}}
+                    {{> userLoggedIn}}
+                    {{else}}
+                    {{> userLoggedOut}}
+                    {{/if}}
+                </li>
+                {{/if}}
                 <li class="nav-list__item">
                     <a stats href="/{{project}}/stats" class="link link--disabled nav-list__item__stats">Statistics</a>
                 </li>
@@ -15,15 +24,6 @@
                 <li class="nav-list__item">
                     <a href="/" class="link link--active nav-list__item__home">Home</a>
                 </li>
-                {{#if isAuthEnabled}}
-                    <li class="nav-list__item">
-                        {{#if currentUser}}
-                            {{> userLoggedIn}}
-                        {{else}}
-                            {{> userLoggedOut}}
-                        {{/if}}
-                    </li>
-                {{/if}}
             </ol>
         </nav>
     </header>

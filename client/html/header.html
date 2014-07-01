@@ -3,6 +3,15 @@
         <a href="/{{project}}" class="clickable-logo"></a>
         <nav class="header-main__nav">
             <ol class="nav-list">
+                {{#if isAuthEnabled}}
+                <li class="nav-list__item">
+                    {{#if currentUser}}
+                    {{> userLoggedIn}}
+                    {{else}}
+                    {{> userLoggedOut}}
+                    {{/if}}
+                </li>
+                {{/if}}
                 {{#if showConfig}}
                     <li class="nav-list__item">
                         <a config class="nav-list__item__config" title="Configuration"></a>
@@ -18,17 +27,8 @@
                     <a target="_blank" href="https://github.com/scaljeri/scrummie" class="nav-list__item__about">About</a>
                 </li>
                 <li class="nav-list__item">
-                    <a href="/" class="nav-list__item__home">Home</a>
+                    <a href="/" class="nav-list__item__home">Projects</a>
                 </li>
-                {{#if isAuthEnabled}}
-                    <li class="nav-list__item">
-                        {{#if currentUser}}
-                            {{> userLoggedIn}}
-                        {{else}}
-                            {{> userLoggedOut}}
-                        {{/if}}
-                    </li>
-                {{/if}}
             </ol>
         </nav>
     </header>

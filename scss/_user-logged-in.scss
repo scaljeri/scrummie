@@ -24,9 +24,9 @@
   box-shadow: 0px 0px 11px 0px #323232;
   display: none;
   padding: 10px;
-  position: absolute;
   width: 100px;
   z-index: $on-top;
+  @include position(absolute, 0 0px 0 0);
 
   .login__dropdown__item {
     cursor: pointer;

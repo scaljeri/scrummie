@@ -1,8 +1,12 @@
 .select2-colors {
   .select2-choices {
     .select2-search-field input {
-      line-height: 20px;
+      font: 100 20px/20px Lato;
       height: 25px;
+
+      //margin-left: 20px;
+      margin: 5px 20px;
+      padding-left: 0;
     }
 
     .select2-search-choice {

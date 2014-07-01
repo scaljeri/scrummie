@@ -1,6 +1,6 @@
 <template name="postit">
     <li class="postit {{state}}" data-id="{{_id}}" draggable postit
-        style="top:{{y}}%;left:{{x}}%;z-index:{{zIndex}};background-color:{{color.value}}" data-z-index="{{zIndex}}"
+        style="top:{{y}}%;left:{{x}}%;z-index:{{zIndex}};background-color:{{color.value}};" data-z-index="{{zIndex}}"
             title="{{color.title}} {{#if member.profile.name}}- {{/if}}{{member.profile.name}}">
         {{#if title}}
           <h3 class="postit__title">{{title}}</h3>

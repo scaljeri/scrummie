@@ -15,10 +15,11 @@ HomeController = RouteController.extend({
         }
 
         App.subs = {
-            projects: Meteor.subscribe('projects')
+            projects: Meteor.subscribe('projects'),
+            settings: Meteor.subscribe('settings')
         };
 
-        return [App.subs.projects];
+        return [App.subs.projects, App.subs.settings];
     },
     data: function () {  // or a function
         return { pageCls: 'page-scrumboard'};
