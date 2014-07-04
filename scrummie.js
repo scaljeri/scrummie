@@ -47,6 +47,12 @@ if (Meteor.isClient) {
                     return item.callback !== callback;
                 }) || [];
             }
+        },
+        ignoreClickFrom: {
+            list: [],
+            add: function (selector) {
+                this.list.push(selector);
+            }
         }
     };
 

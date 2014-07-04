@@ -31,3 +31,8 @@ Template.configSprint.sprintButtonLabel = function () {
 
     return (sprint ? 'End' : 'Start') + ' Sprint';
 };
+
+Template.configSprint.rendered = function () {
+    App.ignoreClickFrom.add('#ui-datepicker-div');
+    App.ignoreClickFrom.add('.ui-datepicker-header'); // FIXME: .ui-datepicker-header is inside #ui-datepicker-div, but it is needed
+};
