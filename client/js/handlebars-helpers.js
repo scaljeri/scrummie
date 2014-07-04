@@ -77,6 +77,10 @@ Handlebars.registerHelper('isAuthenticated', function () {
     return isAuthenticated();
 });
 
+Handlebars.registerHelper('hasPermissionsInProject', function () {
+    return hasPermissionsInProject(App.defaults.project);
+});
+
 Handlebars.registerHelper('isAuthEnabled', function () {
     return Boolean((Settings.findOne() || {}).isAuth);
 });

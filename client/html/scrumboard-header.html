@@ -1,6 +1,6 @@
 <template name="scrumboardHeader">
     <header class="scrumboard__header">
-        {{#if isAuthenticated}}
+        {{#if hasPermissionsInProject}}
             <a add-task class="btn add-task" title="Create new task">+ new task</a>
         {{/if}}
 
