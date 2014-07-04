@@ -82,7 +82,7 @@ Template.configMembers.events = {
         }
         else {
             userId = $(arguments[1].find('[name="site-members"]')).val();
-            Meteor.call('addUserToProject', userId, App.defaults.project);
+            Meteor.call('upsertUserToProject', userId, App.defaults.project);
         }
     },
     'click [member__remove]': function () {
