@@ -89,9 +89,9 @@ function loadTasks(project, sprint, lane) {
         delete task.laneId;
 
         if (task.memberId) {
-            var member = (Meteor.settings||{}).authenticate === true ? (users[task.memberId]||{}).profile : members[task.memberId];
+            var member = (Meteor.settings||{}).authenticate === true ? users[task.memberId] : members[task.memberId];
             if (member) {
-                task.member = member.name;
+                task.member = member.profile.name;
             }
         }
         delete task.memberId;
@@ -99,6 +99,12 @@ function loadTasks(project, sprint, lane) {
         if (!task.link) {
             delete task.link;
         }
+
+        delete task.projectId;
+        task.project = project.name;
+
+        task.updated = new Date(task.updated);
+
         output.tasks.push(task);
     });
     return output;
