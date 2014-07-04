@@ -6,15 +6,15 @@
                 {{#if isAuthEnabled}}
                 <li class="nav-list__item">
                     {{#if currentUser}}
-                    {{> userLoggedIn}}
+                        {{> userLoggedIn}}
                     {{else}}
-                    {{> userLoggedOut}}
+                        {{> userLoggedOut}}
                     {{/if}}
                 </li>
                 {{/if}}
-                {{#if showConfig}}
+                {{#if isAuthenticated}}
                     <li class="nav-list__item">
-                        <a config class="nav-list__item__config" title="Configuration"></a>
+                        <a config class="nav-list__item__setup" title="Setup">Setup</a>
                     </li>
                 {{/if}}
                 <li class="nav-list__item">

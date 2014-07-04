@@ -1,4 +1,3 @@
-//var fs = Meteor.require('fs');
 var fs = Npm.require('fs'),
     path = Meteor.require('path');
 
@@ -32,7 +31,4 @@ if (Meteor.isServer) {
     else
       next();
   });
-//}
-//)
-//;
 }

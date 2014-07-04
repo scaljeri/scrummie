@@ -2,6 +2,7 @@ Template.header.project = function () {
     return App.defaults.project;
 };
 
+/*
 Template.header.showConfig = function () {
     var retVal = false;
 
@@ -11,6 +12,7 @@ Template.header.showConfig = function () {
 
     return retVal;
 };
+*/
 
 Template.header.sprint = function () {
     return Sprints.findOne({ startdate: {$gt: new Date().getTime()}, enddate: { $lt: new Date().getTime()}});

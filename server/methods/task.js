@@ -7,7 +7,7 @@ Meteor.methods({
         }
     },
     upsertTask: function (projectName, task) {
-        var retVal = {status: 'error'}, project,
+        var retVal = {status: 'error', msg: 'Not authorized'}, project,
             origTask = Tasks.findOne({_id: task._id});
 
         if (isDocumentEditable(origTask)) {
@@ -82,7 +82,7 @@ Meteor.methods({
             */
 
             if (lane.title !== 'todo' && !origTask.memberId) {
-                fields.memberId = Meteor.user()._id;
+                fields.memberId = (Meteor.user()||{})._id;
             }
 
             Tasks.update({_id: task._id}, {$set: fields});

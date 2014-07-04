@@ -6,12 +6,15 @@
                 {{#if isAuthEnabled}}
                 <li class="nav-list__item">
                     {{#if currentUser}}
-                    {{> userLoggedIn}}
+                        {{> userLoggedIn}}
                     {{else}}
-                    {{> userLoggedOut}}
+                        {{> userLoggedOut}}
                     {{/if}}
                 </li>
                 {{/if}}
+                <li class="nav-list__item">
+                    <a config class="link link--disabled nav-list__item__setup" title="Setup">Setup</a>
+                </li>
                 <li class="nav-list__item">
                     <a stats href="/{{project}}/stats" class="link link--disabled nav-list__item__stats">Statistics</a>
                 </li>

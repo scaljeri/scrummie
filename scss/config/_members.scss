@@ -15,15 +15,21 @@
       margin: 3px;
       padding-left: 5px;
 
-      &:nth-child(even) { background-color: #F0F0F5; }
+      &:nth-child(even) {
+        background-color: #F0F0F5;
+      }
 
-      .member__name {line-height: 22px;}
+      .member__name {
+        line-height: 22px;
+      }
     }
   }
 
   .site-members {
     margin-bottom: 10px;
-    .project-member:nth-child(odd) { background-color: grey; }
+    .project-member:nth-child(odd) {
+      background-color: grey;
+    }
   }
 
   .seperator {
@@ -37,13 +43,19 @@
     padding: 3px;
   }
 
-  // without auth
-  .member__name {
-    margin-right: 10px;
-    width: 200px;
-  }
-  .member__initials {
-    width: 60px;
-    padding: 0 5px;
+  .no-auth-members {
+    .member__initials {
+      width: 60px;
+      padding: 0 5px;
+    }
+
+    .member__name {
+      margin-right: 10px;
+      width: 200px;
+    }
+
+    .member__remove {
+      line-height: 29px;
+    }
   }
 }

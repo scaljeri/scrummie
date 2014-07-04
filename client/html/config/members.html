@@ -2,7 +2,6 @@
     <h3 class="title">Team members</h3>
 
     <article accordion__item__wrapper class="accordion__item__wrapper">
-        {{isAuth}}
         {{#if isAuthEnabled}}
             <ol class="part part1 project-members">
                 {{#each projectMembers}}
@@ -16,17 +15,17 @@
                 {{/each}}
             </ol>
         {{else}}
-            <ol class="part part1 members">
-                {{#each members}}
+            <ol class="part part1 no-auth-members">
+                {{#each noAuthMembers}}
                     <li data-id="{{_id}}">
-                        <input class="input--shadow member__name" value="{{name}}">
+                        <input class="input--shadow member__name" value="{{profile.name}}">
                         <input class="input--shadow member__initials" maxlength="3" value="{{initials}}">
-                        <span member__remove class="btn member__remove" data-userid="{{_id}}">X</span>
+                        <span member__remove class="btn member__remove">X</span>
                     </li>
                 {{/each}}
                 <li>
-                    <input name="member__new__name" class="input--shadow member__name">
-                     <input name="member__new__initials" maxlength="3" class="input--shadow member__initials">
+                    <input name="member__new__name" placeholder="Example: John Doe" class="input--shadow member__name">
+                     <input name="member__new__initials" placeholder="JD" maxlength="3" class="input--shadow member__initials">
                 </li>
             </ol>
         {{/if}}

@@ -54,10 +54,13 @@
     }
 
 
+
+    .nav-list__item__setup,
     .nav-list__item__login {
       cursor: pointer;
     }
 
+    /*
     .nav-list__item__config {
       display: inline-block;
       cursor: pointer;
@@ -68,7 +71,7 @@
       background-repeat: no-repeat;
       background-size: 25px;
       padding: 0 0 0 10px;
-    }
+    }*/
 
     > a {
       font-size: 15px;

@@ -1,3 +1,12 @@
+Template.configMembers.noAuthMembers = function () {
+    var project = Projects.findOne();
+
+    if (project) {
+        //return Members.find({projects: {$in: [project._id]}}).fetch();
+        return Members.find({projectId: project._id}, {sort: {'profile.name':1}}).fetch();
+    }
+    return null;
+};
 Template.configMembers.siteMembers = function () {
     var project = Projects.findOne();
 
@@ -42,10 +51,12 @@ Template.configMembers.closing = function () {
 
 Template.configMembers.events = {
     'click [add-member]' : function () {
-        var userId, isAuth = Settings.findOne().isAuth;
+        var userId, name, initials;
 
-        if (isAuth) {
-            debugger;
+        if (!Settings.findOne().isAuth) {
+            name = $(arguments[1].find('[name="member__new__name"]')).val();
+            initials = $(arguments[1].find('[name="member__new__initials"]')).val();
+            Meteor.call('addUserToProject', {name: name, initials: initials}, App.defaults.project);
         }
         else {
             userId = $(arguments[1].find('[name="site-members"]')).val();

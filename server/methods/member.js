@@ -28,14 +28,21 @@ Meteor.methods({
             Meteor.users.update({_id: userId}, {$set: {projects: projects}});
         }
     },
-    addUserToProject: function (userId, projectName) {
-        var user, project;
+    addUserToProject: function (input, projectName) {
+        var user, userId = input, project;
 
-        if ( userId && (project = hasPermissionsInProject(projectName)) !== null) {
-            user = Meteor.users.findOne({_id: userId});
-
-            user.projects.push(project._id);
-            Meteor.users.update({_id: userId}, {$set: {projects: user.projects}});
+        if ( input && (project = hasPermissionsInProject(projectName)) !== null) {
+            if (typeof(userId) === 'object') {
+                Members.upsert(
+                    {initials: input.initials, projectId: project._id},
+                    {$set: { profile: {name: input.name}, initials: input.initials, projects: [project._id]}}
+                );
+            }
+            else {
+                user = Meteor.users.findOne({_id: userId});
+                user.projects.push(project._id);
+                Meteor.users.update({_id: userId}, {$set: {projects: user.projects}});
+            }
         }
     }
 });

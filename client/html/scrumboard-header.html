@@ -1,7 +1,7 @@
 <template name="scrumboardHeader">
     <header class="scrumboard__header">
-        {{#if hasUserPermissions}}
-            <a add-task class="btn add-task {{addTaskState}}" title="Create new task">+ new task</a>
+        {{#if isAuthenticated}}
+            <a add-task class="btn add-task" title="Create new task">+ new task</a>
         {{/if}}
 
         <!--<a add-task class="btn add-github-issues" title="Create task from Github">new task</a>-->
