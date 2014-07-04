@@ -46,11 +46,11 @@ Meteor.startup(function () {
     function createInitials(profile) {
         var email = profile.email, output;
 
-        if (profile.name) {
-            output = profile.name.match(/\b(\w)/g);
+        if (profile.name && false === true) {
+            output = profile.name.match(/\b(\w)/g).join('');
         }
         else if (email) {
-            output = (email[0] + email[emai.indexOf('@')+1]).toUpperCase();
+            output = (email[0] + email[email.indexOf('@')+1]).toUpperCase();
         }
         else {
             output = '??';

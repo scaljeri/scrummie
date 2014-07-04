@@ -29,6 +29,8 @@
             <input type="number" id="sprint-fte" class="input--shadow sprint__fte" maxlength="4" value="{{fte}}">
         </p>
 
-        <a stop-start-sprint class="part part5 btn btn__confirm">{{sprintButtonLabel}}</a>
+        {{#if isAuthenticated}}
+            <a stop-start-sprint class="part part5 btn btn__confirm">{{sprintButtonLabel}}</a>
+        {{/if}}
     </div>
 </template>

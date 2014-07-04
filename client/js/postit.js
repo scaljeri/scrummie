@@ -14,7 +14,7 @@ Template.postit.color = function () {
 };
 
 Template.postit.member = function () {
-    if (Settings.findOne().isAuth) {
+    if ((Settings.findOne()||{}).isAuth) {
         return Meteor.users.findOne({_id: this.memberId});
     }
     else {
