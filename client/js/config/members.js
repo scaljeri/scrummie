@@ -54,9 +54,12 @@ Template.configMembers.events = {
         var userId, name, initials;
 
         if (!Settings.findOne().isAuth) {
-            name = $(arguments[1].find('[name="member__new__name"]')).val();
-            initials = $(arguments[1].find('[name="member__new__initials"]')).val();
-            Meteor.call('addUserToProject', {name: name, initials: initials}, App.defaults.project);
+            name = $(arguments[1].find('[name="member__new__name"]'));
+            initials = $(arguments[1].find('[name="member__new__initials"]'));
+            Meteor.call('addUserToProject', {name: name.val(), initials: initials.val()}, App.defaults.project);
+
+            name.val('');
+            initials.val('');
         }
         else {
             userId = $(arguments[1].find('[name="site-members"]')).val();
