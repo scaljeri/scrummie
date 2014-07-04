@@ -3,7 +3,15 @@ Meteor.startup(function () {
     var project = Projects.findOne({name: projectName});
 
     if (project) {
-        return Members.find({projectId: project._id}, {sort: {'profile.name': 1}});
+        return Members.find({$and: [
+                {projectId: project._id},
+                {$or: [
+                    {deleted: {$exists: false}},
+                    {deleted: false}
+                ]}
+            ]},
+            {sort: {'profile.name': 1}}
+        );
     }
   });
 });

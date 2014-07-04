@@ -9,7 +9,7 @@
                         <span class="member__name">{{profile.name}}</span>
                         <span class="member__initials">({{initials}})</span>
                         {{#unless isOnlyMember}}
-                            <span member__remove class="btn member__remove" data-userid="{{_id}}">X</span>
+                            <span user__remove class="btn user__remove" data-userid="{{_id}}">X</span>
                         {{/unless}}
                     </li>
                 {{/each}}
@@ -17,9 +17,9 @@
         {{else}}
             <ol class="part part1 no-auth-members">
                 {{#each noAuthMembers}}
-                    <li data-id="{{_id}}">
-                        <input class="input--shadow member__name" value="{{profile.name}}">
-                        <input class="input--shadow member__initials" maxlength="3" value="{{initials}}">
+                    <li no-auth-member data-id="{{_id}}">
+                        <input no-auth-member__name class="input--shadow member__name" value="{{profile.name}}">
+                        <input no-auth-member__initials class="input--shadow member__initials" maxlength="3" value="{{initials}}">
                         <span member__remove class="btn member__remove">X</span>
                     </li>
                 {{/each}}

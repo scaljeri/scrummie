@@ -46,7 +46,7 @@ Meteor.startup(function () {
     function createInitials(profile) {
         var email = profile.email, output;
 
-        if (profile.name && false === true) {
+        if (profile.name) {
             output = profile.name.match(/\b(\w)/g).join('');
         }
         else if (email) {

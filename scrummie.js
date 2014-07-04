@@ -38,9 +38,9 @@ if (Meteor.isClient) {
         deps: {},
         outsideClick: {
             list: [],
-            register: function (selector, callback) {
+            register: function (selector, callback, notDirty) {
                 this.remove(callback);
-                this.list.push({ selector: selector, callback: callback, dirty: true});
+                this.list.push({ selector: selector, callback: callback, dirty: notDirty === undefined ? true : false});
             },
             remove: function (callback) {
                 this.list = _.filter(this.list, function (item) {

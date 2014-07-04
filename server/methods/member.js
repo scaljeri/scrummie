@@ -11,6 +11,11 @@ Meteor.methods({
             Meteor.users.update({_id: user._id}, {$set: {profile: user.profile}});
         }
     },
+    removeMemberFromProject: function (memberId, projectName) {
+        if ( memberId && hasPermissionsInProject(projectName) !== null) {
+            Members.update({_id: memberId}, {$set: {deleted: true}});
+        }
+    },
     removeUserFromProject: function (userId, projectName) {
         var i, user, project, projects;
 
@@ -28,15 +33,20 @@ Meteor.methods({
             Meteor.users.update({_id: userId}, {$set: {projects: projects}});
         }
     },
-    addUserToProject: function (input, projectName) {
-        var user, userId = input, project;
+    upsertUserToProject: function (input, projectName) {
+        var user, userId = input, project, query;
 
         if ( input && (project = hasPermissionsInProject(projectName)) !== null) {
             if (typeof(userId) === 'object') {
-                Members.upsert(
-                    {initials: input.initials, projectId: project._id},
-                    {$set: { profile: {name: input.name}, initials: input.initials, projects: [project._id]}}
-                );
+                if (input._id) {
+                    Members.update({_id: input._id}, {$set: { profile: {name: input.name}, initials: input.initials, projects: [project._id]}});
+                }
+                else if (input.name) {
+                    if (!input.initials) {
+                        input.initials = input.name.match(/\b(\w)/g).join('');
+                    }
+                    Members.insert({profile: {name: input.name}, initials: input.initials, projectId: project._id});
+                }
             }
             else {
                 user = Meteor.users.findOne({_id: userId});

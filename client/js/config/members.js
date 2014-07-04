@@ -2,8 +2,7 @@ Template.configMembers.noAuthMembers = function () {
     var project = Projects.findOne();
 
     if (project) {
-        //return Members.find({projects: {$in: [project._id]}}).fetch();
-        return Members.find({projectId: project._id}, {sort: {'profile.name':1}}).fetch();
+        return Members.find({projectId: project._id}, {sort: {'profile.name': 1}}).fetch();
     }
     return null;
 };
@@ -24,17 +23,17 @@ Template.configMembers.siteMembers = function () {
                     width: '50%'
                 });
             }
-        },0);
+        }, 0);
         return Meteor.users.find({projects: {$nin: [project._id]}}).fetch();
     }
 };
 
 Template.configMembers.projectMembers = function () {
-   var project = Projects.findOne();
+    var project = Projects.findOne();
 
-   if (project) {
-       return Meteor.users.find({projects: {$in: [project._id]}}).fetch();
-   }
+    if (project) {
+        return Meteor.users.find({projects: {$in: [project._id]}}).fetch();
+    }
 };
 
 Template.configMembers.isOnlyMember = function () {
@@ -50,13 +49,33 @@ Template.configMembers.closing = function () {
 };
 
 Template.configMembers.events = {
-    'click [add-member]' : function () {
+    'click [add-member]': function () {
         var userId, name, initials;
 
         if (!Settings.findOne().isAuth) {
             name = $(arguments[1].find('[name="member__new__name"]'));
             initials = $(arguments[1].find('[name="member__new__initials"]'));
-            Meteor.call('addUserToProject', {name: name.val(), initials: initials.val()}, App.defaults.project);
+
+            if (name.val() !== '') {
+                Meteor.call('upsertUserToProject', {name: name.val(), initials: initials.val()}, App.defaults.project);
+            }
+            else { // Loop through all members and check if their name/initials changed
+                $('[no-auth-member]').each(function () {
+                    var self = $(this),
+                        id = self.attr('data-id'),
+                        member = Members.findOne({_id: id}),
+                        name = self.find('[no-auth-member__name]').val(),
+                        initials = self.find('[no-auth-member__initials]').val();
+
+                    if (name !== member.profile.name || initials !== member.initials) {
+                        Meteor.call('upsertUserToProject',
+                            { name: name,
+                              initials: initials,
+                              _id: id
+                            }, App.defaults.project);
+                    }
+                });
+            }
 
             name.val('');
             initials.val('');
@@ -66,13 +85,17 @@ Template.configMembers.events = {
             Meteor.call('addUserToProject', userId, App.defaults.project);
         }
     },
-    'click .accordion__item__wrapper' : function () {
+    'click [member__remove]': function () {
+        var memberId = $(arguments[0].target).closest('[no-auth-member]').attr('data-id');
+        Meteor.call('removeMemberFromProject', memberId, App.defaults.project);
+    },
+    'click .accordion__item__wrapper': function () {
         $('[members-dropdown]').select2('close');
     },
-    'click .title' : function () {
+    'click .title': function () {
         $('[members-dropdown]').select2('close');
     },
-    'click [member__remove]' : function () {
+    'click [user__remove]': function () {
         var userId = $(arguments[0].target).attr('data-userid');
         Meteor.call('removeUserFromProject', userId, App.defaults.project);
     }
