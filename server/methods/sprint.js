@@ -8,7 +8,8 @@ Meteor.methods({
           projectId: project._id,
           startdate: sprint.startdate,
           enddate: sprint.enddate,
-          active: sprint.active
+          active: sprint.active,
+          fte: sprint.fte
         }
       });
 

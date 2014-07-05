@@ -1,11 +1,12 @@
 <template name="configSprint">
     <h3 class="title">Sprint</h3>
 
+    {{#with sprint}}
     <div accordion__item__wrapper class="accordion__item__wrapper">
         <p class="part part1">
             <label class="label" for="sprint-number">Sprint number:</label>
             <input type="number" id="sprint-number" class="input--shadow sprint__number" sprint-number
-            {{readonlySprintNumber}} maxlength="3" value="{{sprintNumber}}">
+                {{isReadonly}} maxlength="3" value="{{sprintNumber}}">
         </p>
 
         <p class="part part2">
@@ -26,11 +27,12 @@
 
         <p class="part part4">
             <label class="label" for="sprint-fte">FTE:</label>
-            <input type="number" id="sprint-fte" class="input--shadow sprint__fte" maxlength="4" value="{{fte}}">
+            <input sprint-fte {{isReadonly}} type="number" id="sprint-fte" class="input--shadow sprint__fte" maxlength="4" value="{{fte}}">
         </p>
 
         {{#if hasPermissionsInProject}}
             <a stop-start-sprint class="part part5 btn btn__confirm">{{sprintButtonLabel}}</a>
         {{/if}}
     </div>
+    {{/with}}
 </template>

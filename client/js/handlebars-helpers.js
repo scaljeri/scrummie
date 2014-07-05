@@ -73,6 +73,10 @@ Handlebars.registerHelper('taskLink', function (link, taskTitle) {
     return output;
 });
 
+Handlebars.registerHelper('isReadonly', function () {
+    return hasPermissionsInProject(App.defaults.project) === null ? 'readonly' : null;
+});
+
 Handlebars.registerHelper('isAuthenticated', function () {
     return isAuthenticated();
 });
