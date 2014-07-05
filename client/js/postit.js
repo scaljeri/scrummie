@@ -41,10 +41,14 @@ Template.postit.rendered = function () {
     });
 
     if (postit) {
-        Deps.autorun(function () {
+        this.watchPostit = Deps.autorun(function () {
             postit.draggable("option", "disabled", !isDocumentEditable(this.data));
         }.bind(this));
     }
+};
+
+Template.postit.destroyed = function () {
+    this.watchPostit.stop();
 };
 
 Template.postit.events = {
