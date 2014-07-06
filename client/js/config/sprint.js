@@ -67,6 +67,12 @@ Template.configSprint.destroyed = function () { // TODO: Find out why this funct
 };
 
 Template.configSprint.events = {
+    'click [calendar--start]': function (e) {
+        $(e.target).datepicker('show');
+    },
+    'click [calendar--end]': function (e) {
+        $(e.target).datepicker('show');
+    },
     'click [stop-start-sprint]': function () {
         var sprintNumber = $('[sprint-number]').removeClass('error'),
             startdate = $('[start-date]'),
