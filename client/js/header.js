@@ -23,11 +23,3 @@ Template.header.rendered = function () {
         $('[add-task]').removeClass('active');
     });
 };
-
-Template.header.events = {
-    'click [config]': function () {
-        if (App.page === 'scrumboard') {
-            Template.projectConfig.show();
-        }
-    }
-};

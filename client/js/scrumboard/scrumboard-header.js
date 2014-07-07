@@ -23,5 +23,10 @@ Template.scrumboardHeader.events = {
       Template.manipTask.show();
       //event.stopPropagation();
     }
+  },
+  'click [project-setup]': function () {
+    if (App.page === 'scrumboard') {
+        Template.projectConfig.show();
+    }
   }
 };

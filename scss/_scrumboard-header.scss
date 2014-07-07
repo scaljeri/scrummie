@@ -19,15 +19,26 @@
   }
 
   .postit-filter {
-    position: absolute;
-    right: 0;
     z-index: 1;
+    @include position(absolute, 0 40px 0 0);
 
     .postit-filter__label {
       color: $button-bg;
       font: 300 15px/15px $font-normal;
       vertical-align: middle;
     }
+  }
+
+  .project-setup {
+    cursor: pointer;
+    display: inline-block;
+    background-image: url($config-icon);
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    padding: 0 0 0 10px;
+    @include position(absolute, 0 0px 0 0);
+    @include size(20px, 100%);
   }
 
   .scrumboard__header__title {
