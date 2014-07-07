@@ -28,3 +28,10 @@ at [pledgie](https://pledgie.com/campaigns/25781)
 You can find a demo [here](http://scrummie.meteor.com)
 
 ![Scrummie Logo](/public/img/scrummie-logo-big.png)
+
+![Scrummie projects overview](/docs/img/scrummie-projects.png)
+
+![Scrummie scrumboard](/docs/img/scrummie-scrumboard.png)
+
+![Scrummie project setup](/docs/img/scrummie-setup.png)
+
