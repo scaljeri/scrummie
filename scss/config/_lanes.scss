@@ -1,1 +1,52 @@
-.config-lanes {}
+.config-lanes {
+  .config-lanes__item {
+    margin: 0 3px 3px 3px;
+    padding: 0.4em;
+    padding-left: 5px;
+    font-size: 1.4em;
+    height: 30px;
+    border: 1px solid #d3d3d3;
+    background: #e6e6e6;
+
+    &:hover {
+      .config-lanes__item__edit,
+      .config-lanes__item__trash {
+        display: block;
+      }
+    }
+
+    .config-lanes__item__edit,
+    .config-lanes__item__trash {
+      display: none;
+      float: right;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: 15px 15px;
+      @include size(20px, 30px);
+
+      &:hover {
+        background-size: 20px 20px;
+      }
+
+      &:active {
+        background-size: 15px 15px;
+      }
+    }
+  }
+
+  .config-lanes__item__edit {
+    background-image: url($icon-edit);
+  }
+
+  .config-lanes__item__trash {
+    background-image: url($icon-trash);
+  }
+
+  .config-lanes__item__title {
+    font-size: 20px;
+    color: rgb(85, 85, 85);
+    float: left;
+    line-height: 28px;
+  }
+}
+
