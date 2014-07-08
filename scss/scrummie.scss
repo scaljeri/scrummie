@@ -3,6 +3,8 @@
 @import 'reset';
 @import 'form';
 
+@import 'base';
+
 @import 'widgets/select2';
 @import 'widgets/select2-colors';
 @import 'widgets/button';
@@ -29,9 +31,7 @@
 @import 'config/members';
 @import 'config/lanes';
 @import 'config/colors';
-
 @import 'user-logged-in';
-
 
 * {
   box-sizing: border-box;
