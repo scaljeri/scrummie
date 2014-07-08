@@ -1,5 +1,5 @@
 Template.configSprint.sprint = function () {
-    return getLastSprint();
+    return getLastSprint()||{};
 };
 
 Template.configSprint.sprintNumber = function () {
@@ -15,7 +15,7 @@ Template.configSprint.isReadonly = function () {
     var output = 'readonly',
         sprint = getLastSprint();
 
-    if (sprint && !sprint.active) {
+    if (!sprint || !sprint.active) {
         output = null;
     }
 
@@ -45,7 +45,7 @@ Template.configSprint.initialize = function () {
         var sprint = getLastSprint(),
             isDisabled = true;
 
-        if (sprint && !sprint.active && hasPermissionsInProject(App.defaults.project)) {
+        if ((!sprint || !sprint.active) && hasPermissionsInProject(App.defaults.project)) {
             isDisabled = false;
         }
 

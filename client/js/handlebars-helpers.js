@@ -7,9 +7,12 @@ Handlebars.registerHelper('scrumboardView', function () {
 Handlebars.registerHelper('scrumboardState', function () {
     return App.scrumboard.readonly === true ? 'scrumboard--readonly' : '';
 });
+
+/*
 Handlebars.registerHelper('isReadonly', function () {
     return App.scrumboard.readonly;
 });
+*/
 
 /*
  {{#each states}}
