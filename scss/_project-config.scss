@@ -1,7 +1,7 @@
 .project-config {
   color: #fff;
   transition-duration: 500ms;
-  transition-property: right;
+  transition-property: transform;
   z-index: $on-top;
   @include position(absolute, 0px -350px 0 0);
   @include size(350px, 100%);
@@ -156,7 +156,7 @@
   }
 
   &.visible {
-    transform: translate3d(0,0,0);
+    transform: translate3d(-350px,0,0);
   }
 
   .title {
