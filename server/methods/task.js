@@ -130,9 +130,10 @@ function upsertTask(projectId, task) {
     }
     task.sprintNumber = parseInt(task.sprintNumber); // TODO: is this really necessary
     task.updated = new Date().getTime();
+    task.inserted = task.updated;
     task.projectId = projectId;
     task.creatorId = (Meteor.user()||{})._id;
-    taks.createdInSprint = parseInt(task.sprintNumber);
+    task.createdInSprint = parseInt(task.sprintNumber);
 
     _id = task._id;
     delete task._id;
