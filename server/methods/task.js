@@ -15,10 +15,13 @@ Meteor.methods({
 
             if (project) {
                 if (Array.isArray(task.color)) {
-                    var colors = task.color;
+                    var colors = task.color, x = 0, y = 8;
+
                     for (var i = 0; i < colors.length; i++) {
                         task.color = colors[i];
                         delete task._id; // is this needed ?
+                        task.x = (x += 3);
+                        task.y = (y += 3);
                         if ((retVal = upsertTask(project._id, task)).status === 'error') {
                             break;
                         }
@@ -71,7 +74,8 @@ Meteor.methods({
                     x: task.x,
                     y: task.y,
                     updated: new Date().getTime(),
-                    laneId: task.laneId
+                    laneId: task.laneId,
+                    moves: (origTask.moves||0) + 1
                 },
                 lane = LanesSetup.findOne({_id: task.laneId});
 
@@ -118,12 +122,17 @@ function upsertTask(projectId, task) {
 
         var lane = LanesSetup.findOne({projectId: projectId, index: 0}); // find first lane
         task.laneId = lane._id;
-        task.x = 0;
-        task.y = 5;
+
+        if (task.x === undefined) {
+            task.x = 0;
+            task.y = 5;
+        }
     }
     task.sprintNumber = parseInt(task.sprintNumber); // TODO: is this really necessary
     task.updated = new Date().getTime();
     task.projectId = projectId;
+    task.creatorId = (Meteor.user()||{})._id;
+    taks.createdInSprint = parseInt(task.sprintNumber);
 
     _id = task._id;
     delete task._id;
