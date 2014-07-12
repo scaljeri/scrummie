@@ -10,6 +10,7 @@
     "mongodb-server-aggregation": {},
     "npm": {},
     "reactive-publish": {},
-    "reststop2": {}
+    "reststop2": {},
+    "kadira": {}
   }
 }
