@@ -9,5 +9,7 @@ Meteor.startup(function () {
     if (document) {
       return TaskColorsSetup.find({projectId: document._id}, {sort: {index: 1}});
     }
+
+    this.ready();
   });
 });

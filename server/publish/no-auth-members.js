@@ -13,5 +13,8 @@ Meteor.startup(function () {
             {sort: {'profile.name': 1}}
         );
     }
+    else {
+        return this.ready();
+    }
   });
 });

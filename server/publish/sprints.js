@@ -11,5 +11,7 @@ Meteor.startup(function () {
       //return Sprints.find({ startDate: {$gt: new Date().getTime()}, endDate: { $lt: new Date().getTime()}});
       return Sprints.find(query, {limit: 1, sort: {sprintNumber: -1}});
     }
+
+    this.ready();
   });
 });

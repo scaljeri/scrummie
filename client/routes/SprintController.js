@@ -107,7 +107,7 @@ SprintController = RouteController.extend({
             this.render('header', { to: 'header-section'});
         }
         else {
-            ;//this.render('loading');
+            this.render('loading');
         }
     }
 });

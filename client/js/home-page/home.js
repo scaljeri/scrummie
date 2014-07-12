@@ -1,13 +1,14 @@
 var error = null,
     fileData, fileInfo;
 
-Template.home.projects = function () {
-    return Projects.find({}, {sort: {name: 1}});
-};
-
-Template.home.errorMsg = function () {
-    return error;
-};
+Template.home.helpers({
+    projects: function () {
+        return Projects.find({}, {sort: {name: 1}});
+    },
+    errorMsg: function () {
+        return error;
+    }
+});
 
 Template.home.events = {
     'mousedown [submit-project]': function (e) {

@@ -9,5 +9,8 @@ Meteor.startup(function () {
     if (document) {
       return LanesSetup.find({projectId: document._id}, {sort: {index: 1}});
     }
+    else {
+        return this.ready();
+    }
   });
 });

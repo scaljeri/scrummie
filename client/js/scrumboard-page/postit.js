@@ -1,26 +1,27 @@
-Template.postit.zIndex = function () {
-    if (this.updated) {
-        //1396695841955 --> "95841"
-        return this.updated.toString().replace(/^\d{4}|\d{3}$/g, '');
-    }
-};
+Template.postit.helpers({
+    zIndex: function () {
+        if (this.updated) {
+            //1396695841955 --> "95841"
+            return this.updated.toString().replace(/^\d{4}|\d{3}$/g, '');
+        }
+    },
+    isVisible: function () {
+        return !!App.colorFilter || this.color in App.colorFilter;
+    },
+    color: function () {
+        console.log("COLORS: %j", TaskColorsSetup.findOne({_id: this.colorId}));
 
-Template.postit.isVisible = function () {
-    return !!App.colorFilter || this.color in App.colorFilter;
-};
-
-Template.postit.color = function () {
-    return TaskColorsSetup.findOne({_id: this.colorId});
-};
-
-Template.postit.member = function () {
-    if ((Settings.findOne()||{}).isAuth) {
-        return Meteor.users.findOne({_id: this.memberId});
+        return TaskColorsSetup.findOne({_id: this.colorId});
+    },
+    member: function () {
+        if ((Settings.findOne() || {}).isAuth) {
+            return Meteor.users.findOne({_id: this.memberId});
+        }
+        else {
+            return Members.findOne({_id: this.memberId});
+        }
     }
-    else {
-        return Members.findOne({_id: this.memberId});
-    }
-};
+});
 
 Template.postit.projectName = function () {
     return App.defaults.project;
