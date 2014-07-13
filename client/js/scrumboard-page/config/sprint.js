@@ -103,10 +103,8 @@ Template.configSprint.events = {
 
         if (!error) {
             // Change subscriptions sprint number
-            App.subs.tasks.stop();
-            App.subs.taskPositions.stop();
-            App.subs.tasks = Meteor.subscribe('tasks', App.defaults.project, (sprint === undefined ? sprintNumber : -3));
-            App.subs.taskPositions = Meteor.subscribe('task-positions', App.defaults.project, (sprint === undefined ? sprintNumber : -3));
+            subs.subscribe('tasks', App.defaults.project, (sprint === undefined ? sprintNumber : -3));
+            subs.subscribe('task-positions', App.defaults.project, (sprint === undefined ? sprintNumber : -3));
 
             Meteor.call('upsertSprint', App.defaults.project, {
                 sprintNumber: sprintNumber,

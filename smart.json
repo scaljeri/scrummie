@@ -11,6 +11,7 @@
     "npm": {},
     "reactive-publish": {},
     "reststop2": {},
-    "kadira": {}
+    "kadira": {},
+    "subs-manager": {}
   }
 }

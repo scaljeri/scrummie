@@ -9,37 +9,17 @@ SprintController = RouteController.extend({
     waitOn: function () {
         var project = App.defaults.project = this.params.project;
 
-        if (App.subs) {
-            for (name in App.subs) {
-                App.subs[name].stop();
-            }
-        }
-
-        App.subs = {
-            settings: Meteor.subscribe('settings', project),
-            projects: Meteor.subscribe('projects', project),
-            sprint: Meteor.subscribe('sprint', project),
-            lanes: Meteor.subscribe('lanes'),
-            taskColors: Meteor.subscribe('task-colors'),
-            noAuthMembers: Meteor.subscribe('no-auth-members', project),
-            lanesSetup: Meteor.subscribe('lanes-setup', project),
-            taskColorsSetup: Meteor.subscribe('task-colors-setup', project),
-            taskPositions: Meteor.subscribe('task-positions', project),
-            tasks: Meteor.subscribe('tasks', project),
-            users: Meteor.subscribe('users')
-        };
         return [
-            App.subs.settings,
-            App.subs.projects,
-            App.subs.lanes,
-            App.subs.taskColors,
-            App.subs.noAuthMembers,
-            App.subs.lanesSetup,
-            App.subs.taskColorsSetup,
-            App.subs.tasks,
-            App.subs.taskPositions,
-            //App.subs.userData
-            App.subs.user
+            subs.subscribe('settings', project),
+            subs.subscribe('projects', project),
+            subs.subscribe('sprint', project),
+            subs.subscribe('lanes'),
+            subs.subscribe('no-auth-members', project),
+            subs.subscribe('lanes-setup', project),
+            subs.subscribe('task-colors-setup', project),
+            subs.subscribe('task-positions', project),
+            subs.subscribe('tasks', project),
+            subs.subscribe('users')
         ];
     },
     data: function () {  // or a function
