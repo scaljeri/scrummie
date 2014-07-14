@@ -8,38 +8,44 @@
 <template name="manipTask">
     <form manip-task class="manip-task">
         {{#if task._id}}
-            <input name="_id" type="hidden" value="{{task._id}}">
-            <input name="sprintNumber" type="hidden" value="{{task.sprintNumber}}">
+        <input name="_id" type="hidden" value="{{task._id}}">
+        <input name="sprintNumber" type="hidden" value="{{task.sprintNumber}}">
         {{/if}}
         <p>
-            <input type="text" name="title" value="{{task.title}}" placeholder="Title" class="input--shadow task__title">
-            <input type="text" name="fte" maxlength="3" value="{{task.fte}}" placeholder="PTS" class="input--shadow task__fte">
+            <input type="text" name="title" value="{{task.title}}" placeholder="Title"
+                   class="input--shadow task__title">
+            <input type="text" name="fte" maxlength="3" value="{{task.fte}}" placeholder="PTS"
+                   class="input--shadow task__fte">
         </p>
         <textarea name="description" placeholder="Description" class="textarea--shadow">{{task.description}}</textarea>
 
         <select dropdown colors multiple class="dropdown" name="color">
             {{#each colors}}
-                <option value="{{value}}">{{title}}</option>
+            <option value="{{value}}">{{title}}</option>
             {{/each}}
         </select>
 
         <select dropdown members class="dropdown" name="memberId">
-            <option></option> <!-- required for placeholder -->
+            <option></option>
+            <!-- required for placeholder -->
             {{#each members}}
-                <option value="{{_id}}">{{profile.name}}</option>
+            <option value="{{_id}}">{{profile.name}}</option>
             {{/each}}
         </select>
 
         <input type="text" name="link" value="{{task.link}}" placeholder="Link" class="input--shadow">
 
-        <a save-task class="btn btn__confirm save-task">Save</a>
 
-        {{#if task}}
-            {{#unless isReadonly}}
-                <a cancel-task class="btn cancel-task">Cancel</a>
-                <a delete-task class="btn delete-task">Delete</a>
-                <a clone-task class="btn clone-task">Clone</a>
-            {{/unless}}
-        {{/if}}
+        <p class="button-group">
+            {{#if task}}
+                {{#unless isReadonly}}
+                    <a cancel-task class="btn cancel cancel-task">Cancel</a>
+                    <a delete-task class="btn delete delete-task">Delete</a>
+                    <a clone-task class="btn default clone-task">Clone</a>
+                {{/unless}}
+            {{/if}}
+
+            <a save-task class="btn confirm save-task">Save</a>
+        </p>
     </form>
 </template>

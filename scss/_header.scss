@@ -44,6 +44,9 @@
       bottom: 5px;
     }
 
+    &:first-child {
+      padding: 0;
+    }
     &:last-child:before {
       border-width: 0;
     }

@@ -1,11 +1,13 @@
 .login {
+  color: $text;
   display: inline-block;
-  margin-right: 10px;
+  text-align: left;
+  padding-left: 9px;
 
   .login__name {
-    color: $text;
     cursor: pointer;
     font: 300 15px/23px Lato;
+    padding-right: 25px;
 
     &::after {
       content: '';
@@ -16,20 +18,32 @@
       border-top-color: $text-lighter;
     }
   }
+
+  &.showing {
+    background-color: $default;
+    color: #fff;
+  }
 }
 
 .login__dropdown {
-  background-color: #fff;
+  background-color: $default;
+  color: #fff;
   border-radius: 2px;
-  box-shadow: 0px 0px 11px 0px #323232;
   display: none;
-  padding: 10px;
-  width: 100px;
+  font-weight: 100;
+  text-align: left;
+  width: 100%;
   z-index: $on-top;
-  @include position(absolute, 0 0px 0 0);
+
+  padding-left: -9px;
 
   .login__dropdown__item {
     cursor: pointer;
-    margin-bottom: 5px;
+    padding: 6px;
+    border-top: 1px solid $cancel;
+
+    &:first-child {
+      margin-top: 10px;
+    }
   }
 }

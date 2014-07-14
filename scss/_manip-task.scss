@@ -25,16 +25,44 @@
     margin-bottom: 10px;
   }
 
+  .button-group {
+    display: flex;
+  }
+
+  .save-task,
   .cancel-task,
   .clone-task,
   .delete-task {
-    margin-top: 5px;
-    width: 30%;
+    flex: 1;
+    margin: 2px;
+    padding: 6px 0 7px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
   .clone-task,
   .delete-task {
-    margin-left: 11px;
+  }
+
+  .save-task {
+    background-color: $confirm;
+  }
+
+  .cancel-task {
+    background-color: $cancel;
+  }
+
+  .delete-task {
+    background-color: $delete;
+  }
+
+  .clone-task {
+    background-color: $default;
   }
 
   .task__links-wrapper {
