@@ -8,18 +8,7 @@ HomeController = RouteController.extend({
       App.scrumboard.readonly = false;
     },
     waitOn: function () {
-        if (App.subs) {
-            for (name in App.subs) {
-                App.subs[name].stop();
-            }
-        }
-
-        App.subs = {
-            projects: Meteor.subscribe('projects'),
-            settings: Meteor.subscribe('settings')
-        };
-
-        return [App.subs.projects, App.subs.settings];
+        return [subs.subscribe('projects'), subs.subscribe('settings')];
     },
     data: function () {  // or a function
         return { pageCls: 'page-scrumboard'};

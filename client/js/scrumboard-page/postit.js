@@ -9,8 +9,6 @@ Template.postit.helpers({
         return !!App.colorFilter || this.color in App.colorFilter;
     },
     color: function () {
-        console.log("COLORS: %j", TaskColorsSetup.findOne({_id: this.colorId}));
-
         return TaskColorsSetup.findOne({_id: this.colorId});
     },
     member: function () {

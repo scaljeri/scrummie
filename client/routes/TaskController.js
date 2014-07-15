@@ -8,31 +8,15 @@ TaskController = RouteController.extend({
     var projectName  = App.defaults.project = this.params.project,
         taskId    = this.params.id;
 
-   if (App.subs) {
-      for (name in App.subs) {
-        App.subs[name].stop();
-      }
-    }
-
-    App.subs = {
-      settings: Meteor.subscribe('settings', projectName),
-      projects: Meteor.subscribe('projects', projectName),
-      task: Meteor.subscribe('task', projectName, taskId),
-      members: Meteor.subscribe('members', projectName, taskId),
-      comments: Meteor.subscribe('comments', taskId ),
-      lanesSetup: Meteor.subscribe('lanes-setup', projectName),
-      taskColorsSetup: Meteor.subscribe('task-colors-setup', projectName),
-      users: Meteor.subscribe('users')
-    };
     return [
-      App.subs.settings,
-      App.subs.projects,
-      App.subs.task,
-      App.subs.members,
-      App.subs.comments,
-      App.subs.lanesSetup,
-      App.subs.taskColorsSetup,
-      App.subs.users
+      subs.subscribe('settings', projectName),
+      subs.subscribe('projects', projectName),
+      subs.subscribe('task', projectName, taskId),
+      subs.subscribe('members', projectName, taskId),
+      subs.subscribe('comments', taskId),
+      subs.subscribe('lanes-setup', projectName),
+      subs.subscribe('task-colors-setup', projectName),
+      subs.subscribe('user')
     ];
   },
   start: function () {
