@@ -35,8 +35,6 @@ if (Meteor.isClient) {
         expireIn: 5
     });
 
-    Settings = new Meteor.Collection('settings');
-
     App = {
         defaults: {},
         noob: function () {},
@@ -126,6 +124,8 @@ if (Meteor.isServer) {
              });
              */
         }
+
+        Settings.insert({ x: 10});
 
         if (TaskColors.find({}).count() === 0) {
             TaskColors.insert({ value: '#ffff92', title: 'Frontend', index: 0});
