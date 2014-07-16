@@ -8,6 +8,7 @@ HomeController = RouteController.extend({
       App.scrumboard.readonly = false;
     },
     waitOn: function () {
+        App.defaults = {};
         return [subs.subscribe('projects'), subs.subscribe('settings')];
     },
     data: function () {  // or a function

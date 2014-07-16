@@ -6,7 +6,8 @@ StatsController = RouteController.extend({
     },
     data: { pageCls: 'page-statistics'},
     waitOn: function () {
-        var project = App.defaults.project = this.params.project;
+        var project = this.params.project;
+        App.defaults = {project: project};
 
         if (App.subs) {
             for (name in App.subs) {

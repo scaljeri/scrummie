@@ -1,5 +1,5 @@
 Template.configColors.colors = function () {
-    return TaskColorsSetup.find({}, {sort: {index: 1}}).fetch();
+    return TaskColorsSetup.find(query(), {sort: {index: 1}}).fetch();
 };
 
 Template.configColors.rendered = function () {

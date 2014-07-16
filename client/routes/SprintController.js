@@ -7,7 +7,8 @@ SprintController = RouteController.extend({
         App.scrumboard.readonly = false;
     },
     waitOn: function () {
-        var project = App.defaults.project = this.params.project;
+        var project = this.params.project;
+        App.defaults = {project: project}; // reset App.defaults
 
         return [
             subs.subscribe('settings', project),
@@ -42,9 +43,9 @@ SprintController = RouteController.extend({
                 window.location.replace('/');
             }
 
-            var strs = (window.location.search.match(/([^\?=&]+=[^=&]+)/g) || []),
-                sprint = Sprints.find({project: App.defaults.project, active: true});
+            var strs = (window.location.search.match(/([^\?=&]+=[^=&]+)/g) || []);
 
+            var sprint = Sprints.find(query({active: true}));
             if (sprint) {
                 App.defaults.sprintNumber = sprint.sprintNumber;
             }
@@ -62,10 +63,11 @@ SprintController = RouteController.extend({
                     colors = splitted[1].split(/,/);
                     colors.forEach(function (color) {
                         re = new RegExp(color);
-                        result = TaskColors.findOne({$or: [
+                        // TODO: Does this query work
+                        result = TaskColors.findOne(query({$or: [
                             {title: re},
                             {value: re}
-                        ] });
+                        ] }));
                         if (result) {
                             App.defaults.colors.push(result.value);
                         }
@@ -73,10 +75,10 @@ SprintController = RouteController.extend({
                 }
                 else if (splitted[0] === 'member') {
                     re = RegExp(splitted[1]);
-                    result = Members.findOne({$or: [
+                    result = Members.findOne(query({$or: [
                         {name: re},
                         {initials: re}
-                    ]});
+                    ]}));
 
                     if (result) {
                         App.defaults.member = result._id;

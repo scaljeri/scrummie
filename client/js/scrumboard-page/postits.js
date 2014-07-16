@@ -4,7 +4,7 @@ Template.postits.items = function () {
         searchOps.colorId = App.filterColorId;
     }
 
-    return Tasks.find(searchOps, { sort: {index: 1}}).fetch();
+    return Tasks.find(query(searchOps), { sort: {index: 1}}).fetch();
 };
 
 Template.postits.rendered = function (t) {
@@ -18,7 +18,7 @@ Template.postits.rendered = function (t) {
                 left = parseInt(ui.draggable.css('left')),
                 top = parseInt(ui.draggable.css('top')),
                 task = Tasks.findOne({_id: taskId}),
-                firstLaneId = Lanes.findOne({index: 0})._id;
+                firstLaneId = LanesSetup.findOne({index: 0})._id;
 
             width = $('[scrumboard]').width();
             height = $('[scrumboard]').height();

@@ -15,7 +15,7 @@ Template.header.showConfig = function () {
 */
 
 Template.header.sprint = function () {
-    return Sprints.findOne({ startdate: {$gt: new Date().getTime()}, enddate: { $lt: new Date().getTime()}});
+    return Sprints.findOne(query({ startdate: {$gt: new Date().getTime()}, enddate: { $lt: new Date().getTime()}}));
 };
 
 Template.header.rendered = function () {

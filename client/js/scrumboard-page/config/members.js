@@ -1,15 +1,8 @@
 Template.configMembers.noAuthMembers = function () {
-    var project = Projects.findOne();
-
-    if (project) {
-        return Members.find({projectId: project._id}, {sort: {'profile.name': 1}}).fetch();
-    }
-    return null;
+    return Members.find(query(), {sort: {'profile.name': 1}}).fetch();
 };
 Template.configMembers.siteMembers = function () {
-    var project = Projects.findOne();
-
-    if (project) {
+    if (App.defaults.projectId) {
         setTimeout(function () {
             var select = $('[members-dropdown]');
 
@@ -24,16 +17,12 @@ Template.configMembers.siteMembers = function () {
                 });
             }
         }, 0);
-        return Meteor.users.find({projects: {$nin: [project._id]}}).fetch();
+        return Meteor.users.find({projects: {$nin: [App.defaults.projectId]}}).fetch();
     }
 };
 
 Template.configMembers.projectMembers = function () {
-    var project = Projects.findOne();
-
-    if (project) {
-        return Meteor.users.find({projects: {$in: [project._id]}}).fetch();
-    }
+    return Meteor.users.find({projects: {$in: [App.defaults.projectId]}}).fetch();
 };
 
 Template.configMembers.isOnlyMember = function () {

@@ -1,3 +1,3 @@
 Template.taskMain.comments = function () {
-  return Comments.find({});
+  return Comments.find(query({/*TaskID*/}));
 };

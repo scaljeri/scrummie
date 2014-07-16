@@ -5,25 +5,24 @@ Template.manipTask.task = function () {
 };
 
 Template.manipTask.colors = function () {
-    return TaskColorsSetup.find({}, {sort: {index: 1}}).fetch();
+    return TaskColorsSetup.find(query(), {sort: {index: 1}}).fetch();
 };
 
 Template.manipTask.members = function () {
-    var project = Projects.findOne(),
-        settings = Settings.findOne();
+    var settings = Settings.findOne();
 
-    if (project) {
+    if (App.defaults.projectId) {
         if (settings && settings.isAuth) {
-            return Meteor.users.find({projects: {$in: [project._id]}}, {sort: {name: 1}}).fetch();
+            return Meteor.users.find({projects: {$in: [App.defaults.projectId]}}, {sort: {name: 1}}).fetch();
         }
         else {
-            return Members.find().fetch();
+            return Members.find(query()).fetch();
         }
     }
 };
 
 Template.manipTask.show = function (task, callback) {
-    var taskColors = [], memberId, members, select;
+    var taskColors = [], members, select;
 
     if (task && typeof task === 'function') {
         callback = task;
@@ -39,7 +38,7 @@ Template.manipTask.show = function (task, callback) {
 
         if (task) {
             select.removeAttr('multiple');
-            if (task.colorId) { // TODO: can happen now, but should not happen
+            if (task.colorId) {
                 taskColors = TaskColorsSetup.findOne({_id: task.colorId});
             }
         }

@@ -3,7 +3,7 @@ Template.scrumboardHeader.addTaskState = function () {
 };
 
 Template.scrumboardHeader.sprintNumber = function () {
-    var sprint = Sprints.findOne();
+    var sprint = Sprints.findOne(query());
     return sprint ? sprint.sprintNumber : '???';
 };
 

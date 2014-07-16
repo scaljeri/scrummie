@@ -1,5 +1,5 @@
 Template.configLanes.lanes = function () {
-    return LanesSetup.find({}, {sort: {index: 1}});
+    return LanesSetup.find(query(), {sort: {index: 1}});
 };
 
 Template.configLanes.rendered = function () {

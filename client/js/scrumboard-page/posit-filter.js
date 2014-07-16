@@ -1,5 +1,5 @@
 Template.postitFilter.colors = function () {
-    return TaskColors.find({}, {sort: {index: 1}}).fetch();
+    return TaskColors.find(query(), {sort: {index: 1}}).fetch();
 };
 
 Template.postitFilter.rendered = function () {
@@ -22,7 +22,7 @@ Template.postitFilter.rendered = function () {
             App.filterColorId = null;
         }
         else {
-            App.filterColorId = TaskColorsSetup.findOne({value: select.val()})._id;
+            App.filterColorId = TaskColorsSetup.findOne(query({value: select.val()}))._id;
         }
     })
         .on('select2-open', function () {

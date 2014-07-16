@@ -1,7 +1,7 @@
 Template.projectConfig.items = {};
 
 Template.projectConfig.members = function () {
-    return Members.find({}, {sort: {name: 1}});
+    return Members.find(query(), {sort: {name: 1}});
 };
 
 Template.projectConfig.show = function () {
@@ -61,7 +61,7 @@ Template.projectConfig.events = {
 
 Deps.autorun(function () {
     if (window.Sprints !== undefined) {
-        var sprint = Sprints.findOne({}, {sort: {sprintNumber: -1}});
+        var sprint = Sprints.findOne(query(), {sort: {sprintNumber: -1}});
 
         if (sprint && sprint.startdate) {
             $('[start-date]').datepicker("setDate", new Date(sprint.startdate));

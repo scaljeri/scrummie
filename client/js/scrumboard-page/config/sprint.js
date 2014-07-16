@@ -23,7 +23,7 @@ Template.configSprint.isReadonly = function () {
 };
 
 Template.configSprint.sprintButtonLabel = function () {
-    var sprint = Sprints.findOne({active: true});
+    var sprint = Sprints.findOne(query({active: true}));
 
     return (sprint ? 'End' : 'Start') + ' Sprint';
 };
@@ -99,7 +99,7 @@ Template.configSprint.events = {
         }
 
         sprintNumber = parseInt(sprintNumber.val());
-        sprint = Sprints.findOne({sprintNumber: sprintNumber}); // on the client we only have the data for a specific project
+        sprint = Sprints.findOne(query({sprintNumber: sprintNumber}));
 
         if (!error) {
             // Change subscriptions sprint number
@@ -129,5 +129,5 @@ Template.configSprint.events = {
 };
 
 function getLastSprint() {
-    return Sprints.findOne({}, {sort: {sprintNumber: -1}});
+    return Sprints.findOne(query(), {sort: {sprintNumber: -1}});
 }

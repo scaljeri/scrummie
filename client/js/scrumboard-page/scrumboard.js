@@ -1,17 +1,19 @@
 Template.scrumboard.lanes = function () {
-    return LanesSetup.find({}, {sort: {index: 1}}).fetch();
+    return LanesSetup.find(query(), {sort: {index: 1}}).fetch();
 };
 
 Template.scrumboard.tasksOnLane = function (laneId) {
-    var query = {laneId: laneId};
+    var search = {laneId: laneId};
 
     if (App.filterColorId) {
-        query.colorId = App.filterColorId;
+        search.colorId = App.filterColorId;
     }
-    return Tasks.find(query).count();
+    return Tasks.find(query(search)).count();
 };
 
 Template.scrumboard.rendered = function () {
-    //var lanes = Lanes.find({}).fetch();
+    if (!App.defaults.projectId) {
+        App.defaults.projectId = Projects.findOne({name: App.defaults.project})._id
+    }
 };
 
