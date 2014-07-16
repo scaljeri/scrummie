@@ -11,7 +11,8 @@
 
     &::after {
       content: '';
-      margin-left: 4px;
+      margin-right: -13px;
+      margin-left: 11px;
       position: relative;
       top: 1px;
       @include triangle(8px, $text, down);
@@ -39,8 +40,18 @@
 
   .login__dropdown__item {
     cursor: pointer;
-    padding: 6px;
+    padding: 6px 0 ;
     border-top: 1px solid $cancel;
+
+    &:hover {
+      font-weight: 400;
+    }
+    &:active {
+      font-size: 15px;
+      font-weight: 100;
+      padding-top: 8px;
+      padding-bottom: 5px;
+    }
 
     &:first-child {
       margin-top: 10px;

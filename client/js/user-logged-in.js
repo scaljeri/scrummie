@@ -5,13 +5,15 @@ Template.userLoggedIn.hide = function () {
     App.outsideClick.remove(Template.userLoggedIn.hide);
     $('[login-wrapper]').removeClass('showing');
     $('[login__dropdown]').hide();
+    $('[login-wrapper]').parent().removeClass('header__item--active');
 };
 
 Template.userLoggedIn.events({
     'click [login__name]': function (e, el) {
         $(el.find('[login__dropdown]')).show();
 
-        $(el.find('.login')).addClass('showing');
+        $(el.find('[login-wrapper]')).addClass('showing')
+            .parent().addClass('header__item--active');
 
         /*.position({
          of: '[login]',

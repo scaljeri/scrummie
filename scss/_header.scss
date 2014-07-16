@@ -44,8 +44,13 @@
       bottom: 5px;
     }
 
+    &.header__item--active:before {
+      border-left: none;
+    }
+
     &:first-child {
       padding: 0;
+      min-width: 70px;
     }
     &:last-child:before {
       border-width: 0;
@@ -58,6 +63,7 @@
 
     .nav-list__item__login {
       cursor: pointer;
+      margin-left: 15px;
     }
 
     > a {
