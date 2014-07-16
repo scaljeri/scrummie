@@ -55,7 +55,7 @@ $VENDORS: webkit, moz, ms, o;
 
 // Copied from Bourbon
 // https://github.com/thoughtbot/bourbon/blob/master/dist/addons/_position.scss
-@mixin position ($position: relative, $coordinates: 0 0 0 0) {
+@mixin position($position: relative, $coordinates: 0 0 0 0) {
 
   @if type-of($position) == list {
     $coordinates: $position;

@@ -11,12 +11,11 @@
 
     &::after {
       content: '';
-      margin-right: -13px;
-      margin-left: 11px;
       position: relative;
-      top: 1px;
-      @include triangle(8px, $text, down);
-      border-top-color: $text-lighter;
+      margin-left: 10px;
+      margin-right: -13px;
+      top: 2px;
+      @include triangle(8px, $text-lighter, down);
     }
   }
 
