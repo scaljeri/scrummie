@@ -76,6 +76,10 @@ Handlebars.registerHelper('taskLink', function (link, taskTitle) {
     return output;
 });
 
+Handlebars.registerHelper('isChecked', function (val) {
+    return val === true ? {checked: 'checked'} : null;
+});
+
 Handlebars.registerHelper('isReadonly', function () {
     return hasPermissionsInProject(App.defaults.project) === null ? 'readonly' : null;
 });

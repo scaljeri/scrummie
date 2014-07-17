@@ -1,0 +1,34 @@
+<template name="configConnections">
+    <h3 class="title">Connections</h3>
+
+    <div accordion__item__wrapper class="accordion__item__wrapper">
+        <ul class="part part1 config__connections">
+            {{#with github}}
+                <li class="part part1">
+                    <input id="config-github" type="checkbox" {{isChecked checked}} class="hide github__checkbox">
+                    <label for="config-github" class="with-checkbox">Github (Auth only)</label>
+                    {{#if checked}}
+                        <p class="part2 input__container">
+                            {{#if label}}
+                                <h5>{{label}}</h5>
+                            {{else}}
+                                <input github-client-id placeholder="Client Id" class="input--shadow">
+                                <input github-client-secret placeholder="Client Secret" class="input--shadow">
+
+                                <a github-save class="part part5 btn btn__confirm">Save</a>
+                            {{/if}}
+                        </p>
+                    {{/if}}
+                </li>
+            {{/with}}
+            <li class="part part3">
+                <input id="config-hipchat" type="checkbox" class="hide">
+                <label for="config-hipchat" class="with-checkbox">Hipchat</label>
+            </li>
+            <li class="part part4">
+                <input id="config-jira" type="checkbox" class="hide">
+                <label for="config-jira" class="with-checkbox">Jira</label>
+            </li>
+        </ul>
+    </div>
+</template>

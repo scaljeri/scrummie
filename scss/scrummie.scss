@@ -8,6 +8,7 @@
 @import 'widgets/select2';
 @import 'widgets/select2-colors';
 @import 'widgets/button';
+@import 'widgets/checkbox';
 @import 'widgets/upload-button';
 @import 'widgets/wrapper';
 
@@ -31,6 +32,7 @@
 @import 'config/members';
 @import 'config/lanes';
 @import 'config/colors';
+@import 'config/connections';
 
 @import 'user-logged-in';
 
@@ -85,6 +87,10 @@ body {
       cursor: default!important;
       font-weight: 700!important;
     }
+}
+
+.hide {
+  display: none;
 }
 
 // css fixes

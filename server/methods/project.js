@@ -55,4 +55,8 @@ function inititalizeProject(projectId) {
         delete lane._id;
         LanesSetup.insert(lane);
     });
+
+    Settings.insert({
+        projectId: projectId
+    });
 }

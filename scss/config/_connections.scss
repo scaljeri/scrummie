@@ -1,0 +1,17 @@
+.config__connections {
+  font: 300 17px/20px $font-normal;
+  color: $text;
+
+  .input__container {
+    padding: 10px 10px 5px;
+    border-bottom: 1px solid grey;
+    margin-bottom: 10px;
+  }
+
+  .github__checkbox:not(:checked) ~ .input__container {
+    border-bottom: none;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+}
