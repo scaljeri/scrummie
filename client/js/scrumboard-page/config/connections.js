@@ -5,6 +5,13 @@ Template.configConnections.helpers({
         if (settings) {
             return Settings.findOne(query).connections.github;
         }
+    },
+    jira: function () {
+        var settings = Settings.findOne(query);
+
+        if (settings) {
+            return Settings.findOne(query).connections.jira;
+        }
     }
 });
 
@@ -13,7 +20,6 @@ Template.configConnections.events = {
         var clientId = $(tpl.find('[github-client-id]')),
             clientSecret = $(tpl.find('[github-client-secret]'));
 
-        debugger;
         if (!clientId.val()) {
 
         }

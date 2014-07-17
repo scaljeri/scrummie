@@ -8,7 +8,7 @@
     margin-bottom: 10px;
   }
 
-  .github__checkbox:not(:checked) ~ .input__container {
+  .config__checkbox:not(:checked) ~ .input__container {
     border-bottom: none;
     max-height: 0;
     overflow: hidden;
