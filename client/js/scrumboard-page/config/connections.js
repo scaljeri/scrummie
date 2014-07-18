@@ -1,15 +1,15 @@
 Template.configConnections.helpers({
-    github: function () {
+    hipchat: function () {
         var settings = Settings.findOne(query);
 
-        if (settings) {
-            return Settings.findOne(query).connections.github;
+        if (settings && settings.connections) {
+            return Settings.findOne(query).connections.hipchat;
         }
     },
     jira: function () {
         var settings = Settings.findOne(query);
 
-        if (settings) {
+        if (settings && settings.connections) {
             return Settings.findOne(query).connections.jira;
         }
     }

@@ -4,23 +4,69 @@
     <div accordion__item__wrapper class="accordion__item__wrapper">
         <ul class="part part1 config__connections">
             {{#with jira}}
-                <li class="part part4">
-                    <input id="config-jira" type="checkbox" class="hide config__checkbox">
-                    <label for="config-jira" class="with-checkbox">Jira</label>
+                <li class="part part4 config__connection__item">
+                    <input type="radio" id="item-toggle-jira" name="item-toggle" class="item__toggle"/>
+                    <label for="item-toggle-jira" class="item__header">
+                        <h5 class="item__label">Jira</h5>
+
+                        <div on-off-switch class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch-jira" class="onoffswitch-checkbox" id="onoffswitch-jira" checked>
+                            <label class="onoffswitch-label" for="onoffswitch-jira">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </label>
 
                     {{#if checked}}
-                        <p class="part2 input__container">
+                        <p class="part2 item__body">
                             {{#if label}}
                                 <h5>{{label}}</h5>
+
+
                             {{else}}
                                 <input jira-user placeholder="Jira username" class="input--shadow">
-                                <input jira-password placeholder="User password" class="input--shadow">
+                                <input jira-password placeholder="Jira user password" class="input--shadow">
 
                                 <a jira-save class="part part5 btn btn__confirm">Save</a>
                             {{/if}}
+
                         </p>
                     {{/if}}
                 </li>
+            {{/with}}
+
+            {{#with hipchat}}
+            <li class="part part4 config__connection__item">
+                <input type="radio" id="item-toggle-hipchat" name="item-toggle" class="item__toggle"/>
+                <label for="item-toggle-hipchat" class="item__header">
+                    <h5 class="item__label">hipchat</h5>
+
+                    <div on-off-switch class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch-hipchat" class="onoffswitch-checkbox" id="onoffswitch-hipchat" checked>
+                        <label class="onoffswitch-label" for="onoffswitch-hipchat">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </label>
+
+                {{#if checked}}
+                <p class="part2 item__body">
+                    {{#if label}}
+                <h5>{{label}}</h5>
+
+
+                {{else}}
+                <input hipchat-user placeholder="hipchat username" class="input--shadow">
+                <input hipchat-password placeholder="User password" class="input--shadow">
+
+                <a hipchat-save class="part part5 btn btn__confirm">Save</a>
+                {{/if}}
+
+                </p>
+                {{/if}}
+            </li>
             {{/with}}
         </ul>
     </div>
