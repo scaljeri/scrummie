@@ -9,7 +9,15 @@ HomeController = RouteController.extend({
     },
     waitOn: function () {
         App.defaults = {};
-        return [subs.subscribe('projects'), subs.subscribe('settings')];
+        if (!App.subs)
+            App.subs = {};
+        else if (App.subs.settings)
+            App.subs.settings.stop();
+
+        App.subs.settings = Meteor.subscribe('settings');
+
+        return [subs.subscribe('projects'), App.subs.settings];
+        //return [subs.subscribe('projects'), subs.subscribe('settings')];
     },
     data: function () {  // or a function
         return { pageCls: 'page-scrumboard'};

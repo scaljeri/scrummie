@@ -1,22 +1,20 @@
 Meteor.methods({
-    saveGithubCredentials: function (label, clientId, clientSecret, projectName) {
-        var project = Projects.findOne({name: projectName}),
-            settings;
+    updateConnection: function (cType, projectName, options) {
+        var update = {}, settings;
 
-        if (project) {
-            settings = Settings.findOne({projectId: project._id});
+        if (hasPermissionsInProject(projectName)) {
+            settings = Settings.findOne({name: projectName});
 
-            if (hasPermissionsInProject(projectName)) {
-               Settings.update()
-               settings.github = {
-                   label: label,
-                   clientId: clientId,
-                   clientSecret: clientSecret
-               }
+
+            if (settings && settings[cType]) {
+                update[cType] = settings[cType];
+
+                Object.keys(options).forEach(function(key){
+                    update[cType][key] = options[key];
+                });
+
+                Settings.update({_id: settings._id}, {$set: update});
             }
         }
-    },
-    saveJiraCredentials: function (/* arguments */) {
-
     }
 });

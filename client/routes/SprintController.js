@@ -10,8 +10,16 @@ SprintController = RouteController.extend({
         var project = this.params.project;
         App.defaults = {project: project}; // reset App.defaults
 
+        if (!App.subs)
+            App.subs = {};
+        else if (App.subs.settings)
+            App.subs.settings.stop();
+
+        App.subs.settings = Meteor.subscribe('settings', project);
+
         return [
-            subs.subscribe('settings', project),
+            App.subs.settings,
+            //subs.subscribe('settings', project),
             subs.subscribe('projects', project),
             subs.subscribe('sprint', project),
             subs.subscribe('lanes'),

@@ -31,5 +31,11 @@ Template.configConnections.events = {
 
             });
         }
+    },
+    'change [on-off-switch-input]': function (e) {
+        var checked = e.currentTarget.checked,
+            cType = $(e.currentTarget).attr('data-type');
+
+        Meteor.call('updateConnection', cType, App.defaults.project, {checked: checked});
     }
 };

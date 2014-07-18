@@ -8,17 +8,17 @@ Meteor.startup(function () {
                 connections = {};
 
             if (settings.jira) {
-                connections.jira = {label: settings.jira.label, checked: settings.jira.checked};
+                connections.jira = {username: settings.jira.username, checked: settings.jira.checked};
             }
             else {
-                connections.jira = {checked: true};
+                connections.jira = {checked: false};
             }
 
             if (settings.hipchat) {
                 connections.hipchat = {};
             }
             else {
-                connections.hipchat = {checked: true};
+                connections.hipchat = {checked: false};
             }
         }
 

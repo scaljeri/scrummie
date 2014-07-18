@@ -4,6 +4,7 @@ Template.postits.items = function () {
         searchOps.colorId = App.filterColorId;
     }
 
+    debugger;
     return Tasks.find(query(searchOps), { sort: {index: 1}}).fetch();
 };
 
