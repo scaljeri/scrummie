@@ -16,18 +16,18 @@ Template.configConnections.helpers({
 });
 
 Template.configConnections.events = {
-    'click [github-save]': function (e, tpl) {
-        var clientId = $(tpl.find('[github-client-id]')),
-            clientSecret = $(tpl.find('[github-client-secret]'));
+    'click [jira-save]': function (e, tpl) {
+        var user = $(tpl.find('[jira-user]')),
+            passwd = $(tpl.find('[jira-password ]'));
 
-        if (!clientId.val()) {
+        if (!user.val()) {
 
         }
-        else if (!clientSecret) {
+        else if (!passwd.val()) {
 
         }
         else {
-            Meteor.call('saveGithuCredentials', clientId.val(), clientSecret.val(), function (response) {
+            Meteor.call('updateConnection', 'jira', App.defaults.project, {username: user.val(), password: passwd.val()}, function (response) {
 
             });
         }

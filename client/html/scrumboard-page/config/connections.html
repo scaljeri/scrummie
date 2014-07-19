@@ -18,21 +18,19 @@
                         </div>
                     </label>
 
-                    {{#if checked}}
                         <p class="part2 item__body">
                             {{#if label}}
                                 <h5>{{label}}</h5>
 
 
                             {{else}}
-                                <input jira-user placeholder="Jira username" class="input--shadow">
+                                <input jira-user placeholder="Jira username" class="input--shadow" value="{{username}}">
                                 <input jira-password placeholder="Jira user password" class="input--shadow">
 
                                 <a jira-save class="part part5 btn btn__confirm">Save</a>
                             {{/if}}
 
                         </p>
-                    {{/if}}
                 </li>
             {{/with}}
 
@@ -51,7 +49,6 @@
                     </div>
                 </label>
 
-                {{#if checked}}
                 <p class="part2 item__body">
                     {{#if label}}
                 <h5>{{label}}</h5>
@@ -65,7 +62,6 @@
                 {{/if}}
 
                 </p>
-                {{/if}}
             </li>
             {{/with}}
         </ul>
