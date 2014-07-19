@@ -17,14 +17,14 @@ Meteor.startup(function () {
             }
 
             if (settings.hipchat) {
-                connections.hipchat = { checked: settings.hipchat.checked};
+                connections.hipchat = { checked: settings.hipchat.checked, roomId: settings.hipchat.roomId};
             }
             else {
                 connections.hipchat = {checked: false};
             }
         }
 
-        try { // TODO: Find out why the try/catch is necessary
+        try { // TODO: The try/catch is a hack
             this.removed('settings', 'settings');
         } catch(e){}
 

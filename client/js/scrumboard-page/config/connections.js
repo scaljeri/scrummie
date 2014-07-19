@@ -32,6 +32,22 @@ Template.configConnections.events = {
             });
         }
     },
+    'click [hipchat-save]': function(e, tpl) {
+        var roomId = $(tpl.find('[hipchat-room-id]')),
+            authToken = $(tpl.find('[hipchat-auth-token]'));
+
+        if (!roomId.val()) {
+
+        }
+        else if(!authToken.val()) {
+
+        }
+        else {
+            Meteor.call('updateConnection', 'hipchat', App.defaults.project, {roomId: roomId.val(), authToken: authToken.val()}, function (response) {
+
+            });
+        }
+    },
     'change [on-off-switch-input]': function (e) {
         var checked = e.currentTarget.checked,
             cType = $(e.currentTarget).attr('data-type');

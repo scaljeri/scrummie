@@ -3,68 +3,67 @@ var http = Meteor.require('http');
 var fs = Meteor.require('fs');
 
 
-HipChat = function (task, project, member) {
-    // TODO
-  var ROOM_ID = '********',
-    AUTH_TOKEN = '********************************';
+HipChat = function (task) {
+    var member, settings = Settings.findOne({projectId: task.projectId}),
+        project = Projects.findOne({_id: task.projectId});
 
-  if (!member) {
-    member = Members.findOne({_id: task.memberId});
-  }
+    if (!settings.hipchat || !settings.hipchat.roomId || !settings.hipchat.authToken) {
+        return ;
+    }
+
+    if (task.memberId) {
+        member = Meteor.user() ? Meteor.users.findOne({_id: task.memberId}) : Members.findOne({_id: task.memberId});
+    }
 
 // Build the post string from an object
-  var post_data = JSON.stringify({
-    color: 'purple',
-    message_format: 'html',
-    message: addInfo(task, project, member)
-  });
+    var post_data = JSON.stringify({
+        color: 'purple',
+        message_format: 'html',
+        message: addInfo(task, project, member)
+    });
 
 // An object of options to indicate where to post to
-  var post_options = {
-    host: 'api.hipchat.com',
-    port: '80',
-    path: '/v2/room/' + ROOM_ID + '/notification?auth_token=' + AUTH_TOKEN,
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Content-Length': post_data.length
-    }
-  };
+    var post_options = {
+        host: 'api.hipchat.com',
+        port: '80',
+        path: '/v2/room/' + settings.hipchat.roomId + '/notification?auth_token=' + settings.hipchat.authToken,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': post_data.length
+        }
+    };
 
 // Set up the request
-  var post_req = http.request(post_options, function (res) {
-    res.setEncoding('utf8');
-    res.on('data', function (chunk) {
-      console.log('Response: ' + chunk);
+    var post_req = http.request(post_options, function (res) {
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            console.log('Response: ' + chunk);
+        });
     });
-  });
 
-  post_req.write(post_data);
-  post_req.end();
+    post_req.write(post_data);
+    post_req.end();
 };
 
 function addInfo(task, project, member) {
-  var msg = Scrummie.hipchat.message,
-      url = (Scrummie.host.protocol ||'http://') + Scrummie.baseUrl;
-  console.log(url);
+    var msg = Meteor.settings.hipchat.message;
 
-  if (project) {
-    msg = msg.replace('{{project}}', project);
-  }
+    if (project) {
+        msg = msg.replace('{{project}}', project.name);
+    }
 
-  for(var key in member) {
-    msg = msg.replace('{{member.' + key + '}}', member[key]);
-  }
+    for (var key in member.profile) {
+        msg = msg.replace('{{member.' + key + '}}', member.profile[key]);
+    }
 
-  for(var key in task) {
-    msg = msg.replace('{{task.' + key + '}}', task[key]);
-  }
+    for (var key in task) {
+        msg = msg.replace('{{task.' + key + '}}', task[key]);
+    }
 
-  if (url) {
-    msg = msg.replace('{{url}}', url);
-  }
+    msg = msg.replace('{{taskUrl}}', Meteor.absoluteUrl() + project.name + '/task/' + task._id);
 
-  logger.info('Hipchat msg: ' + msg);
+    console.log('Hipchat msg: ' + msg);
 
-  return msg;
+    return msg;
 }

@@ -50,17 +50,10 @@
                 </label>
 
                 <p class="part2 item__body">
-                    {{#if label}}
-                <h5>{{label}}</h5>
+                    <input hipchat-room-id placeholder="Room ID" class="input--shadow" value="{{roomId}}">
+                    <input hipchat-auth-token placeholder="Auth token" class="input--shadow">
 
-
-                {{else}}
-                <input hipchat-user placeholder="hipchat username" class="input--shadow">
-                <input hipchat-password placeholder="User password" class="input--shadow">
-
-                <a hipchat-save class="part part5 btn btn__confirm">Save</a>
-                {{/if}}
-
+                    <a hipchat-save class="part part5 btn btn__confirm">Save</a>
                 </p>
             </li>
             {{/with}}
