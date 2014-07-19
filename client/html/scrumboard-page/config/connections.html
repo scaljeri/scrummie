@@ -10,7 +10,7 @@
                         <h5 class="item__label">Jira</h5>
 
                         <div on-off-switch class="onoffswitch">
-                            <input data-type="jira" on-off-switch-input type="checkbox" name="onoffswitch-jira" class="onoffswitch-checkbox" id="onoffswitch-jira" checked>
+                            <input {{isChecked checked}} data-type="jira" on-off-switch-input type="checkbox" name="onoffswitch-jira" class="onoffswitch-checkbox" id="onoffswitch-jira">
                             <label class="onoffswitch-label" for="onoffswitch-jira">
                                 <span class="onoffswitch-inner"></span>
                                 <span class="onoffswitch-switch"></span>
@@ -43,7 +43,7 @@
                     <h5 class="item__label">hipchat</h5>
 
                     <div on-off-switch class="onoffswitch">
-                        <input type="checkbox" name="onoffswitch-hipchat" class="onoffswitch-checkbox" id="onoffswitch-hipchat" checked>
+                        <input {{isChecked checked}} on-off-switch-input  data-type="hipchat" type="checkbox" name="onoffswitch-hipchat" class="onoffswitch-checkbox" id="onoffswitch-hipchat">
                         <label class="onoffswitch-label" for="onoffswitch-hipchat">
                             <span class="onoffswitch-inner"></span>
                             <span class="onoffswitch-switch"></span>

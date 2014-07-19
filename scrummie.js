@@ -125,8 +125,6 @@ if (Meteor.isServer) {
              */
         }
 
-        Settings.insert({ x: 10});
-
         if (TaskColors.find({}).count() === 0) {
             TaskColors.insert({ value: '#ffff92', title: 'Frontend', index: 0});
             TaskColors.insert({ value: '#ffa2e7', title: 'Design', index: 1});

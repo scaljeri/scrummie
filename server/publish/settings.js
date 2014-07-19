@@ -1,10 +1,12 @@
 Meteor.startup(function () {
-    Meteor.publish('settings', function (projectName) {
+    var isAdded = false;
+
+    Meteor.reactivePublish('settings', function (projectName) {
         var enabled = Meteor.settings.authenticate === undefined ? false : Meteor.settings.authenticate;
 
         if (projectName) {
             var project = Projects.findOne({name: projectName}),
-                settings = Settings.find({projectId: project._id}),
+                settings = Settings.findOne({projectId: project._id}, {reactive: true}),
                 connections = {};
 
             if (settings.jira) {
@@ -15,17 +17,33 @@ Meteor.startup(function () {
             }
 
             if (settings.hipchat) {
-                connections.hipchat = {};
+                connections.hipchat = { checked: settings.hipchat.checked};
             }
             else {
                 connections.hipchat = {checked: false};
             }
         }
 
-        this.added("settings", "settings", {
-            isAuth: enabled,
-            connections: connections
-        });
+        try { // TODO: Find out why the try/catch is necessary
+            this.removed('settings', 'settings');
+        } catch(e){}
+
+        //if (!isAdded) {
+            console.log("ADDING id=" + settings);
+            this.added("settings", "settings", {
+                isAuth: enabled,
+                connections: connections
+            });
+            isAdded = true;
+        /*}
+        else {
+
+            console.log("Cahnging id=" + settings);
+            this.changed('settings', 'settings', {
+                isAuth: enabled,
+                connections: connections
+            });
+        }*/
 
         this.ready();
     });
