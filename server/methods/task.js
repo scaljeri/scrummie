@@ -54,7 +54,6 @@ Meteor.methods({
 
            for( var prop in origTask) {
                if (origTask.hasOwnProperty(prop) && !task[prop]) {
-                  console.log('adding ' + prop + ' --> ' + origTask[prop]);
                   task[prop] = origTask[prop];
                }
            }

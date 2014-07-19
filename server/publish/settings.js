@@ -29,7 +29,6 @@ Meteor.startup(function () {
         } catch(e){}
 
         //if (!isAdded) {
-            console.log("ADDING id=" + settings);
             this.added("settings", "settings", {
                 isAuth: enabled,
                 connections: connections
