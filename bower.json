@@ -9,6 +9,7 @@
     "jquery-ui": "~1.10.4",
     "underscore": "~1.6.0",
     "select2": "~3.4.6",
-    "nvd3": "~1.1.15-beta"
+    "nvd3": "~1.1.15-beta",
+    "animate.css": "~3.2.0"
   }
 }

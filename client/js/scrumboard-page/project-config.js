@@ -18,8 +18,12 @@ Template.projectConfig.hide = function (e) {
         App.outsideClick.remove(Template.projectConfig.hide);
 
         if (accordion) {
-            accordion.addClass('accordion__item--open')
-                .removeClass('accordion__item--closed');
+            var attr = accordion.addClass('accordion__item--open')
+                        .removeClass('accordion__item--closed')
+                        .attr('accordion-item');
+            if (attr) {
+                Template.projectConfig.items[attr].closing(accordion);
+            }
             accordion = null;
         }
 
@@ -43,7 +47,7 @@ Template.projectConfig.events = {
                 .removeClass('accordion__item--open');
             var attr = accordion.attr('accordion-item');
             if (attr) {
-                Template.projectConfig.items[attr].closing();
+                Template.projectConfig.items[attr].closing(accordion);
             }
         }
 

@@ -15,18 +15,36 @@ Template.configConnections.helpers({
     }
 });
 
+Template.configConnections.closing = function (parent) {
+    parent.find('.error').removeClass('error big-error');
+    parent.find('[connection-toggle]').prop('checked', false);
+};
+
+Template.configConnections.rendered = function () {
+    Template.projectConfig.items.connections = Template.configConnections;
+};
+
 Template.configConnections.events = {
     'click [jira-save]': function (e, tpl) {
         var user = $(tpl.find('[jira-user]')),
             passwd = $(tpl.find('[jira-password ]'));
 
         if (!user.val()) {
-
+            user.addClass('animated rubberBand');
+            user.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                user.removeClass('animated rubberBand')
+                    .addClass((user.hasClass('error') ? 'big-' : '') + 'error');
+            });
         }
-        else if (!passwd.val()) {
-
+        if (!passwd.val()) {
+            passwd.addClass('animated rubberBand');
+            passwd.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                passwd.removeClass('animated rubberBand')
+                    .addClass(passwd.hasClass('error') ? 'big-error' : 'error');
+            });
         }
-        else {
+
+        if ($(tpl.find('.error')).length === 0) {
             Meteor.call('updateConnection', 'jira', App.defaults.project, {username: user.val(), password: passwd.val()}, function (response) {
 
             });

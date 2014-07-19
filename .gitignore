@@ -2,6 +2,7 @@
 .bower-*
 .idea
 .DS_Store
+.uploads
 scrummie.css
 bower_components
 node_modules
