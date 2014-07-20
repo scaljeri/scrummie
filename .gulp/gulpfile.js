@@ -1,45 +1,33 @@
 var gulp = require('gulp'),
-//es      = require('event-stream'),
-  $ = require('gulp-load-plugins')();
+    es = require('event-stream'),
+    $ = require('gulp-load-plugins')();
 
 var watch = require('gulp-watch'),
    plumber = require('gulp-plumber'),
    sass = require('gulp-sass');
 
 gulp.task('styles', function () {
-  //var styles = gulp.src('../scss')
-  gulp.src('../scss/scrummie.scss')
-    .pipe($.sass({
-      errLogToConsole: true
-    }))
-    .pipe($.autoprefixer('last 2 versions'))
-    //.pipe($.rename('app.css'))
-    .pipe(gulp.dest('../public/styles/'))
-    .pipe($.filelog())
-    .pipe($.size());
+    var _sass = gulp.src('../scss/scrummie.scss')
+        .pipe($.sass({
+            errLogToConsole: true
+        }))
+        .pipe($.autoprefixer('last 2 versions'));
+
+    var _css = gulp.src([
+        '/animate.css/animate.css',
+        '/jquery-ui/themes/base/jquery-ui.css',
+        '/select2/select2.css',
+        '/nvd3/nv.d3.min.css'], {root: '../public/bower_components'});
+
+    return es.merge(_css, _sass)
+        .pipe($.concat('scrummie.css'))
+        .pipe($.filelog())
+        .pipe($.size())
+        .pipe(gulp.dest('../public/styles/'));
 });
 
 gulp.task('default', function () {
    gulp.watch([
    '../scss/**/*.scss'
    ], ['styles']);
-
-  //gulp.src('../scss/**/*.scss')
-    //.pipe($.watch(function (files) {
-        //return files.pipe($.sass())
-          //.pipe(gulp.dest('../public/styles/'));
-      //}
-    //));
-  /*
-   if (production) {
-   styles = es.merge(compileCss(), styles)
-   .pipe($.concat('app.css'))
-   .pipe($.cssmin());
-   }
-
-   return styles
-   .pipe($.rename('app.css'))
-   .pipe(gulp.dest(dest))
-   .pipe($.size());
-   */
 });
