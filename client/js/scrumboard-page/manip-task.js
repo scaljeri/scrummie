@@ -81,7 +81,8 @@ Template.manipTask.show = function (task, callback) {
 
 Template.manipTask.hide = function () {
     $('[manip-task] [dropdown]').blur();
-    $('[manip-task]').css('visibility', 'hidden');
+    $('[manip-task]').css('visibility', 'hidden')
+        .find('.error').removeClass('error big-error');
     $('[add-task]').removeClass('btn--active');  // TODO: implement closeCallback
 
     App.outsideClick.remove(Template.manipTask.hide);
@@ -93,20 +94,40 @@ Template.manipTask.rendered = function () {
 
 Template.manipTask.events = {
     'click [cancel-task]': closeManip,
-    'click [save-task]': function (e) {
-        var data = $('[manip-task]').serializeObject({sprintNumber: App.defaults.sprintNumber});
+    'click [save-task]': function (e, tpl) {
+        var data = $('[manip-task]').serializeObject({sprintNumber: App.defaults.sprintNumber}),
+            errors = false;
+
+        $(tpl.findAll('.error')).removeClass('error big-error');
+
+        if (!data.title) {
+            $('[manip-task-title]').addClass('animated rubberBand')
+                .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                    $(this).removeClass('animated rubberBand')
+                        .addClass(($(this).hasClass('error') ? 'big-' : '') + 'error');
+                });
+            errors = true;
+        }
         if (!data.color) {
-            data.color = App.defaults.colors;
+            $(tpl.find('.select2-colors')).addClass('animated rubberBand')
+                .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                    $(this).removeClass('animated rubberBand')
+                        .addClass(($(this).hasClass('error') ? 'big-' : '') + 'error');
+                });
+            errors = true;
         }
 
-        Meteor.call('upsertTask', App.defaults.project, data, function (err, response) {
-            if (response.status === 'error') {
-                App.errorMessage = response.msg;
-                $('[error-dialog]').dialog('open');
-            }
-        });
+        if (!errors) {
+            Meteor.call('upsertTask', App.defaults.project, data, function (err, response) {
+                if (response.status === 'error') {
+                    App.errorMessage = response.msg;
+                    $('[error-dialog]').dialog('open');
+                }
+            });
 
-        closeManip();
+            closeManip();
+        }
+
     },
     'click [delete-task]': function () {
         Meteor.call('deleteTask', App.selectedTask._id);
