@@ -1,5 +1,5 @@
 Template.postitFilter.colors = function () {
-    return TaskColors.find(query(), {sort: {index: 1}}).fetch();
+    return TaskColorsSetup.find(query(), {sort: {index: 1}}).fetch();
 };
 
 Template.postitFilter.rendered = function () {
