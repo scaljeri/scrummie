@@ -19,7 +19,7 @@ gulp.task('styles', function () {
         '/select2/select2.css',
         '/nvd3/nv.d3.min.css'], {root: '../public/bower_components'});
 
-    return es.merge(_css, _sass)
+    es.merge(_css, _sass)
         .pipe($.concat('scrummie.css'))
         .pipe($.filelog())
         .pipe($.size())
