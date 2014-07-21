@@ -22,7 +22,7 @@ Template.configMembers.siteMembers = function () {
 };
 
 Template.configMembers.projectMembers = function () {
-    return Meteor.users.find({projects: {$in: [App.defaults.projectId]}}).fetch();
+    return Meteor.users.find({projects: {$in: [App.defaults.projectId]}}, {sort: {name: 1}}).fetch();
 };
 
 Template.configMembers.isOnlyMember = function () {
