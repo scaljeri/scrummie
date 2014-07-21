@@ -1,17 +1,17 @@
 .manip-task {
-  position: absolute;
-  visibility: hidden;
-  padding: 10px;
-  width: 300px;
+  background-color: #fff;
+  border-radius: 2px;
+  margin-left: 5px;
   min-height: 412px;
-  z-index: $on-top; // 47 less than the maximum value
+  padding: 10px;
+  visibility: hidden;
+  width: 300px;
+  z-index: -$on-top;
 
-    background-color: #fff;
-    border-radius: 2px;
   -webkit-box-shadow: 0px 0px 11px 0px rgba(50, 50, 50, 1);
   -moz-box-shadow: 0px 0px 11px 0px rgba(50, 50, 50, 1);
   box-shadow: 0px 0px 11px 0px rgba(50, 50, 50, 1);
-  margin-left: 5px;
+  @include position(absolute, 0px 0 0 0px);
 
   .task__title {
     width: 75%;

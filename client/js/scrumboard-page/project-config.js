@@ -5,16 +5,21 @@ Template.projectConfig.members = function () {
 };
 
 Template.projectConfig.show = function () {
-    $('[config-menu]').addClass('visible');
+    var config = $('[config-menu]');
+
+    config.css('display', 'block');
+    setTimeout(function () {
+        config.addClass('visible');
+    },0);
 
     Template.configSprint.initialize();
-
     App.outsideClick.register('.config-content', Template.projectConfig.hide);
 };
 
 Template.projectConfig.hide = function (e) {
     if ($(e.target).closest('.ui-datepicker-header').length === 0) { // make sure the config window doesn't close on calendar navigation
         $('[config-menu]').removeClass('visible');
+
         App.outsideClick.remove(Template.projectConfig.hide);
 
         if (accordion) {
