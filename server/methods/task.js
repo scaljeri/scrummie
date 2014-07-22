@@ -79,11 +79,9 @@ Meteor.methods({
                 },
                 lane = LanesSetup.findOne({_id: task.laneId});
 
-            /*
             if (lane.title === 'done' && origTask.laneId !== lane._id) {
-                HipChat(origTask, Projects.findOne({_id: origTask.projectId}).name, Members.findOne({_id: origTask.memberId}));
+                HipChat(origTask);
             }
-            */
 
             if (lane.title !== 'todo' && !origTask.memberId) {
                 fields.memberId = (Meteor.user()||{})._id;

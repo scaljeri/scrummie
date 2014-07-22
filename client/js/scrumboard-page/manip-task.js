@@ -8,6 +8,11 @@ Template.manipTask.colors = function () {
     return TaskColorsSetup.find(query(), {sort: {index: 1}}).fetch();
 };
 
+Template.manipTask.issues = function () {
+
+    return Session.get('serverDataResponse') || "";
+};
+
 Template.manipTask.members = function () {
     var settings = Settings.findOne();
 
@@ -16,24 +21,37 @@ Template.manipTask.members = function () {
             return Meteor.users.find({projects: {$in: [App.defaults.projectId]}}, {sort: {name: 1}}).fetch();
         }
         else {
+            console.log(Members.find(query()).fetch());
             return Members.find(query()).fetch();
         }
     }
 };
 
 Template.manipTask.show = function (task, callback) {
-    var taskColors = [], members, select;
+
+    Meteor.call('jiraStories', '30', 'test', function (error,result) {
+        if(error) {
+            Session.set('serverDataResponse', "Error:" + err.reason);
+            return;
+        }
+        Session.set('serverDataResponse', result.issues);
+        console.log(result.issues);
+    });
+    var taskColors = [], members, select, issues;
 
     if (task && typeof task === 'function') {
         callback = task;
         task = null;
     }
 
+
     App.selectedTask = task;
     closeCallback = callback || App.noob;
 
     setTimeout(function () { // make sure App.selectedTask is applied
+
         select = $('[manip-task] [dropdown][colors]');
+        issues = $('[manip-task] [dropdown][issues]');
         members = $('[manip-task] [dropdown][members]');
 
         if (task) {
@@ -56,14 +74,34 @@ Template.manipTask.show = function (task, callback) {
             containerCssClass: 'select2-colors'
         });
 
+
         select.select2('val', taskColors ? taskColors.value : null);
 
-        $('[manip-task]').css('visibility', 'visible');
+        $('[manip-task]').addClass('on-top');
 
         members.select2({
+            allowClear: true,
             minimumResultsForSearch: -1,
             placeholder: "Team member"
         });
+
+        issues.select2({
+            allowClear: true,
+            minimumResultsForSearch: -1,
+            formatResult: format,
+            placeholder: "Select Jira task",
+            allowNewValues: true
+         });
+
+        issues.on('change', function () {
+            if (issues.val() === '') {
+                console.log('nothing');
+            }
+            else {
+
+                $('[manip-task] [description]').value = issues.val();
+            }
+        })
 
         if (task && task.memberId) {
             members.select2('val', task.memberId);
@@ -81,7 +119,7 @@ Template.manipTask.show = function (task, callback) {
 
 Template.manipTask.hide = function () {
     $('[manip-task] [dropdown]').blur();
-    $('[manip-task]').css('visibility', 'hidden')
+    $('[manip-task]').removeClass('on-top')
         .find('.error').removeClass('error big-error');
     $('[add-task]').removeClass('btn--active');  // TODO: implement closeCallback
 
@@ -90,9 +128,11 @@ Template.manipTask.hide = function () {
 
 Template.manipTask.rendered = function () {
 
+
 };
 
 Template.manipTask.events = {
+
     'click [cancel-task]': closeManip,
     'click [save-task]': function (e, tpl) {
         var data = $('[manip-task]').serializeObject({sprintNumber: App.defaults.sprintNumber}),
@@ -109,7 +149,7 @@ Template.manipTask.events = {
             errors = true;
         }
         if (!data.color) {
-            $(tpl.find('.select2-colors')).addClass('animated rubberBand')
+            $(tpl.find('.select2-colors .select2-choices')).addClass('animated rubberBand')
                 .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
                     $(this).removeClass('animated rubberBand')
                         .addClass(($(this).hasClass('error') ? 'big-' : '') + 'error');

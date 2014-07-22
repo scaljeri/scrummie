@@ -1,6 +1,5 @@
 {
   "jira": "0.10.0",
-  "easy-request" :"0.0.3",
   "request" :"2.37.0",
   "future": "2.3.1",
   "oauth" :"0.9.12"

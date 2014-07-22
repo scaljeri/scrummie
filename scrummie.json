@@ -11,9 +11,7 @@
     "appName"       : "Scrummie"
   },
   "jira" : {
-    "server"        : "jira.malmberg.nl",
-    "username"      : "joostdi",
-    "password"      : "welkom14"
+    "server"        : "jira.malmberg.nl"
   },
   "uploadFolder" : ".uploads",
   "host"         : {
