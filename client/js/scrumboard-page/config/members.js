@@ -75,6 +75,21 @@ Template.configMembers.events = {
         }
     },
     'click [member__remove]': function () {
+        Meteor.call('jiraStories', '30', App.defaults.project, function (error,result) {
+          var index = 0;
+          console.log(result);
+          while (index < result.issues.length) {
+
+              var data = $('[manip-task]').serializeObject({sprintNumber: App.defaults.sprintNumber , title: result.issues[index].key , description: result.issues[index].fields.summary , link: result.issues[index].self});
+              Meteor.call('upsertTask', App.defaults.project, data, function (err, response) {
+                  if (response.status === 'error') {
+                      App.errorMessage = response.msg;
+                      $('[error-dialog]').dialog('open');
+                  }
+              });
+              index++;
+          }
+        });
         var memberId = $(arguments[0].target).closest('[no-auth-member]').attr('data-id');
         Meteor.call('removeMemberFromProject', memberId, App.defaults.project);
     },

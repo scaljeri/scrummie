@@ -54,6 +54,7 @@ Meteor.methods({
 
            for( var prop in origTask) {
                if (origTask.hasOwnProperty(prop) && !task[prop]) {
+                  console.log('adding ' + prop + ' --> ' + origTask[prop]);
                   task[prop] = origTask[prop];
                }
            }
@@ -78,9 +79,11 @@ Meteor.methods({
                 },
                 lane = LanesSetup.findOne({_id: task.laneId});
 
+            /*
             if (lane.title === 'done' && origTask.laneId !== lane._id) {
-                HipChat(origTask);
+                HipChat(origTask, Projects.findOne({_id: origTask.projectId}).name, Members.findOne({_id: origTask.memberId}));
             }
+            */
 
             if (lane.title !== 'todo' && !origTask.memberId) {
                 fields.memberId = (Meteor.user()||{})._id;

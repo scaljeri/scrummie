@@ -11,13 +11,19 @@
         <input name="_id" type="hidden" value="{{task._id}}">
         <input name="sprintNumber" type="hidden" value="{{task.sprintNumber}}">
         {{/if}}
+        <select dropdown issues class="dropdown" name="issue">
+            <option></option>
+            {{#each issues}}
+            <option value="{{fields.summary}}">{{key}}</option>
+            {{/each}}
+        </select>
         <p>
             <input manip-task-title type="text" name="title" value="{{task.title}}" placeholder="Title"
                    class="input--shadow task__title">
             <input type="text" name="fte" maxlength="3" value="{{task.fte}}" placeholder="PTS"
                    class="input--shadow task__fte">
         </p>
-        <textarea name="description" placeholder="Description" class="textarea--shadow">{{task.description}}</textarea>
+        <textarea description name="description" placeholder="Description" class="textarea--shadow">{{task.description}}</textarea>
 
         <select dropdown colors multiple class="dropdown" name="color">
             {{#each colors}}

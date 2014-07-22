@@ -116,6 +116,7 @@ Template.configSprint.events = {
             }, function (result) {
                 // TODO
             });
+
         }
 
         //$('[stop-start-sprint]').addClass('active');

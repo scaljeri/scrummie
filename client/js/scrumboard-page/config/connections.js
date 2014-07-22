@@ -27,8 +27,8 @@ Template.configConnections.rendered = function () {
 Template.configConnections.events = {
     'click [jira-save]': function (e, tpl) {
         var user = $(tpl.find('[jira-user]')),
-            passwd = $(tpl.find('[jira-password ]'));
-
+            passwd = $(tpl.find('[jira-password ]')),
+            project = $(tpl.find('[jira-projectname ]'));
         if (!user.val()) {
             user.addClass('animated rubberBand');
             user.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
@@ -45,7 +45,7 @@ Template.configConnections.events = {
         }
 
         if ($(tpl.find('.error')).length === 0) {
-            Meteor.call('updateConnection', 'jira', App.defaults.project, {username: user.val(), password: passwd.val()}, function (response) {
+            Meteor.call('updateConnection', 'jira', App.defaults.project, {username: user.val(), password: passwd.val(), projectname: project.val()}, function (response) {
 
             });
         }

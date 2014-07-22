@@ -94,7 +94,7 @@ if (Meteor.isServer) {
     initializeLogger();
 
     Meteor.startup(function () {
-
+        Future = Npm.require('fibers/future');
         /*
          Projects.remove({});
          Sprints.remove({});

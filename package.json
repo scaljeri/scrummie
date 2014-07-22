@@ -4,7 +4,8 @@
   "description": "A Analoque digital scrumboard.",
   "version": "0.0.1",
   "private": false,
-  "devDependencies": {},
+  "devDependencies": {
+  },
   "engines": {
     "node": ">=0.10.22"
   },

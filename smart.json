@@ -8,10 +8,11 @@
       "git": "https://github.com/alexsuslov/Meteor.cron.git"
     },
     "mongodb-server-aggregation": {},
-    "npm": {},
     "reactive-publish": {},
     "reststop2": {},
     "kadira": {},
-    "subs-manager": {}
+    "subs-manager": {},
+    "async": {},
+    "npm": {}
   }
 }

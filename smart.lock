@@ -12,11 +12,12 @@
         "branch": "master"
       },
       "mongodb-server-aggregation": {},
-      "npm": {},
       "reactive-publish": {},
       "reststop2": {},
       "kadira": {},
-      "subs-manager": {}
+      "subs-manager": {},
+      "async": {},
+      "npm": {}
     },
     "packages": {
       "iron-router": {
@@ -39,11 +40,6 @@
         "tag": "v1.0.3",
         "commit": "416293e383f53e2506f1b7a1a7687390cbaf0e68"
       },
-      "npm": {
-        "git": "https://github.com/arunoda/meteor-npm.git",
-        "tag": "v0.2.6",
-        "commit": "177ab6118de5bf8cffb19481343d5762ff7a2aaf"
-      },
       "reactive-publish": {
         "git": "https://github.com/Diggsey/meteor-reactive-publish.git",
         "tag": "v0.1.6",
@@ -63,6 +59,16 @@
         "git": "https://github.com/meteorhacks/subs-manager.git",
         "tag": "v1.0.1",
         "commit": "38317052d1601002d4dff537e4e0f61d1aa36e6d"
+      },
+      "async": {
+        "git": "https://github.com/peerlibrary/meteor-async.git",
+        "tag": "v0.9.0-1",
+        "commit": "419ddf9711474738cddc6fa3c086a0875be3a5d1"
+      },
+      "npm": {
+        "git": "https://github.com/arunoda/meteor-npm.git",
+        "tag": "v0.2.6",
+        "commit": "177ab6118de5bf8cffb19481343d5762ff7a2aaf"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

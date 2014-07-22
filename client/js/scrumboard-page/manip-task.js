@@ -58,7 +58,7 @@ Template.manipTask.show = function (task, callback) {
 
         select.select2('val', taskColors ? taskColors.value : null);
 
-        $('[manip-task]').addClass('on-top');
+        $('[manip-task]').css('visibility', 'visible');
 
         members.select2({
             minimumResultsForSearch: -1,
@@ -81,7 +81,7 @@ Template.manipTask.show = function (task, callback) {
 
 Template.manipTask.hide = function () {
     $('[manip-task] [dropdown]').blur();
-    $('[manip-task]').removeClass('on-top')
+    $('[manip-task]').css('visibility', 'hidden')
         .find('.error').removeClass('error big-error');
     $('[add-task]').removeClass('btn--active');  // TODO: implement closeCallback
 
@@ -89,6 +89,7 @@ Template.manipTask.hide = function () {
 };
 
 Template.manipTask.rendered = function () {
+
 };
 
 Template.manipTask.events = {
@@ -108,7 +109,7 @@ Template.manipTask.events = {
             errors = true;
         }
         if (!data.color) {
-            $(tpl.find('.select2-colors .select2-choices')).addClass('animated rubberBand')
+            $(tpl.find('.select2-colors')).addClass('animated rubberBand')
                 .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
                     $(this).removeClass('animated rubberBand')
                         .addClass(($(this).hasClass('error') ? 'big-' : '') + 'error');
