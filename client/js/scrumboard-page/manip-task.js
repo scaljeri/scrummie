@@ -181,9 +181,9 @@ Template.manipTask.events = {
 };
 
 function closeManip() {
-    $('[manip-task]').css('visibility', 'hidden');
+    $('[manip-task]').removeClass('on-top')[0].reset();
     $('[add-task]').removeClass('btn--active');
-    $('[manip-task]')[0].reset();
+    //$('[manip-task]')[0].reset();
     App.selectedTask = null;
 }
 
