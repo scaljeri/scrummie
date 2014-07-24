@@ -4,6 +4,14 @@ Template.manipTask.task = function () {
     return App.selectedTask;
 };
 
+Template.manipTask.jiraEnabled = function () {
+    var settings = Settings.findOne(query());
+
+    if (settings) {
+        return settings.connections.jira.checked;
+    }
+};
+
 Template.manipTask.colors = function () {
     return TaskColorsSetup.find(query(), {sort: {index: 1}}).fetch();
 };
@@ -29,13 +37,16 @@ Template.manipTask.members = function () {
 
 Template.manipTask.show = function (task, callback) {
 
-    Meteor.call('jiraStories', '30', 'test', function (error,result) {
+    Meteor.call('jiraStories', App.defaults.sprintNumber, App.defaults.project, function (error,result) {
         if(error) {
             Session.set('serverDataResponse', "Error:" + err.reason);
             return;
         }
+        result.issues.forEach(function(item, index) {
+            item.index = index;
+        });
+        console.dir(result.issues);
         Session.set('serverDataResponse', result.issues);
-        console.log(result.issues);
     });
     var taskColors = [], members, select, issues;
 
@@ -98,10 +109,13 @@ Template.manipTask.show = function (task, callback) {
                 console.log('nothing');
             }
             else {
-
-                $('[manip-task] [description]').value = issues.val();
+                var issue = Session.get('serverDataResponse')[parseInt(issues.val())];
+                debugger;
+                $('[manip-task-title ]').val(issue.key);
+                $('[manip-task] [description]').val(issue.fields.summary);
+                $('[manip-task-link]').val(issue.self);
             }
-        })
+        });
 
         if (task && task.memberId) {
             members.select2('val', task.memberId);

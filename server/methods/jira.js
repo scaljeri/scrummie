@@ -1,25 +1,26 @@
 Meteor.methods({
     jiraStories: function (sprintNumber,projectName) {
-
-        return fetchSprintJiraStories(sprintNumber,projectName);;
+        return fetchSprintJiraStories(sprintNumber,projectName);
     }
 });
 
-function fetchSprintJiraStories(sprint,projectName) {
-    var project = Projects.findOne({name: projectName});
-    var settings = Settings.findOne({projectId: project._id});
-    var JiraApi = Meteor.require('jira').JiraApi;
+function fetchSprintJiraStories(sprintNumber,projectName) {
+    var settings, JiraApi, project = Projects.findOne({name: projectName});
 
-    console.log(settings);
-    var jira = new JiraApi('https', 'jira.malmberg.nl', 443, settings.jira.username, settings.jira.password, '2');
+    if (project) {
+        settings = Settings.findOne({projectId: project._id});
+        JiraApi = Meteor.require('jira').JiraApi;
 
-    var fut = new Future();
-    jira.searchJira("project in("+ settings.jira.projectname +") and issuetype in (Story) and Sprint = 'Sprint " + sprint + "'", {}, function(error, result) {
+        var jira = new JiraApi('https', 'jira.malmberg.nl', 443, settings.jira.username, settings.jira.password, '2');
 
-        fut['return'](result);
+        var fut = new Future();
+        jira.searchJira("project in("+ settings.jira.projectname +") and issuetype in (Story) and Sprint = 'Sprint " + sprintNumber + "'", {}, function(error, result) {
+            fut['return'](result);
+        });
 
-    });
-    return fut.wait();
+        return fut.wait();
+    }
 
+    return null;
 }
 

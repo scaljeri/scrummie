@@ -11,12 +11,15 @@
         <input name="_id" type="hidden" value="{{task._id}}">
         <input name="sprintNumber" type="hidden" value="{{task.sprintNumber}}">
         {{/if}}
+
+        {{#if jiraEnabled}}
         <select dropdown issues class="dropdown" name="issue">
             <option></option>
             {{#each issues}}
-            <option value="{{fields.summary}}">{{key}}</option>
+            <option value="{{this.index}}">{{key}}</option>
             {{/each}}
         </select>
+        {{/if}}
         <p>
             <input manip-task-title type="text" name="title" value="{{task.title}}" placeholder="Title"
                    class="input--shadow task__title">
@@ -39,7 +42,7 @@
             {{/each}}
         </select>
 
-        <input type="text" name="link" value="{{task.link}}" placeholder="Link" class="input--shadow">
+        <input manip-task-link type="text" name="link" value="{{task.link}}" placeholder="Link" class="input--shadow">
 
 
         <p class="button-group">

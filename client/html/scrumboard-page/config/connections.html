@@ -3,10 +3,16 @@
 
     <div accordion__item__wrapper class="accordion__item__wrapper">
         <ul class="part part1 config__connections">
+
             {{#with jira}}
                 <li class="part part4 config__connection__item">
                     <input connection-toggle type="radio" id="item-toggle-jira" name="item-toggle" class="item__toggle"/>
                     <label for="item-toggle-jira" class="item__header">
+                        <div class="spinner" alt="saving..." title="saving...">
+                            <span class="circle"></span>
+                            <span class="circle1"></span>
+                        </div>
+
                         <h5 class="item__label">Jira</h5>
 
                         <div on-off-switch class="onoffswitch">
@@ -19,18 +25,10 @@
                     </label>
 
                         <p class="part2 item__body">
-                            {{#if label}}
-                                <h5>{{label}}</h5>
-
-
-                            {{else}}
+                                <input jira-projectname placeholder="Jira projectname" class="input--shadow" value="{{projectName}}">
                                 <input jira-user placeholder="Jira username" class="input--shadow" value="{{username}}">
-                                <input jira-password placeholder="Jira user password" class="input--shadow">
-                                <input jira-projectname placeholder="Jira projectname" class="input--shadow" value="{{project}}">
-
+                                <input jira-password type="password" placeholder="Jira user password" class="input--shadow">
                                 <a jira-save class="part part5 btn btn__confirm">Save</a>
-                            {{/if}}
-
                         </p>
                 </li>
             {{/with}}

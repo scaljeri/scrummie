@@ -2,8 +2,7 @@
   "loglevel" : "info",
   "hipchat"  : {
     "message"    : "{{member.name}} finished task <a href='{{url}}/{{project}}/task/{{task._id}}'>{{task.title}}</a>",
-    "rooId"      : "*******",
-    "authToken"  : "************************"
+    "active" : false
   },
   "github"   : {
     "clientId"      : "*****************",
@@ -11,7 +10,9 @@
     "appName"       : "Scrummie"
   },
   "jira" : {
-    "server"        : "jira.malmberg.nl"
+    "url"       : "jira.malmberg.nl",
+    "active"    : true
+
   },
   "uploadFolder" : ".uploads",
   "host"         : {

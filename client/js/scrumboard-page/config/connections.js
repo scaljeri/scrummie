@@ -26,15 +26,21 @@ Template.configConnections.rendered = function () {
 
 Template.configConnections.events = {
     'click [jira-save]': function (e, tpl) {
-        var user = $(tpl.find('[jira-user]')),
+        var checked = $('[data-type="jira"]').prop('checked'),
+            user = $(tpl.find('[jira-user]')),
             passwd = $(tpl.find('[jira-password ]')),
-            project = $(tpl.find('[jira-projectname ]'));
+            project = $(tpl.find('[jira-projectname ]')),
+            errors = false,
+            passwdVal;
+
+
         if (!user.val()) {
             user.addClass('animated rubberBand');
             user.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
                 user.removeClass('animated rubberBand')
                     .addClass((user.hasClass('error') ? 'big-' : '') + 'error');
             });
+            errors = true;
         }
         if (!passwd.val()) {
             passwd.addClass('animated rubberBand');
@@ -42,22 +48,43 @@ Template.configConnections.events = {
                 passwd.removeClass('animated rubberBand')
                     .addClass(passwd.hasClass('error') ? 'big-error' : 'error');
             });
+            errors = true;
+        }
+        else {
+            passwdVal = passwd.val();
+            passwd.val('');
         }
 
-        if ($(tpl.find('.error')).length === 0) {
-            Meteor.call('updateConnection', 'jira', App.defaults.project, {username: user.val(), password: passwd.val(), projectname: project.val()}, function (response) {
+        if (!project.val()) {
+           project.val(App.defaults.project);
+        }
 
-            });
+        if (!errors) {
+            $(tpl.findAll('.error')).removeClass('error error-big');
+
+            var timeStart = new Date().getTime();
+            $(tpl.find('[connection-toggle]')).prop('checked', false);
+            setTimeout(function () {$(tpl.find('.spinner')).show();}, 500);
+            Meteor.call('updateConnection', 'jira', App.defaults.project,
+                { checked: checked,
+                    username: user.val(),
+                    password: passwdVal,
+                    projectName: project.val()
+                }, function (response) {
+                    setTimeout(function () {
+                        $(tpl.find('.spinner')).hide();
+                    }, 2000 - (new Date().getTime() - timeStart));
+                });
         }
     },
-    'click [hipchat-save]': function(e, tpl) {
+    'click [hipchat-save]': function (e, tpl) {
         var roomId = $(tpl.find('[hipchat-room-id]')),
             authToken = $(tpl.find('[hipchat-auth-token]'));
 
         if (!roomId.val()) {
 
         }
-        else if(!authToken.val()) {
+        else if (!authToken.val()) {
 
         }
         else {

@@ -14,18 +14,26 @@
       display: none;
     }
 
+    .item__body {
+      transition: all 0.9s ease;
+    }
+
     .item__toggle:not(:checked) ~ .item__body {
+      padding: 0;
       max-height: 0;
-      display: none;
     }
     .item__toggle:checked ~ .item__body {
-      display: block;
+      max-height: 190px;
     }
 
     .item__header {
       display: block;
 
-
+      .spinner {
+        float: left;
+        margin-top: 5px;
+        display: none;
+      }
     }
 
     .item__body {
@@ -71,6 +79,7 @@
 
     .item__label {
       display: inline-block;
+      margin-left: 8px;
       vertical-align: top;
     }
   }
