@@ -1,3 +1,5 @@
+<a href='https://pledgie.com/campaigns/25781'><img alt='Click here to lend your support to: Scrummie - first stable release of analogue digital Scrum board and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/25781.png?skin_name=chrome' border='0' ></a>
+
 The rise of agile software development in recent years has created a need for automated task boards. 
 Issue tracking and project management software currently facilitate agile processes such as Scrum. 
 However, these full-fledged systems lack the versatility of a paper task board. They often limit user 
