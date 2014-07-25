@@ -1,24 +1,23 @@
 {
-  "loglevel" : "info",
-  "hipchat"  : {
-    "message"    : "{{member.name}} finished task <a href='{{url}}/{{project}}/task/{{task._id}}'>{{task.title}}</a>",
-    "active" : false
+  "services" : {
+      "jira" : {
+          "url"       : "jira.malmberg.nl",
+          "protocol"  : "https",
+          "port"      : 443,
+          "visible"   : true
+      },
+      "hipchat"  : {
+          "message"    : "{{member.name}} finished task <a href='{{url}}/{{project}}/task/{{task._id}}'>{{task.title}}</a>",
+          "visible" : false
+      }
   },
-  "github"   : {
-    "clientId"      : "*****************",
-    "clientSecret"  : "*****************************************",
-    "appName"       : "Scrummie"
+  "authentication" : {
+      "github"   : {
+          "visible"       : true,
+          "clientId"      : "********",
+          "clientSecret"  : "********************",
+          "appName"       : "Scrummie"
+      }
   },
-  "jira" : {
-    "url"       : "jira.malmberg.nl",
-    "active"    : true
-
-  },
-  "uploadFolder" : ".uploads",
-  "host"         : {
-    "domain"        : "localhost",
-    "port"          : "3000"
-                   },
-  "url"          : "localhost",
-  "test"         : "test value"
+  "uploadFolder" : ".uploads"
 }

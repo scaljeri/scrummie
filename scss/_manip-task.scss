@@ -13,6 +13,35 @@
   box-shadow: 0px 0px 11px 0px rgba(50, 50, 50, 1);
   @include position(absolute, 0px 0 0 0px);
 
+  .jira-stories {
+    margin-bottom: 10px;
+
+    .loaded {
+      display: block;
+    }
+
+    .loading {
+      display: none;
+    }
+
+    .loading-message {
+      display: inline-block;
+      font: 100 20px/35px Lato;
+      vertical-align: top;
+      margin-left: 10px;
+      line-height: 19px;
+    }
+
+    &.jira-stories--loading {
+      .loaded {
+        display: none;
+      }
+      .loading {
+        display: block;
+      }
+    }
+  }
+
   .task__title {
     width: 75%;
   }

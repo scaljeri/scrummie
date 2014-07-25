@@ -2,28 +2,15 @@ Meteor.startup(function () {
     var isAdded = false;
 
     Meteor.reactivePublish('settings', function (projectName) {
-        var enabled = Meteor.settings.authenticate === undefined ? false : Meteor.settings.authenticate,
-            connections = {}, project, settings;
+        var connections = {}, project, settings;
 
         if (projectName) {
             project = Projects.findOne({name: projectName}),
             settings = Settings.findOne({projectId: project._id}, {reactive: true});
 
-            if (Meteor.settings.jira && Meteor.settings.jira.active === true) {
-                connections.jira = settings.jira ?
-                    {username: settings.jira.username, checked: settings.jira.checked, projectName: settings.jira.projectName} :
-                    {checked: false};
-            }
+            connections.jira = setupJira(settings.jira);
+            //connections.hipchat = setupHipchat(settings.hipchat);
 
-
-            if (Meteor.settings.hipchat && Meteor.settings.hipchat.active === true) {
-                if (settings.hipchat) {
-                    connections.hipchat = { checked: settings.hipchat.checked, roomId: settings.hipchat.roomId};
-                }
-                else {
-                    connections.hipchat = {checked: false};
-                }
-            }
         }
 
         try { // TODO: The try/catch is a hack
@@ -33,12 +20,12 @@ Meteor.startup(function () {
 
         //if (!isAdded) {
         this.added("settings", "settings", {
-            isAuth: enabled,
+            isAuth: isAuthenticationEnabled(),
             connections: connections,
-            projectId: project._id
+            projectId: (project||{})._id
         });
-        isAdded = true;
         /*}
+         isAdded = true;
          else {
 
          console.log("Cahnging id=" + settings);
@@ -51,3 +38,52 @@ Meteor.startup(function () {
         this.ready();
     });
 });
+
+function isAuthenticationEnabled() {
+    // currently only github authentication is implemented
+    var settings = Meteor.settings;
+    return settings && settings.authentication && settings.authentication.github &&
+           settings.authentication.github.visible === true;
+}
+
+function getService(key) {
+    var service = {};
+
+    if (Meteor.settings && Meteor.settings.services) {
+        service = Meteor.settings.services[key];
+    }
+
+    return service;
+
+}
+
+function setupJira(settings) {
+    var retVal = null, service;
+
+    if (settings) {
+        service = getService('jira');
+
+        // if visible is `false` it will not show up in the configuration
+        if (service.visible === true) {
+            retVal = {
+                username: settings.username,
+                checked: settings.checked, // if false it will not show up in the 'create task' menu
+                projectName: settings.projectName
+            };
+        }
+
+    }
+
+    return retVal;
+}
+
+function setupHipchat(settings) {
+    if (Meteor.settings.hipchat && Meteor.settings.hipchat.active === true) {
+        if (settings.hipchat) {
+            connections.hipchat = { checked: settings.hipchat.checked, roomId: settings.hipchat.roomId};
+        }
+        else {
+            connections.hipchat = {checked: false};
+        }
+    }
+}

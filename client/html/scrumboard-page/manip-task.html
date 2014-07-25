@@ -13,12 +13,21 @@
         {{/if}}
 
         {{#if jiraEnabled}}
-        <select dropdown issues class="dropdown" name="issue">
-            <option></option>
-            {{#each issues}}
-            <option value="{{this.index}}">{{key}}</option>
-            {{/each}}
-        </select>
+            <div jira__stories class="jira-stories jira-stories--loading">
+                <p loading class="loading">
+                    <span jira-spinner class="spinner" alt="loading jira stories..." title="loading jira stories...">
+                        <span class="circle"></span>
+                        <span class="circle1"></span>
+                    </span>
+                    <span class="loading-message">Loading Jira stories....</span>
+                </p>
+                <select dropdown jira__stories__dropdown class="dropdown loaded" name="issue">
+                    <option></option>
+                    {{#each issues}}
+                        <option value="{{this.index}}">{{key}}</option>
+                    {{/each}}
+                </select>
+            </div>
         {{/if}}
         <p>
             <input manip-task-title type="text" name="title" value="{{task.title}}" placeholder="Title"

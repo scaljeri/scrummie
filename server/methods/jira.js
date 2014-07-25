@@ -1,20 +1,21 @@
 Meteor.methods({
-    jiraStories: function (sprintNumber,projectName) {
-        return fetchSprintJiraStories(sprintNumber,projectName);
+    jiraStories: function (sprintNumber, projectName) {
+        return fetchSprintJiraStories(sprintNumber, projectName);
     }
 });
 
-function fetchSprintJiraStories(sprintNumber,projectName) {
+function fetchSprintJiraStories(sprintNumber, projectName) {
     var settings, JiraApi, project = Projects.findOne({name: projectName});
 
     if (project) {
-        settings = Settings.findOne({projectId: project._id});
+        settings = getJiraSettings(project);
         JiraApi = Meteor.require('jira').JiraApi;
 
-        var jira = new JiraApi('https', 'jira.malmberg.nl', 443, settings.jira.username, settings.jira.password, '2');
+
+        var jira = new JiraApi(settings.protocol, settings.url, settings.port, settings.username, settings.password, '2');
 
         var fut = new Future();
-        jira.searchJira("project in("+ settings.jira.projectname +") and issuetype in (Story) and Sprint = 'Sprint " + sprintNumber + "'", {}, function(error, result) {
+        jira.searchJira("project in(" + settings.projectName + ") and issuetype in (Story) and Sprint = 'Sprint " + sprintNumber + "'", {}, function (error, result) {
             fut['return'](result);
         });
 
@@ -22,5 +23,18 @@ function fetchSprintJiraStories(sprintNumber,projectName) {
     }
 
     return null;
+}
+
+function getJiraSettings(project) {
+    var jira, settings = Settings.findOne({projectId: project._id}).jira || {};
+
+    if (Meteor.settings && Meteor.settings.services) {
+        jira = Meteor.settings.services.jira || {};
+        settings.url = jira.url;
+        settings.protocol = jira.protocol;
+        settings.port = jira.port;
+    }
+
+    return settings;
 }
 

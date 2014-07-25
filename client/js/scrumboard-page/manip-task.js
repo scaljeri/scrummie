@@ -5,11 +5,13 @@ Template.manipTask.task = function () {
 };
 
 Template.manipTask.jiraEnabled = function () {
-    var settings = Settings.findOne(query());
+    var retVal = false, settings = Settings.findOne(query());
 
-    if (settings) {
-        return settings.connections.jira.checked;
+    if (settings && settings.connections.jira) {
+        retVal = !Template.manipTask.task() && settings.connections.jira.checked;
     }
+
+    return retVal;
 };
 
 Template.manipTask.colors = function () {
@@ -36,19 +38,29 @@ Template.manipTask.members = function () {
 };
 
 Template.manipTask.show = function (task, callback) {
+    var taskColors = [], members, select, issues, jiraEl;
 
-    Meteor.call('jiraStories', App.defaults.sprintNumber, App.defaults.project, function (error,result) {
-        if(error) {
-            Session.set('serverDataResponse', "Error:" + err.reason);
-            return;
+    if (!task && Template.manipTask.jiraEnabled() === true) {
+        jiraEl = $('[manip-task] [jira__stories]');
+
+        if (!Session.get('serverDataResponse')) {
+            Meteor.call('jiraStories', App.defaults.sprintNumber, App.defaults.project, function (error, result) {
+                if (error) {
+                    Session.set('serverDataResponse', "Error:" + err.reason);
+                }
+                else {
+                    result.issues.forEach(function (item, index) {
+                        item.index = index;
+                    });
+                    Session.set('serverDataResponse', result.issues);
+                    jiraEl.removeClass('jira-stories--loading').addClass('jira-stories--loaded');
+                }
+            });
         }
-        result.issues.forEach(function(item, index) {
-            item.index = index;
-        });
-        console.dir(result.issues);
-        Session.set('serverDataResponse', result.issues);
-    });
-    var taskColors = [], members, select, issues;
+        else {
+            jiraEl.removeClass('jira-stories--loading').addClass('jira-stories--loaded');
+        }
+    }
 
     if (task && typeof task === 'function') {
         callback = task;
@@ -62,7 +74,7 @@ Template.manipTask.show = function (task, callback) {
     setTimeout(function () { // make sure App.selectedTask is applied
 
         select = $('[manip-task] [dropdown][colors]');
-        issues = $('[manip-task] [dropdown][issues]');
+        issues = $('[jira__stories__dropdown]');
         members = $('[manip-task] [dropdown][members]');
 
         if (task) {
@@ -102,7 +114,7 @@ Template.manipTask.show = function (task, callback) {
             formatResult: format,
             placeholder: "Select Jira task",
             allowNewValues: true
-         });
+        });
 
         issues.on('change', function () {
             if (issues.val() === '') {
@@ -110,7 +122,6 @@ Template.manipTask.show = function (task, callback) {
             }
             else {
                 var issue = Session.get('serverDataResponse')[parseInt(issues.val())];
-                debugger;
                 $('[manip-task-title ]').val(issue.key);
                 $('[manip-task] [description]').val(issue.fields.summary);
                 $('[manip-task-link]').val(issue.self);
@@ -132,11 +143,7 @@ Template.manipTask.show = function (task, callback) {
 };
 
 Template.manipTask.hide = function () {
-    $('[manip-task] [dropdown]').blur();
-    $('[manip-task]').removeClass('on-top')
-        .find('.error').removeClass('error big-error');
-    $('[add-task]').removeClass('btn--active');  // TODO: implement closeCallback
-
+    closeManip();
     App.outsideClick.remove(Template.manipTask.hide);
 };
 
@@ -194,10 +201,13 @@ Template.manipTask.events = {
     }
 };
 
+
 function closeManip() {
+    //$('[manip-task] [dropdown]').blur();
     $('[manip-task]').removeClass('on-top')[0].reset();
+    $('[manip-task] [dropdown]').select2('val', '');
     $('[add-task]').removeClass('btn--active');
-    //$('[manip-task]')[0].reset();
+    $('[manip-task] .error').removeClass('error big-error');
     App.selectedTask = null;
 }
 
