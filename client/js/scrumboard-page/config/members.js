@@ -41,7 +41,7 @@ Template.configMembers.events = {
     'click [add-member]': function () {
         var userId, name, initials;
 
-        if (!Settings.findOne().isAuth) {
+        if (!Settings.findOne().authenticate) {
             name = $(arguments[1].find('[name="member__new__name"]'));
             initials = $(arguments[1].find('[name="member__new__initials"]'));
 

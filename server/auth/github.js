@@ -1,4 +1,4 @@
-var github = Meteor.settings.github;
+var github = (Meteor.settings.authentication||{}).github;
 
 if (github) {
     validateGithubSettings(github);

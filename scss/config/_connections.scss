@@ -75,6 +75,13 @@
         }
       }
 
+      :disabled + .item__header {
+        cursor: default;
+
+        label {
+          cursor: default;
+        }
+      }
     }
 
     .item__label {
@@ -82,5 +89,12 @@
       margin-left: 8px;
       vertical-align: top;
     }
+
+  }
+
+  .config__connections__empty {
+    color: $text;
+    display: block;
+    font: 300 20px/30px $font-normal;
   }
 }

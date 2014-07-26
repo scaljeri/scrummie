@@ -9,12 +9,6 @@ Handlebars.registerHelper('scrumboardState', function () {
 });
 
 /*
-Handlebars.registerHelper('isReadonly', function () {
-    return App.scrumboard.readonly;
-});
-*/
-
-/*
  {{#each states}}
  <option value="{{this}}" {{selected this ../selectedState}}>{{this}}</option>
  {{/each}}
@@ -80,8 +74,16 @@ Handlebars.registerHelper('isChecked', function (val) {
     return val === true ? {checked: 'checked'} : null;
 });
 
-Handlebars.registerHelper('isReadonly', function () {
-    return hasPermissionsInProject(App.defaults.project) === null ? 'readonly' : null;
+Handlebars.registerHelper('isReadonly', function (disable) {
+    var retVal = {};
+    if (hasPermissionsInProject(App.defaults.project) === null) {
+        if (disable) {
+            retVal.disabled = 'disabled';
+        }
+
+        retVal.readonly = 'readonly';
+    }
+    return retVal;
 });
 
 Handlebars.registerHelper('isAuthenticated', function () {
@@ -93,7 +95,7 @@ Handlebars.registerHelper('hasPermissionsInProject', function () {
 });
 
 Handlebars.registerHelper('isAuthEnabled', function () {
-    return Boolean((Settings.findOne() || {}).isAuth);
+    return Boolean((Settings.findOne() || {}).authenticate);
 });
 
 /*

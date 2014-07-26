@@ -12,7 +12,7 @@ Template.postit.helpers({
         return TaskColorsSetup.findOne({_id: this.colorId});
     },
     member: function () {
-        if ((Settings.findOne() || {}).isAuth) {
+        if ((Settings.findOne() || {}).authenticate) {
             return Meteor.users.findOne({_id: this.memberId});
         }
         else {

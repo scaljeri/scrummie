@@ -12,10 +12,11 @@
       }
   },
   "authentication" : {
+      "enabled"    : true,
       "github"   : {
           "visible"       : true,
           "clientId"      : "********",
-          "clientSecret"  : "********************",
+          "clientSecret"  : "*************************",
           "appName"       : "Scrummie"
       }
   },

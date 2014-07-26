@@ -1,17 +1,21 @@
 Template.configConnections.helpers({
     hipchat: function () {
-        var settings = Settings.findOne(query);
+        var settings = Settings.findOne(query());
 
         if (settings && settings.connections) {
             return Settings.findOne(query).connections.hipchat;
         }
     },
     jira: function () {
-        var settings = Settings.findOne(query);
+        var settings = Settings.findOne(query());
 
         if (settings && settings.connections) {
-            return Settings.findOne(query).connections.jira;
+            return Settings.findOne(query()).connections.jira;
         }
+    },
+    empty: function () {
+        var settings = Settings.findOne(query());
+        return !settings || Object.keys(settings.connections).length === 0;
     }
 });
 

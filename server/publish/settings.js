@@ -2,14 +2,24 @@ Meteor.startup(function () {
     var isAdded = false;
 
     Meteor.reactivePublish('settings', function (projectName) {
-        var connections = {}, project, settings;
+        var connections = {}, project, settings, service;
 
         if (projectName) {
-            project = Projects.findOne({name: projectName}),
-            settings = Settings.findOne({projectId: project._id}, {reactive: true});
+            project = Projects.findOne({name: projectName});
 
-            connections.jira = setupJira(settings.jira);
-            //connections.hipchat = setupHipchat(settings.hipchat);
+            if (project) {
+                settings = Settings.findOne({projectId: project._id}, {reactive: true});
+
+                service = setupJira(settings.jira||{});
+                if (service) {
+                    connections.jira = service;
+                }
+
+                service = setupHipchat(settings.hipchat||{});
+                if (service) {
+                    connections.hipchat = service;
+                }
+            }
 
         }
 
@@ -20,9 +30,9 @@ Meteor.startup(function () {
 
         //if (!isAdded) {
         this.added("settings", "settings", {
-            isAuth: isAuthenticationEnabled(),
+            authenticate: isAuthenticationEnabled(),
             connections: connections,
-            projectId: (project||{})._id
+            projectId: (project || {})._id
         });
         /*}
          isAdded = true;
@@ -42,8 +52,7 @@ Meteor.startup(function () {
 function isAuthenticationEnabled() {
     // currently only github authentication is implemented
     var settings = Meteor.settings;
-    return settings && settings.authentication && settings.authentication.github &&
-           settings.authentication.github.visible === true;
+    return settings && settings.authentication && settings.authentication.enabled === true;
 }
 
 function getService(key) {
@@ -60,30 +69,31 @@ function getService(key) {
 function setupJira(settings) {
     var retVal = null, service;
 
-    if (settings) {
-        service = getService('jira');
+    service = getService('jira');
 
-        // if visible is `false` it will not show up in the configuration
-        if (service.visible === true) {
-            retVal = {
-                username: settings.username,
-                checked: settings.checked, // if false it will not show up in the 'create task' menu
-                projectName: settings.projectName
-            };
-        }
-
+    // if visible is `false` it will not show up in the configuration
+    if (service.visible === true) {
+        retVal = {
+            username: settings.username,
+            checked: settings.checked, // if false it will not show up in the 'create task' menu
+            projectName: settings.projectName
+        };
     }
 
     return retVal;
 }
 
 function setupHipchat(settings) {
-    if (Meteor.settings.hipchat && Meteor.settings.hipchat.active === true) {
-        if (settings.hipchat) {
-            connections.hipchat = { checked: settings.hipchat.checked, roomId: settings.hipchat.roomId};
-        }
-        else {
-            connections.hipchat = {checked: false};
+    var retVal = null, service;
+
+    if (settings) {
+        service = getService('hipchat');
+
+        // if visible is `false` it will not show up in the configuration
+        if (service.visible === true) {
+            retVal = {}
         }
     }
+
+    return retVal;
 }

@@ -6,7 +6,7 @@
 
             {{#with jira}}
                 <li class="part part4 config__connection__item">
-                    <input connection-toggle type="radio" id="item-toggle-jira" name="item-toggle" class="item__toggle"/>
+                    <input connection-toggle type="radio" id="item-toggle-jira" name="item-toggle" class="item__toggle" {{isReadonly true}}/>
                     <label for="item-toggle-jira" class="item__header">
                         <div class="spinner" alt="saving..." title="saving...">
                             <span class="circle"></span>
@@ -16,7 +16,7 @@
                         <h5 class="item__label">Jira</h5>
 
                         <div on-off-switch class="onoffswitch">
-                            <input {{isChecked checked}} data-type="jira" on-off-switch-input type="checkbox" name="onoffswitch-jira" class="onoffswitch-checkbox" id="onoffswitch-jira">
+                            <input {{isChecked checked}} {{isReadonly true}} data-type="jira" on-off-switch-input type="checkbox" name="onoffswitch-jira" class="onoffswitch-checkbox" id="onoffswitch-jira">
                             <label class="onoffswitch-label" for="onoffswitch-jira">
                                 <span class="onoffswitch-inner"></span>
                                 <span class="onoffswitch-switch"></span>
@@ -57,5 +57,8 @@
             </li>
             {{/with}}
         </ul>
+        {{#with empty}}
+            <div class="config__connections__empty">No Connections available</div>
+        {{/with}}
     </div>
 </template>

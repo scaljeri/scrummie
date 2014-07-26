@@ -7,7 +7,7 @@ Template.manipTask.task = function () {
 Template.manipTask.jiraEnabled = function () {
     var retVal = false, settings = Settings.findOne(query());
 
-    if (settings && settings.connections.jira) {
+    if (settings && settings.connections.jira && !Session.get('jiraDisabled')) {
         retVal = !Template.manipTask.task() && settings.connections.jira.checked;
     }
 
@@ -27,7 +27,7 @@ Template.manipTask.members = function () {
     var settings = Settings.findOne();
 
     if (App.defaults.projectId) {
-        if (settings && settings.isAuth) {
+        if (settings && settings.authenticate) {
             return Meteor.users.find({projects: {$in: [App.defaults.projectId]}}, {sort: {name: 1}}).fetch();
         }
         else {
@@ -39,6 +39,7 @@ Template.manipTask.members = function () {
 
 Template.manipTask.show = function (task, callback) {
     var taskColors = [], members, select, issues, jiraEl;
+    Session.set('jiraDisabled', false);
 
     if (!task && Template.manipTask.jiraEnabled() === true) {
         jiraEl = $('[manip-task] [jira__stories]');
@@ -46,7 +47,8 @@ Template.manipTask.show = function (task, callback) {
         if (!Session.get('serverDataResponse')) {
             Meteor.call('jiraStories', App.defaults.sprintNumber, App.defaults.project, function (error, result) {
                 if (error) {
-                    Session.set('serverDataResponse', "Error:" + err.reason);
+                    Session.set('alert', {msg: error.reason, type: 'error'});
+                    Session.set('jiraDisabled', true);
                 }
                 else {
                     result.issues.forEach(function (item, index) {
