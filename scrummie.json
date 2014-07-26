@@ -4,19 +4,19 @@
           "url"       : "jira.malmberg.nl",
           "protocol"  : "https",
           "port"      : 443,
-          "visible"   : true
+          "active"    : true
       },
       "hipchat"  : {
           "message"    : "{{member.name}} finished task <a href='{{url}}/{{project}}/task/{{task._id}}'>{{task.title}}</a>",
-          "visible" : false
+          "active"     : true
       }
   },
   "authentication" : {
       "enabled"    : true,
       "github"   : {
-          "visible"       : true,
-          "clientId"      : "********",
-          "clientSecret"  : "*************************",
+          "active"        : true,
+          "clientId"      : "*********",
+          "clientSecret"  : "*********************",
           "appName"       : "Scrummie"
       }
   },

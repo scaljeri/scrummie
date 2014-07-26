@@ -47,7 +47,7 @@ Template.manipTask.show = function (task, callback) {
         if (!Session.get('serverDataResponse')) {
             Meteor.call('jiraStories', App.defaults.sprintNumber, App.defaults.project, function (error, result) {
                 if (error) {
-                    Session.set('alert', {msg: error.reason, type: 'error'});
+                    Session.set('alert', {message: error.error === '403' ? 'Jira denied access for user ' + Settings.findOne().connections.jira.username : error.message, type: 'error'});
                     Session.set('jiraDisabled', true);
                 }
                 else {
@@ -159,7 +159,12 @@ Template.manipTask.events = {
     'click [cancel-task]': closeManip,
     'click [save-task]': function (e, tpl) {
         var data = $('[manip-task]').serializeObject({sprintNumber: App.defaults.sprintNumber}),
+            sprint = Sprints(query({active: true})),
             errors = false;
+
+        if (!sprint) {
+            debugger;
+        }
 
         $(tpl.findAll('.error')).removeClass('error big-error');
 

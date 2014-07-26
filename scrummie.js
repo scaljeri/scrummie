@@ -84,7 +84,6 @@ if (Meteor.isClient) {
     }
 
     makeReactive('selectedTask');
-    makeReactive('errorMessage');
     makeReactive('selectedColors');
     makeReactive('filterColorId');
     makeReactive('isLoggedIn', false);

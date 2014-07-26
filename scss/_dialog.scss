@@ -1,0 +1,22 @@
+.ui-dialog {
+  z-index: $on-top + 2;
+
+  .ui-state {
+    padding: 10px;
+    border: none;
+  }
+
+  .dialog__icon {
+    float: left;
+  }
+
+  .dialog__message {
+    display: block;
+    margin-left: 25px;
+  }
+}
+
+.ui-widget-overlay {
+  opacity: .9;
+  z-index: $on-top + 1;
+}

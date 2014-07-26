@@ -1,22 +1,34 @@
+var crypto = Meteor.require('crypto'),
+    algorithm = 'aes256';
+
 Meteor.methods({
     jiraStories: function (sprintNumber, projectName) {
-        return fetchSprintJiraStories(sprintNumber, projectName);
+         var retVal = fetchSprintJiraStories(sprintNumber, projectName), error;
+
+        if (typeof retVal === 'string') {
+            error = retVal.split(/:/);
+            throw new Meteor.Error(error[0], error[1]);
+        }
+        else {
+            return retVal;
+        }
     }
 });
 
 function fetchSprintJiraStories(sprintNumber, projectName) {
-    var settings, JiraApi, project = Projects.findOne({name: projectName});
+    var decipher, passwd, settings, JiraApi, project = Projects.findOne({name: projectName});
 
     if (project) {
         settings = getJiraSettings(project);
         JiraApi = Meteor.require('jira').JiraApi;
+        decipher = crypto.createDecipher(algorithm, 'KJHG7yg)a1(_');
+        passwd = decipher.update(settings.password, 'hex', 'utf8') + decipher.final('utf8');
 
-
-        var jira = new JiraApi(settings.protocol, settings.url, settings.port, settings.username, settings.password, '2');
+        var jira = new JiraApi(settings.protocol, settings.url, settings.port, settings.username, passwd, '2');
 
         var fut = new Future();
         jira.searchJira("project in(" + settings.projectName + ") and issuetype in (Story) and Sprint = 'Sprint " + sprintNumber + "'", {}, function (error, result) {
-            fut['return'](result);
+            fut.return(error || result);
         });
 
         return fut.wait();

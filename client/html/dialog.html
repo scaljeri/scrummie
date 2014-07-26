@@ -1,0 +1,10 @@
+<template name="dialog">
+        <dialog dialog class="dialog" title="TODO">
+            {{#with alert}}
+                <p class="ui-state ui-state-error">
+                    <span class="ui-icon ui-icon-alert dialog__icon"></span>
+                    <span class="dialog__message">{{message}}</span>
+                </p>
+            {{/with}}
+        </dialog>
+</template>

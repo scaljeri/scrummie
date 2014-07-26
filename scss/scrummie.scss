@@ -23,6 +23,7 @@
 @import 'postit';
 @import 'manip-task';
 @import 'add-task';
+@import 'dialog';
 @import 'statistics';
 @import 'statistics/header';
 @import 'statistics/chart-footer';
@@ -64,9 +65,6 @@ body {
   &.big-error {
     border-width: 4px!important;
   }
-}
-.ui-dialog {
-  z-index: 1000000!important;
 }
 
 .clickable-overlay {

@@ -72,7 +72,7 @@ function setupJira(settings) {
     service = getService('jira');
 
     // if visible is `false` it will not show up in the configuration
-    if (service.visible === true) {
+    if (service.active === true) {
         retVal = {
             username: settings.username,
             checked: settings.checked, // if false it will not show up in the 'create task' menu
@@ -90,7 +90,7 @@ function setupHipchat(settings) {
         service = getService('hipchat');
 
         // if visible is `false` it will not show up in the configuration
-        if (service.visible === true) {
+        if (service.active === true) {
             retVal = {}
         }
     }

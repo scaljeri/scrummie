@@ -15,7 +15,7 @@ gulp.task('styles', function () {
 
     var _css = gulp.src([
         '/animate.css/animate.css',
-        '/jquery-ui/themes/base/jquery-ui.css',
+        //'/jquery-ui/themes/base/jquery-ui.css',
         '/select2/select2.css',
         '/nvd3/nv.d3.min.css'], {root: '../public/bower_components'});
 
