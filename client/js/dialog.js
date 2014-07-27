@@ -10,8 +10,16 @@ Template.dialog.helpers({
 
         App.ignoreClickFrom.add('.ui-widget-overlay');
         $('.ui-dialog').click(function (e) {
-            Session.set('alert', null);
-            e.stopPropagation();
+            if ($(e.target).hasClass('ui-icon-closethick')) {
+                Session.set('alert', null);
+            }
+
+            if ($(e.target).attr('dialog-help') === undefined ) {
+                e.stopPropagation();
+            }
+            else if(Session.get('alert').help) {
+                new Robot(Session.get('alert').help.preset).start({x: e.pageX, y: e.pageY})
+            }
         });
     },
     alert: function () {
@@ -20,6 +28,11 @@ Template.dialog.helpers({
         }
 
         return Session.get('alert');
-    },
-    events: {}
+    }
 });
+/*
+Template.dialog.events = {
+    'click [dialog-help]': function (e) {
+        debugger;
+    }
+}*/

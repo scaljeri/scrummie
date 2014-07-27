@@ -5,6 +5,11 @@
                     <span class="ui-icon ui-icon-alert dialog__icon"></span>
                     <span class="dialog__message">{{message}}</span>
                 </p>
+                <p>
+                   {{#with help}}
+                       <span dialog-help class="btn dialog__help">{{label}}</span>
+                   {{/with}}
+                </p>
             {{/with}}
         </dialog>
 </template>

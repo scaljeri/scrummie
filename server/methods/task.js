@@ -7,28 +7,32 @@ Meteor.methods({
         }
     },
     upsertTask: function (projectName, task) {
-        var retVal = {status: 'error', msg: 'Not authorized'}, project,
+        var retVal = {status: 'error', msg: 'Not authorized'}, project, sprint,
             origTask = Tasks.findOne({_id: task._id});
 
         if (isDocumentEditable(origTask)) {
             project = Projects.findOne({name: projectName});
 
             if (project) {
-                if (Array.isArray(task.color)) {
-                    var colors = task.color, x = 0, y = 8;
+                sprint = Sprints.findOne({projectId: project._id, active: true});
 
-                    for (var i = 0; i < colors.length; i++) {
-                        task.color = colors[i];
-                        delete task._id; // is this needed ?
-                        task.x = (x += 3);
-                        task.y = (y += 3);
-                        if ((retVal = upsertTask(project._id, task)).status === 'error') {
-                            break;
+                if (sprint) { // should always be defined (this is handled in the client)
+                    if (Array.isArray(task.color)) {
+                        var colors = task.color, x = 0, y = 8;
+
+                        for (var i = 0; i < colors.length; i++) {
+                            task.color = colors[i];
+                            delete task._id; // is this needed ?
+                            task.x = (x += 3);
+                            task.y = (y += 3);
+                            if ((retVal = upsertTask(project._id, task)).status === 'error') {
+                                break;
+                            }
                         }
                     }
-                }
-                else {
-                    retVal = upsertTask(project._id, task);
+                    else {
+                        retVal = upsertTask(project._id, task);
+                    }
                 }
             }
             else {
@@ -50,20 +54,20 @@ Meteor.methods({
         replaceColor(task, origTask.projectId);
 
         if (isDocumentEditable(origTask)) {
-           delete task.sprintNumber;
+            delete task.sprintNumber;
 
-           for( var prop in origTask) {
-               if (origTask.hasOwnProperty(prop) && !task[prop]) {
-                  console.log('adding ' + prop + ' --> ' + origTask[prop]);
-                  task[prop] = origTask[prop];
-               }
-           }
+            for (var prop in origTask) {
+                if (origTask.hasOwnProperty(prop) && !task[prop]) {
+                    console.log('adding ' + prop + ' --> ' + origTask[prop]);
+                    task[prop] = origTask[prop];
+                }
+            }
 
-           delete task._id;
-           task.updated = new Date().getTime();
-           task.x += 5;
-           task.y += 5;
-           Tasks.insert(task);
+            delete task._id;
+            task.updated = new Date().getTime();
+            task.x += 5;
+            task.y += 5;
+            Tasks.insert(task);
         }
     },
     updatePostitPosition: function (task) {
@@ -75,7 +79,7 @@ Meteor.methods({
                     y: task.y,
                     updated: new Date().getTime(),
                     laneId: task.laneId,
-                    moves: (origTask.moves||0) + 1
+                    moves: (origTask.moves || 0) + 1
                 },
                 lane = LanesSetup.findOne({_id: task.laneId});
 
@@ -84,7 +88,7 @@ Meteor.methods({
             }
 
             if (lane.title !== 'todo' && !origTask.memberId) {
-                fields.memberId = (Meteor.user()||{})._id;
+                fields.memberId = (Meteor.user() || {})._id;
             }
 
             Tasks.update({_id: task._id}, {$set: fields});
@@ -130,7 +134,7 @@ function upsertTask(projectId, task) {
     task.updated = new Date().getTime();
     task.inserted = task.updated;
     task.projectId = projectId;
-    task.creatorId = (Meteor.user()||{})._id;
+    task.creatorId = (Meteor.user() || {})._id;
     task.createdInSprint = parseInt(task.sprintNumber);
 
     _id = task._id;

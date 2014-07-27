@@ -159,12 +159,7 @@ Template.manipTask.events = {
     'click [cancel-task]': closeManip,
     'click [save-task]': function (e, tpl) {
         var data = $('[manip-task]').serializeObject({sprintNumber: App.defaults.sprintNumber}),
-            sprint = Sprints(query({active: true})),
             errors = false;
-
-        if (!sprint) {
-            debugger;
-        }
 
         $(tpl.findAll('.error')).removeClass('error big-error');
 

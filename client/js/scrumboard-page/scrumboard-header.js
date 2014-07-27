@@ -9,9 +9,13 @@ Template.scrumboardHeader.sprintNumber = function () {
 
 Template.scrumboardHeader.events = {
   'click [add-task]': function () {
-    var addTask = $('[add-task]');
+    var addTask = $('[add-task]'),
+        sprint = Sprints.findOne(query({active: true}));
 
-    if (!addTask.hasClass('btn--active')) {
+    if (!sprint) {
+        Session.set('alert', {message: 'No active sprint', help: { label: 'Let\'s fix it', preset: 'configSprint'}});
+    }
+    else if (!addTask.hasClass('btn--active')) {
       addTask.addClass('btn--active');
       $('[manip-task]').position({
         of: $('[add-task]'),

@@ -38,7 +38,7 @@
     background-size: 25px;
     padding: 0 0 0 10px;
     @include position(absolute, 0 0px 0 0);
-    @include size(20px, 100%);
+    @include size(20px, 23px);
   }
 
   .scrumboard__header__title {
