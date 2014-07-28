@@ -98,6 +98,12 @@ body {
   display: none;
 }
 
+.hide-cursor {
+  * {
+    cursor: none!important;
+  }
+}
+
 .on-top {
   visibility: visible;
   z-index: $on-top;

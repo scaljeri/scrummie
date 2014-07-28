@@ -49,6 +49,8 @@ Robot = (function () {
         var el = $(pointer);
         this.state = 0;
 
+
+        $('body').addClass('hide-cursor');
         doStep($(pointer), 0, this.preset.steps, mouse);
     };
 
@@ -68,6 +70,7 @@ Robot = (function () {
             }
         }
         else {
+            $('body').removeClass('hide-cursor');
             el.remove();
             $('.robot__click').remove();
         }
