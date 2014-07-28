@@ -56,11 +56,11 @@
 
         <p class="button-group">
             {{#if task}}
-                {{#unless isReadonly}}
+                {{#if isEditable}}
                     <a cancel-task class="btn cancel cancel-task">Cancel</a>
                     <a delete-task class="btn delete delete-task">Delete</a>
                     <a clone-task class="btn default clone-task">Clone</a>
-                {{/unless}}
+                {{/if}}
             {{/if}}
 
             <a save-task class="btn confirm save-task">Save</a>

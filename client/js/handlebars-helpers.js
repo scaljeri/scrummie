@@ -74,6 +74,10 @@ Handlebars.registerHelper('isChecked', function (val) {
     return val === true ? {checked: 'checked'} : null;
 });
 
+Handlebars.registerHelper('isEditable', function () {
+    return hasPermissionsInProject(App.defaults.project) !== null ;
+});
+
 Handlebars.registerHelper('isReadonly', function (disable) {
     var retVal = {};
     if (hasPermissionsInProject(App.defaults.project) === null) {
