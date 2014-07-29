@@ -1,7 +1,17 @@
 Template.postits.items = function () {
-    var searchOps = {};
-    if (App.filterColorId) {
-        searchOps.colorId = App.filterColorId;
+    var searchOps = {}, filter = Session.get('postitFilter');
+
+    if (filter) {
+        if (filter.colorId) {
+            searchOps.colorId = filter.colorId;
+        }
+        if (filter.text) {
+            var re = new RegExp('.*' + filter.text + '.*', 'i');
+            searchOps['$or'] = [
+                {title: re},
+                {description: re}
+            ];
+        }
     }
 
     return Tasks.find(query(searchOps), { sort: {index: 1}}).fetch();

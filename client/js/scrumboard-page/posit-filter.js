@@ -19,15 +19,25 @@ Template.postitFilter.rendered = function () {
 
     select.on('change', function () {
         if (select.val() === '') {
-            App.filterColorId = null;
+            Session.set('postitFilter', null); // reset filter
         }
         else {
-            App.filterColorId = TaskColorsSetup.findOne(query({value: select.val()}))._id;
+            var filter = Session.get('postitFilter')||{};
+            filter.colorId = TaskColorsSetup.findOne(query({value: select.val()}))._id;
+            Session.set('postitFilter', filter);
         }
     })
         .on('select2-open', function () {
             App.outsideClick.register('[postit-filter]', hide, true);
         });
+};
+
+Template.postitFilter.events = {
+    'keyup [postit-filter-text]': function (e) {
+        var filter = Session.get('postitFilter')||{};
+        filter.text = $(e.target).val();
+        Session.set('postitFilter', filter);
+    }
 };
 
 function hide() {
