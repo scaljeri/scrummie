@@ -112,7 +112,7 @@ function upsertTask(projectId, task) {
 
     replaceColor(task, projectId);
 
-    if (!task.sprintNumber) { // new tasks do not have a sprint number yet
+    if (!task._id) { // new tasks do not have a sprint number yet
         var currentSprint = Sprints.findOne({projectId: projectId, active: true});
 
         if (currentSprint) { // first define a sprint
