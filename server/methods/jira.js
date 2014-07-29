@@ -27,7 +27,7 @@ function fetchSprintJiraStories(sprintNumber, projectName) {
         var jira = new JiraApi(settings.protocol, settings.url, settings.port, settings.username, passwd, '2');
 
         var fut = new Future();
-        jira.searchJira("project in(" + settings.projectName + ") and issuetype in (Story) and Sprint = 'Sprint " + sprintNumber + "'", {}, function (error, result) {
+        jira.searchJira("project in(" + settings.projectName + ") and issuetype in (Story, Incident) and Sprint = 'Sprint " + sprintNumber + "'", {}, function (error, result) {
             fut.return(error || result);
         });
 
