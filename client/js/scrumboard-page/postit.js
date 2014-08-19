@@ -1,8 +1,10 @@
 Template.postit.helpers({
     zIndex: function () {
+        var hidden = applyFilter(this, Session.get('postitFilter')||{});
+
         if (this.updated) {
             //1396695841955 --> "95841"
-            return this.updated.toString().replace(/^\d{4}|\d{3}$/g, '');
+            return Math.max(parseInt(this.updated.toString().replace(/^\d{4}|\d{3}$/g, '')) -  (hidden ? 200000 : 0), 2);
         }
     },
     isVisible: function () {
@@ -26,7 +28,16 @@ Template.postit.projectName = function () {
 };
 
 Template.postit.state = function () {
-    return 'postit--' + (isDocumentEditable(this) ? 'draggable' : 'fixed');
+    var state,
+        filter = Session.get('postitFilter'),
+        hide = applyFilter(this, filter||{});
+    state = 'postit--' + (isDocumentEditable(this) && !hide ? 'draggable' : 'fixed');
+
+    if (hide) {
+        state += ' postit--soft-hide';
+    }
+
+    return state;
 };
 
 Template.postit.rendered = function () {
@@ -41,7 +52,21 @@ Template.postit.rendered = function () {
 
     if (postit) {
         this.watchPostit = Deps.autorun(function () {
-            postit.draggable("option", "disabled", !isDocumentEditable(this.data));
+            var filter = Session.get('postitFilter'),
+                hide = applyFilter(this.data, filter||{});
+
+            postit.draggable("option", "disabled", !isDocumentEditable(this.data) || hide);
+
+            if (hide) {
+                var zIndex = Math.max(Template.postit.zIndex.call(this.data) - 200000, 2);
+                postit.css('z-index', zIndex);
+            }
+            else if (filter && filter.text) {
+                postit.one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
+                    postit.removeClass('postit--notify');
+                });
+                postit.addClass('postit--notify');
+            }
         }.bind(this));
     }
 };
@@ -52,7 +77,9 @@ Template.postit.destroyed = function () {
 
 Template.postit.events = {
     'click [postit]': function (e, t) {
-        if (!e.target.hasAttribute('postit-link') && isDocumentEditable(t.data)) {
+        var hide = applyFilter(this.data, Session.get('postitFilter')||{});
+
+        if (!e.target.hasAttribute('postit-link') && isDocumentEditable(t.data) && !hide) {
             var postit = $(e.target).closest('[postit]');
 
             $('[manip-task]').position({
@@ -65,3 +92,18 @@ Template.postit.events = {
         }
     }
 };
+
+function applyFilter(task, filter) {
+    var re = filter.text ? new RegExp('.*' + filter.text + '.*', 'i') : null,
+        retVal = false;
+
+    if (filter.colorId && task.colorId !== filter.colorId) {
+        retVal = true;
+    }
+
+    if (re && !(task.title||'').match(re) && !(task.description||'').match(re)) {
+        retVal = true;
+    }
+
+    return retVal;
+}
