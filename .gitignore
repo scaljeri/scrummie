@@ -4,6 +4,7 @@
 .DS_Store
 .uploads
 scrummie.css
+smart.lock
 bower_components
 node_modules
 packages/npm

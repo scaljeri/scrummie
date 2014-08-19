@@ -6,7 +6,6 @@
 standard-app-packages
 insecure
 iron-router
-blaze-layout
 mongodb-server-aggregation
 reactive-publish
 reststop2
