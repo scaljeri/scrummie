@@ -112,10 +112,11 @@ Template.manipTask.show = function (task, callback) {
 
         issues.select2({
             allowClear: true,
+            formatResult: formatIssue,
             minimumResultsForSearch: -1,
-            formatResult: format,
             placeholder: "Select Jira task",
-            allowNewValues: true
+            allowNewValues: true,
+            containerCssClass: 'select2-issues'
         });
 
         issues.on('change', function () {
@@ -126,7 +127,12 @@ Template.manipTask.show = function (task, callback) {
                 var issue = Session.get('serverDataResponse')[parseInt(issues.val())];
                 $('[manip-task-title ]').val(issue.key);
                 $('[manip-task] [description]').val(issue.fields.summary);
-                $('[manip-task-link]').val(issue.self);
+
+                var settings = Settings.findOne(),
+                    urlSettings = settings.connections.jira.settings,
+                    url = [urlSettings.protocol, '://', urlSettings.url, '/browse/', issue.key].join('');
+
+                $('[manip-task-link]').val(url);
             }
         });
 
@@ -217,4 +223,14 @@ function format(color) {
     return ['<span class="select-option-color"',
             'style="background-color:' + color.id + '"></span>',
             '<h3 class="select-option-title">' + color.text + '</h3>'].join('');
+}
+
+function formatIssue(input) {
+    var issue  = Session.get('serverDataResponse')[input.id];
+    return ['<h3 class="task-manip__issue-option">',
+                input.text,
+            '</h3>',
+            '<h5 class="task-manip__issue-option">',
+                issue.fields.description,
+            '</h5>'].join('');
 }

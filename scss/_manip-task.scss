@@ -106,6 +106,8 @@
     }
   }
 
+
+
   /*
   &:before {
     border-bottom: 10px solid green;//#fff;
@@ -120,4 +122,21 @@
     z-index: 1;
   }
   */
+}
+
+h4.task-manip__issue-option {
+  font: 100 20px/20px Lato;
+}
+h5.task-manip__issue-option {
+  font: 100 15px/17px Lato;
+  hyphens: auto;
+  width: 100%;
+  max-height: 34px; /* fallback */
+
+  @include vendor-prefix-value(display, box);
+  @include vendor-prefix(box-orient, vertical);
+  @include vendor-prefix(line-clamp, 2);
+
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

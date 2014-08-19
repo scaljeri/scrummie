@@ -13,6 +13,7 @@ Meteor.startup(function () {
                 service = setupJira(settings.jira||{});
                 if (service) {
                     connections.jira = service;
+                    connections.jira.settings = Meteor.settings.services.jira;
                 }
 
                 service = setupHipchat(settings.hipchat||{});
