@@ -1,4 +1,4 @@
-HomeController = RouteController.extend({
+HomeController =  FastRender.RouteController.extend({
     layoutTemplate: 'layout',
     template: 'home',
     fastRender: true,
@@ -9,7 +9,8 @@ HomeController = RouteController.extend({
       App.scrumboard.readonly = false;
     },
     waitOn: function () {
-        App.defaults = {};
+        //App.defaults = {};
+        /*
         if (!App.subs)
             App.subs = {};
         else if (App.subs.settings)
@@ -18,7 +19,9 @@ HomeController = RouteController.extend({
         App.subs.settings = Meteor.subscribe('settings');
 
         return [subs.subscribe('projects'), App.subs.settings];
+        */
         //return [subs.subscribe('projects'), subs.subscribe('settings')];
+        return [Meteor.subscribe('projects'), Meteor.subscribe('settings')];
     },
     data: function () {  // or a function
         return { pageCls: 'page-scrumboard'};

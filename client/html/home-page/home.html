@@ -27,7 +27,7 @@
                                 <img src="/img/project-icon.png">
                             {{/if}}
                         </span>
-                        <a href="/{{name}}" class="project-item__name">{{name}}</a>
+                        <a href="{{pathFor 'project' project=name}}" class="project-item__name">{{name}}</a>
                     </li>
                     {{/each}}
                 </ol>

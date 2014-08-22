@@ -1,31 +1,7 @@
-// Routes
-Router.configure({
-    layoutTemplate: 'layout',
-    loadingTemplate: 'loading',
-    notFoundTemplate: 'notFound'
-});
-//RsprintNumberouter.onBeforeAction('notFound');
-Router.map(function () {
-    this.route('home', {
-        path: '/',
-        controller: 'HomeController'
-    });
-    this.route('project', {
-        path: '/:project',
-        controller: 'SprintController'
-        //action: 'start'
-    });
+App = {};
 
-    this.route('task', {
-        path: '/:project/task/:id',
-        controller: 'TaskController'
-    });
-
-    this.route('stats', {
-        path: '/:project/stats',
-        controller: 'StatsController'
-    });
-});
+if (Meteor.isServer)
+    Inject.obj('settings', {baseUrl: 'scrummie/'});
 
 if (Meteor.isClient) {
     subs = new SubsManager({

@@ -23,6 +23,7 @@
                 </p>
                 <select dropdown jira__stories__dropdown class="dropdown loaded" name="issue">
                     <option></option>
+                    <option value="-1">All</option>
                     {{#each issues}}
                         <option value="{{this.index}}">{{key}}</option>
                     {{/each}}

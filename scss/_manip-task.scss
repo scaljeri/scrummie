@@ -132,6 +132,7 @@ h5.task-manip__issue-option {
   hyphens: auto;
   width: 100%;
   max-height: 34px; /* fallback */
+  margin-bottom: 2px;
 
   @include vendor-prefix-value(display, box);
   @include vendor-prefix(box-orient, vertical);

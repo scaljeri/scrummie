@@ -113,26 +113,28 @@ Template.manipTask.show = function (task, callback) {
         issues.select2({
             allowClear: true,
             formatResult: formatIssue,
-            minimumResultsForSearch: -1,
+            minimumResultsForSearch: 1,
             placeholder: "Select Jira task",
             allowNewValues: true,
             containerCssClass: 'select2-issues'
         });
 
         issues.on('change', function () {
+            var urlSettings, url;
+
             if (issues.val() === '') {
                 console.log('nothing');
             }
             else {
                 var issue = Session.get('serverDataResponse')[parseInt(issues.val())];
-                $('[manip-task-title ]').val(issue.key);
-                $('[manip-task] [description]').val(issue.fields.summary);
+                $('[manip-task-title ]').val(issue ? issue.key : '-- All stories --');
+                $('[manip-task] [description]').val(issue ? issue.fields.summary : '--');
 
-                var settings = Settings.findOne(),
-                    urlSettings = settings.connections.jira.settings,
+                if (issue) {
+                    urlSettings = Settings.findOne().connections.jira.settings;
                     url = [urlSettings.protocol, '://', urlSettings.url, '/browse/', issue.key].join('');
-
-                $('[manip-task-link]').val(url);
+                    $('[manip-task-link]').val(url);
+                }
             }
         });
 
@@ -226,11 +228,12 @@ function format(color) {
 }
 
 function formatIssue(input) {
-    var issue  = Session.get('serverDataResponse')[input.id];
+    var issue = Session.get('serverDataResponse')[input.id];
+
     return ['<h3 class="task-manip__issue-option">',
-                input.text,
-            '</h3>',
-            '<h5 class="task-manip__issue-option">',
-                issue.fields.description,
-            '</h5>'].join('');
+        input.text,
+        '</h3>',
+        '<h5 class="task-manip__issue-option">',
+            input.id == -1 ? 'Select all Jira stories' : issue.fields.description,
+        '</h5>'].join('');
 }
