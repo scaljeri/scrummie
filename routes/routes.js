@@ -35,13 +35,14 @@ function routeSetup() {
         baseUrl = App.settings.baseUrl;
     }
     else {
-        baseUrl = Meteor.settings.baseUrl || '';
+        baseUrl = Meteor.settings.baseUrl || '/';
     }
 
     //baseUrl = ('/' + baseUrl).replace(/\/\//g, '/').replace(/\/$/, '');
-    var urlParts = baseUrl.match(/^.*:\/\/[a-z\-.]+(?::[0-9]+)?\/(.*)$/)
+    var urlParts = baseUrl.match(/^(?:.*:\/\/[a-z\-.]+(?::[0-9]+))?\/(.*)$/);
+
     if (urlParts.length === 2) {
-        baseUrl = urlParts[1];
+        baseUrl = urlParts[1] || '/';
     }
 
     // Routes
