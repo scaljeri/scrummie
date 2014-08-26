@@ -1,8 +1,9 @@
 SprintController = RouteController.extend({
-    fastRender: true,
+    //fastRender: true,
     layoutTemplate: 'layout',
 
     onBeforeAction: function () {
+        // TODO: use Session
         App.page = 'scrumboard';
         App.scrumboard.view = 'normal';
         App.scrumboard.readonly = false;
@@ -10,19 +11,21 @@ SprintController = RouteController.extend({
     waitOn: function () {
         var project = this.params.project;
         App.defaults = {project: project}; // reset App.defaults
-        App.filterColorId = null;
-        Session.set('alert', null); // clear
 
-        if (!App.subs)
-            App.subs = {};
-        else if (App.subs.settings)
+        if (Meteor.isClient) {
+            Session.set('alert', null);
+            Session.set('postitFilter', null);
+            Session.set('project', project); // TODO
+        }
+
+        if (App.subs.settings && App.subs.settings.stop) {
             App.subs.settings.stop();
+        }
 
         App.subs.settings = Meteor.subscribe('settings', project);
 
         return [
-            App.subs.settings,
-            //subs.subscribe('settings', project),
+            subs.subscribe('settings', project),
             subs.subscribe('projects', project),
             subs.subscribe('sprint', project),
             subs.subscribe('lanes'),
@@ -50,6 +53,7 @@ SprintController = RouteController.extend({
     },
     action: function () {
         if (this.ready()) {
+            // TODO: cleanup
             if (!Projects.findOne()) { // project does not exist
                 window.location.replace('/');
             }

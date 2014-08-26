@@ -3,12 +3,16 @@ var crypto = Meteor.require('crypto'),
 
 Meteor.methods({
     updateConnection: function (cType, projectName, options) {
-        var update = {}, settings, project, cTypes = {jira: true, hipchat: true};
+        var update, settings, project, cTypes = {jira: true, hipchat: true};
 
         if (hasPermissionsInProject(projectName)) {
             if (cTypes[cType] && (project = hasPermissionsInProject(projectName))) {
                 settings = Settings.findOne({projectId: project._id});
-                update[cType] = settings[cType] || {};
+                update = settings.connections || {};
+
+                if (!update[cType]) {
+                    update[cType] = {};
+                }
 
                 Object.keys(options).forEach(function (key) {
                     update[cType][key] = options[key];
@@ -19,7 +23,7 @@ Meteor.methods({
                     update[cType].password = cipher.update(update[cType].password, 'utf8', 'hex') + cipher.final('hex');
                 }
 
-                Settings.update({_id: settings._id}, {$set: update});
+                Settings.update({_id: settings._id}, {$set: {connections: update}});
             }
         }
     }

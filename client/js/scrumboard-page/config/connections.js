@@ -7,11 +7,14 @@ Template.configConnections.helpers({
         }
     },
     jira: function () {
-        var settings = Settings.findOne(query());
+        if (App.settings && App.settings.services.jira) {
+            var settings = Settings.findOne(query());
 
-        if (settings && settings.connections) {
-            return Settings.findOne(query()).connections.jira;
+            if (settings && settings.connections) {
+                return Settings.findOne(query()).connections.jira || {};
+            }
         }
+        return false;
     },
     empty: function () {
         var settings = Settings.findOne(query());

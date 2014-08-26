@@ -1,6 +1,6 @@
 <template name="headerHome">
     <header class="header-main logo">
-        <a href="/{{project}}" class="clickable-logo"></a>
+        <a href="{{pathFor 'home'}}" class="clickable-logo"></a>
         <nav class="header-main__nav">
             <ol class="nav-list">
                 {{#if isAuthEnabled}}
@@ -22,7 +22,7 @@
                     <a target="_blank" href="https://github.com/scaljeri/scrummie" class="nav-list__item__about">About</a>
                 </li>
                 <li class="nav-list__item">
-                    <a href="/" class="link link--active nav-list__item__home">Projects</a>
+                    <a class="link link--active nav-list__item__home">Projects</a>
                 </li>
             </ol>
         </nav>

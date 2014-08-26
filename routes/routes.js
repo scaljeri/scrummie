@@ -1,16 +1,48 @@
+if (Meteor.isClient) {
+    App = {
+        defaults: {},
+        noob: function () {},
+        scrumboard: {view: 'normal', readonly: false},
+        subs: {},
+        deps: {},
+        outsideClick: {
+            list: [],
+            register: function (selector, callback, notDirty) {
+                this.remove(callback);
+                this.list.push({ selector: selector, callback: callback, dirty: notDirty === undefined ? true : false});
+            },
+            remove: function (callback) {
+                this.list = _.filter(this.list, function (item) {
+                    return item.callback !== callback;
+                }) || [];
+            }
+        },
+        ignoreClickFrom: {
+            list: [],
+            add: function (selector) {
+                this.list.push(selector);
+            }
+        },
+        settings: Injected.obj('settings')
+    };
+}
+
 routeSetup();
 
 function routeSetup() {
     var baseUrl = '';
     if (Meteor.isClient) {
-        baseUrl = Injected.obj('settings').baseUrl;
+        baseUrl = App.settings.baseUrl;
     }
     else {
         baseUrl = Meteor.settings.baseUrl || '';
     }
 
-    baseUrl = ('/' + baseUrl).replace(/\/\//g, '/').replace(/\/$/, '');
-    console.log("BASEURL = " + baseUrl);
+    //baseUrl = ('/' + baseUrl).replace(/\/\//g, '/').replace(/\/$/, '');
+    var urlParts = baseUrl.match(/^.*:\/\/[a-z\-.]+(?::[0-9]+)?\/(.*)$/)
+    if (urlParts.length === 2) {
+        baseUrl = urlParts[1];
+    }
 
     // Routes
     Router.configure({

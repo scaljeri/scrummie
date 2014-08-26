@@ -2,7 +2,58 @@ Meteor.startup(function () {
     var isAdded = false;
 
     Meteor.reactivePublish('settings', function (projectName) {
-        var connections = {}, project, settings, service;
+        var project, settings;
+
+        var self = this;
+
+        function prepare(d) {
+            if (!d.connections) {
+                d.connections = {};
+            }
+            else {
+                d.connections.jira.password = null;
+            }
+
+            return d;
+        }
+
+        if (projectName) {
+            project = Projects.findOne({name: projectName});
+
+            if (project) {
+                console.log("-----> " + Settings.find({projectId: project._id}).fetch().length);
+
+                settings = Settings.find({projectId: project._id}).observe({
+                    added: function (document) {
+                        self.added('settings', document._id, prepare(document));
+                    },
+                    changed: function (newDocument, oldDocument) {
+                        self.changed('settings', newDocument._id, prepare(newDocument));
+                    },
+                    removed: function (oldDocument) {
+                        self.removed('settings', oldDocument._id);
+                    }
+                });
+
+                self.ready();
+
+                self.onStop(function () {
+                    settings.stop();
+                });
+            }
+        }
+        else {
+            self.ready();
+        }
+
+        // ======
+        //var connections = {}, project, settings, service;
+
+
+
+
+        /*
+        console.log("SETTINGSSSSSSSSSSSSSSSSSS " + projectName);
 
         if (projectName) {
             project = Projects.findOne({name: projectName});
@@ -46,7 +97,7 @@ Meteor.startup(function () {
          });
          }*/
 
-        this.ready();
+        //this.ready();
     });
 });
 

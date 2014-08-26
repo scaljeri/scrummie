@@ -99,7 +99,7 @@ Handlebars.registerHelper('hasPermissionsInProject', function () {
 });
 
 Handlebars.registerHelper('isAuthEnabled', function () {
-    return Boolean((Settings.findOne() || {}).authenticate);
+    return App.settings.authenticate;
 });
 
 /*

@@ -5,6 +5,7 @@ Meteor.methods({
     'createProject': function (name, fileInfo, fileData) {
         var dir, imgType, resourceId, projectId;
 
+        console.log("CREATE NEW PROJECT " + name + ' en ' + isAuthenticated());
         if (isAuthenticated()) {
             projectId = Projects.insert({
                 creatorId: (Meteor.user()||{})._id, // if Authentication is disabled
