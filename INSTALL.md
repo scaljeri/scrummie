@@ -32,6 +32,14 @@ An analogue digital scrumboard. You can find a demo [here](http://scrummie.meteo
     # if wrong version of node
     $> sudo npm install n -g
     $> sudo n 0.10.26   // This will give you the specific version
+    
+## With ROOT_URL
+
+    $> export ROOT_URL=http://localhost:3000/scrummie
+    
+If scrummie runs behind a reverse-proxy, the public url needs to be defined in scrummie.json
+
+    baseUrl: 'http://localhost/scrummie'
 
 ## URL parameters
 

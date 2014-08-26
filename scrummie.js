@@ -1,67 +1,11 @@
-// Routes
-Router.configure({
-    layoutTemplate: 'layout',
-    loadingTemplate: 'loading',
-    notFoundTemplate: 'notFound'
-});
-//RsprintNumberouter.onBeforeAction('notFound');
-Router.map(function () {
-    this.route('home', {
-        path: '/',
-        controller: 'HomeController'
-    });
-    this.route('project', {
-        path: '/:project',
-        controller: 'SprintController'
-        //action: 'start'
-    });
-
-    this.route('task', {
-        path: '/:project/task/:id',
-        controller: 'TaskController'
-    });
-
-    this.route('stats', {
-        path: '/:project/stats',
-        controller: 'StatsController'
-    });
+subs = new SubsManager({
+    // will be cached only 20 recently used subscriptions
+    cacheLimit: 20,
+    // any subscription will be expired after 5 minutes of inactivity
+    expireIn: 5
 });
 
 if (Meteor.isClient) {
-    subs = new SubsManager({
-        // will be cached only 20 recently used subscriptions
-        cacheLimit: 20,
-        // any subscription will be expired after 5 minutes of inactivity
-        expireIn: 5
-    });
-
-    App = {
-        defaults: {},
-        noob: function () {},
-        scrumboard: {view: 'normal', readonly: false},
-        subs: null,
-        deps: {},
-        outsideClick: {
-            list: [],
-            register: function (selector, callback, notDirty) {
-                this.remove(callback);
-                this.list.push({ selector: selector, callback: callback, dirty: notDirty === undefined ? true : false});
-            },
-            remove: function (callback) {
-                this.list = _.filter(this.list, function (item) {
-                    return item.callback !== callback;
-                }) || [];
-            }
-        },
-        ignoreClickFrom: {
-            list: [],
-            add: function (selector) {
-                this.list.push(selector);
-            }
-        }
-    };
-
-
     /* PRIVATE HELPER FUNCTIONS */
     function makeReactive(property, defaultValue) {
         var value = null,

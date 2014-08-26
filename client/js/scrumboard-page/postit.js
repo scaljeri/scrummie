@@ -47,7 +47,10 @@ Template.postit.rendered = function () {
         containment: '.' + (App.scrumboard.readonly ? this.data.laneId : 'lanes'),
         scroll: false,
         disabled: !isDocumentEditable(this.data),
-        zIndex: 1000000
+        zIndex: 1000000,
+        stop: function () {
+            $(this).css('z-index', 999999); // this value is only valid until new data comes from the server
+        }
     });
 
     if (postit) {

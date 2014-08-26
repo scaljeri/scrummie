@@ -19,3 +19,5 @@
 /iron-layout
 /iron-core
 /iron-dynamic-template
+/fast-render
+/inject-initial

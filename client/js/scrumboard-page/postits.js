@@ -33,20 +33,6 @@ Template.postits.rendered = function (t) {
     });
 };
 
-Template.postits.events = {
-    'mousedown [postit]': function (e, t) {
-        //$(e.target).closest('[postit]').css('z-index', 1000000);
-    },
-    'drag [postit]': function (e, t) {
-        $(e.target).closest('[postit]').css('z-index', 1000000);
-    },
-    'dragend [postit]': function (e, t) {
-        var el = $(e.target).closest('[postit]');
-        el.css('z-index', el.attr('zIndex', 'data-z-index'));
-
-    }
-};
-
 /*
  db.tasks.find(
  { "color": { $in: ["e4oqPeoBTJtCpG53K", "cvmQv7vQHunPnmqPz"] }}

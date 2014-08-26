@@ -1,4 +1,5 @@
 {
+  "baseUrl" : "/scrummie/",
   "services" : {
       "jira" : {
           "url"       : "jira.malmberg.nl",

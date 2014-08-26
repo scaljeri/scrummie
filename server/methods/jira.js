@@ -38,7 +38,7 @@ function fetchSprintJiraStories(sprintNumber, projectName) {
 }
 
 function getJiraSettings(project) {
-    var jira, settings = Settings.findOne({projectId: project._id}).jira || {};
+    var jira, settings = (Settings.findOne({projectId: project._id}).connections||{}).jira || {};
 
     if (Meteor.settings && Meteor.settings.services) {
         jira = Meteor.settings.services.jira || {};

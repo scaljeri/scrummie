@@ -23,5 +23,8 @@
   "scripts": {
     "install": "bower install",
     "update": "bower update"
+  },
+  "dependencies": {
+    "gulp-assetpaths": "0.0.7"
   }
 }
