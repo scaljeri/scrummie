@@ -28,7 +28,7 @@ gulp.task('styles', function () {
         .pipe($.filelog())
         .pipe($.size())
         .pipe(assetpath({
-            newDomain: config.baseUrl,
+	          newDomain: config.baseUrl || '/',
             oldDomain: 'http://localhost:3000/',
             filetypes : ['png', 'jpg'],
             docRoot: '/'
@@ -40,7 +40,7 @@ gulp.task('styles', function () {
 gulp.task('html', function () {
     gulp.src('resources/scrummie.html')
         .pipe(assetpath({
-            newDomain: config.baseUrl,
+            newDomain: config.baseUrl || '/.',
             oldDomain: 'http://localhost:3000/',
             filetypes : ['js', 'css', 'ico'],
             docRoot: '/'

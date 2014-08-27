@@ -1,15 +1,10 @@
 {
   "packages": {
     "iron-router": {
-      "git": "https://github.com/EventedMind/iron-router.git",
-      "tag": "v0.8.2",
-      "commit": "05415a8891ea87a00fb1e2388585f2ca5a38e0da"
+      "git": "https://github.com/EventedMind/iron-router.git"
     },
     "normalize.css": {
       "git": "https://github.com/rithis-archive/meteor-normalize.css.git"
-    },
-    "Meteor.cron": {
-      "git": "https://github.com/alexsuslov/Meteor.cron.git"
     },
     "mongodb-server-aggregation": {},
     "reactive-publish": {},
@@ -19,6 +14,7 @@
     "async": {},
     "npm": {},
     "fast-render": {},
-    "inject-initial": {}
+    "inject-initial": {},
+    "synced-cron": {}
   }
 }

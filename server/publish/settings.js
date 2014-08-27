@@ -21,8 +21,6 @@ Meteor.startup(function () {
             project = Projects.findOne({name: projectName});
 
             if (project) {
-                console.log("-----> " + Settings.find({projectId: project._id}).fetch().length);
-
                 settings = Settings.find({projectId: project._id}).observe({
                     added: function (document) {
                         self.added('settings', document._id, prepare(document));

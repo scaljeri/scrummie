@@ -6,7 +6,6 @@ An analogue digital scrumboard. You can find a demo [here](http://scrummie.meteo
 ## Run in development
 
     $> MONGO_URL='mongodb://localhost:27017/scrumboard' meteor --settings=scrummie.json
-    $> MONGO_URL='mongodb://localhost:27017/scrumboard' mrt --settings=scrummie.json
 
 ## Bundle
 
@@ -40,6 +39,8 @@ An analogue digital scrumboard. You can find a demo [here](http://scrummie.meteo
 If scrummie runs behind a reverse-proxy, the public url needs to be defined in scrummie.json
 
     baseUrl: 'http://localhost/scrummie'
+    
+ROOT_URL === baseUrl
 
 ## URL parameters
 

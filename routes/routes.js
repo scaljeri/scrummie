@@ -30,20 +30,33 @@ if (Meteor.isClient) {
 routeSetup();
 
 function routeSetup() {
-    var baseUrl = '';
+    var baseUrl = '', urlParts;
+
     if (Meteor.isClient) {
         baseUrl = App.settings.baseUrl;
     }
     else {
+        //var url = Meteor.require('url'); // TODO use it to replace the regex below
         baseUrl = Meteor.settings.baseUrl || '/';
     }
 
-    //baseUrl = ('/' + baseUrl).replace(/\/\//g, '/').replace(/\/$/, '');
-    var urlParts = baseUrl.match(/^(?:.*:\/\/[a-z\-.]+(?::[0-9]+))?\/(.*)$/);
+    /* RegExp alternative:
+     var parser = document.createElement('a');
+     parser.href = "http://example.com:3000/pathname/?search=test#hash";
 
-    if (urlParts.length === 2) {
-        baseUrl = urlParts[1] || '/';
+     parser.protocol; // => "http:"
+     parser.hostname; // => "example.com"
+     parser.port;     // => "3000"
+     parser.pathname; // => "/pathname/"
+     parser.search;   // => "?search=test"
+     parser.hash;     // => "#hash"
+     parser.host;     // => "example.com:3000"
+     */
+    urlParts = baseUrl.match(/^(?:.*:\/\/[a-z\-.]+(?::[0-9]+)?)?\/(.*)$/);
+    if (urlParts && urlParts.length === 2) {
+        baseUrl = urlParts[1];
     }
+    baseUrl = ('/' + baseUrl + '/').replace('//', '/');
 
     // Routes
     Router.configure({
@@ -52,25 +65,24 @@ function routeSetup() {
         notFoundTemplate: 'notFound'
     });
 
-    //RsprintNumberouter.onBeforeAction('notFound');
     Router.map(function () {
         this.route('home', {
             path: baseUrl,
             controller: 'HomeController'
         });
         this.route('project', {
-            path: baseUrl + '/:project/',
+            path: baseUrl + ':project/',
             controller: 'SprintController'
             //action: 'start'
         });
 
         this.route('task', {
-            path: baseUrl + '/:project/task/:id',
+            path: baseUrl + ':project/task/:id',
             controller: 'TaskController'
         });
 
         this.route('stats', {
-            path: baseUrl + '/:project/stats',
+            path: baseUrl + ':project/stats',
             controller: 'StatsController'
         });
     });
