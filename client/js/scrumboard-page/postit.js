@@ -3,8 +3,7 @@ Template.postit.helpers({
         var hidden = applyFilter(this, Session.get('postitFilter')||{});
 
         if (this.updated) {
-            //1396695841955 --> "95841"
-            return Math.max(parseInt(this.updated.toString().replace(/^\d{4}|\d{3}$/g, '')) -  (hidden ? 200000 : 0), 2);
+            return Math.max(parseInt(this.updated/1000) -  (hidden ? 200000 : 0), 2);
         }
     },
     isVisible: function () {
@@ -47,9 +46,9 @@ Template.postit.rendered = function () {
         containment: '.' + (App.scrumboard.readonly ? this.data.laneId : 'lanes'),
         scroll: false,
         disabled: !isDocumentEditable(this.data),
-        zIndex: 1000000,
+        zIndex: 9000000000,
         stop: function () {
-            $(this).css('z-index', 999999); // this value is only valid until new data comes from the server
+            $(this).css('z-index', 8999999999); // this value is only valid until new data comes from the server
         }
     });
 

@@ -28,7 +28,7 @@ gulp.task('styles', function () {
         .pipe($.filelog())
         .pipe($.size())
         .pipe(assetpath({
-	          newDomain: config.baseUrl || '/',
+	        newDomain: config.baseUrl || '/.',
             oldDomain: 'http://localhost:3000/',
             filetypes : ['png', 'jpg'],
             docRoot: '/'
