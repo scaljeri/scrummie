@@ -1,0 +1,24 @@
+{
+  "services" : {
+      "jira" : {
+          "url"       : "jira.malmberg.nl",
+          "protocol"  : "https",
+          "port"      : 443,
+          "active"    : true
+      },
+      "hipchat"  : {
+          "message"    : "{{member.name}} finished task <a href='{{url}}/{{project}}/task/{{task._id}}'>{{task.title}}</a>",
+          "active"     : true
+      }
+  },
+  "authentication" : {
+      "enabled"    : false,
+      "github"   : {
+          "active"        : true,
+          "clientId"      : "*********",
+          "clientSecret"  : "*********************",
+          "appName"       : "Scrummie"
+      }
+  },
+  "uploadFolder" : ".uploads"
+}

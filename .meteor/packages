@@ -5,16 +5,14 @@
 
 standard-app-packages
 insecure
-mongodb-server-aggregation
-reactive-publish
-reststop2
-npm
+zvictor:mongodb-server-aggregation
+mrt:reactive-publish
+meteorhacks:npm
 accounts-github
 service-configuration
-kadira
-subs-manager
-inject-initial
-synced-cron
-fast-render
-iron-router
-
+meteorhacks:kadira
+meteorhacks:subs-manager
+gadicohen:inject-initial
+percolatestudio:synced-cron
+meteorhacks:fast-render
+cmather:iron-router

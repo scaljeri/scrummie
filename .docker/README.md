@@ -1,0 +1,1 @@
+This folder contains Docker specific file which override other project files for running in Docker.
