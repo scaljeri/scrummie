@@ -5,7 +5,8 @@
         <ol class="lanes">
             {{#each lanes}}
             <li droppable class="lane {{_id}}" data-id="{{_id}}">
-                <h1 class="lane-title">{{title}} <span class="task-count">{{tasksOnLane[_id]}}</span></h1>
+                <h1 class="lane-title">
+                    <span class="lane-title-container"> {{title}} <span class="task-count">{{tasksOnLane[_id]}}</span></span></h1>
             </li>
             {{/each}}
         </ol>

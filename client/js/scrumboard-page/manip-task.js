@@ -31,7 +31,7 @@ Template.manipTask.members = function () {
             return Meteor.users.find({projects: {$in: [App.defaults.projectId]}}, {sort: {name: 1}}).fetch();
         }
         else {
-            console.log(Members.find(query()).fetch());
+            //console.log(Members.find(query()).fetch());
             return Members.find(query()).fetch();
         }
     }
@@ -128,7 +128,7 @@ Template.manipTask.show = function (task, callback) {
             else {
                 var issue = Session.get('serverDataResponse')[parseInt(issues.val())];
                 $('[manip-task-title ]').val(issue ? issue.key : '-- All stories --');
-                $('[manip-task] [description]').val(issue ? issue.fields.summary : '--');
+                $('[manip-task] [description]').val(issue ? issue.fields.summary : '-- ' + Session.get('serverDataResponse').length + ' stories selected --');
 
                 if (issue) {
                     urlSettings = Settings.findOne().connections.jira.settings;
@@ -189,13 +189,20 @@ Template.manipTask.events = {
         }
 
         if (!errors) {
-            Meteor.call('upsertTask', App.defaults.project, data, function (err, response) {
-                if (response.status === 'error') {
-                    App.errorMessage = response.msg;
-                    $('[error-dialog]').dialog('open');
-                }
-            });
+            if ( data.issue == -1) {
+                taskFormatter.setup({colors: data.color});
 
+
+                for(var i = 0; i < Session.get('serverDataResponse').length; i++) {
+                   data.title = Session.get('serverDataResponse')[i].key;
+                   data.description = Session.get('serverDataResponse')[i].fields.description;
+                   data.issue = Session.get('serverDataResponse')[i].id;
+                   uploadTask(data, true);
+                }
+            }
+            else {
+                uploadTask(data);
+            }
             closeManip();
         }
 
@@ -211,6 +218,22 @@ Template.manipTask.events = {
     }
 };
 
+var timeoutId;
+function uploadTask(data, formatTasks) {
+    Meteor.call('upsertTask', App.defaults.project, data, {randomPosition: true}, function (err, response) {
+        if (response.status === 'error') {
+            App.errorMessage = response.msg;
+            $('[error-dialog]').dialog('open');
+        }
+        else if (formatTasks) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(function () {
+                laneId = LanesSetup.findOne({title: 'todo'})._id;
+                taskFormatter.formatLane(laneId);
+            }, 500);
+        }
+    });
+}
 
 function closeManip() {
     //$('[manip-task] [dropdown]').blur();
@@ -234,6 +257,6 @@ function formatIssue(input) {
         input.text,
         '</h3>',
         '<h5 class="task-manip__issue-option">',
-            input.id == -1 ? 'Select all Jira stories' : issue.fields.description,
+            input.id == -1 ? 'Select all ' + Session.get('serverDataResponse').length + ' Jira stories' : issue.fields.description,
         '</h5>'].join('');
 }

@@ -6,7 +6,7 @@ Meteor.methods({
             Task.update({_id: id}, {$set: {updated: new Date().getTime()}});
         }
     },
-    upsertTask: function (projectName, task) {
+    upsertTask: function (projectName, task, options) {
         var retVal = {status: 'error', msg: 'Not authorized'}, project, sprint,
             origTask = Tasks.findOne({_id: task._id});
 
@@ -23,8 +23,11 @@ Meteor.methods({
                         for (var i = 0; i < colors.length; i++) {
                             task.color = colors[i];
                             delete task._id; // is this needed ?
-                            task.x = (x += 3);
-                            task.y = (y += 3);
+                            if (!task.x)
+                                task.x = (x += 3);
+                            if (!task.y)
+                                task.y = (y += 3);
+
                             if ((retVal = upsertTask(project._id, task)).status === 'error') {
                                 break;
                             }
@@ -102,6 +105,11 @@ Meteor.methods({
 function replaceColor(task, projectId) {
     if (task.color !== undefined) {
         var color = TaskColorsSetup.findOne({projectId: projectId, value: task.color});
+        if (!color) {
+            console.log('=========');
+            console.dir(task);
+            console.log('=========---------------');
+        }
         task.colorId = color._id;
         delete task.color;
     }
@@ -140,6 +148,7 @@ function upsertTask(projectId, task) {
     _id = task._id;
     delete task._id;
 
+    console.dir(task);
     Tasks.upsert({_id: _id}, {$set: task});
     return {status: 'ok'};
 }
