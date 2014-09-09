@@ -1,0 +1,41 @@
+.select2-colors {
+  .select2-choices {
+    .select2-search-field input {
+      font: 100 20px/20px Lato;
+      height: 25px;
+
+      //margin-left: 20px;
+      margin: 5px 20px;
+      padding-left: 0;
+    }
+
+    .select2-search-choice {
+      padding-right: 0;
+
+      .select-option-color {
+        top: 0;
+        margin-right: 6px;
+        transform:rotate(0);
+        -ms-transform:rotate(0); /* IE 9 */
+        -webkit-transform:rotate(0); /* Opera, Chrome, and Safari */
+
+
+      }
+      .select-option-title {
+        display: none;
+        top: 0;
+      }
+    }
+  }
+}
+
+.select-option-color {
+  box-sizing: border-box;
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  margin-right: 10px;
+  position: relative;
+  left: 2px;
+  @extend .scrummie-color-block;
+}

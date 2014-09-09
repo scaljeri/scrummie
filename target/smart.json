@@ -1,0 +1,20 @@
+{
+  "packages": {
+    "iron-router": {
+      "git": "https://github.com/EventedMind/iron-router.git"
+    },
+    "normalize.css": {
+      "git": "https://github.com/rithis-archive/meteor-normalize.css.git"
+    },
+    "mongodb-server-aggregation": {},
+    "reactive-publish": {},
+    "reststop2": {},
+    "kadira": {},
+    "subs-manager": {},
+    "async": {},
+    "npm": {},
+    "fast-render": {},
+    "inject-initial": {},
+    "synced-cron": {}
+  }
+}

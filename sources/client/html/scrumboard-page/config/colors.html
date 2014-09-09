@@ -1,0 +1,17 @@
+<template name="configColors">
+    <h3 class="title">Colors</h3>
+
+    <div accordion__item__wrapper class="accordion__item__wrapper">
+        <ul class="part part1 sortable config-colors">
+            {{#each colors}}
+                <li class="config-color__item" data-id="{{_id}}">
+                    <span class="config-colors__color" style="background-color:{{value}};"></span>
+                    <h4 class="config-color__title">{{title}}</h4>
+
+                    <span config-color__trash class="config-color__trash"></span>
+                    <span config-color__edit class="config-color__edit"></span>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</template>

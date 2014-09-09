@@ -1,0 +1,30 @@
+<template name="headerHome">
+    <header class="header-main logo">
+        <a href="{{pathFor 'home'}}" class="clickable-logo"></a>
+        <nav class="header-main__nav">
+            <ol class="nav-list">
+                {{#if isAuthEnabled}}
+                <li class="nav-list__item">
+                    {{#if currentUser}}
+                        {{> userLoggedIn}}
+                    {{else}}
+                        {{> userLoggedOut}}
+                    {{/if}}
+                </li>
+                {{/if}}
+                <li class="nav-list__item">
+                    <a stats href="/{{project}}/stats" class="link link--disabled nav-list__item__stats">Statistics</a>
+                </li>
+                <li class="nav-list__item">
+                    <a href="/{{project}}/backlog" class="link link--disabled nav-list__item__backlog">Backlog</a>
+                </li>
+                <li class="nav-list__item">
+                    <a target="_blank" href="https://github.com/scaljeri/scrummie" class="nav-list__item__about">About</a>
+                </li>
+                <li class="nav-list__item">
+                    <a class="link link--active nav-list__item__home">Projects</a>
+                </li>
+            </ol>
+        </nav>
+    </header>
+</template>

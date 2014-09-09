@@ -1,0 +1,13 @@
+<template name="layout">
+    <main class="viewport {{pageCls}}">
+        {{> yield region='header-section'}}
+
+        {{> yield}}
+
+        {{> projectConfig}}
+
+        {{> manipTask}}
+
+        {{> dialog}}
+    </main>
+</template>

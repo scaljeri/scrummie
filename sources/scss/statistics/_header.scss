@@ -1,0 +1,16 @@
+.statistics__header {
+  height: 40px;
+  position: relative;
+
+  .back {
+    position: absolute;
+    left: 20px;
+    top: 12px;
+
+    color: #1c1c1c;
+  }
+
+  .title {
+    line-height: 40px;
+  }
+}

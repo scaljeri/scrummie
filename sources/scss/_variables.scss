@@ -1,0 +1,53 @@
+$primary: #fff;
+$secondary: #fff;
+$tertiary: #fff;
+
+$button-bg: #233046;
+$button-hover: #395077;
+$button-confirm: #22cf3a;
+$button-active: #395077;
+$text: #233046;
+$text-lighter: #646466;
+$char-footer: rgba(35, 48, 70, .9);
+
+$lane-odd: #d5d5d5;
+$lane-hover: $text-lighter;
+$lane-active: $button-active;
+
+$color-theme1: #ff2ecb;
+$color-theme2: #22cf3a;
+$color-theme3: #2693ff;
+$color-theme4: #ffe426;
+
+$error: #f00;
+
+$font-normal: Lato;//, sans-serif;
+
+$on-top: 2147483610; // z-index value
+
+
+$main-bg: 'img/bg.png';
+$logo: '/img/02_logo.png';
+$config-icon: '/img/config-icon.png';
+$config-icon-disabled: '/img/config-icon-disabled.png';
+$add-github: '/img/octocat.png';
+$icon-trash: '/img/trash-icon.png';
+$icon-edit: '/img/edit-icon.png';
+
+// activity colors
+$confirm: #22cf3a;
+$confirm-hover: #000;
+$confirm-active: #000;
+$confirm-disabled: #000;
+$cancel: #bbbbbb;
+$cancel-hover: #000;
+$cancel-active: #000;
+$cancel-disabled: #000;
+$delete: #d90000;
+$delete-hover: #000;
+$delete-active: #000;
+$delete-disabled: #000;
+$default: #233046;
+$default-hover: #395077;
+$default-active: #395077;
+$default-disabled: #000;

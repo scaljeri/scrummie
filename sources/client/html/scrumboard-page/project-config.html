@@ -1,0 +1,27 @@
+<template name="projectConfig">
+    <section config-menu class="project-config accordion">
+        <div class="project-content__wrapper ">
+            <h1 class="title">Configuration</h1>
+
+            <article accordion-item class="accordion__item sprint accordion__item--closed">
+                {{> configSprint}}
+            </article>
+
+            <article accordion-item="members" class="accordion__item members accordion__item--closed">
+                {{> configMembers}}
+            </article>
+
+            <article accordion-item class="accordion__item config-lanes accordion__item--closed">
+                {{> configLanes}}
+            </article>
+
+            <article accordion-item class="accordion__item config-colors accordion__item--closed">
+                {{> configColors}}
+            </article>
+
+            <article accordion-item="connections" class="accordion__item config-connections accordion__item--closed">
+                {{> configConnections}}
+            </article>
+        </div>
+    </section>
+</template>

@@ -1,0 +1,47 @@
+<template name="home">
+    <section class="home">
+        <header class="home__header">
+            <h1>Projects</h1>
+        </header>
+        <div class="wrapper home__wrapper">
+            {{#if isAuthenticated}}
+                <article class="home__item new-project">
+                    <h4 class="section__name">New Project:</h4>
+                    <a class="file-upload">
+                        <img file-upload-preview class="file-upload__preview" src="/img/scrum-icon.png">
+                        <input file-upload type="file" class="file-upload"/>
+                    </a>
+                    <input new-project__name class="new-project__name"/>
+                    <a submit-project class="btn input--shadow new-project__add">Add</a>
+                </article>
+            {{/if}}
+            <article class="home__item home__projects">
+                <h4 class="section__name">All projects</h4>
+                <ol>
+                    {{#each projects}}
+                    <li class="project-item">
+                        <span class="project-item__icon">
+                            {{#if icon}}
+                                <img src="{{icon}}">
+                            {{else}}
+                                <img src="/img/project-icon.png">
+                            {{/if}}
+                        </span>
+                        <a href="{{pathFor 'project' project=name}}" class="project-item__name">{{name}}</a>
+                    </li>
+                    {{/each}}
+                </ol>
+            </article>
+            <h3>Projects</h3>
+        </div>
+    </section>
+</template>
+
+<!--
+<div class="new-project__buttons">
+<span class="file-upload btn btn-primary">
+ <span>Upload</span>
+ <input file-upload type="file" class="upload"/>
+</span>
+</div>
+-->

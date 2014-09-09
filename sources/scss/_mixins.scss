@@ -1,0 +1,164 @@
+@mixin breakpoint($points...) {
+  @each $point in $points {
+    @if $point == small {
+      // Landscape phones and down
+      @media (max-width: 480px) { @content; }
+    }
+    @else if $point == medium {
+      // Landscape phone to portait tablet
+      @media (min-width: 480px) and (max-width: 767px) { @content; }
+    }
+    @else if $point == large {
+      // Portrait tablet to landscape and desktop
+      @media (min-width: 768px) and (max-width: 1023px) { @content; }
+    }
+    @else if $point == xlarge {
+      // Large desktop
+      @media (min-width: 1023px) { @content; }
+    }
+  }
+}
+
+@mixin clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+// https://gist.github.com/evilmarty/3951201
+$VENDORS: webkit, moz, ms, o;
+
+// @include vendor-prefix(border-radius, $radius);
+@mixin vendor-prefix($property, $values...) {
+  @each $vendor in $VENDORS {
+    -#{$vendor}-#{$property}: $values;
+  }
+  #{$property}: $values;
+}
+
+@mixin vendor-prefix-value($property, $value) {
+  @each $vendor in $VENDORS {
+    #{$property}: -#{$vendor}-#{$value};
+  }
+  #{$property}: $value;
+}
+
+// @include vendor-function(background-image, linear-gradient, top, red, blue);
+@mixin vendor-function($property, $func, $args...) {
+  @each $vendor in $VENDORS {
+    #{$property}: -#{$vendor}-#{$func}($args);
+  }
+  #{$property}: #{$func}($args);
+}
+
+// Copied from Bourbon
+// https://github.com/thoughtbot/bourbon/blob/master/dist/addons/_position.scss
+@mixin position($position: relative, $coordinates: 0 0 0 0) {
+
+  @if type-of($position) == list {
+    $coordinates: $position;
+    $position: relative;
+  }
+
+  $top: nth($coordinates, 1);
+  $right: nth($coordinates, 2);
+  $bottom: nth($coordinates, 3);
+  $left: nth($coordinates, 4);
+
+  position: $position;
+
+  @if $top == auto {
+    top: $top;
+  }
+  @else if not(unitless($top)) {
+    top: $top;
+  }
+
+  @if $right == auto {
+    right: $right;
+  }
+  @else if not(unitless($right)) {
+    right: $right;
+  }
+
+  @if $bottom == auto {
+    bottom: $bottom;
+  }
+  @else if not(unitless($bottom)) {
+    bottom: $bottom;
+  }
+
+  @if $left == auto {
+    left: $left;
+  }
+  @else if not(unitless($left)) {
+    left: $left;
+  }
+}
+
+@mixin size($width, $height) {
+  @if $width == auto {
+    width: $width;
+  }
+  @else if not(unitless($width)) {
+    width: $width;
+  }
+
+  @if $height == auto {
+    height: $height;
+  }
+  @else if not(unitless($height)) {
+    height: $height;
+  }
+}
+
+// Copied from Bourbon
+// https://github.com/thoughtbot/bourbon/blob/master/dist/addons/_triangle.scss
+@mixin triangle ($size, $color, $direction) {
+  display: inline-block;
+  height: 0;
+  width: 0;
+
+  @if ($direction == up) or ($direction == down) or ($direction == right) or ($direction == left) {
+    border-color: transparent;
+    border-style: solid;
+    border-width: $size / 2;
+
+    @if $direction == up {
+      border-bottom-color: $color;
+
+    } @else if $direction == right {
+      border-left-color:   $color;
+
+    } @else if $direction == down {
+      border-top-color:    $color;
+
+    } @else if $direction == left {
+      border-right-color:  $color;
+    }
+  }
+
+  @else if ($direction == up-right) or ($direction == up-left) {
+    border-top: $size solid $color;
+
+    @if $direction == up-right {
+      border-left:  $size solid transparent;
+
+    } @else if $direction == up-left {
+      border-right: $size solid transparent;
+    }
+  }
+
+  @else if ($direction == down-right) or ($direction == down-left) {
+    border-bottom: $size solid $color;
+
+    @if $direction == down-right {
+      border-left:  $size solid transparent;
+
+    } @else if $direction == down-left {
+      border-right: $size solid transparent;
+    }
+  }
+}

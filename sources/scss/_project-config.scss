@@ -1,0 +1,169 @@
+.project-config {
+  color: #fff;
+  transition-duration: 500ms;
+  transition-property: transform;
+  transform: translate3d(350px,0,0);
+  z-index: $on-top;
+  @include position(absolute, 0px 0px 0 0);
+  @include size(350px, 100%);
+
+  &.accordion {
+    .accordion__item {
+      border-radius: 2px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      position: relative;
+
+      &::before {
+        content: '';
+        @include position(absolute, 0 0 0 10px);
+        top: 11px;
+      }
+
+      .accordion__item__wrapper {
+        background-color: #fff;
+        font-size: 0;
+        line-height: 0;
+        padding: 0 20px;
+
+        .part {
+          max-height: 0;
+          overflow: hidden;
+          transition: all .5s ease;
+        }
+
+        .part1 {
+          transition-delay: .10000s;
+        }
+        .part2 {
+          transition-delay: .20000s;
+        }
+        .part3 {
+          transition-delay: .30000s;
+        }
+        .part4 {
+          transition-delay: .40000s;
+        }
+        .part5 {
+          transition-delay: .50000s;
+        }
+      }
+
+      &.accordion__item--closed {
+        border: 1px solid grey;
+        border-radius: 2px;
+        transition: border-color 0s ease .9s;
+
+        .title {
+          transition: all 0.2s ease;
+          transition-delay: .8s;
+        }
+
+        .part {
+          margin: 0;
+          padding: 0;
+        }
+
+        .accordion__item__wrapper {
+          transition: padding .2s ease .7s;
+        }
+
+        &::before {
+          transition: all 0s ease .9s;
+          @include triangle(10px, #fff, right);
+        }
+      }
+
+      &.accordion__item--open {
+        border: 1px solid #fff;
+
+        &::before {
+          color: $button-bg;
+          top: 15px;
+          @include triangle(10px, black, down);
+        }
+        .accordion__item__wrapper {
+          padding: 20px;
+
+          .part {
+            max-height: 80%;
+          }
+        }
+
+        .title {
+          background-color: #fff;
+          color: $button-bg;
+        }
+      }
+
+      .title {
+        cursor: pointer;
+        line-height: 30px;
+        padding: 0 0 0 30px;
+      }
+    }
+  }
+
+  .project-content__wrapper {
+    background-color: $button-bg;
+    color: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+    @include size(350px, 100%);
+
+    /*
+    .sub-title {
+      color: inherit;
+      font: 100 20px/40px 'Titillium Web';
+    }
+
+    .config-items {
+      padding-left: 15px;
+      padding-right: 30px;
+
+      .accordion-section {
+        padding: 20px;
+
+        &.team-members {
+          .member-name {
+            width: 200px;
+          }
+
+          .member-initials {
+            width: 75px;
+          }
+
+          .add-member {
+            padding: 6px 1px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .label {
+        display: inline-block;
+        width: 120px;
+        text-align: right;
+        margin-right: 10px;
+        font-size: 15px;
+      }
+
+      .input-datepicker {
+        position: relative;
+
+      }
+    }
+    */
+  }
+
+  &.visible {
+    transform: translate3d(0px,0,0);
+  }
+
+  .title {
+    color: inherit;
+    font: 100 20px/40px $font-normal;
+    padding-bottom: 20px;
+    text-shadow: none;
+  }
+}

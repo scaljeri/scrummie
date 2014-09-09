@@ -1,0 +1,57 @@
+.config-colors {
+  .config-color__item {
+    margin: 0 3px 3px 3px;
+    padding: 0.4em;
+    padding-left: 1.5em;
+    font-size: 1.4em;
+    height: 30px;
+
+    border: 1px solid #d3d3d3;
+    background: #e6e6e6;
+
+    &:hover {
+      .config-color__edit,
+      .config-color__trash {
+        display: block;
+      }
+    }
+
+    .config-color__edit,
+    .config-color__trash {
+      display: none;
+      float: right;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: 15px 15px;
+      @include size(20px, 30px);
+
+      &:hover {
+        background-size: 20px 20px;
+      }
+
+      &:active {
+        background-size: 15px 15px;
+      }
+    }
+  }
+
+  .config-color__edit {
+    background-image: url($icon-edit);
+  }
+
+  .config-color__trash {
+    background-image: url($icon-trash);
+  }
+
+  .config-color__title {
+    font-size: 20px;
+    color: rgb(85, 85, 85);
+    float: left;
+    line-height: 28px;
+  }
+  .config-colors__color {
+    float: left;
+    margin: 9px;
+    @extend .scrummie-color-block;
+  }
+}

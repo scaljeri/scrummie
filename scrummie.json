@@ -15,8 +15,8 @@
         "enabled"    : true,
         "github"   : {
             "active"        : true,
-            "clientId"      : "fe740c90886f556e05f0",
-            "clientSecret"  : "c36da3946b15ad6e4eedfdeab46760cdfbbc34d2",
+            "clientId"      : "****************",
+            "clientSecret"  : "**************************************",
             "appName"       : "Scrummie"
         }
     },

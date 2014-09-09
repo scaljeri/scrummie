@@ -1,0 +1,20 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+standard-app-packages
+insecure
+mongodb-server-aggregation
+reactive-publish
+reststop2
+npm
+accounts-github
+service-configuration
+kadira
+subs-manager
+inject-initial
+synced-cron
+fast-render
+iron-router
+

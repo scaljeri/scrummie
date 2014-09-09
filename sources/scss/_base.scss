@@ -1,0 +1,6 @@
+.scrummie-color-block {
+    transform:rotate(45deg);
+    -ms-transform:rotate(45deg); /* IE 9 */
+    -webkit-transform:rotate(45deg); /* Opera, Chrome, and Safari */
+    @include size(10px, 10px);
+}

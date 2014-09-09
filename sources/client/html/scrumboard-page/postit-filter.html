@@ -1,0 +1,12 @@
+<template name="postitFilter">
+    <section class="postit-filter">
+        <label class="postit-filter__label" for="postit-filter">Show:</label>
+        <input postit-filter-text class="input--shadow postit-filter__text" placeholder="Postit text">
+        <select postit-filter class="postit-filter__select" id="postit-filter">
+            <option></option>
+            {{#each colors}}
+                <option value="{{value}}">{{title}}</option>
+            {{/each}}
+        </select>
+    </section>
+</template>

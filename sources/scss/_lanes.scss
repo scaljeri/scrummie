@@ -1,0 +1,65 @@
+.lanes {
+  position: relative;
+  font-size: 0;
+  height: 100%;
+  list-style-type: none;
+  padding: 0px;
+  margin: 0;
+  border-top: 1px dashed #d2d4d8;
+  flex: 1;
+
+  @include vendor-prefix-value(display, flex);
+  @include vendor-prefix(flex-direction, row);
+
+  .lane {
+    position: relative;
+    border-bottom: 10px solid rgba(0, 0, 0, 0);
+    flex: 1;
+    text-align: center;
+    user-select: none;
+
+    &:after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      bottom: 0;
+      right: 0;
+
+      border-right: 1px dashed #d2d4d8;
+    }
+
+    &:last-child:after {
+      display: none;
+    }
+
+    &.ui-state-hover {
+      background: none;
+      background-color: #fff;
+      border: none;
+    }
+
+    &.ui-state-active {
+      background: none;
+      background-color: rgba(0, 0, 0, .1);
+      border: none;
+    }
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    .lane-title {
+      color: #253248;
+      font: 300 17px/40px $font-normal;
+      text-transform: uppercase;
+
+      .task-count {
+          font-size: 11px;
+      }
+    }
+  }
+}

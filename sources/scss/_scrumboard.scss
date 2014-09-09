@@ -1,0 +1,22 @@
+.scrumboard {
+  background-color: #fff;
+  border: 10px solid rgba(0, 0, 0, 0);
+  border-radius: 2px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  position: relative;
+  user-select: none;
+
+  &.scrumboard--readonly {
+    height:  100%;
+  }
+
+  .lane-title-container {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    position: relative;
+    z-index: $on-top - 10;
+  }
+}

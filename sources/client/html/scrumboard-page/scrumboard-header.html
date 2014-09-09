@@ -1,0 +1,18 @@
+<template name="scrumboardHeader">
+    <header class="scrumboard__header">
+        {{#if hasPermissionsInProject}}
+            <a add-task class="btn add-task" title="Create new task">+ new task</a>
+        {{/if}}
+
+        <!--<a add-task class="btn add-github-issues" title="Create task from Github">new task</a>-->
+
+        <!--
+        {{> sprintTitle}}
+        -->
+
+        {{> postitFilter}}
+
+        <a project-setup class="project-setup" title="Setup"></a>
+        <h1 class="scrumboard__header__title">Sprint {{sprintNumber}}</h1>
+    </header>
+</template>
