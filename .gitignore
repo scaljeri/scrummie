@@ -15,3 +15,6 @@ target/lib
 target/routes
 target/public
 target/server
+target/index.html
+target/scrummie.js
+target/scrummie.json
