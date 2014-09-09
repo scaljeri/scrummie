@@ -22,7 +22,7 @@ An analogue digital scrumboard. You can find a demo [here](http://scrummie.meteo
     $> npm install fibers@1.0.1
 
     # setup environment variables (METEOR_SETTINGS is optional)
-    $> export MONGO_URL='mongodb://localhost'
+    $> export MONGO_URL='mongodb://localhost/scrummie'
     $> export ROOT_URL='http://localhost:3000'
     $> export PORT=3000
     $> export METEOR_SETTINGS="`cat scrummie.json`"

@@ -1,25 +1,24 @@
 {
-  "baseUrl" : "/scrummie/",
-  "services" : {
-      "jira" : {
-          "url"       : "jira.malmberg.nl",
-          "protocol"  : "https",
-          "port"      : 443,
-          "active"    : true
-      },
-      "hipchat"  : {
-          "message"    : "{{member.name}} finished task <a href='{{url}}/{{project}}/task/{{task._id}}'>{{task.title}}</a>",
-          "active"     : true
-      }
-  },
-  "authentication" : {
-      "enabled"    : true,
-      "github"   : {
-          "active"        : true,
-          "clientId"      : "*********",
-          "clientSecret"  : "*********************",
-          "appName"       : "Scrummie"
-      }
-  },
-  "uploadFolder" : ".uploads"
+    "services" : {
+        "jira" : {
+            "url"       : "jira.malmberg.nl",
+            "protocol"  : "https",
+            "port"      : 443,
+            "active"    : true
+        },
+        "hipchat"  : {
+            "message"    : "{{member.name}} finished task <a href='{{url}}/{{project}}/task/{{task._id}}'>{{task.title}}</a>",
+            "active"     : true
+        }
+    },
+    "authentication" : {
+        "enabled"    : true,
+        "github"   : {
+            "active"        : true,
+            "clientId"      : "fe740c90886f556e05f0",
+            "clientSecret"  : "c36da3946b15ad6e4eedfdeab46760cdfbbc34d2",
+            "appName"       : "Scrummie"
+        }
+    },
+    "uploadFolder" : ".uploads"
 }

@@ -9,3 +9,9 @@ smart.lock
 bower_components
 node_modules
 packages/npm
+
+target/client
+target/lib
+target/routes
+target/public
+target/server

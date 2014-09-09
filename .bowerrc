@@ -1,5 +1,5 @@
 {
-    "directory": "public/bower_components",
+    "directory": "./bower_components",
     "tmp": ".bower-tmp",
     "storage": {
         "packages": ".bower-cache",
