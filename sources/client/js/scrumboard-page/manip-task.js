@@ -24,10 +24,9 @@ Template.manipTask.issues = function () {
 };
 
 Template.manipTask.members = function () {
-    var settings = Settings.findOne();
 
     if (App.defaults.projectId) {
-        if (settings && settings.authenticate) {
+        if (App.settings.authenticate) {
             return Meteor.users.find({projects: {$in: [App.defaults.projectId]}}, {sort: {name: 1}}).fetch();
         }
         else {
