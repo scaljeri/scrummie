@@ -3,9 +3,9 @@ Meteor.methods({
     var project = Projects.findOne({name: projectName});
 
     if (project) {
-      Sprints.upsert({ sprintNumber: parseInt(sprint.sprintNumber)}, {
+      Sprints.upsert({ projectId: project._id, sprintNumber: parseInt(sprint.sprintNumber)}, {
         $set: {
-          projectId: project._id,
+          //projectId: project._id,
           startdate: sprint.startdate,
           enddate: sprint.enddate,
           active: sprint.active,
@@ -17,7 +17,7 @@ Meteor.methods({
         var tasks = Tasks.find({
               projectId: project._id,
               sprintNumber: parseInt(sprint.sprintNumber)}).fetch(),
-            todoLaneId = LanesSetup.find({}, {sort: {index: -1}}).fetch()[0]._id;
+            todoLaneId = LanesSetup.find({projectId: project._id}, {sort: {index: -1}}).fetch()[0]._id;
 
         tasks.forEach(function (task) {
           if (task.laneId !== todoLaneId) {

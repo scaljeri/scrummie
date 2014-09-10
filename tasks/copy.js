@@ -4,11 +4,12 @@ gulp.task('copy', function () {
   return es.merge(
       // CSS
       gulp.src([
-        'bower_components/jquery-ui/themes/base/*'
+        'bower_components/jquery-ui/themes/base/**/*'
       ])
           .pipe(gulp.dest('target/public/styles/jquery-ui/')),
 
       gulp.src([
+        'bower_components/select2/select2x2.png',
         'bower_components/select2/select2.css'
       ])
           .pipe(gulp.dest('target/public/styles/')),
