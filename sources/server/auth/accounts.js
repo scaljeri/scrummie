@@ -36,6 +36,9 @@ Meteor.startup(function () {
             profile.name = profile.login;
         }
 
+        // initials don't get saved after the first time
+        Meteor.users.update({_id: user._id}, {$set: {initials: user.initials}});
+
         return user;
     };
 
