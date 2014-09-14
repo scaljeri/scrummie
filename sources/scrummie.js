@@ -4,8 +4,11 @@ subs = new SubsManager({
     // any subscription will be expired after 5 minutes of inactivity
     expireIn: 5
 });
+var testing = null;
 
 if (Meteor.isClient) {
+    testing = App.settings.testing;
+
     /* PRIVATE HELPER FUNCTIONS */
     function makeReactive(property, defaultValue) {
         var value = null,
@@ -35,6 +38,7 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
     //initializeLogger();
+    testing = process.env.TESTING;
 
     Meteor.startup(function () {
         Future = Npm.require('fibers/future');
@@ -101,4 +105,12 @@ if (Meteor.isServer) {
             return;
         });
     });
+}
+
+if (testing) {
+    Meteor.user = (function () {
+        return function user() {
+            return Meteor.users.findOne({_id: testing});
+        };
+    })();
 }
