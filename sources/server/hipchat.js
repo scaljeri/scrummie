@@ -1,6 +1,6 @@
-var querystring = Meteor.require('querystring');
-var http = Meteor.require('http');
-var fs = Meteor.require('fs');
+var querystring = Meteor.npmRequire('querystring');
+var http = Meteor.npmRequire('http');
+var fs = Meteor.npmRequire('fs');
 
 
 HipChat = function (task) {

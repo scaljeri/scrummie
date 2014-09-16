@@ -1,5 +1,5 @@
 var fs = Npm.require('fs'),
-    path = Meteor.require('path');
+    path = Meteor.npmRequire('path');
 
 Meteor.methods({
     'createProject': function (name, fileInfo, fileData) {

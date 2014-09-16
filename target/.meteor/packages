@@ -5,13 +5,18 @@
 
 standard-app-packages
 insecure
-reactive-publish
-reststop2
-npm
 accounts-github
 service-configuration
 subs-manager
-inject-initial
-synced-cron
-fast-render
-iron-router
+# inject-initial
+gadicohen:inject-initial
+# synced-cron
+percolatestudio:synced-cron
+# fast-render
+meteorhacks:fast-render
+iron:router
+mrt:reactive-publish
+meteorhacks:npm
+
+
+npm-container
