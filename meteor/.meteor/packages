@@ -7,7 +7,7 @@ standard-app-packages
 insecure
 accounts-github
 service-configuration
-subs-manager
+meteorhacks:subs-manager
 # inject-initial
 gadicohen:inject-initial
 # synced-cron

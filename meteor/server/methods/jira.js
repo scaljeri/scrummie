@@ -1,4 +1,4 @@
-var crypto = Meteor.require('crypto'),
+var crypto = Meteor.npmRequire('crypto'),
     algorithm = 'aes256';
 
 Meteor.methods({

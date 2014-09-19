@@ -6,6 +6,10 @@ var settings = {
 
 settings.services.jira = isJiraActive();
 
+if (process.env.TESTING) {
+    settings.testing = process.env.TESTING;
+}
+
 Inject.obj('settings', settings);
 
 function isJiraActive() {

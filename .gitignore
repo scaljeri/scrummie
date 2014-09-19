@@ -10,11 +10,11 @@ bower_components
 node_modules
 packages/npm
 
-target/client
-target/lib
-target/routes
-target/public
-target/server
-target/index.html
-target/scrummie.js
-target/scrummie.json
+meteor/client/*
+meteor/lib/*
+meteor/routes/*
+meteor/public/*
+meteor/server/*
+meteor/index.html
+meteor/scrummie.js
+meteor/scrummie.json

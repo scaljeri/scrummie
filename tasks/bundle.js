@@ -5,7 +5,7 @@ gulp.task('bundle', function () {
         if (err) {
             fs.mkdirSync('./tmp');
         }
-        changeDirTo('./target', createBundle);
+        changeDirTo('./meteor', createBundle);
     });
 
     return deferred.promise;
@@ -24,6 +24,7 @@ function changeDirTo(path, cb) {
 
 function createBundle() {
     try {
+        gutil.log('        ', 'Create bundle' );
         if (exec('meteor bundle ../tmp/bundle.tgz').code === 0) {
             console.log("bundle created");
             changeDirTo('../tmp/', unpackBundle);
@@ -61,7 +62,7 @@ function updateBundle() {
 }
 
 function modifyBundle() {
-    if (exec('cp ' + settingsFile + ' .').code === 0) {
+    if (exec('cp ' + settingsFile + ' ./scrummie.json').code === 0) {
         if (exec('mv main.js server.js').code === 0) {
             changeDirTo('../', createNewBundle);
         }

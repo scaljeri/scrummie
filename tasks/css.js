@@ -25,5 +25,5 @@ gulp.task('css', function () {
             filetypes : ['png', 'jpg'],
             docRoot: '/'
         }))
-        .pipe(gulp.dest('target/public/styles/'));
+        .pipe(gulp.dest('meteor/public/styles/'));
 });

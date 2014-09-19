@@ -1,5 +1,5 @@
 var fs = Npm.require('fs'),
-    path = Meteor.require('path');
+    path = Meteor.npmRequire('path');
 
 if (Meteor.isServer) {
   WebApp.connectHandlers.use(function (req, res, next) {

@@ -30,3 +30,13 @@ initializeLogger = function () {
   }
     */
 };
+
+console.log('ROOT_URL: ' + process.env.ROOT_URL);
+console.log('PORT: ' + process.env.RORT);
+console.log('MONGO_URL: ' + process.env.MONGO_URL);
+console.log('METEOR_SETTINGS: ' + process.env.METEOR_SETTINGS);
+
+WebApp.connectHandlers.use(function (req, res, next) {
+    console.log('requested url: ' + req.originalUrl);
+    next();
+});

@@ -1,4 +1,6 @@
-if (Meteor.isServer) {
+var RESTstop = null;
+
+if (Meteor.isServer && false) {
 // Global configuration
     RESTstop.configure({
         use_auth: false

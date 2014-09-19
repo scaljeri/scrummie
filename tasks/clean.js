@@ -2,10 +2,10 @@ gulp.task('clean', function() {
     var rimraf = require('gulp-rimraf');
 
     return gulp.src(['./tmp',
-                     'target/public',
-                     'target/client',
-                     'target/server',
-                     'target/lib',
-                     'target/routes'], {read:false})
+                     'meteor/public',
+                     'meteor/client',
+                     'meteor/server',
+                     'meteor/lib',
+                     'meteor/routes'], {read:false})
         .pipe(rimraf());
 });

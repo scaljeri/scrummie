@@ -9,7 +9,7 @@ gulp.task('html', function () {
             filetypes: ['png', 'jpg'],
             docRoot: '/'
           }))
-          .pipe(gulp.dest('target/client/')),
+          .pipe(gulp.dest('meteor/client/')),
       gulp.src('sources/index.html')
           .pipe(assetpath({
             newDomain: config.baseUrl || '/.',
@@ -17,6 +17,6 @@ gulp.task('html', function () {
             filetypes: ['js', 'css', 'ico'],
             docRoot: '/'
           }))
-          .pipe(gulp.dest('target/'))
+          .pipe(gulp.dest('meteor/'))
   );
 });

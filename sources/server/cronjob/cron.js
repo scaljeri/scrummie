@@ -16,7 +16,8 @@ SyncedCron.add({
     schedule: function(parser) {
         // parser is a later.parse object
         //return parser.text('at 00:00 every weekday')
-        return parser.cron('0 0 * * * ?');
+        //return parser.cron('0 0 * * * ?');
+        return parser.cron('* * * * * ?');
     },
     job: function() {
         console.log("RUN CRONJOB");
