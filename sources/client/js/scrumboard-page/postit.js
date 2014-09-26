@@ -3,7 +3,7 @@ Template.postit.helpers({
         var hidden = applyFilter(this, Session.get('postitFilter')||{});
 
         if (this.updated) {
-            return Math.max(parseInt(this.updated/1000) -  (hidden ? 200000 : 0), 2);
+            return hidden ? 200 : parseInt(this.updated/1000);
         }
     },
     isVisible: function () {
