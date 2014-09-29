@@ -1,16 +1,16 @@
 $(function () {
     $('body').on('click keydown', function (e) {
-                var el, list = App.outsideClick.list;
+                var i, el, list = App.outsideClick.list;
 
                 if (e.type === 'keydown' && e.keyCode == 27) {
-                    for (var i = 0; i < list.length; i++) {
+                    for (i = 0; i < list.length; i++) {
                         list[i].callback(e);
                     }
                 } else if (e.type === 'click') {
                     if (!ignoreEvent(e)) {
                         el = $(e.target);
 
-                        for (var i = 0; i < list.length; i++) {
+                        for (i = 0; i < list.length; i++) {
                             if (el.closest(list[i].selector).length === 0) {
                                 if (list[i].dirty) {  // only call widgets which are not dirty (just added)
                                     list[i].dirty = false;
