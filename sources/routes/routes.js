@@ -36,7 +36,7 @@ function routeSetup() {
         baseUrl = App.settings.baseUrl;
     }
     else {
-        //var url = Meteor.require('url'); // TODO use it to replace the regex below
+        //var url = Meteor.npmRequire('url'); // TODO use it to replace the regex below
         baseUrl = Meteor.settings.baseUrl || '/';
     }
 

@@ -4,7 +4,7 @@ var settings = {
     services: {}
 };
 
-settings.services.jira = isJiraActive();
+settings.services.jira = ((Meteor.settings||{}).services||{}).jira || {active: false};
 
 if (process.env.TESTING) {
     settings.testing = process.env.TESTING;
@@ -12,8 +12,10 @@ if (process.env.TESTING) {
 
 Inject.obj('settings', settings);
 
+/*
 function isJiraActive() {
     var jira = ((Meteor.settings||{}).services||{}).jira;
 
     return jira && jira.active;
 }
+*/

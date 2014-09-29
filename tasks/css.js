@@ -10,10 +10,10 @@ gulp.task('css', function () {
 
 
     var _css = gulp.src([
-        'animate.css/animate.css',
+        'bower_components/animate.css/animate.css',
         //'/jquery-ui/themes/base/jquery-ui.css',
         //'/select2/select2.css',
-        '/nvd3/nv.d3.min.css'], {root: './bower_components'});
+        'bower_components/nvd3/nv.d3.min.css']);//, {root: './bower_components/'});
 
     return es.merge(_css, _sass)
         .pipe($.concat('scrummie.css'))

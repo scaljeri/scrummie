@@ -129,8 +129,8 @@ Template.manipTask.show = function (task, callback) {
                 $('[manip-task-title ]').val(issue ? issue.key : '-- All stories --');
                 $('[manip-task] [description]').val(issue ? issue.fields.summary : '-- ' + Session.get('serverDataResponse').length + ' stories selected --');
 
-                if (issue) {
-                    urlSettings = Settings.findOne().connections.jira.settings;
+                if (issue && App.settings.services.jira.active) {
+                    urlSettings = App.settings.services.jira;
                     url = [urlSettings.protocol, '://', urlSettings.url, '/browse/', issue.key].join('');
                     $('[manip-task-link]').val(url);
                 }

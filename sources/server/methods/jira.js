@@ -20,7 +20,7 @@ function fetchSprintJiraStories(sprintNumber, projectName) {
 
     if (project) {
         settings = getJiraSettings(project);
-        JiraApi = Meteor.require('jira').JiraApi;
+        JiraApi = Meteor.npmRequire('jira').JiraApi;
         decipher = crypto.createDecipher(algorithm, 'KJHG7yg)a1(_');
         passwd = decipher.update(settings.password, 'hex', 'utf8') + decipher.final('utf8');
 

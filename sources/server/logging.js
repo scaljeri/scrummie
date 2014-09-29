@@ -1,4 +1,4 @@
-/*var winston = Meteor.require('winston'),
+/*var winston = Meteor.npmRequire('winston'),
   MongoDB = Npm.require('winston-mongodb').MongoDB;
   */
 
