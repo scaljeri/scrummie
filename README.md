@@ -37,3 +37,12 @@ You can find a demo [here](http://scrummie.meteor.com)
 
 ![Scrummie project setup](/docs/img/scrummie-setup.png)
 
+
+## Contributors
+
+  + Anne Heijkoop - Design
+  + Joost den Boer - Docker support
+  + Joost van Dieten - Jira integration
+  + Robin Smit - Fitnesse Tests
+  + Sander van Geloven - Pledgie.com
+
