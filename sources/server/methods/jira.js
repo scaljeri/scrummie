@@ -28,7 +28,7 @@ function fetchSprintJiraStories(sprintNumber, projectName) {
 
         var fut = new Future();
         //jira.searchJira("project in(" + settings.projectName + ") and issuetype in (Story, Incident) and Sprint = 'Sprint " + sprintNumber + "'", {}, function (error, result) {
-        jira.searchJira("project in(" + settings.projectName + ") and issuetype in (Story, Incident) and Sprint in openSprints()", {}, function (error, result) {
+        jira.searchJira("project in('" + settings.projectName + "') and issuetype in (Story, Incident) and Sprint in openSprints()", {}, function (error, result) {
             fut.return(error || result);
         });
 
