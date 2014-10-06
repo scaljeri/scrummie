@@ -55,6 +55,9 @@ Meteor.startup(function () {
         else if (email) {
             output = (email[0] + email[email.indexOf('@')+1]).toUpperCase();
         }
+        else if (profile.login) {
+            output = profile.login[0].toUpperCase();
+        }
         else {
             output = '??';
         }
