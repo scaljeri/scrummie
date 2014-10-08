@@ -24,41 +24,41 @@ gulp.task('js', function () {
       ])
         //.pipe(jshint(options.jshint))
         //.pipe(jshint.reporter('default'))
-          .pipe(gulp.dest('meteor/')),
+          .pipe(gulp.dest(outputDir)),
 
       gulp.src([
         'sources/server/**/*.js'
       ])
           .pipe(jshint(options.jshint))
           .pipe(jshint.reporter('default'))
-          .pipe(gulp.dest('meteor/server/')),
+          .pipe(gulp.dest(outputDir + 'server/')),
 
       gulp.src([
         'sources/lib/**/*.js'
       ])
           .pipe(jshint(options.jshint))
           .pipe(jshint.reporter('default'))
-          .pipe(gulp.dest('meteor/lib/')),
+          .pipe(gulp.dest(outputDir + 'lib/')),
 
       gulp.src([
         'sources/routes/**/*.js'
       ])
           .pipe(jshint(options.jshint))
           .pipe(jshint.reporter('default'))
-          .pipe(gulp.dest('meteor/routes/')),
+          .pipe(gulp.dest(outputDir + 'routes/')),
 
       gulp.src([
         'sources/client/**/*.js'
       ])
           .pipe(jshint(options.jshint))
           .pipe(jshint.reporter('default'))
-          .pipe(gulp.dest('meteor/client/')),
+          .pipe(gulp.dest(outputDir + 'client/')),
 
       gulp.src([
         'sources/public/js/**/*'
       ])
           .pipe(jshint(options.jshint))
           .pipe(jshint.reporter('default'))
-          .pipe(gulp.dest('meteor/public/js/'))
+          .pipe(gulp.dest(outputDir + 'public/js/'))
   );
 });

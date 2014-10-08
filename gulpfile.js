@@ -14,6 +14,8 @@ global.config = require(settingsFile);
 //global.es = require('event-stream');
 global.$ = require('gulp-load-plugins')();
 
+global.outputDir = './meteor/';
+
 var watch = require('gulp-watch'),
     requireDir = require('require-dir'),
     tasks = requireDir('./tasks'),
