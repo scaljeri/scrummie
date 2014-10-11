@@ -1,59 +1,62 @@
-gulp.task('copy', function () {
+gulp.task('copy-to-meteor', function () {
   var es =  require('event-stream');
 
   return es.merge(
       // CSS
       gulp.src([
-        'bower_components/jquery-ui/themes/base/**/*'
+        inputDir + 'bower_components/jquery-ui/themes/base/**/*'
       ])
           .pipe(gulp.dest(outputDir + 'public/styles/jquery-ui/')),
 
       gulp.src([
-        'bower_components/select2/select2x2.png',
-        'bower_components/select2/select2.css'
+        inputDir + 'bower_components/select2/select2x2.png',
+        inputDir + 'bower_components/select2/select2.css'
       ])
           .pipe(gulp.dest(outputDir + 'public/styles/')),
 
       // IMAGES
       gulp.src([
-        'sources/public/img/**/*'
+        inputDir + 'sources/public/img/**/*'
       ])
           .pipe(gulp.dest(outputDir + 'public/img/')),
 
       // JS
       gulp.src([
-        'bower_components/jquery/dist/jquery.min.js'
+        inputDir + 'bower_components/jquery/dist/jquery.min.js'
       ])
           .pipe(gulp.dest(outputDir + 'public/js/')),
 
       gulp.src([
-        'bower_components/jquery-ui/ui/jquery-ui.js'
+        inputDir + 'bower_components/jquery-ui/ui/jquery-ui.js'
       ])
           .pipe(gulp.dest(outputDir + 'public/js/')),
 
       gulp.src([
-        'bower_components/underscore/underscore.js'
+        inputDir + 'bower_components/underscore/underscore.js'
       ])
           .pipe(gulp.dest(outputDir + 'public/js/')),
 
       gulp.src([
-        'bower_components/select2/select2.js'
+        inputDir + 'bower_components/select2/select2.js'
       ])
           .pipe(gulp.dest(outputDir + 'public/js/')),
 
       gulp.src([
-        'bower_components/d3/d3.js'
+        inputDir + 'bower_components/d3/d3.js'
       ])
           .pipe(gulp.dest(outputDir + 'public/js/')),
 
       gulp.src([
-        'bower_components/nvd3/nv.d3.js'
+        inputDir + 'bower_components/nvd3/nv.d3.js'
       ])
           .pipe(gulp.dest(outputDir + 'public/js/')),
 
       gulp.src([
-        'bower_components/jsdiff/diff.js'
+        inputDir + 'bower_components/jsdiff/diff.js'
       ])
-          .pipe(gulp.dest(outputDir + 'public/js/'))
+          .pipe(gulp.dest(outputDir + 'public/js/')),
+
+      gulp.src(settingsFile)
+        .pipe(gulp.dest(outputDir))
   );
 });

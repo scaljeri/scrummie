@@ -10,11 +10,11 @@ global.shell = require('gulp-shell');
 global.argv = require('yargs').argv;
 global.Q = require('q');
 global.settingsFile = process.cwd() + '/' + (global.argv.settings || 'scrummie.json');
-global.config = require(settingsFile);
 //global.es = require('event-stream');
 global.$ = require('gulp-load-plugins')();
 
 global.outputDir = './meteor/';
+global.inputDir = './';
 
 var watch = require('gulp-watch'),
     requireDir = require('require-dir'),
@@ -22,22 +22,22 @@ var watch = require('gulp-watch'),
     runSequence = require('run-sequence');
 
 gulp.task('default', function () {
-  runSequence('clean', 'copy', ['css', 'html', 'js'], function() {});
+  runSequence('clean-meteor', 'copy-to-meteor', ['css-to-meteor', 'html-to-meteor', 'js-to-meteor'], function() {});
 });
 
 gulp.task('watch', ['default'], function () {
   gulp.watch(settingsFile, function () {
     global.config = fs.readFileSync(settingsFile, 'utf-8');
-    gulp.start('css', 'html');
+    gulp.start('css-to-meteor', 'html-to-meteor');
   });
 
-  gulp.watch('sources/**/*.js', ['js']);
-  gulp.watch('sources/**/*.html', ['html']);
-  gulp.watch('sources/scss/**/*.scss', ['css']);
+  gulp.watch('sources/**/*.js', ['js-to-meteor']);
+  gulp.watch('sources/**/*.html', ['html-to-meteor']);
+  gulp.watch('sources/scss/**/*.scss', ['css-to-meteor']);
 });
 
 gulp.task('build', function () {
-  return runSequence('clean', 'copy', 'html', 'js', 'css', function() {
-    return gulp.start('bundle');
+  return runSequence('clean-to-meteor', 'copy-to-meteor', 'html-to-meteor', 'js-to-meteor', 'css-to-meteor', function() {
+    return gulp.start('bundle-scrummie');
   });
 });

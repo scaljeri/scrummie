@@ -1,4 +1,4 @@
-gulp.task('js', function () {
+gulp.task('js-to-meteor', function () {
   var jshint = require('gulp-jshint'),
     es =  require('event-stream');
 
@@ -20,42 +20,42 @@ gulp.task('js', function () {
 
   return es.merge(
       gulp.src([
-        'sources/scrummie.js'
+        inputDir + 'sources/scrummie.js'
       ])
         //.pipe(jshint(options.jshint))
         //.pipe(jshint.reporter('default'))
           .pipe(gulp.dest(outputDir)),
 
       gulp.src([
-        'sources/server/**/*.js'
+        inputDir + 'sources/server/**/*.js'
       ])
           .pipe(jshint(options.jshint))
           .pipe(jshint.reporter('default'))
           .pipe(gulp.dest(outputDir + 'server/')),
 
       gulp.src([
-        'sources/lib/**/*.js'
+        inputDir + 'sources/lib/**/*.js'
       ])
           .pipe(jshint(options.jshint))
           .pipe(jshint.reporter('default'))
           .pipe(gulp.dest(outputDir + 'lib/')),
 
       gulp.src([
-        'sources/routes/**/*.js'
+        inputDir + 'sources/routes/**/*.js'
       ])
           .pipe(jshint(options.jshint))
           .pipe(jshint.reporter('default'))
           .pipe(gulp.dest(outputDir + 'routes/')),
 
       gulp.src([
-        'sources/client/**/*.js'
+        inputDir + 'sources/client/**/*.js'
       ])
           .pipe(jshint(options.jshint))
           .pipe(jshint.reporter('default'))
           .pipe(gulp.dest(outputDir + 'client/')),
 
       gulp.src([
-        'sources/public/js/**/*'
+        inputDir + 'sources/public/js/**/*'
       ])
           .pipe(jshint(options.jshint))
           .pipe(jshint.reporter('default'))

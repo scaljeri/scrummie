@@ -1,11 +1,15 @@
-gulp.task('clean', function() {
+gulp.task('clean-meteor', function() {
     var rimraf = require('gulp-rimraf');
 
     return gulp.src(['./tmp',
-                     'meteor/public',
-                     'meteor/client',
-                     'meteor/server',
-                     'meteor/lib',
-                     'meteor/routes'], {read:false})
+                     outputDir + 'public',
+                     outputDir + 'client',
+                     outputDir + 'server',
+                     outputDir + 'lib',
+                     outputDir + 'routes',
+                     outputDir + 'index.html',
+                     outputDir + 'scrummie.json',
+                     outputDir + 'scrummie.js'
+    ], {read:false})
         .pipe(rimraf());
 });

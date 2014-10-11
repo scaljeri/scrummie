@@ -1,4 +1,4 @@
-gulp.task('css', function () {
+gulp.task('css-to-meteor', function () {
   var es =  require('event-stream');
 
     var _sass = gulp.src('sources/scss/scrummie.scss')

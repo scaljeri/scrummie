@@ -1,6 +1,6 @@
 var deferred = Q.defer();
 
-gulp.task('bundle', function () {
+gulp.task('bundle-scrummie', function () {
     fs.stat('./tmp', function (err, stats) {
         if (err) {
             fs.mkdirSync('./tmp');

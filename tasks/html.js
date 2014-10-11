@@ -1,4 +1,4 @@
-gulp.task('html', function () {
+gulp.task('html-to-meteor', function () {
   var es =  require('event-stream');
 
   return es.merge(
