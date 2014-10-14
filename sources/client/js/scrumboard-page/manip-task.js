@@ -162,7 +162,6 @@ Template.manipTask.rendered = function () {
 };
 
 Template.manipTask.events = {
-
     'click [cancel-task]': closeManip,
     'click [save-task]': function (e, tpl) {
         var data = $('[manip-task]').serializeObject({sprintNumber: App.defaults.sprintNumber}),

@@ -1,15 +1,20 @@
 <template name="dialog">
-        <dialog dialog style="display:block" class="dialog" title="TODO">
+        <dialog dialog style="display:block" class="dialog" title="Ooops">
             {{#with alert}}
                 <p class="ui-state ui-state-error">
                     <span class="ui-icon ui-icon-alert dialog__icon"></span>
-                    <span class="dialog__message">{{message}}</span>
+                    <span class="dialog__message">{{{message}}}</span>
                 </p>
                 <p>
                    {{#with help}}
-                       <span dialog-help class="btn dialog__help">{{label}}</span>
+                       <span dialog-button="help" class="btn dialog__help">{{label}}</span>
                    {{/with}}
                 </p>
+
+                {{#if alert.confirm}}
+                    <button dialog-button="confirm-yes" class="btn dialog__confirm-yes">{{alert.confirm.yes.label}}</button>
+                    <button dialog-button="confirm-no" class="btn dialog__confirm-no">{{alert.confirm.no.label}}</button>
+                {{/if}}
             {{/with}}
         </dialog>
 </template>

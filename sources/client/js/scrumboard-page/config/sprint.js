@@ -1,5 +1,5 @@
 Template.configSprint.sprint = function () {
-    return getLastSprint()||{};
+    return getLastSprint() || {};
 };
 
 Template.configSprint.sprintNumber = function () {
@@ -81,7 +81,7 @@ Template.configSprint.events = {
             sprint, error = false;
 
         if (isNaN(fte)) {
-           fte = null;
+            fte = null;
         }
 
         if (!sprintNumber.val()) {
@@ -102,21 +102,27 @@ Template.configSprint.events = {
         sprint = Sprints.findOne(query({sprintNumber: sprintNumber}));
 
         if (!error) {
-            // Change subscriptions sprint number
-            subs.subscribe('tasks', App.defaults.project, (sprint === undefined ? sprintNumber : -3));
-            subs.subscribe('task-positions', App.defaults.project, (sprint === undefined ? sprintNumber : -3));
-
-            Meteor.call('upsertSprint', App.defaults.project, {
-                sprintNumber: sprintNumber,
-                startdate: startdate.val() === 'Now' ?
-                    new Date() : new Date(startdate.val()),
-                enddate: new Date(enddate.val()),
-                active: sprint === undefined, // if sprint is defined --> its closed now (active === false)
-                fte: fte
-            }, function (result) {
-                // TODO
-            });
-
+            Meteor.call('checkIfSprintExists', App.defaults.project, sprintNumber, function (err, response) {
+                // Change subscriptions sprint number
+                if (response.present) {
+                    Session.set('alert', {
+                        message: 'Sprint already exists.<br>Do you want to replace it ?',
+                        confirm: {
+                            yes: {
+                                label: 'Yes, lets replace it'
+                            },
+                            no: {
+                                label: 'No, lets fix the sprint number'
+                            }
+                        }
+                    });
+                    // it is not possible to set the cb on the Session
+                    App.dialog = { yes: saveSprint.bind(null, sprint, startdate, enddate, fte, sprintNumber)};
+                }
+                else {
+                    saveSprint(sprint, startdate, enddate, fte, sprintNumber);
+                }
+            })
         }
 
         //$('[stop-start-sprint]').addClass('active');
@@ -131,4 +137,19 @@ Template.configSprint.events = {
 
 function getLastSprint() {
     return Sprints.findOne(query(), {sort: {sprintNumber: -1}});
+}
+
+function saveSprint(sprint, startdate, enddate, fte, sprintNumber) {
+    subs.subscribe('tasks', App.defaults.project, (sprint === undefined ? sprintNumber : -3));
+    subs.subscribe('task-positions', App.defaults.project, (sprint === undefined ? sprintNumber : -3));
+
+    Meteor.call('upsertSprint', App.defaults.project, {
+        sprintNumber: sprintNumber,
+        startdate:    startdate.val() === 'Now' ? new Date() : new Date(startdate.val()),
+        enddate:      new Date(enddate.val()),
+        active:       sprint === undefined, // if sprint is defined --> its closed now (active === false)
+        fte:          fte
+    }, function (result) {
+        // TODO
+    });
 }
