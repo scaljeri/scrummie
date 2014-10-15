@@ -18,8 +18,9 @@ Meteor.methods({
     upsertSprint: function (projectName, sprintData) {
         var project, sprint;
         //var project = Projects.findOne({name: projectName});
+        if ((project = hasPermissionsInProject(projectName)) !== null && sprintData && sprintData.sprintNumber !== undefined) {
+            sprintData.sprintNumber = parseInt(sprintData.sprintNumber);
 
-        if ( (project = hasPermissionsInProject(projectName)) !== null) {
             sprint = Sprints.findOne({projectId: project._id, sprintNumber: sprintData.sprintNumber});
 
             if (sprintData.active && sprint) { // if new sprint -> remove old sprint with same number!
@@ -39,20 +40,20 @@ Meteor.methods({
             if (sprintData.active === false) { // its closed now -> clone unfinished tasks
                 var tasks = Tasks.find({
                             projectId: project._id,
-                            sprintNumber: parseInt(sprintData.sprintNumber)}).fetch(),
-                        todoLaneId = LanesSetup.find({projectId: project._id}, {sort: {index: -1}}).fetch()[0]._id;
+                            sprintNumber: sprintData.sprintNumber}).fetch(),
+                    doneLaneId = LanesSetup.find({projectId: project._id}, {sort: {index: -1}}).fetch()[0]._id;
 
                 tasks.forEach(function (task) {
-                    if (task.laneId !== todoLaneId) {
+                    if (task.laneId !== doneLaneId) {
                         delete task._id;
                         task.sprintNumber = -1;
                         Tasks.insert(task); // task cloned
                     }
                 });
             }
-            else if (!sprint) { // only copy old tasks to the new sprint if the sprint doesn't exist yet
+            else { // only copy old tasks to the new sprint if the sprint doesn't exist yet
                 Tasks.find({projectId: project._id, sprintNumber: -1}).fetch().forEach(function (task) {
-                    Tasks.update({_id: task._id}, {$set: {sprintNumber: parseInt(sprintData.sprintNumber)}});
+                    Tasks.update({_id: task._id}, {$set: {sprintNumber: sprintData.sprintNumber}});
                 });
             }
         }
