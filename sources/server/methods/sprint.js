@@ -15,24 +15,31 @@ Meteor.methods({
         return retVal;
 
     },
-    upsertSprint: function (projectName, sprint) {
-        var project = Projects.findOne({name: projectName});
+    upsertSprint: function (projectName, sprintData) {
+        var project, sprint;
+        //var project = Projects.findOne({name: projectName});
 
-        if (project) {
-            Sprints.upsert({ projectId: project._id, sprintNumber: parseInt(sprint.sprintNumber)}, {
+        if ( (project = hasPermissionsInProject(projectName)) !== null) {
+            sprint = Sprints.findOne({projectId: project._id, sprintNumber: sprintData.sprintNumber});
+
+            if (sprintData.active && sprint) { // if new sprint -> remove old sprint with same number!
+                Sprints.remove({projectId: project._id, sprintNumber: sprintData.sprintNumber});
+                Tasks.remove({projectId: project._id, sprintNumber: sprintData.sprintNumber});
+            }
+
+            Sprints.upsert({ projectId: project._id, sprintNumber: parseInt(sprintData.sprintNumber)}, {
                 $set: {
-                    //projectId: project._id,
-                    startdate: sprint.startdate,
-                    enddate: sprint.enddate,
-                    active: sprint.active,
-                    fte: sprint.fte
+                    startdate: sprintData.startdate,
+                    enddate: sprintData.enddate,
+                    active: sprintData.active,
+                    fte: sprintData.fte
                 }
             });
 
-            if (sprint.active === false) { // its closed now -> clone unfinished tasks
+            if (sprintData.active === false) { // its closed now -> clone unfinished tasks
                 var tasks = Tasks.find({
                             projectId: project._id,
-                            sprintNumber: parseInt(sprint.sprintNumber)}).fetch(),
+                            sprintNumber: parseInt(sprintData.sprintNumber)}).fetch(),
                         todoLaneId = LanesSetup.find({projectId: project._id}, {sort: {index: -1}}).fetch()[0]._id;
 
                 tasks.forEach(function (task) {
@@ -43,9 +50,9 @@ Meteor.methods({
                     }
                 });
             }
-            else { // new sprint
+            else if (!sprint) { // only copy old tasks to the new sprint if the sprint doesn't exist yet
                 Tasks.find({projectId: project._id, sprintNumber: -1}).fetch().forEach(function (task) {
-                    Tasks.update({_id: task._id}, {$set: {sprintNumber: parseInt(sprint.sprintNumber)}});
+                    Tasks.update({_id: task._id}, {$set: {sprintNumber: parseInt(sprintData.sprintNumber)}});
                 });
             }
         }

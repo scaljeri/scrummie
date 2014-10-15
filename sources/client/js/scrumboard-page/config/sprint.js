@@ -78,7 +78,8 @@ Template.configSprint.events = {
             startdate = $('[start-date]'),
             enddate = $('[end-date]').removeClass('error'),
             fte = parseFloat($('[sprint-fte]').val()),
-            sprint, error = false;
+            error = false,
+            sprint = Sprints.findOne(query({active: true}));
 
         if (isNaN(fte)) {
             fte = null;
@@ -99,30 +100,33 @@ Template.configSprint.events = {
         }
 
         sprintNumber = parseInt(sprintNumber.val());
-        sprint = Sprints.findOne(query({sprintNumber: sprintNumber}));
-
         if (!error) {
-            Meteor.call('checkIfSprintExists', App.defaults.project, sprintNumber, function (err, response) {
-                // Change subscriptions sprint number
-                if (response.present) {
-                    Session.set('alert', {
-                        message: 'Sprint already exists.<br>Do you want to replace it ?',
-                        confirm: {
-                            yes: {
-                                label: 'Yes, lets replace it'
-                            },
-                            no: {
-                                label: 'No, lets fix the sprint number'
+            if (sprint && sprint.active) { // stop sprint
+                saveSprint(sprint, startdate, enddate, fte, sprintNumber);
+            }
+            else { // to start a sprint first check if it doesn't exist yet
+                Meteor.call('checkIfSprintExists', App.defaults.project, sprintNumber, function (err, response) {
+                    // Change subscriptions sprint number
+                    if (response.present) {
+                        Session.set('alert', {
+                            message: 'Sprint already exists.<br>Do you want to replace it ?',
+                            confirm: {
+                                yes: {
+                                    label: 'Yes'
+                                },
+                                no: {
+                                    label: 'No'
+                                }
                             }
-                        }
-                    });
-                    // it is not possible to set the cb on the Session
-                    App.dialog = { yes: saveSprint.bind(null, sprint, startdate, enddate, fte, sprintNumber)};
-                }
-                else {
-                    saveSprint(sprint, startdate, enddate, fte, sprintNumber);
-                }
-            })
+                        });
+                        // it is not possible to set the cb on the Session
+                        App.dialog = { yes: saveSprint.bind(null, sprint, startdate, enddate, fte, sprintNumber)};
+                    }
+                    else {
+                        saveSprint(sprint, startdate, enddate, fte, sprintNumber);
+                    }
+                })
+            }
         }
 
         //$('[stop-start-sprint]').addClass('active');
