@@ -7,7 +7,7 @@ HipChat = function (task) {
     var member, settings = Settings.findOne({projectId: task.projectId}),
         project = Projects.findOne({_id: task.projectId});
 
-    if (!settings.hipchat || !settings.hipchat.roomId || !settings.hipchat.authToken) {
+    if (!settings || !settings.hipchat || !settings.hipchat.roomId || !settings.hipchat.authToken) {
         return ;
     }
 

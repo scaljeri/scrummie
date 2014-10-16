@@ -1,3 +1,5 @@
+App.eventHub = new EventHub({allowMultiple: false});
+
 $(function () {
     $('body').on('click keydown', function (e) {
                 var i, el, list = App.outsideClick.list;

@@ -22,6 +22,11 @@ gulp.task('copy-to-meteor', function () {
 
       // JS
       gulp.src([
+        inputDir + 'bower_components/javascript-eventhub/eventhub.js'
+      ])
+        .pipe(gulp.dest(outputDir + 'public/js/')),
+
+      gulp.src([
         inputDir + 'bower_components/jquery/dist/jquery.min.js'
       ])
           .pipe(gulp.dest(outputDir + 'public/js/')),

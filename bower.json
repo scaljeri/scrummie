@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "jquery": "~2.1.0",
-    "jsdiff": "~1.0.8"
+    "jsdiff": "~1.0.8",
+    "javascript-eventhub": "*"
   },
   "devDependencies": {
     "jquery-ui": "~1.10.4",
