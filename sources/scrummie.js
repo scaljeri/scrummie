@@ -1,3 +1,8 @@
+/*
+    Main file
+ */
+VERSION = '0.0.1';
+
 subs = new SubsManager({
     // will be cached only 20 recently used subscriptions
     cacheLimit: 20,
@@ -43,7 +48,8 @@ if (Meteor.isServer) {
     Meteor.startup(function () {
         Future = Npm.require('fibers/future');
 
-        dbSetup(); // initialize db
+        setupScrummie(); // initialize db
+
 
         // server
         Meteor.publish("users", function () {

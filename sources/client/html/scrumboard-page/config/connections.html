@@ -1,46 +1,50 @@
 <template name="configConnections">
     <h3 class="title">Connections</h3>
 
-    <div accordion__item__wrapper class="accordion__item__wrapper">
-        <ul class="part part1 config__connections">
+    <ul accordion__item__wrapper class="accordion__item__wrapper config__connections">
+        <!--<div class="config__connections">-->
 
             {{#with jira}}
-                <li class="part part4 config__connection__item">
-                    <input connection-toggle type="radio" id="item-toggle-jira" name="item-toggle" class="item__toggle" {{isReadonly true}}/>
-                    <label for="item-toggle-jira" class="item__header">
-                        <div class="spinner" alt="saving..." title="saving...">
-                            <span class="circle"></span>
-                            <span class="circle1"></span>
-                        </div>
+            <li class="part part5 config__connection__item">
+                <input connection-toggle type="radio" id="item-toggle-jira" name="item-toggle" class="item__toggle" {{isReadonly true}}/>
+                <label for="item-toggle-jira" class="item__header">
+                    <div class="spinner" alt="saving..." title="saving...">
+                        <span class="circle"></span>
+                        <span class="circle1"></span>
+                    </div>
 
-                        <h5 class="item__label">Jira</h5>
+                    <h5 class="item__label">Jira</h5>
 
-                        <div on-off-switch class="onoffswitch">
-                            <input {{isChecked checked}} {{isReadonly true}} data-type="jira" on-off-switch-input type="checkbox" name="onoffswitch-jira" class="onoffswitch-checkbox" id="onoffswitch-jira">
-                            <label class="onoffswitch-label" for="onoffswitch-jira">
-                                <span class="onoffswitch-inner"></span>
-                                <span class="onoffswitch-switch"></span>
-                            </label>
-                        </div>
-                    </label>
+                    <div on-off-switch class="onoffswitch">
+                        <input {{isChecked checked}} {{isReadonly true}} data-type="jira" on-off-switch-input
+                        type="checkbox" name="onoffswitch-jira" class="onoffswitch-checkbox" id="onoffswitch-jira">
+                        <label class="onoffswitch-label" for="onoffswitch-jira">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </label>
 
-                        <p class="part2 item__body">
-                                <input jira-projectname placeholder="Jira projectname" class="input--shadow" value="{{projectName}}">
-                                <input jira-user placeholder="Jira username" class="input--shadow" value="{{username}}">
-                                <input jira-password type="password" placeholder="Jira user password" class="input--shadow">
-                                <a jira-save class="part part5 btn btn__confirm">Save</a>
-                        </p>
-                </li>
+                <p class="item__body">
+                    <input jira-projectname placeholder="Jira projectname" class="input--shadow"
+                           value="{{projectName}}">
+                    <input jira-user placeholder="Jira username" class="input--shadow" value="{{username}}">
+                    <input jira-password type="password" placeholder="Jira user password" class="input--shadow">
+                    <a jira-save class="part part5 btn btn__confirm">Save</a>
+                </p>
+            </li>
             {{/with}}
 
             {{#with hipchat}}
-            <li class="part part4 config__connection__item">
-                <input connection-toggle type="radio" id="item-toggle-hipchat" name="item-toggle" class="item__toggle"/>
+            <li class="part part1 config__connection__item">
+                <input connection-toggle type="radio" id="item-toggle-hipchat" name="item-toggle"
+                       class="item__toggle"/>
                 <label for="item-toggle-hipchat" class="item__header">
                     <h5 class="item__label">hipchat</h5>
 
                     <div on-off-switch class="onoffswitch">
-                        <input {{isChecked checked}} on-off-switch-input  data-type="hipchat" type="checkbox" name="onoffswitch-hipchat" class="onoffswitch-checkbox" id="onoffswitch-hipchat">
+                        <input {{isChecked checked}} on-off-switch-input data-type="hipchat" type="checkbox"
+                        name="onoffswitch-hipchat" class="onoffswitch-checkbox" id="onoffswitch-hipchat">
                         <label class="onoffswitch-label" for="onoffswitch-hipchat">
                             <span class="onoffswitch-inner"></span>
                             <span class="onoffswitch-switch"></span>
@@ -48,7 +52,7 @@
                     </div>
                 </label>
 
-                <p class="part2 item__body">
+                <p class="item__body">
                     <input hipchat-room-id placeholder="Room ID" class="input--shadow" value="{{roomId}}">
                     <input hipchat-auth-token placeholder="Auth token" class="input--shadow">
 
@@ -56,9 +60,9 @@
                 </p>
             </li>
             {{/with}}
-        </ul>
-        {{#with empty}}
-            <div class="config__connections__empty">No Connections available</div>
-        {{/with}}
-    </div>
+
+            {{#with empty}}
+                <li class="config__connections__empty">No Connections available</li>
+            {{/with}}
+    </ul>
 </template>

@@ -17,11 +17,11 @@ Template.header.helpers({
 
     sprint: function () {
         return Sprints.findOne(query({ startdate: {$gt: new Date().getTime()}, enddate: { $lt: new Date().getTime()}}));
-    },
-
-    rendered: function () {
-        App.outsideClick.register('[edit-task]', function () {
-            $('[add-task]').removeClass('active');
-        });
     }
 });
+
+Template.header.rendered = function () {
+    App.outsideClick.register('[edit-task]', function () {
+        $('[add-task]').removeClass('active');
+    });
+};

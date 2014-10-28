@@ -1,4 +1,4 @@
-dbSetup = function () {
+setupDatabase = function () {
     if (Lanes.find({}).count() === 0) {
         Lanes.insert({ title: 'todo', message: 'Tasks to be done', index: 0});
         Lanes.insert({ title: 'in progress', message: 'Tasks in progress', index: 1});

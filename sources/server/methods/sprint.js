@@ -24,8 +24,10 @@ Meteor.methods({
             sprint = Sprints.findOne({projectId: project._id, sprintNumber: sprintData.sprintNumber});
 
             if (sprintData.active && sprint) { // if new sprint -> remove old sprint with same number!
-                Sprints.remove({projectId: project._id, sprintNumber: sprintData.sprintNumber});
-                Tasks.remove({projectId: project._id, sprintNumber: sprintData.sprintNumber});
+                //Sprints.remove({projectId: project._id, sprintNumber: sprintData.sprintNumber});
+                // TODO: never remove tasks (need to be fixed)
+                Tasks.update({projectId: project._id, sprintNumber: sprintData.sprintNumber}, {
+                    $set: {sprintNumber: -999}});
             }
 
             Sprints.upsert({ projectId: project._id, sprintNumber: parseInt(sprintData.sprintNumber)}, {

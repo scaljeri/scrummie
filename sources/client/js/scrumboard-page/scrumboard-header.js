@@ -26,13 +26,12 @@ Template.scrumboardHeader.events = {
                 collision: 'fit flip'
             });
 
-            Template.manipTask.show();
-            //event.stopPropagation();
+            App.eventHub.trigger('manipTask.show');
         }
     },
     'click [project-setup]': function () {
         if (App.page === 'scrumboard') {
-            App.eventHub.trigger('projectConfig.show');
+            App.eventHub.trigger('project.show');
         }
     }
 };

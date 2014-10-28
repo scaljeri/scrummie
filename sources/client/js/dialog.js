@@ -36,6 +36,7 @@ Template.dialog.rendered = function () {
         }, 400);
     });
 };
+
 Template.dialog.helpers({
     alert: function () {
         if (Session.get('alert')) {

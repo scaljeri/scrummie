@@ -11,7 +11,8 @@ Meteor.startup(function () {
                 d.connections = {};
             }
             else {
-                d.connections.jira.password = null;
+                (d.connections.jira||{}).password = null;
+                (d.connections.hipchat||{}).password = null;
             }
 
             return d;
@@ -116,6 +117,7 @@ function getService(key) {
 
 }
 
+/*
 function setupJira(settings) {
     var retVal = null, service;
 
@@ -131,7 +133,7 @@ function setupJira(settings) {
     }
 
     return retVal;
-}
+}*/
 
 function setupHipchat(settings) {
     var retVal = null, service;

@@ -10,12 +10,22 @@ Template.scrumboard.helpers({
             search.colorId = App.filterColorId;
         }
         return Tasks.find(query(search)).count();
-    },
-
-    rendered: function () {
-        if (!App.defaults.projectId) {
-            App.defaults.projectId = Projects.findOne({name: App.defaults.project})._id;
-        }
     }
 });
 
+Template.scrumboard.rendered = function () {
+    if (!App.defaults.projectId) {
+        App.defaults.projectId = Projects.findOne({name: App.defaults.project})._id;
+    }
+};
+
+
+/*
+Deps.autorun(function () {
+    if (window.Sprints !== undefined) {
+        console.log("REGISTER");
+        var sprint = Sprints.findOne(query({active: true}));
+        Meteor.subscribe('tasks', sprint ? sprint.sprintNumber : -1);
+    }
+});
+*/

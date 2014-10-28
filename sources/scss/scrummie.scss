@@ -18,8 +18,14 @@
 @import 'header';
 @import 'home';
 @import 'scrumboard';
-@import 'scrumboard/small';
-@import 'scrumboard/postit-filter';
+@import 'scrumboard-page/small';
+@import 'scrumboard-page/postit-filter';
+@import 'scrumboard-page/project-config';
+@import 'scrumboard-page/config/sprint';
+@import 'scrumboard-page/config/members';
+@import 'scrumboard-page/config/lanes';
+@import 'scrumboard-page/config/colors';
+@import 'scrumboard-page/config/connections';
 @import 'scrumboard-header';
 @import 'lanes';
 @import 'postit';
@@ -31,13 +37,6 @@
 @import 'statistics/chart-footer';
 @import 'statistics/velocity';
 @import 'statistics/fullscreen';
-
-@import 'project-config';
-@import 'config/sprint';
-@import 'config/members';
-@import 'config/lanes';
-@import 'config/colors';
-@import 'config/connections';
 
 @import 'user-logged-in';
 

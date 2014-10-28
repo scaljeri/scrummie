@@ -20,7 +20,6 @@ SyncedCron.add({
         return parser.cron('* * * * * ?');
     },
     job: function() {
-        console.log("RUN CRONJOB");
         return true;
     }
 });
